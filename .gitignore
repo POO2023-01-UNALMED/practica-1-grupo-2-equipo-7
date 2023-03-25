@@ -1,0 +1,4 @@
+*.class
+/bin/
+.project
+.vscode/settings.json
