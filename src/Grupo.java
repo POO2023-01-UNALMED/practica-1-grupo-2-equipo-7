@@ -1,3 +1,5 @@
+// !! falta getters y setters, Agregue los que necesitaba
+
 import java.util.*;
 
 public class Grupo {
@@ -43,4 +45,16 @@ public class Grupo {
     public void agregarEstudiante(Estudiante estudiante){
       this.estudiantes.add(estudiante);
     }
+
+
+    // Getters
+
+    public Profesor getProfesor() {
+        return profesor;
+    }
+
+    public ArrayList<Estudiante> getEstudiantes() {
+        return estudiantes;
+    }
+
 }
