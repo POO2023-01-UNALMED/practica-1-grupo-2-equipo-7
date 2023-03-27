@@ -19,6 +19,8 @@ public class Materia {
         this.creditos = creditos;
         this.facultad = facultad;
         this.cupos = cupos;
+        this.prerrequisitos = new ArrayList<Materia>();
+        this.grupos = new ArrayList<Grupo>();
     }
 
     public Materia(String nombre, int codigo, int creditos, String facultad, int cupos, ArrayList<Materia> prerrequisitos) {
@@ -77,6 +79,38 @@ public class Materia {
 
     public void setGrupos(ArrayList<Grupo> grupos) {
         this.grupos = grupos;
+    }
+    
+    //Esta un poco ambigua la definicion de este metodo
+    public void crearGrupo(){
+        
+    }
+    
+    //Este metodo tambien tenemos que hablarlo
+    public String mostrarContenidos(){
+        return "";
+    }
+    
+    public boolean existenciaGrupo(Grupo grupoBuscado){
+        
+        if (!grupos.isEmpty()){
+            
+            for (Grupo grupo: grupos){
+                
+                if (grupo.equals(grupoBuscado)){
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    public void eliminarGrupo(Grupo grupo){
+        this.grupos.remove(grupo);
     }
      
 }
