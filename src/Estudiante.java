@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+import java.util.Scanner;
 public class Estudiante extends Usuario {
     private String programa;
     private int semestre;
@@ -13,7 +13,7 @@ public class Estudiante extends Usuario {
         this.semestre = semestre;
         this.facultad = facultad;
         this.creditos = creditos;
-        this.materias = new ArrayList<materias>();
+        this.materias = new ArrayList<Materia>();
         //Si es necesario declarar un nuevo array al crear el objeto o no?
 
     }
@@ -23,6 +23,23 @@ public class Estudiante extends Usuario {
         this.materias = materias;
     }
 
+    public void matricularMateria() {
+    	Scanner scanner = new Scanner(System.in); 
+    	int opcion;
+    	
+    	System.out.println("¿Cómo desea realizar la búsqueda?"
+    			+ "\n1: Por nombre."
+    			+ "\n2: Por créditos."
+    			+ "\n3: Por código");
+    	do {
+    		opcion = scanner.nextInt();
+    	
+    		switch(opcion) {
+    			default:
+    				System.out.println("Ha ingresado un valor inválido. Intente nuevamente");
+    		}
+    	}while(opcion<1 || opcion>3);
+    }
 
     public String getPrograma() {
         return programa;
