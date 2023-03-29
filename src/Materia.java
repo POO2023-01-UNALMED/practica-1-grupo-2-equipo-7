@@ -3,19 +3,21 @@ import java.util.ArrayList;
 
 public class Materia {
     
-    //nombre y codigo las declare como constantes. �Estan de acuerdo?
+    //nombre y codigo las declare como constantes. �Estan de acuerdo?
     private final String nombre;
     private final int codigo;
+    private String descripcion;
     private int creditos;
     private String facultad;
-    //�Este atributo cupos si se necesita en esta clase?
+    //�Este atributo cupos si se necesita en esta clase?
     private int cupos;
     private ArrayList<Materia> prerrequisitos;
     private ArrayList<Grupo> grupos;
 
-    public Materia(String nombre, int codigo, int creditos, String facultad, int cupos) {
+    public Materia(String nombre, int codigo, String descripcion, int creditos, String facultad, int cupos) {
         this.nombre = nombre;
         this.codigo = codigo;
+        this.descripcion = descripcion;
         this.creditos = creditos;
         this.facultad = facultad;
         this.cupos = cupos;
@@ -23,13 +25,13 @@ public class Materia {
         this.grupos = new ArrayList<Grupo>();
     }
 
-    public Materia(String nombre, int codigo, int creditos, String facultad, int cupos, ArrayList<Materia> prerrequisitos) {
-        this(nombre, codigo, creditos, facultad, cupos);
+    public Materia(String nombre, int codigo, String descripcion, int creditos, String facultad, int cupos, ArrayList<Materia> prerrequisitos) {
+        this(nombre, codigo, descripcion, creditos, facultad, cupos);
         this.prerrequisitos = prerrequisitos;
     }
 
-    public Materia(String nombre, int codigo, int creditos, String facultad, int cupos, ArrayList<Materia> prerrequisitos, ArrayList<Grupo> grupos) {
-        this(nombre, codigo, creditos, facultad, cupos, prerrequisitos);
+    public Materia(String nombre, int codigo, String descripcion,int creditos, String facultad, int cupos, ArrayList<Materia> prerrequisitos, ArrayList<Grupo> grupos) {
+        this(nombre, codigo, descripcion, creditos, facultad, cupos, prerrequisitos);
         this.grupos = grupos;
     }
     
@@ -82,13 +84,26 @@ public class Materia {
     }
     
     //Esta un poco ambigua la definicion de este metodo
-    public void crearGrupo(){
+    public void crearGrupo(int numero, Profesor profesor, String horario, int cupos, String salon){
         
+    	//Faltaría que implementen los respectivos metodos y atributos en la clase profesor
+    	//para comprobar que si se pueda asignar al grupo.
+    	Grupo grupo = new Grupo(numero, profesor, horario, cupos, salon);
+    	
+    	//No se si sería mejor crear otro metodo para añadir un grupo o añadirlo aquí mismo. Hay que hablarlo.
+    	this.grupos.add(grupo);
+    	
     }
     
     //Este metodo tambien tenemos que hablarlo
     public String mostrarContenidos(){
-        return "";
+        String contenido =  "Materia: " + this.nombre +
+        					"\nCodigo: " + this.codigo +
+        					"\nCreditos: " + this.creditos +
+        					"\nFacultad: " + this.facultad +
+        					"\nDescripcion:\n" + this.descripcion;
+        return contenido;
+        					
     }
     
     public boolean existenciaGrupo(Grupo grupoBuscado){
