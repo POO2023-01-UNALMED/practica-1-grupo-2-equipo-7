@@ -2,3 +2,4 @@
 /bin/
 .project
 .vscode/settings.json
+.classpath
