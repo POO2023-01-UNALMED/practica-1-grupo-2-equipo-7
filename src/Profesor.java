@@ -39,7 +39,15 @@ public class Profesor {
         this.grupos = grupos;
     }
     
-
     //FALTA: ORGANIZAR LAS FUNCIONALIDADES QUE NOS UNIERON Y HACER EL CONSTRUCTOR CORRESPONDIENTE
+
+    public void desvincularGrupo(Grupo g){
+        if (grupos.contains(g)){
+            int indice = grupos.indexOf(g);
+            grupos.remove(indice);
+
+        }
+    }
+
 
 }
