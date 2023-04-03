@@ -40,6 +40,14 @@ public class Estudiante extends Usuario {
     		}
     	}while(opcion<1 || opcion>3);
     }
+    
+    public String mostrarMaterias() {
+    	String retorno = "";
+    	for (Materia materia:materias) {
+    		retorno += "- "+materia.getNombre()+"\n";
+    	}
+    	return retorno;
+    }
 
     public String getPrograma() {
         return programa;
