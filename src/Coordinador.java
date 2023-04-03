@@ -2,11 +2,11 @@ public class Coordinador extends Usuario {
     private String facultad;
     private int limitesCreditos;
 
-    public Coordinador(String facultad,int limitesCreditos) {
+    public Coordinador(String facultad,int limitesCreditos,long id, String nombre, String pw) {
     
         //podemos ponerlos ahora o despues con el super o con los set del metodo
         // super(id,nombre,tipo,pw);
-        super();
+        super(id, nombre,pw);
         this.facultad = facultad;
         this.limitesCreditos = limitesCreditos;
     }

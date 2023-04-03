@@ -56,11 +56,6 @@ public class Grupo {
 		return this.profesor;
 	}
 
-<<<<<<< HEAD
-    public ArrayList<Estudiante> getEstudiantes() {
-        return estudiantes;
-    }
-=======
 	public void setProfesor(Profesor profesor) {
 		this.profesor = profesor;
 	}
@@ -96,5 +91,4 @@ public class Grupo {
 	public void setEstudiantes(ArrayList<Estudiante> estudiantes) {
 		this.estudiantes = estudiantes;
 	}
->>>>>>> be3a17e7b3c7adcd982fa49bbd2eff82fbabe21a
 }
