@@ -6,6 +6,7 @@ public class Estudiante extends Usuario {
     private String facultad;
     private int creditos;
     private ArrayList<Materia> materias;
+    private ArrayList<Grupo> grupos;
 
     public Estudiante(long id, String nombre, String pw, String programa, int semestre, String facultad, int creditos) {
         super(id,nombre,pw);
@@ -14,6 +15,7 @@ public class Estudiante extends Usuario {
         this.facultad = facultad;
         this.creditos = creditos;
         this.materias = new ArrayList<Materia>();
+        this.grupos = new ArrayList<Grupo>();
         //Si es necesario declarar un nuevo array al crear el objeto o no?
 
     }
@@ -43,8 +45,8 @@ public class Estudiante extends Usuario {
     
     public String mostrarMaterias() {
     	String retorno = "";
-    	for (Materia materia:materias) {
-    		retorno += "- "+materia.getNombre()+"\n";
+    	for (Grupo grupo:grupos) {
+    		retorno += "- "+grupo.getMateria().getNombre()+" | Grupo "+grupo.getNumero()+"\n";
     	}
     	return retorno;
     }

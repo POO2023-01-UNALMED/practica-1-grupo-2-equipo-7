@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class Grupo {
+	private Materia materia;
     private int numero;
     private Profesor profesor;
     private String horario; 
@@ -90,5 +91,13 @@ public class Grupo {
 
 	public void setEstudiantes(ArrayList<Estudiante> estudiantes) {
 		this.estudiantes = estudiantes;
+	}
+	
+	public Materia getMateria() {
+		return this.materia;
+	}
+	
+	public void setMateria(Materia materia) {
+		this.materia = materia;
 	}
 }
