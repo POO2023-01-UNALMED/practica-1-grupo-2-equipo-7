@@ -38,12 +38,15 @@ public class Grupo {
       for (int i=0;i<this.estudiantes.size();i++){
         if (this.estudiantes.get(i)==estudiante){
           this.estudiantes.remove(i);
+		  this.cupos++;
+		  break;
         }
       }
     }
 
     public void agregarEstudiante(Estudiante estudiante){
       this.estudiantes.add(estudiante);
+	  this.cupos--;
     }
 
 	public int getNumero() {

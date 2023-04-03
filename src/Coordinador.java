@@ -22,8 +22,23 @@ public class Coordinador extends Usuario {
         Materia materia = new Materia();
     }
 
-    public void desmatricular(Estudiante estudiante){
+    public String desmatricular(Estudiante estudiante, Grupo grupo){
         // Es desmatricular de... ya no eres estudiante o desmatricular de... ya no estar en una materia
+
+        boolean estaMatriculado = grupo.existenciaEstudiante(estudiante);
+
+        if (estaMatriculado){
+
+            grupo.eliminarEstudiante(estudiante);
+            return "El estudiante ha sido desmatriculado de la materia y su respectivo grupo";
+
+        }
+
+        else{
+
+            return "El estudiante no estaba matriculado";
+
+        }
 
     }
 
