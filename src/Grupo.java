@@ -10,7 +10,8 @@ public class Grupo {
     private String salon;
     private ArrayList<Estudiante> estudiantes;
 
-    public Grupo(int numero, Profesor profesor, String horario, int cupos, String salon){
+    public Grupo(Materia materia, int numero, Profesor profesor, String horario, int cupos, String salon){
+      this.materia = materia;
       this.numero=numero;
       this.profesor=profesor;
       //Otra vez lo mismo, el tipo de dato de horario
