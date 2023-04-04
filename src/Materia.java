@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Materia {
     
-    //nombre y codigo las declare como constantes. �Estan de acuerdo?
+    //nombre y codigo las declare como constantes. �Estan de acuerdo? si
     private final String nombre;
     private final int codigo;
     private String descripcion;

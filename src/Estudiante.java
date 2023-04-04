@@ -17,6 +17,7 @@ public class Estudiante extends Usuario {
         this.materias = new ArrayList<Materia>();
         this.grupos = new ArrayList<Grupo>();
         //Si es necesario declarar un nuevo array al crear el objeto o no?
+        // si jajaja
 
     }
 

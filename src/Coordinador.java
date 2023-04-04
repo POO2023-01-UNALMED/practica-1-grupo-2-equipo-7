@@ -23,7 +23,7 @@ public class Coordinador extends Usuario {
     }
 
     public String desmatricular(Estudiante estudiante, Grupo grupo){
-        // Es desmatricular de... ya no eres estudiante o desmatricular de... ya no estar en una materia
+        // Es desmatricular de ya no estar en una materia
 
         boolean estaMatriculado = grupo.existenciaEstudiante(estudiante);
 
