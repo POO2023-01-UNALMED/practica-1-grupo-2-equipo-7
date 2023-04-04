@@ -1,4 +1,4 @@
-## Proyecto: Easy POO
+## Proyecto De Gestion de Materias y Horarios
 
 Buenas :D
 
