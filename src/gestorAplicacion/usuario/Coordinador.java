@@ -1,3 +1,4 @@
+package gestorAplicacion.usuario;
 public class Coordinador extends Usuario {
     private String facultad;
     private int limitesCreditos;
