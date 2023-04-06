@@ -15,6 +15,10 @@ public class Coordinador extends Usuario {
 
     //Metodos
 
+    public String toString(){
+        return "Nombre: "+ getNombre()+ "\nDocumento: "+ getId();
+    }
+
     public void crearMateria(){
         // Agrega una materia a la "base de datos" pero antes necesitamos saber como funciona la serializacion
 

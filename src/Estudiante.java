@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+
 public class Estudiante extends Usuario {
     private String programa;
     private int semestre;
@@ -18,7 +19,10 @@ public class Estudiante extends Usuario {
         this.grupos = new ArrayList<Grupo>();
         //Si es necesario declarar un nuevo array al crear el objeto o no?
         // si jajaja
+    }
 
+    public String toString(){
+        return "Nombre: "+ getNombre()+ "\nDocumento: "+ getId();
     }
 
     public Estudiante(long id, String nombre, String pw, String programa, int semestre, String facultad, int creditos, ArrayList<Materia> materias) {

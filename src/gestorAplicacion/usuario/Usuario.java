@@ -1,15 +1,18 @@
-public class Usuario {
+package gestorAplicacion.usuario;
+public abstract class Usuario {
     private long id;
     private String nombre;
     private String tipo;
     private String pw;
+    
+    public abstract String toString();
 
     public Usuario(long id, String nombre, String pw){
         this.id = id;
         this.nombre = nombre;
         this.pw = pw;
     }
-    
+
     public long getId() {
         return id;
     }
