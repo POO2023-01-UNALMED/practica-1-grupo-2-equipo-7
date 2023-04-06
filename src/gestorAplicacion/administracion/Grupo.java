@@ -1,29 +1,30 @@
 import java.util.*;
+package administracion;
 
 public class Grupo {
-	private Materia materia;
+		private Materia materia;
     private int numero;
     private Profesor profesor;
-    private String horario; 
-    //En esta parte no se que tipo de dato es la variable horario
+    private Horario horario; 
     private int cupos;
     private String salon;
     private ArrayList<Estudiante> estudiantes;
 
-    public Grupo(Materia materia, int numero, Profesor profesor, String horario, int cupos, String salon){
+    public Grupo(Materia materia, int numero, Profesor profesor, Horario horario, int cupos, String salon){
       this.materia = materia;
       this.numero=numero;
       this.profesor=profesor;
-      //Otra vez lo mismo, el tipo de dato de horario
       this.horario=horario;
       this.cupos=cupos;
       this.salon=salon;
       this.estudiantes=new ArrayList<Estudiante>();
     } 
 
-    public void mostrarInformacionGrupo(){
-      System.out.println("Número del grupo: "+this.numero+", Profesor: "+this.profesor+", Horario: "+this.horario+", Cupos: "+this.cupos+", Salón: "+this.salon);
-    }
+    public String mostrarInformacionGrupo(){
+			String retorno= "Número del grupo: "+this.numero+", Profesor: "+this.profesor+", Horario: "+this.horario+", Cupos: "+this.cupos+", Salón: "+this.salon;
+			return retorno;
+		}
+
 
     public boolean existenciaEstudiante(Estudiante estudiante){
       for (int j=0;j<this.estudiantes.size();j++){
@@ -38,15 +39,15 @@ public class Grupo {
       for (int i=0;i<this.estudiantes.size();i++){
         if (this.estudiantes.get(i)==estudiante){
           this.estudiantes.remove(i);
-		  this.cupos++;
-		  break;
+		  		this.cupos++;
+		  		break;
         }
       }
     }
 
     public void agregarEstudiante(Estudiante estudiante){
       this.estudiantes.add(estudiante);
-	  this.cupos--;
+	  	this.cupos--;
     }
 
 	public int getNumero() {
