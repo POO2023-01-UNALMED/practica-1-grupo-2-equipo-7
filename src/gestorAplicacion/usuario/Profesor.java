@@ -1,3 +1,4 @@
+package gestorAplicacion.usuario;
 import java.util.ArrayList;
 
 public class Profesor {
