@@ -1,17 +1,17 @@
 package gestorAplicacion.administracion;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 public class Salon {
     private String lugar;
     private int aforo;
-    private Grupo[][] horario = new Grupo[7][24];
+    private Horario horario;
 
     public Salon(String lugar,int aforo){
         this.lugar = lugar;
         this.aforo = aforo;
     }
 
-    public void agregarGrupo(ArrayList<String> horario,Grupo grupo){
+    /*public void agregarGrupo(ArrayList<String> horario,Grupo grupo){
         for (int i = 0;i<horario.size();i++){
             
             // tiene que dar el horario en formato: "1-08-10" "Dia-hora inicio-hora final" todo en horario militar
@@ -25,9 +25,33 @@ public class Salon {
             }
 
         }
+    }*/
+    
+    public void setHorario(Horario horario) {
+    	this.horario = horario;
+    }
+    
+    public Horario getHorario() {
+    	return this.horario;
     }
 
-    public boolean comprobarDisponibilidadSalon(String hora){
+	public String getLugar() {
+		return lugar;
+	}
+
+	public void setLugar(String lugar) {
+		this.lugar = lugar;
+	}
+
+	public int getAforo() {
+		return aforo;
+	}
+
+	public void setAforo(int aforo) {
+		this.aforo = aforo;
+	}
+
+    /*public boolean comprobarDisponibilidadSalon(String hora){
         
         int dia = Integer.parseInt(hora.substring(0, 1))-1;
         int horaInicio = Integer.parseInt(hora.substring(2, 4));
@@ -42,6 +66,7 @@ public class Salon {
         }
         return boo;
     }
+    */
 
     // public void verHorario() {
     //     for(int i=0;i<7;i++){

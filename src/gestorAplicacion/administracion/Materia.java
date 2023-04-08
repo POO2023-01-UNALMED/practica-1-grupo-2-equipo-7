@@ -129,6 +129,8 @@ public class Materia {
     }
     
     public void eliminarGrupo(Grupo grupo){
+    	grupo.getProfesor().desvincularGrupo(grupo);
+    	grupo.getSalon().getHorario().liberarHorario(grupo.getHorario());;
         this.grupos.remove(grupo);
     }
     
@@ -142,7 +144,7 @@ public class Materia {
     		dispProfesor = profesor.getHorario().comprobarDisponibilidad(hor);
     		dispSalon = salon.getHorario().comprobarDisponibilidad(hor);
     		
-    		if(!dispProfesor||dispSalon) {
+    		if(!dispProfesor||!dispSalon) {
     			break;
     		}
     	}
@@ -151,9 +153,9 @@ public class Materia {
     	//En caso de contar con disponibilidad, se procede a declarar el nuevo grupo y agregarselo a su respectiva meteria, profesor y salon
     	if(dispProfesor&&dispSalon) {
     		Grupo nGrupo = crearGrupo(numero,profesor,horario,cupos,salon);
-    		this.grupos.add(nGrupo);
-    		salon.agregarGrupo(horario, nGrupo);
-    		
+    		salon.getHorario().ocuparHorario(horario, nGrupo);
+    		profesor.vincularGrupo(nGrupo);
+    		salon.getHorario().ocuparHorario(horario, nGrupo);
     	}
     	
     }

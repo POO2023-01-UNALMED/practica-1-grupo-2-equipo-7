@@ -30,6 +30,34 @@ public class Horario {
         }
     }
 
+    public void ocuparHorario(ArrayList<String> horario,  Grupo grupo) {
+        for (int i = 0;i<horario.size();i++){
+            
+            String clase = horario.get(i);
+            int dia = Integer.parseInt(clase.substring(0, 1))-1;
+            int horaInicio = Integer.parseInt(clase.substring(2, 4));
+            int horaFinal = Integer.parseInt(clase.substring(5, 7));
+            
+            for (int hora = horaInicio; hora < horaFinal; hora++){
+                this.horario[dia][hora] = grupo;
+            }
+        }
+    }
+    
+    public void liberarHorario(ArrayList<String> horario) {
+        for (int i = 0;i<horario.size();i++){
+            
+            String clase = horario.get(i);
+            int dia = Integer.parseInt(clase.substring(0, 1))-1;
+            int horaInicio = Integer.parseInt(clase.substring(2, 4));
+            int horaFinal = Integer.parseInt(clase.substring(5, 7));
+            
+            for (int hora = horaInicio; hora < horaFinal; hora++){
+                this.horario[dia][hora] = null;
+            }
+        }
+    }
+    
     public boolean comprobarDisponibilidad(String clase){
 
         int dia = Integer.parseInt(clase.substring(0, 1))-1;

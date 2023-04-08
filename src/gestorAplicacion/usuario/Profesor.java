@@ -54,13 +54,15 @@ public class Profesor {
     
     public void vincularGrupo(Grupo g) {
     	this.grupos.add(g);
+    	this.horario.ocuparHorario(g.getHorario(), g);
     }
     
     public void desvincularGrupo(Grupo g){
         if (grupos.contains(g)){
             int indice = grupos.indexOf(g);
+            ArrayList<String> horLibre = grupos.get(indice).getHorario();
+            this.horario.liberarHorario(horLibre);
             grupos.remove(indice);
-
         }
     }
 
