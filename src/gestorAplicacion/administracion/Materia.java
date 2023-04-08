@@ -1,5 +1,6 @@
 package gestorAplicacion.administracion;
 import java.util.ArrayList;
+import gestorAplicacion.usuario.*;
 
 public class Materia {
     
@@ -127,5 +128,12 @@ public class Materia {
     public void eliminarGrupo(Grupo grupo){
         this.grupos.remove(grupo);
     }
-     
+    
+    public void agregarGrupo(int numero, Profesor profesor, String horario, int cupos, String salon) {
+    	//el metodo recibe los parametros necesarios para crear un nuevo grupo
+    	boolean dispSalon = true;
+    	boolean dispProfesor = false;
+    	
+    	
+    }
 }
