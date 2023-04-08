@@ -85,16 +85,19 @@ public class Materia {
     }
     
     //Esta un poco ambigua la definicion de este metodo
-    public void crearGrupo(int numero, Profesor profesor, String horario, int cupos, String salon){
+    public Grupo crearGrupo(int numero, Profesor profesor, ArrayList<String> horario, int cupos, Salon salon){
         
     	//Faltaría que implementen los respectivos metodos y atributos en la clase profesor
     	//para comprobar que si se pueda asignar al grupo.
-    	Grupo grupo = new Grupo(numero, profesor, horario, cupos, salon);
+    	Grupo grupo = new Grupo(this, numero, profesor, horario, cupos, salon);
     	
     	//No se si sería mejor crear otro metodo para añadir un grupo o añadirlo aquí mismo. Hay que hablarlo.
     	this.grupos.add(grupo);
     	
+    	return grupo;
     }
+    //Cambié el metodo de un void a uno que retorne un Grupo por requerimiento de mi funcionalidad Att: Sebastian
+    
     
     //Este metodo tambien tenemos que hablarlo
     public String mostrarContenidos(){
@@ -129,11 +132,29 @@ public class Materia {
         this.grupos.remove(grupo);
     }
     
-    public void agregarGrupo(int numero, Profesor profesor, String horario, int cupos, String salon) {
+    public void agregarGrupo(int numero, Profesor profesor, ArrayList<String> horario, int cupos, Salon salon) {
     	//el metodo recibe los parametros necesarios para crear un nuevo grupo
     	boolean dispSalon = true;
-    	boolean dispProfesor = false;
+    	boolean dispProfesor = true;
     	
+    	//Se comprueba la disponibilidad del profesor y el salon para el horario ingresado
+    	for(String hor:horario) {
+    		dispProfesor = profesor.getHorario().comprobarDisponibilidad(hor);
+    		dispSalon = salon.getHorario().comprobarDisponibilidad(hor);
+    		
+    		if(!dispProfesor||dispSalon) {
+    			break;
+    		}
+    	}
+    	
+
+    	//En caso de contar con disponibilidad, se procede a declarar el nuevo grupo y agregarselo a su respectiva meteria, profesor y salon
+    	if(dispProfesor&&dispSalon) {
+    		Grupo nGrupo = crearGrupo(numero,profesor,horario,cupos,salon);
+    		this.grupos.add(nGrupo);
+    		salon.agregarGrupo(horario, nGrupo);
+    		
+    	}
     	
     }
 }

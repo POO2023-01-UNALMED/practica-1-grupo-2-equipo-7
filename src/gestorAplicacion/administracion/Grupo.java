@@ -1,16 +1,17 @@
+package gestorAplicacion.administracion;
 import java.util.*;
-package administracion;
+import gestorAplicacion.usuario.*;
 
 public class Grupo {
 		private Materia materia;
     private int numero;
     private Profesor profesor;
-    private Horario horario; 
+    private ArrayList<String> horario; 
     private int cupos;
-    private String salon;
+    private Salon salon;
     private ArrayList<Estudiante> estudiantes;
 
-    public Grupo(Materia materia, int numero, Profesor profesor, Horario horario, int cupos, String salon){
+    public Grupo(Materia materia, int numero, Profesor profesor, ArrayList<String> horario, int cupos, Salon salon){
       this.materia = materia;
       this.numero=numero;
       this.profesor=profesor;
@@ -66,11 +67,11 @@ public class Grupo {
 		this.profesor = profesor;
 	}
 
-	public String getHorario() {
+	public ArrayList<String> getHorario() {
 		return this.horario;
 	}
 
-	public void setHorario(String horario) {
+	public void setHorario(ArrayList<String> horario) {
 		this.horario = horario;
 	}
 
@@ -82,11 +83,11 @@ public class Grupo {
 		this.cupos = cupos;
 	}
 
-	public String getSalon() {
+	public Salon getSalon() {
 		return this.salon;
 	}
 
-	public void setSalon(String salon) {
+	public void setSalon(Salon salon) {
 		this.salon = salon;
 	}
 
