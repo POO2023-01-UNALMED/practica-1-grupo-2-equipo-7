@@ -38,9 +38,10 @@ public class Grupo {
 
     public void eliminarEstudiante(Estudiante estudiante){
       for (int i=0;i<this.estudiantes.size();i++){
-        if (this.estudiantes.get(i)==estudiante){
-          this.estudiantes.remove(i);
+        if (this.estudiantes.get(i).equals(estudiante)){
+          		this.estudiantes.remove(i);
 		  		this.cupos++;
+				estudiante.eliminarGrupo(this);
 		  		break;
         }
       }

@@ -11,6 +11,8 @@ public class Estudiante extends Usuario {
     private int creditos;
     private ArrayList<Materia> materias;
     private ArrayList<Grupo> grupos;
+    private Horario horario;
+    private static ArrayList<Estudiante> estudiantes;
 
     public Estudiante(long id, String nombre, String pw, String programa, int semestre, String facultad, int creditos) {
         super(id,nombre,pw);
@@ -58,6 +60,20 @@ public class Estudiante extends Usuario {
     	return retorno;
     }
 
+    public static long buscarEstudiante(String nombre, long id){
+        /*
+         * Si existe el estudiante retorna su indice en el Arraylist estudiante
+         * Si no existe, retorna -1
+         */
+        for (int i = 0; i < estudiantes.size(); i++){
+            if (estudiantes.get(i).getNombre().equals(nombre) && estudiantes.get(i).getId() == id){
+
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public String getPrograma() {
         return programa;
     }
@@ -97,4 +113,23 @@ public class Estudiante extends Usuario {
     public void setMaterias(ArrayList<Materia> materias) {
         this.materias = materias;
     }
+
+    public static ArrayList<Estudiante> getEstudiantes() {
+        return Estudiante.estudiantes;
+    }
+
+    public static void setEstudiantes(ArrayList<Estudiante> estudiantes) {
+        Estudiante.estudiantes = estudiantes;
+    }
+
+    public void eliminarMateria(Materia materia){
+        this.materias.remove(materia);
+    }
+
+    public void eliminarGrupo(Grupo grupo){
+        this.grupos.remove(grupo);
+        this.eliminarMateria(grupo.getMateria());
+        this.horario.liberarHorario(grupo.getHorario());
+    }
+
 }
