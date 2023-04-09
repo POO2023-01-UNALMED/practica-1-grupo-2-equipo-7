@@ -43,6 +43,26 @@ public class Horario {
             }
         }
     }
+
+    public void ocuparHorario(Grupo grupo) {
+
+        /*
+         * Metodo que solo necesita del grupo para agregarlo al horario correspondiente
+         */
+
+        ArrayList<String> horario = grupo.getHorario();
+        for (int i = 0;i<horario.size();i++){
+            
+            String clase = horario.get(i);
+            int dia = Integer.parseInt(clase.substring(0, 1))-1;
+            int horaInicio = Integer.parseInt(clase.substring(2, 4));
+            int horaFinal = Integer.parseInt(clase.substring(5, 7));
+            
+            for (int hora = horaInicio; hora < horaFinal; hora++){
+                this.horario[dia][hora] = grupo;
+            }
+        }
+    }
     
     public void liberarHorario(ArrayList<String> horario) {
         for (int i = 0;i<horario.size();i++){
@@ -72,6 +92,24 @@ public class Horario {
 
         return true;
     }
+
+
+    public boolean comprobarDisponibilidad(ArrayList<String> clases){
+        /*
+         * Comprobamos la disponibilidad de un conjunto de clases de un grupo
+         */
+        boolean ok = true;
+
+        for (String i:clases){
+            if (!comprobarDisponibilidad(i)){
+                ok = false;
+            }
+        }
+
+        return ok;
+        
+    }
+
 
     public String mostrarHorario(){
 

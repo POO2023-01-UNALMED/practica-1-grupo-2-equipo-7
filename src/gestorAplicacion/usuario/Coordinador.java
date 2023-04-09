@@ -73,29 +73,47 @@ public class Coordinador extends Usuario {
          *  crear el horaio y el horario generado.
          */
 
-        Horario horario;
-
-        Object[] resultado = new Object[2];
-
-        ArrayList<String> totalPosibles;
-
-        boolean ok;
-
-        for (int i=0;i<=materias.size();i++){
-            Materia pMateria = materias.get(i);
-            String posible;
-
-            ArrayList<Grupo> grupos = pMateria.getGrupos();
-            for (int e=0;e<=grupos.size();e++){
-                Grupo pGrupo = grupos.get(e);
+        Object[] resultado = new Object[3];
                 
-                //trabajo en progreso
-            }
+        Horario horario =  new Horario();
+        boolean ok = true;
+        Materia materiaObstaculo = null;
 
+
+        int[] gPosible = new int[materias.size()];        
+        int i =0; // indice de materias
+        
+        while (true){
+            ArrayList<String> pClases = materias.get(i).getGrupos().get(gPosible[i]).getHorario();
+            if (!horario.comprobarDisponibilidad(pClases)){
+                if(gPosible[i]==materias.get(i).getGrupos().size()-1){
+                    ok = false;
+                    horario = null;
+                    materiaObstaculo = materias.get(i);
+                    break;
+                }
+                else{
+                    gPosible[i]++;
+                }
+            }
+            
+            else if(i==materias.size()-1){
+                for (int k=0;k<materias.size();k++){
+                    Grupo grupo = materias.get(k).getGrupos().get(gPosible[k]);
+                    horario.ocuparHorario(grupo);
+                }
+                break;
+            }
+            
+            else{
+                i++;
+            };
+            // }
         }
 
         resultado[0] = ok;
         resultado[1] = horario;
+        resultado[2] = materiaObstaculo;
 
         return resultado;
 
