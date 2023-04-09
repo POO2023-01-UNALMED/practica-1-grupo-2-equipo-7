@@ -14,6 +14,7 @@ public class Materia {
     private int cupos;
     private ArrayList<Materia> prerrequisitos;
     private ArrayList<Grupo> grupos;
+    private static ArrayList<Materia> materiasTotales;
 
     public Materia(String nombre, int codigo, String descripcion, int creditos, String facultad, int cupos) {
         this.nombre = nombre;
@@ -24,6 +25,7 @@ public class Materia {
         this.cupos = cupos;
         this.prerrequisitos = new ArrayList<Materia>();
         this.grupos = new ArrayList<Grupo>();
+        materiasTotales.add(this);
     }
 
     public Materia(String nombre, int codigo, String descripcion, int creditos, String facultad, int cupos, ArrayList<Materia> prerrequisitos) {
@@ -157,6 +159,9 @@ public class Materia {
     		profesor.vincularGrupo(nGrupo);
     		salon.getHorario().ocuparHorario(horario, nGrupo);
     	}
-    	
+    }
+
+    public static ArrayList<Materia> getMateriasTotales(){
+        return materiasTotales;
     }
 }

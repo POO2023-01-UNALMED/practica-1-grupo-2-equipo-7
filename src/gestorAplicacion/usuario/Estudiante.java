@@ -36,20 +36,55 @@ public class Estudiante extends Usuario {
 
     public void matricularMateria() {
     	Scanner scanner = new Scanner(System.in); 
-    	int opcion;
-    	
-    	System.out.println("¿Cómo desea realizar la búsqueda?"
-    			+ "\n1: Por nombre."
-    			+ "\n2: Por créditos."
-    			+ "\n3: Por código");
-    	do {
-    		opcion = scanner.nextInt();
-    	
-    		switch(opcion) {
-    			default:
-    				System.out.println("Ha ingresado un valor inválido. Intente nuevamente");
-    		}
-    	}while(opcion<1 || opcion>3);
+    	ArrayList<Materia> materiasDisponibles=new ArrayList<Materia>();
+        ArrayList<Materia> materiasTotales=Materia.getMateriasTotales();
+        for (int i=0; i<materiasTotales.size();i++){
+            Materia materia=materiasTotales.get(i);
+            boolean anadir=true;
+            for (int j=0; j<materia.getPrerrequisitos().size();j++){
+                Materia prerrequisito=materia.getPrerrequisitos().get(j);
+                for (int k=0; k < this.materias.size();k++){
+                    if (prerrequisito==this.materias.get(k)){
+                        anadir=false;
+                        break;
+                    }
+                }
+            }
+            if (anadir){
+                materiasDisponibles.add(materia);
+            }
+        }
+        for (int l=0;l<materiasDisponibles.size();l++){
+            Materia materia2=materiasDisponibles.get(l);
+            int limitesCreditos=20;
+            if (materia2.getCupos()<=0){
+                materiasDisponibles.remove(l);
+            }
+            if (this.getCreditos()+materia2.getCreditos()>limitesCreditos){
+                materiasDisponibles.remove(l);
+            }
+        }
+
+        for (int m=0;m<materiasDisponibles.size();m++){
+            int numero=1;
+            Materia materia3=materiasDisponibles.get(m);
+            String imprimir="";
+            imprimir=" "+materia3.getNombre()+" Grupo ";
+            for (int n=0; n<materia3.getGrupos().size(); n++){
+                int grupo=materia3.getGrupos().get(n).getNumero();
+                int cantidad=materia3.getGrupos().get(n).getCupos();
+                if (cantidad==0){
+                    continue;
+                } else{
+                    System.out.println(numero+imprimir+grupo+"("+cantidad+ " cupos)");
+                    numero++;
+                }
+            }
+            System.out.println("Por favor ingrese el numero correspondiente a la materia que desea matricular");
+            //LUEGO CONTINUO...
+        }
+
+        scanner.close();
     }
     
     public String mostrarMaterias() {
