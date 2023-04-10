@@ -120,6 +120,24 @@ public class Coordinador extends Usuario implements Serializable{
 
     }
 
+    /*Metodo eliminarMateria: Rectificará que la materia que se quiere eliminar de la base de datos
+    sí se encuentre en esta, y además eliminarla correctamente de las materias de los estudiantes 
+    que la tienen inscrita y de los profesores relacionados a esta*/
+
+    public void eliminarMateria(Materia materia){
+        if(materiasTotales.contains(materia)){
+            materiasTotales.remove(materia);
+            resturarMateria(materia);
+        }
+        
+    }
+
+    /*Método agregarMateria: 
+     * 
+     * 
+     * 
+     */
+                                                                                                                     
     // Getters
 
     public String getFacultad() {
