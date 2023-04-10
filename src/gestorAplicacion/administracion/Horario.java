@@ -114,12 +114,14 @@ public class Horario {
     public String mostrarHorario(){
 
         enum DiaSemana {
-    LUNES(1), MARTES(2), MIERCOLES(3), JUEVES(4), VIERNES(5), SABADO(6), DOMINGO(7);
+    LUNES(0, 5), MARTES(1, 6), MIERCOLES(2, 9), JUEVES(3, 6), VIERNES(4, 7), SABADO(5, 6), DOMINGO(6, 7);
 
     private final int indice;
+    private int length;
 
-    DiaSemana(int index) {
+    DiaSemana(int indice, int length) {
         this.indice = indice;
+        this.length = length;
     }
 
     public static DiaSemana getDiaPorIndice(int indice) {
@@ -156,7 +158,7 @@ public class Horario {
                 else{
                     materia = this.horario[j][i].getMateria().getNombre();
                 }
-                int cantidad_espacios = ((DiaSemana.getDiaPorIndice(j).length() + 4) - materia.length());
+                int cantidad_espacios = ((DiaSemana.getDiaPorIndice(j).length + 4) - materia.length());
                 String espacios = new String(new char[cantidad_espacios]).replace("\0", " ");
                 horario += materia + espacios;
             }
