@@ -6,13 +6,12 @@ import gestorAplicacion.administracion.*;
 
 public class Coordinador extends Usuario {
     private String facultad;
-    private int limitesCreditos;
+    private final static int limitesCreditos=20;
     // private static ArrayList<Materia> materiasTotales;
 
-    public Coordinador(String facultad,int limitesCreditos,long id, String nombre, String pw) {
+    public Coordinador(String facultad,long id, String nombre, String pw) {
         super(id, nombre,pw);
         this.facultad = facultad;
-        this.limitesCreditos = limitesCreditos;
     }
 
 
@@ -125,8 +124,8 @@ public class Coordinador extends Usuario {
         return this.facultad;
     }
         
-    public int getLimitesCreditos() {
-        return this.limitesCreditos;
+    public static int getLimitesCreditos() {
+        return limitesCreditos;
     }
 
 
@@ -136,9 +135,4 @@ public class Coordinador extends Usuario {
     public void setFacultad(String facultad) {
         this.facultad = facultad;
     }
-
-    public void setLimitesCreditos(int limitesCreditos) {
-        this.limitesCreditos = limitesCreditos;
-    }
-
 }

@@ -1,7 +1,6 @@
 package gestorAplicacion.usuario;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 import gestorAplicacion.administracion.*;
 
 public class Estudiante extends Usuario {
@@ -9,7 +8,7 @@ public class Estudiante extends Usuario {
     private int semestre;
     private String facultad;
     private int creditos;
-    private ArrayList<Materia> materias;
+    private ArrayList<Materia> materias; 
     private ArrayList<Grupo> grupos;
     private Horario horario;
     private static ArrayList<Estudiante> estudiantes;
@@ -32,59 +31,6 @@ public class Estudiante extends Usuario {
     public Estudiante(long id, String nombre, String pw, String programa, int semestre, String facultad, int creditos, ArrayList<Materia> materias) {
         this(id,nombre,pw,programa,semestre,facultad,creditos);
         this.materias = materias;
-    }
-
-    public void matricularMateria() {
-    	Scanner scanner = new Scanner(System.in); 
-    	ArrayList<Materia> materiasDisponibles=new ArrayList<Materia>();
-        ArrayList<Materia> materiasTotales=Materia.getMateriasTotales();
-        for (int i=0; i<materiasTotales.size();i++){
-            Materia materia=materiasTotales.get(i);
-            boolean anadir=true;
-            for (int j=0; j<materia.getPrerrequisitos().size();j++){
-                Materia prerrequisito=materia.getPrerrequisitos().get(j);
-                for (int k=0; k < this.materias.size();k++){
-                    if (prerrequisito==this.materias.get(k)){
-                        anadir=false;
-                        break;
-                    }
-                }
-            }
-            if (anadir){
-                materiasDisponibles.add(materia);
-            }
-        }
-        for (int l=0;l<materiasDisponibles.size();l++){
-            Materia materia2=materiasDisponibles.get(l);
-            int limitesCreditos=20;
-            if (materia2.getCupos()<=0){
-                materiasDisponibles.remove(l);
-            }
-            if (this.getCreditos()+materia2.getCreditos()>limitesCreditos){
-                materiasDisponibles.remove(l);
-            }
-        }
-
-        for (int m=0;m<materiasDisponibles.size();m++){
-            int numero=1;
-            Materia materia3=materiasDisponibles.get(m);
-            String imprimir="";
-            imprimir=" "+materia3.getNombre()+" Grupo ";
-            for (int n=0; n<materia3.getGrupos().size(); n++){
-                int grupo=materia3.getGrupos().get(n).getNumero();
-                int cantidad=materia3.getGrupos().get(n).getCupos();
-                if (cantidad==0){
-                    continue;
-                } else{
-                    System.out.println(numero+imprimir+grupo+"("+cantidad+ " cupos)");
-                    numero++;
-                }
-            }
-            System.out.println("Por favor ingrese el numero correspondiente a la materia que desea matricular");
-            //LUEGO CONTINUO...
-        }
-
-        scanner.close();
     }
     
     public String mostrarMaterias() {
