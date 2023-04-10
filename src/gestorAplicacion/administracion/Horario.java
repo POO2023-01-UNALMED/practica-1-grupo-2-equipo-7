@@ -113,8 +113,26 @@ public class Horario {
 
     public String mostrarHorario(){
 
-        String[] dias = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" };
-        String horario = "Hora    Lunes    Martes    Miercoles    Jueves    Viernes    Sabado    Domingo\n";
+        enum DiaSemana {
+    LUNES(1), MARTES(2), MIERCOLES(3), JUEVES(4), VIERNES(5), SABADO(6), DOMINGO(7);
+
+    private final int indice;
+
+    DiaSemana(int index) {
+        this.indice = indice;
+    }
+
+    public static DiaSemana getDiaPorIndice(int indice) {
+        for (DiaSemana dia : DiaSemana.values()) {
+            if (dia.indice == indice) {
+                return dia;
+            }
+        }
+        return null;
+    }
+}
+
+        String horario = "HORA    LUNES    MARTES    MIERCOLES    JUEVES    VIERNES    SABADO    DOMINGO\n";
 
         for (int i = 0; i < 24; i++){
 
@@ -138,7 +156,7 @@ public class Horario {
                 else{
                     materia = this.horario[j][i].getMateria().getNombre();
                 }
-                int cantidad_espacios = ((dias[j].length() + 4) - materia.length());
+                int cantidad_espacios = ((DiaSemana.getDiaPorIndice(j).length() + 4) - materia.length());
                 String espacios = new String(new char[cantidad_espacios]).replace("\0", " ");
                 horario += materia + espacios;
             }
