@@ -1,10 +1,12 @@
 package gestorAplicacion.administracion;
 import java.util.ArrayList;
 import gestorAplicacion.usuario.*;
+import java.io.Serializable;
 
-public class Materia {
+public class Materia implements Serializable{
     
     //nombre y codigo las declare como constantes. �Estan de acuerdo? si
+    private static final long serialVersionUID = 1L;
     private final String nombre;
     private final int codigo;
     private String descripcion;

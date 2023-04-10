@@ -1,9 +1,12 @@
 package gestorAplicacion.usuario;
-public abstract class Usuario {
+import java.io.Serializable;
+
+public abstract class Usuario implements Serializable{
     private long id;
     private String nombre;
     private String tipo;
     private String pw;
+    private static final long serialVersionUID = 1L;
     
     public abstract String toString();
 

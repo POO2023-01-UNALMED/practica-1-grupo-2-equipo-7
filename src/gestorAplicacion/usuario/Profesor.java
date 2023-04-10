@@ -1,13 +1,15 @@
 package gestorAplicacion.usuario;
 import java.util.ArrayList;
 import gestorAplicacion.administracion.*;
+import java.io.Serializable;
 
-public class Profesor {
+public class Profesor implements Serializable{
     private String nombre;
     private ArrayList<Materia> materiasDadas = new ArrayList<Materia>(10);
     private ArrayList<Grupo> grupos = new ArrayList<Grupo>();
     private String facultad;
     private Horario horario;
+    private static final long serialVersionUID = 1L;
     
     public Profesor(String nombre, String facultad){
         this.nombre = nombre;

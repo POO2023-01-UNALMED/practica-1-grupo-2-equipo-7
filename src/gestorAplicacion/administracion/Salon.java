@@ -1,10 +1,12 @@
 package gestorAplicacion.administracion;
 //import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Salon {
+public class Salon implements Serializable{
     private String lugar;
     private int aforo;
     private Horario horario;
+    private static final long serialVersionUID = 1L;
 
     public Salon(String lugar,int aforo){
         this.lugar = lugar;

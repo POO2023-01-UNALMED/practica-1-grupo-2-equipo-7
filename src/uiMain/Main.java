@@ -4,6 +4,7 @@ import java.util.Scanner;
 import gestorAplicacion.administracion.*;
 import gestorAplicacion.usuario.*;
 import java.util.ArrayList;
+import baseDatos.Deserializador;
 
 public class Main {
     public static void main(String[] args){

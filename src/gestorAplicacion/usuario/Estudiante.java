@@ -2,8 +2,9 @@ package gestorAplicacion.usuario;
 
 import java.util.ArrayList;
 import gestorAplicacion.administracion.*;
+import java.io.Serializable;
 
-public class Estudiante extends Usuario {
+public class Estudiante extends Usuario implements Serializable{
     private String programa;
     private int semestre;
     private String facultad;
@@ -12,6 +13,7 @@ public class Estudiante extends Usuario {
     private ArrayList<Grupo> grupos;
     private Horario horario;
     private static ArrayList<Estudiante> estudiantes;
+    private static final long serialVersionUID = 1L;
 
     public Estudiante(long id, String nombre, String pw, String programa, int semestre, String facultad, int creditos) {
         super(id,nombre,pw);

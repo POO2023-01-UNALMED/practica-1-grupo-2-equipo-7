@@ -3,11 +3,13 @@ package gestorAplicacion.usuario;
 import java.util.ArrayList;
 
 import gestorAplicacion.administracion.*;
+import java.io.Serializable;
 
-public class Coordinador extends Usuario {
+public class Coordinador extends Usuario implements Serializable{
     private String facultad;
     private final static int limitesCreditos=20;
     // private static ArrayList<Materia> materiasTotales;
+    private static final long serialVersionUID = 1L;
 
     public Coordinador(String facultad,long id, String nombre, String pw) {
         super(id, nombre,pw);

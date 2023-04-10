@@ -1,9 +1,11 @@
 package gestorAplicacion.administracion;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Horario {
+public class Horario implements Serializable{
     private Grupo[][] horario = new Grupo[7][24];
+    private static final long serialVersionUID = 1L;
 
     public Horario() {
     }

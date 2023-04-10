@@ -1,9 +1,11 @@
 package gestorAplicacion.administracion;
+import java.io.Serializable;
 import java.util.*;
 import gestorAplicacion.usuario.*;
 
-public class Grupo {
-		private Materia materia;
+public class Grupo implements Serializable{
+	private static final long serialVersionUID = 1L;
+	private Materia materia;
     private int numero;
     private Profesor profesor;
     private ArrayList<String> horario; 
