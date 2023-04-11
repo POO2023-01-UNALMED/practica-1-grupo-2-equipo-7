@@ -1,7 +1,7 @@
 package gestorAplicacion.usuario;
 
 import java.util.ArrayList;
-
+import gestorAplicacion.usuario.*;
 import gestorAplicacion.administracion.*;
 import java.io.Serializable;
 
@@ -19,11 +19,13 @@ public class Coordinador extends Usuario implements Serializable{
 
     //Metodos
 
+    //Abstract
+
     public String toString(){
         return "Nombre: "+ getNombre()+ "\nDocumento: "+ getId();
     }
 
-    public void crearMateria(String nombre, int codigo, int creditos){
+    public crearMateria(String nombre, int codigo, int creditos){
         // Generarlo aqui o en el main?
         Materia materia = new Materia(nombre,codigo, "Sin descripcion", creditos, "Sin facultad", 0);
         // materiasTotales.add(materia);
@@ -120,7 +122,7 @@ public class Coordinador extends Usuario implements Serializable{
 
     }
 
-    /*Metodo eliminarMateria: Rectificará que la materia que se quiere eliminar de la base de datos
+    /*Metodo eliminarMateria: Recibirá una materia y rectificará see encuentre en la base de datos quiere eliminar de la base de datos
     sí se encuentre en esta, y además eliminarla correctamente de las materias de los estudiantes 
     que la tienen inscrita y de los profesores relacionados a esta*/
 
@@ -132,11 +134,13 @@ public class Coordinador extends Usuario implements Serializable{
         
     }
 
-    /*Método agregarMateria: 
-     * 
-     * 
-     * 
-     */
+    /*Método agregarMateria: Recibirá los parámetros necesarios para crear una materia, si esta no se encuentra en
+    la base de datos, la creará con sus respectivos atributos*/
+    public void agregarMateria(String nombre, int codigo, String descripcion,int creditos, String facultad, int cupos, ArrayList<Materia> prerrequisitos, ArrayList<Grupo> grupos){
+        if((materiasTotales.contains(nombre))== false){
+            Materia nMateria = new Materia(this); 
+        }
+    }
                                                                                                                      
     // Getters
 
