@@ -68,5 +68,8 @@ public class Profesor implements Serializable{
         }
     }
 
+    public boolean daMateria(Materia materia) {
+    	return this.materiasDadas.contains(materia);
+    }
 
 }

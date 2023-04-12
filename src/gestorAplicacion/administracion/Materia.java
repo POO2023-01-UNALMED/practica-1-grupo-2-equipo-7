@@ -142,6 +142,7 @@ public class Materia implements Serializable{
     	//el metodo recibe los parametros necesarios para crear un nuevo grupo
     	boolean dispSalon = true;
     	boolean dispProfesor = true;
+    	boolean daMateria = profesor.daMateria(this);
     	
     	//Se comprueba la disponibilidad del profesor y el salon para el horario ingresado
     	for(String hor:horario) {
@@ -155,7 +156,7 @@ public class Materia implements Serializable{
     	
 
     	//En caso de contar con disponibilidad, se procede a declarar el nuevo grupo y agregarselo a su respectiva meteria, profesor y salon
-    	if(dispProfesor&&dispSalon) {
+    	if(dispProfesor&&dispSalon&&daMateria) {
     		Grupo nGrupo = crearGrupo(numero,profesor,horario,cupos,salon);
     		salon.getHorario().ocuparHorario(horario, nGrupo);
     		profesor.vincularGrupo(nGrupo);
