@@ -25,11 +25,12 @@ public class Coordinador extends Usuario implements Serializable{
         return "Nombre: "+ getNombre()+ "\nDocumento: "+ getId();
     }
 
-    public crearMateria(String nombre, int codigo, int creditos){
-        // Generarlo aqui o en el main?
-        Materia materia = new Materia(nombre,codigo, "Sin descripcion", creditos, "Sin facultad", 0);
-        // materiasTotales.add(materia);
-    }
+    // Ya se encuentra hecha mas abajo :P
+    // public void crearMateria(String nombre, int codigo, int creditos){
+    //     // Generarlo aqui o en el main?
+    //     Materia materia = new Materia(nombre,codigo, "Sin descripcion", creditos, "Sin facultad", 0);
+    //     // materiasTotales.add(materia);
+    // }
 
     public String desmatricular(Estudiante estudiante, Grupo grupo){
         // Desmatricular no seria simplemente llamar un metodo de estudiante?
@@ -127,8 +128,8 @@ public class Coordinador extends Usuario implements Serializable{
     que la tienen inscrita y de los profesores relacionados a esta*/
 
     public void eliminarMateria(Materia materia){
-        if(materiasTotales.contains(materia)){
-            materiasTotales.remove(materia);
+        if(Materia.materiasTotales.contains(materia)){
+            Materia.materiasTotales.remove(materia);
             resturarMateria(materia);
         }
         
@@ -137,7 +138,7 @@ public class Coordinador extends Usuario implements Serializable{
     /*Método agregarMateria: Recibirá los parámetros necesarios para crear una materia, si esta no se encuentra en
     la base de datos, la creará con sus respectivos atributos*/
     public void agregarMateria(String nombre, int codigo, String descripcion,int creditos, String facultad, int cupos, ArrayList<Materia> prerrequisitos, ArrayList<Grupo> grupos){
-        if((materiasTotales.contains(nombre))== false){
+        if((Materia.materiasTotales.contains(nombre))== false){
             Materia nMateria = new Materia(this); 
         }
     }

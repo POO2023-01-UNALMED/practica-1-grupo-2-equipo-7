@@ -16,7 +16,8 @@ public class Materia implements Serializable{
     private int cupos;
     private ArrayList<Materia> prerrequisitos;
     private ArrayList<Grupo> grupos;
-    private static ArrayList<Materia> materiasTotales;
+    // Es publico para que coordinador tenda acceso 
+    public static ArrayList<Materia> materiasTotales;
 
     public Materia(String nombre, int codigo, String descripcion, int creditos, String facultad, int cupos) {
         this.nombre = nombre;
