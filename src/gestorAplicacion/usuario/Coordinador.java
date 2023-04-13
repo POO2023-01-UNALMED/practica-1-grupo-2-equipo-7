@@ -128,8 +128,8 @@ public class Coordinador extends Usuario implements Serializable{
     que la tienen inscrita y de los profesores relacionados a esta*/
 
     public void eliminarMateria(Materia materia){
-        if(Materia.materiasTotales.contains(materia)){
-            Materia.materiasTotales.remove(materia);
+        if(Materia.getMateriasTotales().contains(materia)){
+            Materia.getMateriasTotales().remove(materia);
             resturarMateria(materia);
         }
         
@@ -138,10 +138,13 @@ public class Coordinador extends Usuario implements Serializable{
     /*Método agregarMateria: Recibirá los parámetros necesarios para crear una materia, si esta no se encuentra en
     la base de datos, la creará con sus respectivos atributos*/
     public void agregarMateria(String nombre, int codigo, String descripcion,int creditos, String facultad, int cupos, ArrayList<Materia> prerrequisitos, ArrayList<Grupo> grupos){
-        if((Materia.materiasTotales.contains(nombre))== false){
-            Materia nMateria = new Materia(this); 
+        for (Materia materia : Materia.getMateriasTotales()){
+            if (materia.getNombre().equals(nombre) == false){
+                Materia nMateria = new Materia(nombre, codigo, descripcion, creditos, facultad, cupos, prerrequisitos, grupos);
+            }
         }
     }
+
                                                                                                                      
     // Getters
 
