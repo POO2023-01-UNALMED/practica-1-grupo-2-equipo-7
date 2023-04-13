@@ -1,8 +1,14 @@
 package uiMain;
 
 import java.util.Scanner;
-import gestorAplicacion.administracion.*;
-import gestorAplicacion.usuario.*;
+import gestorAplicacion.administracion.Grupo;
+import gestorAplicacion.administracion.Horario;
+import gestorAplicacion.administracion.Materia;
+import gestorAplicacion.administracion.Salon;
+import gestorAplicacion.usuario.Coordinador;
+import gestorAplicacion.usuario.Estudiante;
+import gestorAplicacion.usuario.Profesor;
+import gestorAplicacion.usuario.Usuario;
 import java.util.ArrayList;
 import baseDatos.Deserializador;
 
@@ -19,6 +25,7 @@ public class Main {
         System.out.println("Bienvenido a ....");
         while(continuar){
             //Aun no esta contruido la interfaz (mensajes bonitos en la terminal)
+            //Por aquí irá el menu con las opciones
             System.out.println("Ingrese la opcion deseada: ");
             int opcion = scanner.nextInt();
             switch(opcion) {
@@ -31,18 +38,30 @@ public class Main {
                 //el parametro sirve para decirle a la funcionalidad cual estudiante va a proceder con la matriculación de una materia
                 break;
             case 2:
-                System.out.println("Has seleccionado la opción 2");
+                System.out.println("Has seleccionado la opción 2 (Generar horario)");
                 break;
             case 3:
-                System.out.println("Has seleccionado la opción 3");
+                System.out.println("Has seleccionado la opción 3 (Eliminar o agregar materia / grupo)");
                 break;
             case 4:
-                System.out.println("Has seleccionado la opción 3");
+                System.out.println("Has seleccionado la opción 4 (Desmatricular alumno)");
+                break;
+            case 5:
+                //El nombre aun se puede cambiar
+                System.out.println("Has seleccionado la opción 5 (Busqueda y postulacion Becas)");
                 break;
             default:
                 System.out.println("Opción inválida");
+                System.out.println("Desea continuar?");
+                System.out.println("Opción 1- SI");
+                System.out.println("Opción 2- NO");
+                System.out.println("Por favor ingrese la opción deseada");
+                int continuarint=scanner.nextInt();
+                if (continuarint==1){
+                    continue;
+                } else{
                 continuar=false;
-                break;
+                }
             }
         }
 
