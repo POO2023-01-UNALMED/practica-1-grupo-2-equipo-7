@@ -1,12 +1,16 @@
 package gestorAplicacion.usuario;
 import java.io.Serializable;
+import java.util.ArrayList;
+
 
 public abstract class Usuario implements Serializable{
+    private static final long serialVersionUID = 1L;
     private long id;
     private String nombre;
     private String tipo;
     private String pw;
-    private static final long serialVersionUID = 1L;
+    private static ArrayList<Usuario> usuariosTotales;
+    
     
     public abstract String toString();
 
@@ -14,6 +18,7 @@ public abstract class Usuario implements Serializable{
         this.id = id;
         this.nombre = nombre;
         this.pw = pw;
+        usuariosTotales.add(this);
     }
 
     public long getId() {
@@ -47,4 +52,13 @@ public abstract class Usuario implements Serializable{
     public void setPw(String pw) {
         this.pw = pw;
     }
+
+    public static ArrayList<Usuario> getUsuariosTotales() {
+        return Usuario.usuariosTotales;
+    }
+
+    public static void setUsuariosTotales(ArrayList<Usuario> usuariosTotales) {
+        Usuario.usuariosTotales = usuariosTotales;
+    }
+
 }
