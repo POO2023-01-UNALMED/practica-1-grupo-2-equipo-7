@@ -9,6 +9,7 @@ public class Profesor implements Serializable{
     private ArrayList<Grupo> grupos = new ArrayList<Grupo>();
     private String facultad;
     private Horario horario;
+    private ArrayList<Estudiante> estudiantesRecomendados = new ArrayList<Estudiante>();
     private static final long serialVersionUID = 1L;
     
     public Profesor(String nombre, String facultad){
@@ -70,6 +71,14 @@ public class Profesor implements Serializable{
 
     public boolean daMateria(Materia materia) {
     	return this.materiasDadas.contains(materia);
+    }
+
+    public void recomendarEstudiantes(ArrayList<Estudiante> estudiantes){
+        
+        for (Estudiante estudiante: estudiantes){
+            this.estudiantesRecomendados.add(estudiante);
+        }
+
     }
 
 }
