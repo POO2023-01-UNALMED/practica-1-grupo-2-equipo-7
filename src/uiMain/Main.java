@@ -22,11 +22,12 @@ public class Main {
 
         Scanner scanner=new Scanner(System.in);
         Boolean continuar=true;
-        System.out.println("Bienvenido a ....");
+        System.out.println("Bienvenido al Portal de Servicios Acacémicos S.M.M");
         while(continuar){
             //Aun no esta contruido la interfaz (mensajes bonitos en la terminal)
             //Por aquí irá el menu con las opciones
-            System.out.println("Ingrese la opcion deseada: ");
+            System.out.println("A continuación encontrará los diferentes servicios ofrecidos por la plataforma.");
+            System.out.println("Ingrese la opcion deseada: \n1. Matricular Materia.\n2. Generar Horario.\n3. Eliminar o agregar Materia / Grupo.\n4. Desmatricular Alumno. \n5. Busqueda y Postulación de Becas.");
             int opcion = scanner.nextInt();
             switch(opcion) {
             case 1:
