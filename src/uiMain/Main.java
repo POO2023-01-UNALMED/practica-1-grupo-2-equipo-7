@@ -39,17 +39,39 @@ public class Main {
                 //el parametro sirve para decirle a la funcionalidad cual estudiante va a proceder con la matriculación de una materia
                 break;
             case 2:
-                System.out.println("Has seleccionado la opción 2 (Generar horario)");
+                System.out.println("Has seleccionado la opción 2 (Generar Horario).");
                 break;
             case 3:
-                System.out.println("Has seleccionado la opción 3 (Eliminar o agregar materia / grupo)");
+                System.out.println("Has seleccionado la opción 3 (Eliminar o agregar Materia / Grupo).");
+                System.out.println("Ingrese la opción que se ajuste a su búsqueda:\n1. Agregar Materia.       2.Eliminar Materia.\n3.Agregar Grupo.          4.Eliminar Grupo.");
+                int opcion_3 = scanner.nextInt();
+                if(opcion_3 == 1){
+                    System.out.println("Has seleccionado la opción 1 (Agregar materia.)");
+                    //Funcionalidad agregar materia//
+                }
+                else if(opcion_3 == 2){
+                    System.out.println("Has seleccionado la opción 2 (Eliminar materia.)");
+                    //Funcionalidad eliminar materia//
+                }
+                else if(opcion_3 == 3){
+                    System.out.println("Has seleccionado la opción 3 (Agregar grupo.)");
+                    //Funcionalidad agregar grupo//
+                }
+                else if(opcion_3 == 4){
+                    System.out.println("Has seleccionado la opción 4 (Eliminar grupo.)");
+                    //Funcionalidad eliminar grupo//
+                }
+                else if(opcion_3 > 4){
+                    System.out.println("Opción inválida.");
+                    continue;
+                }
                 break;
             case 4:
-                System.out.println("Has seleccionado la opción 4 (Desmatricular alumno)");
+                System.out.println("Has seleccionado la opción 4 (Desmatricular Alumno).");
                 break;
             case 5:
                 //El nombre aun se puede cambiar
-                System.out.println("Has seleccionado la opción 5 (Busqueda y postulacion Becas)");
+                System.out.println("Has seleccionado la opción 5 (Busqueda y Postulación Becas).");
                 break;
             default:
                 System.out.println("Opción inválida");
