@@ -1,7 +1,7 @@
 package gestorAplicacion.usuario;
 
 import java.util.ArrayList;
-import gestorAplicacion.usuario.*;
+// import gestorAplicacion.usuario.*;
 import gestorAplicacion.administracion.*;
 import java.io.Serializable;
 
@@ -60,7 +60,8 @@ public class Coordinador extends Usuario implements Serializable{
 
             for (int j=0;j<puntero_Grupo.getEstudiantes().size();j++){
                 Estudiante puntero_Estudiante = puntero_Grupo.getEstudiantes().get(j);
-                puntero_Estudiante.desmatricularMateria(materia);
+                this.desmatricular(puntero_Estudiante, puntero_Grupo);
+                // puntero_Estudiante.desmatricularMateria(materia);
             }   
         }
     }
