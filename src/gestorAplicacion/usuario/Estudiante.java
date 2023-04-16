@@ -187,4 +187,7 @@ public class Estudiante extends Usuario implements Serializable{
         this.calcularPromedio();
     }
 
+    public void desmatricularMateria(Materia materia){
+        estudiantes.remove(materia);
+    }
 }
