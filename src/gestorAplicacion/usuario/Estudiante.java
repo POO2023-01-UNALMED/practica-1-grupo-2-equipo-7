@@ -13,7 +13,7 @@ public class Estudiante extends Usuario implements Serializable{
     private ArrayList<Materia> materias; 
     private ArrayList<Grupo> grupos;
     private Horario horario;
-    private static ArrayList<Estudiante> estudiantes;
+    private static ArrayList<Estudiante> estudiantes=new ArrayList<Estudiante>();
     private short estrato;
     private int sueldo;
     private int valorMatricula;
@@ -35,7 +35,7 @@ public class Estudiante extends Usuario implements Serializable{
         this.estrato = estrato;
         this.sueldo = sueldo;
         this.valorMatricula = 1234567 * estrato;
-        
+        Estudiante.estudiantes.add(this);
     }
 
     public String toString(){

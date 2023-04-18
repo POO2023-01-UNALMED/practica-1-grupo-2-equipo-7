@@ -14,12 +14,6 @@ import baseDatos.Deserializador;
 
 public class Main {
     public static void main(String[] args){
-
-        //solo lo puse para hacer una prueba
-        Estudiante estudiante=new Estudiante(0, null, null, null, 0, null, 0);
-        //lo de arriba se puede borrar
-
-
         Scanner scanner=new Scanner(System.in);
         Boolean continuar=true;
         System.out.println("Bienvenido al Portal de Servicios Acacémicos S.M.M");
@@ -31,12 +25,8 @@ public class Main {
             int opcion = scanner.nextInt();
             switch(opcion) {
             case 1:
-                //La funcionalidad estrella (MATRICULAR MATERIA)
-                //Con esta sacamos cinco
                 System.out.println("Has seleccionado la opción 1 (Matricular materia)");
-                matricularMateria(estudiante);
-                //Le estoy pasando un estudiante como parametro porque no sabia como lo ibamos a hacer
-                //el parametro sirve para decirle a la funcionalidad cual estudiante va a proceder con la matriculación de una materia
+                //matricularMateria();
                 break;
             case 2:
                 System.out.println("Has seleccionado la opción 2 (Generar Horario).");
@@ -61,7 +51,7 @@ public class Main {
                     System.out.println("Has seleccionado la opción 4 (Eliminar grupo.)");
                     //Funcionalidad eliminar grupo//
                 }
-                else if(opcion_3 > 4){
+                else if(0 > opcion_3 || opcion_3 > 4){
                     System.out.println("Opción inválida.");
                     continue;
                 }
