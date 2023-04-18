@@ -69,6 +69,7 @@ public class Main {
             case 4:
                 System.out.println("Has seleccionado la opción 4 (Desmatricular Alumno).");
                 break;
+                //hola
             case 5:
                 //El nombre aun se puede cambiar
                 System.out.println("Has seleccionado la opción 5 (Busqueda y Postulación Becas).");
