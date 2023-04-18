@@ -55,7 +55,7 @@ public class Estudiante extends Usuario implements Serializable{
     	return retorno;
     }
 
-    public static long buscarEstudiante(String nombre, long id){
+    public static int buscarEstudiante(String nombre, long id){
         /*
          * Si existe el estudiante retorna su indice en el Arraylist estudiante
          * Si no existe, retorna -1

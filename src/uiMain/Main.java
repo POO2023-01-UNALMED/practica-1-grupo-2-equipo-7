@@ -60,23 +60,63 @@ public class Main {
                 break;
             case 4:
                 System.out.println("Has seleccionado la opción 4 (Desmatricular Alumno).");
-
+                Estudiante estudiante = null;
                 while (true){
                     System.out.println("Elija como quiere seleccionar el alumno: \n1.Ver la lista de estudiantes. \n2.Buscar estudiante por ID y nombre. \n3.Salir");
                     int eleccion = scanner.nextInt();
+                    Scanner scanner2 = new Scanner(System.in);
                     if (eleccion == 1){
+                        System.out.println("Elija el número del estudiante");
                         System.out.println(Estudiante.mostrarEstudiantes());
+                        int numeroEstudiante = scanner2.nextInt();
+                        estudiante = Estudiante.getEstudiantes().get(numeroEstudiante-1);
                     }
                     else if(eleccion == 2){
-
+                        System.out.print("Ingrese el nombre del estudiante: ");
+                        String nombre = scanner2.nextLine();
+                        System.out.print("Ingrese el id del estudiante: ");
+                        long id = scanner2.nextLong();
+                        int numeroEstudiante = Estudiante.buscarEstudiante(nombre, id);
+                        if (numeroEstudiante != -1){
+                            System.out.println("El estudiante ha sido encontrado\n");
+                            estudiante = Estudiante.getEstudiantes().get(numeroEstudiante);
+                        }
+                        else{
+                            System.out.println("El estudiante no ha sido encontrado, busque nuevamente\n");
+                        }
                     }
                     else if(eleccion == 3){
                         break;
                     }
                     else{
-                        System.out.println("Ingresa ua opción valida");
+                        System.out.println("Ingresa una opción valida\n");
                     }
+                    scanner2.close();
                 }
+
+                while(true && estudiante != null){
+                    Scanner scanner2 = new Scanner(System.in);
+                    while(true){
+                        System.out.println("Seleccione de que quiere desmatricular al estudiante:");
+                        System.out.println("1. Desmatricular de una materia \n2. Desmatricular del sistema \n3. Retroceder");
+                        int opcion_1 = scanner2.nextInt();
+                        if (opcion_1 == 1){
+
+                        }
+                        else if(opcion_1 == 2){
+
+                        }
+                        else if(opcion_1 == 3){
+                            break;
+                        }
+                        else{
+                            System.out.println("Ingresa una opcion valida\n");
+                        }
+                    }
+                    scanner2.close();
+                }
+
+                break;
             case 5:
                 //El nombre aun se puede cambiar
                 System.out.println("Has seleccionado la opción 5 (Busqueda y Postulación Becas).");
