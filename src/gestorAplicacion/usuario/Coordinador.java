@@ -1,9 +1,9 @@
 package gestorAplicacion.usuario;
 
 import java.util.ArrayList;
-// import gestorAplicacion.usuario.*;
 import gestorAplicacion.administracion.*;
 import java.io.Serializable;
+// import gestorAplicacion.usuario.*;
 
 public class Coordinador extends Usuario implements Serializable{
     private String facultad;
@@ -147,7 +147,7 @@ public class Coordinador extends Usuario implements Serializable{
     }
 
                                                                                                                      
-    // Getters
+    // Getters - Setters
 
     public String getFacultad() {
         return this.facultad;
@@ -157,11 +157,9 @@ public class Coordinador extends Usuario implements Serializable{
         return limitesCreditos;
     }
 
-
-
-    // Setters
-
     public void setFacultad(String facultad) {
         this.facultad = facultad;
     }
 }
+
+
