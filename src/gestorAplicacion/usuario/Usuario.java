@@ -9,7 +9,7 @@ public abstract class Usuario implements Serializable{
     private String nombre;
     private String tipo;
     private String pw;
-    private static ArrayList<Usuario> usuariosTotales;
+    private static ArrayList<Usuario> usuariosTotales = new ArrayList<Usuario>();
     
     
     public abstract String toString();

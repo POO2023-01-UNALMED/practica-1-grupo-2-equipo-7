@@ -60,8 +60,23 @@ public class Main {
                 break;
             case 4:
                 System.out.println("Has seleccionado la opción 4 (Desmatricular Alumno).");
-                break;
-                //hola
+
+                while (true){
+                    System.out.println("Elija como quiere seleccionar el alumno: \n1.Ver la lista de estudiantes. \n2.Buscar estudiante por ID y nombre. \n3.Salir");
+                    int eleccion = scanner.nextInt();
+                    if (eleccion == 1){
+                        System.out.println(Estudiante.mostrarEstudiantes());
+                    }
+                    else if(eleccion == 2){
+
+                    }
+                    else if(eleccion == 3){
+                        break;
+                    }
+                    else{
+                        System.out.println("Ingresa ua opción valida");
+                    }
+                }
             case 5:
                 //El nombre aun se puede cambiar
                 System.out.println("Has seleccionado la opción 5 (Busqueda y Postulación Becas).");

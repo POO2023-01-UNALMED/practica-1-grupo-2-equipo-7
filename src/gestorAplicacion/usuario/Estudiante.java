@@ -14,7 +14,7 @@ public class Estudiante extends Usuario implements Serializable{
     private ArrayList<Grupo> grupos;
     private Horario horario;
     private static ArrayList<Estudiante> estudiantes=new ArrayList<Estudiante>();
-    private short estrato;
+    private int estrato;
     private int sueldo;
     private int valorMatricula;
     private boolean matriculaPagada;
@@ -24,7 +24,7 @@ public class Estudiante extends Usuario implements Serializable{
     private ArrayList<Double> notas = new ArrayList<Double>();;
     private Beca beca;
 
-    public Estudiante(long id, String nombre, String pw, String programa, int semestre, String facultad, int creditos, short estrato, int sueldo) {
+    public Estudiante(long id, String nombre, String pw, String programa, int semestre, String facultad, int creditos, int estrato, int sueldo) {
         super(id,nombre,pw);
         this.programa = programa;
         this.semestre = semestre;
@@ -39,10 +39,10 @@ public class Estudiante extends Usuario implements Serializable{
     }
 
     public String toString(){
-        return "Nombre: "+ getNombre()+ "\nDocumento: "+ getId();
+        return "Nombre: "+ getNombre()+ " Documento: "+ getId();
     }
 
-    public Estudiante(long id, String nombre, String pw, String programa, int semestre, String facultad, int creditos, short estrato, int sueldo, ArrayList<Materia> materias) {
+    public Estudiante(long id, String nombre, String pw, String programa, int semestre, String facultad, int creditos, int estrato, int sueldo, ArrayList<Materia> materias) {
         this(id,nombre,pw,programa,semestre,facultad,creditos, estrato, sueldo);
         this.materias = materias;
     }
@@ -109,11 +109,11 @@ public class Estudiante extends Usuario implements Serializable{
         this.materias = materias;
     }
 
-    public short getEstrato() {
+    public int getEstrato() {
         return estrato;
     }
 
-    public void setEstrato(short estrato) {
+    public void setEstrato(int estrato) {
         this.estrato = estrato;
     }
 
@@ -185,6 +185,15 @@ public class Estudiante extends Usuario implements Serializable{
             this.notas.add(nota);
         }
         this.calcularPromedio();
+    }
+
+    public static String mostrarEstudiantes(){
+        String estudiantes = "";
+        int i = 1;
+        for (Estudiante estudiante : Estudiante.estudiantes){
+            estudiantes += "\n" + (i++) + ". " + estudiante;
+        }
+        return estudiantes.substring(1, estudiantes.length());
     }
 
 }
