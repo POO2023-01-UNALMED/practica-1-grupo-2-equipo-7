@@ -454,4 +454,117 @@ public class Main {
         }
         scanner.close();
     }
+    
+    // METODOS USADOS EN GENERAR HORARIO: 
+
+    // - Mostrar Materias confiltro
+    public static ArrayList<Materia> mostrarMateriasConFiltro(int opcionFiltro,String filtro){
+        /*
+        * Muestra solo las materias que cumplan el filtro dado (segundo parametro)
+        * Retorna:
+        * Un arreglo que sera una lista de las materias que pasaron por el filtro 
+        */
+
+    
+        ArrayList<Materia> listaFiltrada=new ArrayList<Materia>();
+
+        // filtro == 1 == facultad
+        if (opcionFiltro == 1){
+            for (Materia pMateria:Materia.getMateriasTotales()){
+                if(pMateria.getFacultad().equalsIgnoreCase(filtro)){
+                    listaFiltrada.add(pMateria);
+                }
+            }
+        }
+        // filtro == 2 == Creditos 
+        else if (opcionFiltro == 2){
+            for (Materia pMateria:Materia.getMateriasTotales()){
+                if(pMateria.getCreditos()==Integer.parseInt(filtro)){
+                    listaFiltrada.add(pMateria);
+                }
+            }
+        }
+        // filtro == 3 == Codigo 
+        else if (opcionFiltro == 3){
+            for (Materia pMateria:Materia.getMateriasTotales()){
+                if(pMateria.getCodigo()==Integer.parseInt(filtro)){
+                    listaFiltrada.add(pMateria);
+                }
+            }
+        }
+        
+        return listaFiltrada;
+
+    }
+    
+    // - Mostrar materias por consola
+    public static void imprimirListaPorConsola(ArrayList<Materia> ListaAMostrar){
+        /*
+         * Toma una lista y la imprime con un formato especial
+         */
+        // imprimir Lista
+        
+        int con =1;
+        System.out.printf("%-3s %-40s %-10s %-10s%n", "Num", "Nombre", "Facultad","Codigo");
+        
+        for (Materia pMateria:ListaAMostrar){
+            System.out.printf("%-3n %-40s %-10s %-15n%n",con,pMateria.getNombre(),pMateria.getFacultad(),pMateria.getCodigo());
+            con++;
+        }       
+    }
+    
+    // - Muestra el horario generado 
+    public static void imprimirHorarioGenerado(ArrayList<Materia> ListaAGenerar){
+        /*
+         * Muestra el horario generado ademas de que recoge la informacion para costruirlo
+         */
+
+        // Elecciones del usuario
+        Scanner scanner=new Scanner(System.in);
+        ArrayList<Materia> listaMateriasAGenerar = new ArrayList<Materia>();
+
+        System.out.println("Indique uno por uno los numeros de la materias que quiere incluir en su horario y envie 0 cuando termine: ");
+        boolean flag = true;
+        while(flag){
+            System.out.print("-> ");
+            int opt3=scanner.nextInt();
+            if (opt3!=0){
+                listaMateriasAGenerar.add(ListaAGenerar.get(opt3-1));
+            }
+            else{
+                flag = false;
+            }
+        }
+        Object[] informacion = Coordinador.crearHorarioAleatorio(listaMateriasAGenerar);
+        
+        if ((boolean)informacion[0]){
+            Horario pHorario= (Horario)informacion[1];
+        }
+        else{
+            System.out.println("No fue posible generar el horario, ya que "+((Materia)informacion[2]).getNombre()+" es un obstaculo");
+        }
+
+        // System.out.println("Desea conservar el horario?\n1. Si \n2. No");
+        // int opt4=scanner.nextInt();
+        // if (opt4 == 1){
+        //     System.out.println("Escoja el numero del estudiante a asignar: ");
+        //     Estudiante.mostrarEstudiantes();
+        //     int opt4=scanner.nextInt();
+            
+        }
+    
+    // Conexion de dos metodos
+    public static void fusionImpresiones(ArrayList<Materia> listaObjetivo){
+        /*
+         * La idea es factorizar un poco mas el codigo, al recibir un arreglo y aplicarle dos metodos ya establecidos
+         */
+        if (listaObjetivo.size()!=0){
+            imprimirListaPorConsola(listaObjetivo);
+            imprimirHorarioGenerado(listaObjetivo);
+        }
+        else{
+            System.out.println("Ningun elemente hizo encontrado con el filtro dado");
+        }
+    }
+
 }
