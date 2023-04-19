@@ -7,22 +7,24 @@ public class Beca {
     private double avanceRequerido;
     private int creditosInscritosRequeridos;
     private int ayudaEconomica;
+    private boolean necesitaRecomendacion;
 
     public Beca(int cupos, String convenio, double promedioRequerido, double avanceRequerido,
-            int creditosInscritosRequeridos, int ayudaEconomica) {
+            int creditosInscritosRequeridos, int ayudaEconomica, boolean necesitaRecomendacion) {
         this.cupos = cupos;
         this.convenio = convenio;
         this.promedioRequerido = promedioRequerido;
         this.avanceRequerido = avanceRequerido;
         this.creditosInscritosRequeridos = creditosInscritosRequeridos;
-        this.ayudaEconomica = ayudaEconomica;
+        this.ayudaEconomica = ayudaEconomica;                         
+        this.necesitaRecomendacion = necesitaRecomendacion;                                                                    
     }
 
     public int getCupos() {
         return cupos;
     }
 
-    public void setCupos(int cupos) {
+    public void setCupos(int cupos) {                             
         this.cupos = cupos;
     }
 
