@@ -88,7 +88,7 @@ public class Profesor implements Serializable{
         for (Profesor profesor : Profesor.getProfesores()){
             int chance = 0;
             int suerte = (int)(Math. random()*10+1);
-            for(Grupo grupo : Estudiante.getGruposVistos()){
+            for(Grupo grupo : estudiante.getGruposVistos()){
                 if (grupo.getProfesor().equals(profesor.getNombre()) == true){
                     chance += 5;
                 }

@@ -68,5 +68,13 @@ public class Beca {
         this.ayudaEconomica = ayudaEconomica;
     }
 
+    public boolean getNecesitaRecomendacion() {
+        return necesitaRecomendacion;
+    }
+    
+    public void setNecesitaRecomendacion(boolean necesitaRecomendacion) {
+        this.necesitaRecomendacion = necesitaRecomendacion;
+    }
+
     
 }
