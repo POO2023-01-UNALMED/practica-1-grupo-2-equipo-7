@@ -145,6 +145,21 @@ public class Coordinador extends Usuario implements Serializable{
             }
         }
     }
+    /*Metodo candidato a beca: ... */
+    public boolean candidatoABeca(Estudiante estudiante, Beca tipoDeBeca){
+        if (tipoDeBeca.getCupos() > 0){
+            if ((estudiante.calcularPromedio >= tipoDeBeca.getPromedioRequerido()) && (estudiante.calcularAvance >= tipoDeBeca.getAvanceRequerido()) && (estudiante.getCreditos() >= tipoDeBeca.getCreditosInscritosRequeridos())){
+                if (tipoDeBeca.necesitaRecomendacion){
+                    if (recomendarEstudiante(estudiante)){
+                        return true;
+                    }else return false;
+                } else return true; //no necesita recomendacion, pero cumple los demás requisitos
+            }
+            else return false;
+        }
+        else return false;
+    }
+        
 
                                                                                                                      
     // Getters - Setters
