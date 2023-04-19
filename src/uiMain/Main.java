@@ -32,6 +32,52 @@ public class Main {
                 break;
             case 2:
                 System.out.println("Has seleccionado la opción 2 (Generar Horario).");
+                System.out.println("Esta Opcion te permitira generar una horario aleatorio segun unas materias dadas.");
+                
+                boolean salir = true;
+                while(salir){
+
+                    
+                    System.out.println("Elija como quiere seleccionar las materias: \n1.Ver la lista de materias. \n2.Buscar por criterio (Facultad - Creditos - Codigo). \n3.Salir");
+                    int opt=scanner.nextInt();
+                    
+
+                    // Ver la lista de materias
+                    if (opt==1){
+                        fusionImpresiones(Materia.getMateriasTotales());
+                    }
+    
+                    // Ver lista pero con filtro
+                    else if (opt ==2){
+                        System.out.println("Por cual criterio quiere buscar: \n1. Facultad. \n2. Creditos. \n3. Codigo");
+                        int opt2=scanner.nextInt();
+                        
+                        if (opt2==1){
+                            System.out.println("Ingrese la facultad: ");
+                            String opt3=scanner.nextLine();
+    
+                            fusionImpresiones(mostrarMateriasConFiltro(opt2, opt3));
+                        }
+                        else if (opt2 == 2){
+                            System.out.println("Ingrese el numero de creditos: ");
+                            String opt3=scanner.nextLine();
+    
+                            fusionImpresiones(mostrarMateriasConFiltro(opt2, opt3));
+
+                        }
+                        else if (opt2 == 3){
+                            System.out.println("Ingrese el codigo: ");
+                            String opt3=scanner.nextLine();
+    
+                            fusionImpresiones(mostrarMateriasConFiltro(opt2, opt3));
+
+                        }
+                    
+                    // Salir
+                    } else{
+                        salir = false;
+                    }
+                }
                 break;
             case 3:
                 System.out.println("Has seleccionado la opción 3 (Eliminar o agregar Materia / Grupo).");
@@ -454,4 +500,6 @@ public class Main {
         }
         scanner.close();
     }
+
 }
+
