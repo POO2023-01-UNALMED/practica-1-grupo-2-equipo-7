@@ -23,6 +23,7 @@ public class Estudiante extends Usuario implements Serializable{
     private final static int creditosParaGraduarse = 120;
     private ArrayList<Double> notas = new ArrayList<Double>();;
     private Beca beca;
+    private ArrayList<Grupo> gruposVistos = new ArrayList<Grupo>();
 
     public Estudiante(long id, String nombre, String pw, String programa, int semestre, String facultad, int creditos, int estrato, int sueldo) {
         super(id,nombre,pw);
@@ -42,9 +43,10 @@ public class Estudiante extends Usuario implements Serializable{
         return "Nombre: "+ getNombre()+ " Documento: "+ getId();
     }
 
-    public Estudiante(long id, String nombre, String pw, String programa, int semestre, String facultad, int creditos, int estrato, int sueldo, ArrayList<Materia> materias) {
+    public Estudiante(long id, String nombre, String pw, String programa, int semestre, String facultad, int creditos, int estrato, int sueldo, ArrayList<Materia> materias, ArrayList<Grupo> gruposVistos) {
         this(id,nombre,pw,programa,semestre,facultad,creditos, estrato, sueldo);
         this.materias = materias;
+        this.gruposVistos = gruposVistos;
     }
     
     public String mostrarMaterias() {
@@ -135,6 +137,13 @@ public class Estudiante extends Usuario implements Serializable{
 
     public static void setEstudiantes(ArrayList<Estudiante> estudiantes) {
         Estudiante.estudiantes = estudiantes;
+    }
+
+    public ArrayList<Grupo> getGruposVistos() {
+        return gruposVistos;
+    }
+    public void setGruposVistos(ArrayList<Grupo> gruposVistos) {
+        this.gruposVistos = gruposVistos;
     }
 
     public void eliminarMateria(Materia materia){

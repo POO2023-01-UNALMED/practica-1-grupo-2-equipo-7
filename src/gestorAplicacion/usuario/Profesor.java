@@ -5,16 +5,20 @@ import java.io.Serializable;
 
 public class Profesor implements Serializable{
     private String nombre;
-    private ArrayList<Materia> materiasDadas = new ArrayList<Materia>(10);
-    private ArrayList<Grupo> grupos = new ArrayList<Grupo>();
     private String facultad;
     private Horario horario;
-    private ArrayList<Estudiante> estudiantesRecomendados = new ArrayList<Estudiante>();
+    private ArrayList<Materia> materiasDadas = new ArrayList<Materia>(10);
+    private ArrayList<Grupo> grupos = new ArrayList<Grupo>();
+    private static ArrayList<Profesor> profesores =new ArrayList<Profesor>();
     private static final long serialVersionUID = 1L;
     
-    public Profesor(String nombre, String facultad){
+    public Profesor(String nombre, String facultad, Horario horario, ArrayList<Materia> materiasDadas, ArrayList<Grupo> grupos){
         this.nombre = nombre;
         this.facultad = facultad;
+        this.horario = horario;
+        this.materiasDadas = materiasDadas;
+        this.grupos = grupos;
+        Profesor.profesores.add(this);
     }
 
     public String getNombre() {
@@ -43,6 +47,13 @@ public class Profesor implements Serializable{
     }
     public void setGrupos(ArrayList<Grupo> grupos) {
         this.grupos = grupos;
+    }
+
+    public static ArrayList<Profesor> getProfesores() {
+        return profesores;
+    }
+    public static void setProfesores(ArrayList<Profesor> profesores) {
+        Profesor.profesores = profesores;
     }
     
     //FALTA: ORGANIZAR LAS FUNCIONALIDADES QUE NOS UNIERON Y HACER EL CONSTRUCTOR CORRESPONDIENTE
@@ -73,12 +84,24 @@ public class Profesor implements Serializable{
     	return this.materiasDadas.contains(materia);
     }
 
-    public void recomendarEstudiantes(ArrayList<Estudiante> estudiantes){
-        
-        for (Estudiante estudiante: estudiantes){
-            this.estudiantesRecomendados.add(estudiante);
+    public boolean recomendarEstudiante(Estudiante estudiante){
+        for (Profesor profesor : Profesor.getProfesores()){
+            int chance = 0;
+            int suerte = (int)(Math. random()*10+1);
+            for(Grupo grupo : Estudiante.getGruposVistos()){
+                if (grupo.getProfesor().equals(profesor.getNombre()) == true){
+                    chance += 5;
+                }
+                if (estudiante.getFacultad().equals(profesor.getFacultad()) == true){
+                    chance += 3;
+                }
+                if (chance >= suerte){
+                    return true;
+                }else if (chance < suerte){
+                    return false;
+                }   
+            }
         }
-
     }
 
 }
