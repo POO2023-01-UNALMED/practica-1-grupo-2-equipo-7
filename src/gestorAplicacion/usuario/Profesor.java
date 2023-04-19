@@ -48,6 +48,13 @@ public class Profesor implements Serializable{
     public void setGrupos(ArrayList<Grupo> grupos) {
         this.grupos = grupos;
     }
+
+    public static ArrayList<Profesor> getProfesores() {
+        return profesores;
+    }
+    public static void setProfesores(ArrayList<Profesor> profesores) {
+        Profesor.profesores = profesores;
+    }
     
     //FALTA: ORGANIZAR LAS FUNCIONALIDADES QUE NOS UNIERON Y HACER EL CONSTRUCTOR CORRESPONDIENTE
 
@@ -77,12 +84,24 @@ public class Profesor implements Serializable{
     	return this.materiasDadas.contains(materia);
     }
 
-    public void recomendarEstudiantes(ArrayList<Estudiante> estudiantes){
-        
-        for (Estudiante estudiante: estudiantes){
-            this.estudiantesRecomendados.add(estudiante);
+    public boolean recomendarEstudiante(Estudiante estudiante){
+        for (Profesor profesor : Profesor.getProfesores()){
+            int chance = 0;
+            int suerte = (int)(Math. random()*10+1);
+            for(Grupo grupo : Estudiante.getGruposVistos()){
+                if (grupo.getProfesor().equals(profesor.getNombre()) == true){
+                    chance += 5;
+                }
+                if (estudiante.getFacultad().equals(profesor.getFacultad()) == true){
+                    chance += 3;
+                }
+                if (chance >= suerte){
+                    return true;
+                }else if (chance < suerte){
+                    return false;
+                }   
+            }
         }
-
     }
 
 }
