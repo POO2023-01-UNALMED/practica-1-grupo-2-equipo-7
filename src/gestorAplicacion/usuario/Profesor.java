@@ -5,16 +5,20 @@ import java.io.Serializable;
 
 public class Profesor implements Serializable{
     private String nombre;
-    private ArrayList<Materia> materiasDadas = new ArrayList<Materia>(10);
-    private ArrayList<Grupo> grupos = new ArrayList<Grupo>();
     private String facultad;
     private Horario horario;
-    private ArrayList<Estudiante> estudiantesRecomendados = new ArrayList<Estudiante>();
+    private ArrayList<Materia> materiasDadas = new ArrayList<Materia>(10);
+    private ArrayList<Grupo> grupos = new ArrayList<Grupo>();
+    private static ArrayList<Profesor> profesores =new ArrayList<Profesor>();
     private static final long serialVersionUID = 1L;
     
-    public Profesor(String nombre, String facultad){
+    public Profesor(String nombre, String facultad, Horario horario, ArrayList<Materia> materiasDadas, ArrayList<Grupo> grupos){
         this.nombre = nombre;
         this.facultad = facultad;
+        this.horario = horario;
+        this.materiasDadas = materiasDadas;
+        this.grupos = grupos;
+        Profesor.profesores.add(this);
     }
 
     public String getNombre() {

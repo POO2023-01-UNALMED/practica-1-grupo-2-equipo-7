@@ -124,7 +124,7 @@ public class Coordinador extends Usuario implements Serializable{
 
     }
 
-    /*Metodo eliminarMateria: Recibirá una materia y rectificará see encuentre en la base de datos quiere eliminar de la base de datos
+    /*Metodo eliminarMateria: Recibira una materia y rectificara see encuentre en la base de datos quiere eliminar de la base de datos
     sí se encuentre en esta, y además eliminarla correctamente de las materias de los estudiantes 
     que la tienen inscrita y de los profesores relacionados a esta*/
 
@@ -136,8 +136,8 @@ public class Coordinador extends Usuario implements Serializable{
         
     }
 
-    /*Método agregarMateria: Recibirá los parámetros necesarios para crear una materia, si esta no se encuentra en
-    la base de datos, la creará con sus respectivos atributos*/
+    /*Metodo agregarMateria: Recibira los parámetros necesarios para crear una materia, si esta no se encuentra en
+    la base de datos, la creara con sus respectivos atributos*/
     public void agregarMateria(String nombre, int codigo, String descripcion,int creditos, String facultad, int cupos, ArrayList<Materia> prerrequisitos, ArrayList<Grupo> grupos){
         for (Materia materia : Materia.getMateriasTotales()){
             if (materia.getNombre().equals(nombre) == false){
