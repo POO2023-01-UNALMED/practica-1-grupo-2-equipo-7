@@ -97,7 +97,7 @@ public class Main {
                     System.out.println("Has seleccionado la opción 3 (Agregar grupo.)");
                     boolean salida = false;
                     while(!salida) {
-	                    System.out.println("Ingrese la materia a la cual desea agregar el grupo (Con mayúscula inicial solo en la primera palabra):\nSi desea salir ingrese la palabra Salir");
+	                    System.out.println("Ingrese la materia a la cual desea agregar el grupo (Con mayúscula inicial solo en la primera palabra).\nSi desea salir ingrese la palabra Salir:");
 	                    String materiaStr = scanner.nextLine();
 	                    if (materiaStr=="Salir") {
 	                    	salida=true;
@@ -114,6 +114,7 @@ public class Main {
 	                    	System.out.println("La materia no ha sido encontrada. Ingrese un nombre de una materia valida.");
 	                    	continue;
 	                    }
+	                    Profesor profesorSel = null;
 		                while(true) {
 		                    System.out.println("Ingrese el método por el cual quiere asignar el profesor para el nuevo grupo:\n1. Seleccionar del listado de profesores.\n2. Asignar un profesor nuevo.\n3. Salir");
 		                    int opcion_profe = scanner.nextInt();
@@ -123,7 +124,7 @@ public class Main {
 		                    	System.out.print(Profesor.mostrarProfesMateria(materiaSel));
 		                    	int seleccionProfe = scanner.nextInt();
 		                    	ArrayList<Profesor> preProfes = Profesor.profesoresDeMateria(materiaSel);
-		                    	Profesor profesorSel = preProfes.get(seleccionProfe-1);
+		                    	profesorSel = preProfes.get(seleccionProfe-1);
 		                    	break;
 		                    }
 		                    
@@ -144,7 +145,7 @@ public class Main {
 		                    			}
 		                    		}
 		                    	}
-		                    	Profesor profesorSel = new Profesor(nomb,facu,new Horario(),mates);
+		                    	profesorSel = new Profesor(nomb,facu,new Horario(),mates);
 		                    	break;
 		                    }
 		                    else if(opcion_profe==3){
@@ -163,10 +164,29 @@ public class Main {
 			            ArrayList<String> horarioSel= new ArrayList<String>(Arrays.asList(horario));
 			            System.out.println("Ingrese la cantidad de cupos con la que contará el grupo:");
 			            int cuposSel = scanner.nextInt();
-			            System.out.println("Ingrese el salón donde se darán las sesiones de clase del grupo:");
-			            String nomSalon = scanner.nextLine();
-			            
-			            //Buscar el nombre del salón entre todos los salones
+			            Salon salonSel = null;
+			            while(true) {
+			            	System.out.println("Ingrese el salón donde se darán las sesiones de clase del grupo.\nSi desea salir ingrese la palabra Salir:");
+			            	String nomSalon = scanner.nextLine();
+			            	if (nomSalon=="Salir") {
+			            		salida = true;
+			            		break;
+			            	}
+			            	for (Salon salon:Salon.salones) {
+			            		if(nomSalon==salon.getLugar()) {
+			            			salonSel = salon;
+			            			break;
+			            		}
+			            	}
+			            	if (salonSel==null) {
+			            		System.out.println("El salón ingresado no existe. Ingrese un salón válido.");
+			            	}
+			            }
+			            if(salida) {break;}
+			            int numSel = materiaSel.getGrupos().size();
+			            materiaSel.agregarGrupo(numSel, profesorSel, horarioSel, cuposSel, salonSel);
+			            System.out.println("El grupo "+numSel+" de la materia "+materiaSel+" ha sido asignado correctamente");
+			            break;
                     }
                 }
                 else if(opcion_3 == 4){

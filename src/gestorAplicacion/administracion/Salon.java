@@ -1,20 +1,29 @@
 package gestorAplicacion.administracion;
-//import java.util.ArrayList;
+import java.util.ArrayList;
 import java.io.Serializable;
 
 public class Salon implements Serializable{
     private String lugar;
     private int aforo;
     private Horario horario;
+    public static ArrayList<Salon> salones= new ArrayList<Salon>();
     private static final long serialVersionUID = 1L;
 
     public Salon(String lugar,int aforo){
         this.lugar = lugar;
         this.aforo = aforo;
+        salones.add(this);
     }
-
     
-    public void setHorario(Horario horario) {
+    public static ArrayList<Salon> getSalones() {
+		return salones;
+	}
+
+	public static void setSalones(ArrayList<Salon> salones) {
+		Salon.salones = salones;
+	}
+
+	public void setHorario(Horario horario) {
         this.horario = horario;
     }
     
