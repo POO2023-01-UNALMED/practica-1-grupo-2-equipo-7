@@ -133,10 +133,17 @@ public class Materia implements Serializable{
         }
     }
     
-    public void eliminarGrupo(Grupo grupo){
+    public void eliminarGrupo(int numero){
+    	Grupo grupo = this.grupos.get(numero-1);
     	grupo.getProfesor().desvincularGrupo(grupo);
     	grupo.getSalon().getHorario().liberarHorario(grupo.getHorario());;
         this.grupos.remove(grupo);
+        for(int i=numero-1;i<this.grupos.size();i++) {
+        	Grupo grupoCamb = this.grupos.get(i);
+        	int nGrupoAnt = grupoCamb.getNumero();
+        	grupoCamb.setNumero(nGrupoAnt-1);
+        }
+        
     }
     
     public void agregarGrupo(int numero, Profesor profesor, ArrayList<String> horario, int cupos, Salon salon) {

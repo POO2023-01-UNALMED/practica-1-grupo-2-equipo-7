@@ -191,7 +191,42 @@ public class Main {
                 }
                 else if(opcion_3 == 4){
                     System.out.println("Has seleccionado la opción 4 (Eliminar grupo.)");
-                    //Funcionalidad eliminar grupo//
+                    boolean salida = false;
+                    while(!salida) {
+                    	System.out.println("ingrese la materia a la cual le desea eliminar un grupo.\nSi desea salir escriba la palabra Salir:");
+                    	String materiaNom = scanner.nextLine();
+                    	Materia materiaSel = null;
+                    	if(materiaNom=="Salida") {
+                    		break;
+                    	}
+                    	for (Materia materia:Materia.getMateriasTotales()) {
+                    		if (materiaNom==materia.getNombre()) {
+                    			materiaSel = materia;
+                    			break;
+                    		}
+                    	}
+                    	if(materiaSel==null) {
+                    		System.out.println("La materia ingresada no existe. Ingrese una materia válida.");
+                    		continue;
+                    	}
+                    	while(true) {
+                    		System.out.println("Ingrese el número del grupo que desea eliminar\nSi desea salir escriba el número 0");
+                    		int numSel = scanner.nextInt();
+                    		if (numSel<0||numSel>materiaSel.getGrupos().size()) {
+                    			System.out.println("El número de grupo ingresado no existe. Ingrese el número de un grupo válido.");
+                    		}
+                    		else if(numSel==0) {
+                    			salida = true;
+                    			break;
+                    		}
+                    		else {
+                    			materiaSel.eliminarGrupo(numSel);
+                    			System.out.println("El grupo "+numSel+" de la materia "+materiaSel+" ha sido eliminado con éxito");
+                    			break;
+                    		}
+                    		break;
+                    	}
+                    }
                 }
                 else if(0 > opcion_3 || opcion_3 > 4){
                     System.out.println("Opción inválida.");
