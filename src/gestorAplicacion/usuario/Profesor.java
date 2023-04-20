@@ -21,6 +21,13 @@ public class Profesor implements Serializable{
         Profesor.profesores.add(this);
     }
 
+    public Profesor(String nombre, String facultad, Horario horario, ArrayList<Materia> materiasDadas){
+        this.nombre = nombre;
+        this.facultad = facultad;
+        this.horario = horario;
+        this.materiasDadas = materiasDadas;
+        Profesor.profesores.add(this);
+    }
     public String getNombre() {
         return nombre;
     }
@@ -102,6 +109,43 @@ public class Profesor implements Serializable{
                 }   
             }
         }
+    }
+    
+    public static String mostrarProfesores() {
+    	String r = "";
+    	int i = 1;
+    	for(Profesor profesor:profesores) {
+    		r += (i++)+". "+profesor.getNombre()+". Materias: ";
+    		for (Materia materia:profesor.getMateriasDadas()) {
+    			if (profesor.getMateriasDadas().indexOf(materia) == profesor.getMateriasDadas().size()-1) {
+    				r += materia.getNombre()+".\n";
+    			}
+    			else {
+    				r += materia.getNombre()+", ";
+    			}
+    		}
+    	}
+    	return r;
+    }
+    
+    public static ArrayList<Profesor> profesoresDeMateria(Materia materia) {
+    	ArrayList<Profesor> profes = new ArrayList<Profesor>();
+    	for (Grupo grupo:materia.getGrupos()) {
+    		if(!profes.contains(grupo.getProfesor())) {
+    			profes.add(grupo.getProfesor());
+    		}
+    	}
+    	return profes;
+    }
+    
+    public static String mostrarProfesMateria(Materia materia) {
+    	String r = "";
+    	int i = 1;
+    	ArrayList<Profesor> profes = profesoresDeMateria(materia);
+    	for (Profesor profesor:profes) {
+    		r += (i++)+". "+profesor.getNombre()+".\n"; 
+    	}
+    	return r;
     }
 
 }
