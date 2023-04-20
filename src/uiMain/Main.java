@@ -259,18 +259,24 @@ public class Main {
         scanner.close();
     }
 
-
+    //METODOS USADOS EN MATRICULAR MATERIA
     //La parte 1 de matricular materia es para seleccionar al estudiante
     public static void matricularMateria(){
         Scanner scn = new Scanner(System.in);
         boolean salir=false;
     	while(salir==false){
+            Boolean invalido=false;
             System.out.println("Desea buscar al estudiante mediante una lista o mediante su ID o su nombre?");
             System.out.println("Ingrese la opción deseada: \n1- Lista de estudiantes disponibles\n2- Buscar al estudiante");
             int opcion1=scn.nextInt();
             //Opcion Lista de estudiantes
             if (opcion1==1){
-                //Filtro de estudiantes para mostrar la lista al usuario
+                /*
+                 * Opcion 1:
+                 * Busqueda de estudiante mediante la lista completa de estudiantes
+                 * Quitando los estudiantes que ya no pueden inscribir mas materias
+                 * Quitando los estudiantes que no tienen la matricula pagada
+                 */
                 ArrayList<Estudiante> totalEstudiantes=new ArrayList<Estudiante>(Estudiante.getEstudiantes());
                 for (int i=0;i<totalEstudiantes.size();i++){
                     Estudiante est=totalEstudiantes.get(i);
@@ -295,129 +301,36 @@ public class Main {
                     matricularMateriaParte2(seleccionado);
                     salir=true;
                 }else{
-                    System.out.println("Opción invalida");
-                    System.out.println("Desea intentarlo otra vez o desea salir?");
-                    System.out.println("Ingrese la opción deseada: \n1- Intentarlo otra vez\n2- Salir");
-                    int opcion2=scn.nextInt();
-                    if (opcion2!=1){
-                        salir=true;
-                    }
+                    invalido=true;
                 }
 
             }else if(opcion1==2){
-                //Opcion Busqueda de estudiante manual
-                System.out.println("Ingrese la opción de busqueda deseada: \n1- Mediante el nombre \n2- Medinate el ID");
-                int opcion4=scn.nextInt();
-                ArrayList<Estudiante> estudiantesTotales=new ArrayList<Estudiante>(Estudiante.getEstudiantes());
-                if (opcion4==1){
-                    //Mediante nombre
-                    System.out.println("Por favor ingrese el nombre del estudiante: ");
-                    String nombre=scn.nextLine();
-                    ArrayList <Estudiante> estudiantesNombreIgual=new ArrayList<Estudiante>();
-                    for (int n=0;n<estudiantesTotales.size();n++){
-                        Estudiante est1=estudiantesTotales.get(n);
-                        if (est1.getNombre()==nombre){
-                            estudiantesNombreIgual.add(est1);
-                        }
-                    }
-                    if (estudiantesNombreIgual.size()>0 && estudiantesNombreIgual.size()!=1){
-                        System.out.println("Estudiantes con nombres iguales: ");
-                        for(int r=0; r<estudiantesNombreIgual.size();r++){
-                            Estudiante est2=estudiantesNombreIgual.get(r);
-                            System.out.println((r+1)+" Nombre: "+est2.getNombre()+ " ID: "+est2.getId());
-                        }
-                        System.out.println("Por favor ingrese al estudiante que quiere seleccionar: ");
-                        int opcion5=scn.nextInt();
-                        if (opcion5>0 && opcion5<estudiantesNombreIgual.size()+1){
-                            Estudiante seleccionado=estudiantesNombreIgual.get(opcion5-1);
-                            System.out.println("Estudiante seleccionado, nombre: "+seleccionado.getNombre()+" ID: "+seleccionado.getId());
-                            matricularMateriaParte2(seleccionado);
-                            salir=true;
-                        } else{
-                            System.out.println("Estudiante no encontrado");
-                            System.out.println("Desea intentarlo otra vez o desea salir?");
-                            System.out.println("Ingrese la opción deseada: \n1- Intentarlo otra vez\n2- Salir");
-                            int opcion2=scn.nextInt();
-                            if (opcion2!=1){
-                                salir=true;
-                            }
-                        }
-
-                    }else if(estudiantesNombreIgual.size()==1){
-                        Estudiante seleccionado=estudiantesNombreIgual.get(0);
-                        System.out.println("Estudiante seleccionado, nombre: "+seleccionado.getNombre()+" ID: "+seleccionado.getId());
-                        matricularMateriaParte2(seleccionado);
-                        salir=true;
-                    }else{
-                        System.out.println("Estudiante no encontrado");
-                        System.out.println("Desea intentarlo otra vez o desea salir?");
-                        System.out.println("Ingrese la opción deseada: \n1- Intentarlo otra vez\n2- Salir");
-                        int opcion2=scn.nextInt();
-                        if (opcion2!=1){
-                            salir=true;
-                        }
-                    }
-                //Mediante ID
-                }else if(opcion4==2){
-                    System.out.println("Por favor ingrese el ID del estudiante: ");
-                    long id = scn.nextLong();
-                    ArrayList <Estudiante> estudiantesIdIgual=new ArrayList<Estudiante>();
-                    for (int n=0;n<estudiantesTotales.size();n++){
-                        Estudiante est1=estudiantesTotales.get(n);
-                        if (est1.getId()==id){
-                            estudiantesIdIgual.add(est1);
-                        }
-                    }
-                    if (estudiantesIdIgual.size()>0 && estudiantesIdIgual.size()!=1){
-                        System.out.println("Estudiantes con ID iguales: ");
-                        for(int r=0; r<estudiantesIdIgual.size();r++){
-                            Estudiante est2=estudiantesIdIgual.get(r);
-                            System.out.println((r+1)+" Nombre: "+est2.getNombre()+ " ID: "+est2.getId());
-                        }
-                        System.out.println("Por favor ingrese al estudiante que quiere seleccionar: ");
-                        int opcion5=scn.nextInt();
-                        if (opcion5>0 && opcion5<estudiantesIdIgual.size()+1){
-                            Estudiante seleccionado=estudiantesIdIgual.get(opcion5-1);
-                            System.out.println("Estudiante seleccionado, nombre: "+seleccionado.getNombre()+" ID: "+seleccionado.getId());
-                            matricularMateriaParte2(seleccionado);
-                            salir=true;
-                        } else{
-                            System.out.println("Estudiante no encontrado");
-                            System.out.println("Desea intentarlo otra vez o desea salir?");
-                            System.out.println("Ingrese la opción deseada: \n1- Intentarlo otra vez\n2- Salir");
-                            int opcion2=scn.nextInt();
-                            if (opcion2!=1){
-                                salir=true;
-                            }
-                        }
-
-                    }else if(estudiantesIdIgual.size()==1){
-                        Estudiante seleccionado=estudiantesIdIgual.get(0);
-                        System.out.println("Estudiante seleccionado, nombre: "+seleccionado.getNombre()+" ID: "+seleccionado.getId());
-                        matricularMateriaParte2(seleccionado);
-                        salir=true;
-                    }else{
-                        System.out.println("Estudiante no encontrado");
-                        System.out.println("Desea intentarlo otra vez o desea salir?");
-                        System.out.println("Ingrese la opción deseada: \n1- Intentarlo otra vez\n2- Salir");
-                        int opcion2=scn.nextInt();
-                        if (opcion2!=1){
-                            salir=true;
-                        }
-                    }
-                } else{
-                    //Opcion invalida, desea continuar?
-                    System.out.println("Opción invalida");
-                    System.out.println("Desea intentarlo otra vez o desea salir?");
-                    System.out.println("Ingrese la opción deseada: \n1- Intentarlo otra vez\n2- Salir");
-                    int opcion2=scn.nextInt();
-                    if (opcion2!=1){
-                        salir=true;
-                    }
+                /*
+                 * Opcion 2:
+                 * Buscar al estudiante mediante su id y su nombre
+                 * si el estudiante que se desea buscar no exite se le notificará al usuario
+                 */
+                System.out.println("Por favor ingrese el nombre del estudiante: ");
+                String nombre=scn.nextLine();
+                System.out.println("Por favor ingrese el ID del estudiante: ");
+                long id=scn.nextLong();
+                int index=Estudiante.buscarEstudiante(nombre, id);
+                if (index==-1){
+                    System.out.println("Estudiante no encontrado");
+                    invalido=true;
+                }else{
+                    Estudiante seleccionado=Estudiante.getEstudiantes().get(index);
+                    System.out.println("Estudiante seleccionado, nombre: "+seleccionado.getNombre()+" ID: "+seleccionado.getId());
+                    matricularMateriaParte2(seleccionado);
                 }
-
             }else{
-                //Opcion invalidad, desea continuar?
+                /*
+                 * Opcion invalida:
+                 * Desea salir o continuar?
+                 */
+                invalido=true;
+            }
+            if (invalido){
                 System.out.println("Opción invalida");
                 System.out.println("Desea intentarlo otra vez o desea salir?");
                 System.out.println("Ingrese la opción deseada: \n1- Intentarlo otra vez\n2- Salir");
@@ -434,11 +347,12 @@ public class Main {
         Scanner scanner = new Scanner(System.in); 
         boolean salir=false;
         while(salir==false){
+            Boolean invalido=false;
             System.out.println("Como desea buscar la materia?\n1- Mediante una lista de las materias disponibles\n2- Mediante una busqueda manual");
             int opt=scanner.nextInt();
+            ArrayList<Materia> materiasTotales=Materia.getMateriasTotales();
             if (opt==1){
                 ArrayList<Materia> materiasDisponibles=new ArrayList<Materia>();
-                ArrayList<Materia> materiasTotales=Materia.getMateriasTotales();
                 ArrayList<Materia> materiasInscritas=estudiante.getMaterias();
 
                 /*
@@ -501,21 +415,34 @@ public class Main {
                     matricularMateriaParte3(estudiante, seleccionada);
                     salir=true;
                 } else{
-                    System.out.println("Opción invalida");
-                    System.out.println("Desea intentarlo otra vez o desea salir?");
-                    System.out.println("Ingrese la opción deseada: \n1- Intentarlo otra vez\n2- Salir");
-                    int eleccion2=scanner.nextInt();
-                    if (eleccion2!=1){
-                        salir=true;
-                    }
+                    invalido=true;
                 }
 
             }else if(opt==2){
                 /*
-                 * BUSQUEDA MANUAL
+                 * Opcion 2:
+                 * Buscar la matetia mediante su codigo y su nombre
+                 * si la materia que se desea buscar no exite se le notificará al usuario
                  */
+                System.out.println("Por favor ingrese el nombre de la materia deseada: ");
+                String nombre=scanner.nextLine();
+                System.out.println("Por favor ingrese el codigo de la materia deseada: ");
+                int codigo=scanner.nextInt();
+                int index=Materia.buscarMateria(nombre, codigo);
+                if (index==-1){
+                    invalido=true;
+                }else{
+                    Materia seleccionada=materiasTotales.get(index);
+                    System.out.println("Materia seleccionada "+seleccionada.getNombre());
+                    matricularMateriaParte3(estudiante, seleccionada);
+                    salir=true;
+                }
             }else{
                 //Opcion invalida, desea continuar?
+                System.out.println("Materia no encontrada");
+                invalido=true;
+            }
+            if (invalido){
                 System.out.println("Opción invalida");
                 System.out.println("Desea intentarlo otra vez o desea salir?");
                 System.out.println("Ingrese la opción deseada: \n1- Intentarlo otra vez\n2- Salir");
@@ -575,8 +502,8 @@ public class Main {
         scanner.close();
     }
     
-    // METODOS USADOS EN GENERAR HORARIO: 
 
+    // METODOS USADOS EN GENERAR HORARIO: 
     // - Mostrar Materias confiltro
     public static ArrayList<Materia> mostrarMateriasConFiltro(int opcionFiltro,String filtro){
         /*

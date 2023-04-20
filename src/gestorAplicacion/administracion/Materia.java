@@ -168,4 +168,17 @@ public class Materia implements Serializable{
     public static ArrayList<Materia> getMateriasTotales(){
         return materiasTotales;
     }
+
+    public static int buscarMateria(String nombre, int codigo){
+        /*
+         * Si existe el estudiante retorna su indice en el Arraylist materiaTotales
+         * Si no existe, retorna -1
+         */
+        for (int i = 0; i < materiasTotales.size(); i++){
+            if (materiasTotales.get(i).getNombre().equals(nombre) && materiasTotales.get(i).getCodigo() == codigo){
+                return i;
+            }
+        }
+        return -1;
+    }
 }
