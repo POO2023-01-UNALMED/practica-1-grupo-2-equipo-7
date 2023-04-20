@@ -12,6 +12,8 @@ import gestorAplicacion.usuario.Usuario;
 
 import java.net.SecureCacheResponse;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import baseDatos.Deserializador;
 
 public class Main {
@@ -93,7 +95,43 @@ public class Main {
                 }
                 else if(opcion_3 == 3){
                     System.out.println("Has seleccionado la opción 3 (Agregar grupo.)");
-                    //Funcionalidad agregar grupo//
+                    System.out.println("Ingrese la materia a la cual desea agregar el grupo (Con mayúscula inicial solo en la primera palabra):");
+                    String materiaStr = scanner.next();
+                    Materia materiaSel = null;
+                    for (Materia materia:Materia.materiasTotales) {
+                    	if (materia.getNombre()==materiaStr) {
+                    		materiaSel = materia;
+                    		break;
+                    	}
+                    }
+                    System.out.println("Ingrese el método por el cual quiere asignar el profesor para el nuevo grupo:\n1. Seleccionar del listado de profesores.\n2. Asignar un profesor nuevo.");
+                    int opcion_profe = scanner.nextInt();
+                    if (opcion_profe==1) {
+                    	System.out.println("Seleccione uno de los siguientes profesores");
+                    	System.out.print(Profesor.mostrarProfesMateria(materiaSel));
+                    	int seleccionProfe = scanner.nextInt();
+                    	ArrayList<Profesor> preProfes = Profesor.profesoresDeMateria(materiaSel);
+                    	Profesor profesorSel = preProfes.get(seleccionProfe-1);
+                    }
+                    else {
+                    	System.out.println("Ingrese el nombre completo del profesor: ");
+                    	String nomb = scanner.next();
+                    	System.out.println("Ingrese la facultad a la que pertenece el profesor: ");
+                    	String facu = scanner.next();
+                    	System.out.println("Ingrese las materias (separadas por comas con su respectivo espacio) para las cuales el profesor está capacitado: ");
+                    	String materias = scanner.next();
+                    	String[] mate = materias.split(", ");
+                    	ArrayList<Materia> mates = new ArrayList<Materia>();
+                    	for (String smateria:mate) {
+                    		for (Materia materia:Materia.getMateriasTotales()) {
+                    			if (smateria==materia.getNombre()) {
+                    				mates.add(materia);
+                    				break;
+                    			}
+                    		}
+                    	}
+                    	Profesor profesorSel = new Profesor(nomb,facu,new Horario(),mates);
+                    	}
                 }
                 else if(opcion_3 == 4){
                     System.out.println("Has seleccionado la opción 4 (Eliminar grupo.)");
