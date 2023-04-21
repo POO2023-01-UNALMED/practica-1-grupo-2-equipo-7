@@ -448,10 +448,9 @@ public class Main {
             Boolean invalido=false;
             System.out.println("Como desea buscar la materia?\n1- Mediante una lista de las materias disponibles\n2- Mediante una busqueda manual");
             int opt=scanner.nextInt();
-            ArrayList<Materia> materiasTotales=Materia.getMateriasTotales();
+            ArrayList<Materia> materiasTotales=new ArrayList<Materia>(Materia.getMateriasTotales());
             if (opt==1){
                 ArrayList<Materia> materiasDisponibles=new ArrayList<Materia>();
-                ArrayList<Materia> materiasInscritas=estudiante.getMaterias();
 
                 /*
                 * PRIMERO: 
@@ -465,11 +464,9 @@ public class Main {
                     boolean anadir=true;
                     for (int j=0; j<materia.getPrerrequisitos().size();j++){
                         Materia prerrequisito=materia.getPrerrequisitos().get(j);
-                        for (int t=0;t < materiasInscritas.size();t++){
-                            if (prerrequisito==materiasInscritas.get(t)){
-                                anadir=false;
-                                break;
-                            }
+                        if (estudiante.buscarMateriaEnInscritas(prerrequisito.getNombre(), prerrequisito.getCodigo())){
+                            anadir=false;
+                            break;
                         }
                     }
                     if (materia.getCupos()<=0){

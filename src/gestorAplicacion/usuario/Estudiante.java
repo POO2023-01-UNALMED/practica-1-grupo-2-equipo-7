@@ -215,6 +215,16 @@ public class Estudiante extends Usuario implements Serializable{
         return null;
     }
 
+    public boolean buscarMateriaEnInscritas(String nombre, int codigo){
+        
+        for (Materia materia : this.materias){
+            if (materia.getNombre().equals(nombre) && materia.getCodigo()==codigo){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void desmatricularMaterias(){
         for (Grupo grupo: this.grupos){
             grupo.eliminarEstudiante(this);
