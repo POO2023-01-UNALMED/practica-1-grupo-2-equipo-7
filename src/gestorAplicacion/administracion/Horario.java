@@ -5,12 +5,14 @@ import java.util.ArrayList;
 
 public class Horario implements Serializable{
     private Grupo[][] horario = new Grupo[7][24];
+    private ArrayList<Grupo> grupoContenidos = new ArrayList<Grupo>();
     private static final long serialVersionUID = 1L;
 
     public Horario() {
     }
 
     public Horario(int diaSemana, int horaInicio, int horaFinal, Grupo grupo) {
+        grupoContenidos.add(grupo);
         for (int hora = horaInicio; hora < horaFinal; hora++){
             this.horario[diaSemana][hora] = grupo;
         }
@@ -18,6 +20,7 @@ public class Horario implements Serializable{
 
     public Horario(ArrayList<String> horario, Grupo grupo) {
         //Las clases del horario se dan como string en formato dia-horaInicio-horaFinal
+        grupoContenidos.add(grupo);
         for (int i = 0;i<horario.size();i++){
             
             String clase = horario.get(i);
@@ -33,6 +36,9 @@ public class Horario implements Serializable{
     }
 
     public void ocuparHorario(ArrayList<String> horario,  Grupo grupo) {
+        
+        grupoContenidos.add(grupo);
+
         for (int i = 0;i<horario.size();i++){
             
             String clase = horario.get(i);
@@ -52,6 +58,8 @@ public class Horario implements Serializable{
          * Metodo que solo necesita del grupo para agregarlo al horario correspondiente
          */
 
+        grupoContenidos.add(grupo);
+
         ArrayList<String> horario = grupo.getHorario();
         for (int i = 0;i<horario.size();i++){
             
@@ -67,6 +75,7 @@ public class Horario implements Serializable{
     }
     
     public void liberarHorario(ArrayList<String> horario) {
+        
         for (int i = 0;i<horario.size();i++){
             
             String clase = horario.get(i);
@@ -74,9 +83,13 @@ public class Horario implements Serializable{
             int horaInicio = Integer.parseInt(clase.substring(2, 4));
             int horaFinal = Integer.parseInt(clase.substring(5, 7));
             
+            Grupo grupoEliminado=null;
+            
             for (int hora = horaInicio; hora < horaFinal; hora++){
+                grupoEliminado = this.horario[dia][hora];
                 this.horario[dia][hora] = null;
             }
+            grupoContenidos.remove(grupoEliminado);
         }
     }
     
