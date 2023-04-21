@@ -168,7 +168,6 @@ public class Materia implements Serializable{
     		Grupo nGrupo = crearGrupo(numero,profesor,horario,cupos,salon);
     		salon.getHorario().ocuparHorario(horario, nGrupo);
     		profesor.vincularGrupo(nGrupo);
-    		salon.getHorario().ocuparHorario(horario, nGrupo);
     	}
     }
 
