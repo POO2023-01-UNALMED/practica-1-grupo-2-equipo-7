@@ -13,6 +13,7 @@ import gestorAplicacion.usuario.Usuario;
 import java.net.SecureCacheResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 import baseDatos.Deserializador;
 
@@ -22,6 +23,17 @@ public class Main {
         Boolean continuar=true;
         System.out.println("Bienvenido al Portal de Servicios Acacémicos S.M.M");
         while(continuar){
+        	boolean logueando = true;
+        	Usuario usuario = null;
+        	while(logueando) {
+        		System.out.println("Seleccione como desea ingresar a la plataforma:\n1. Crear nuevo usuario.\n2. Ingresar usuario existente\n3. Mostrar lista de usuarios existentes.");
+        		int opcion_log = scanner.nextInt();
+        		if (opcion_log==1) {
+        			System.out.println("Ingrese su nombre completo:");
+        			String nomb = scanner.nextLine();
+        			System.out.println("Ingrese su contraseña:");
+        		}
+        	}
             //Aun no esta contruido la interfaz (mensajes bonitos en la terminal)
             //Por aquí irá el menu con las opciones
             System.out.println("A continuación encontrará los diferentes servicios ofrecidos por la plataforma.");
@@ -357,6 +369,24 @@ public class Main {
         scanner.close();
     }
 
+    //METODO USADO PARA EL LOG
+    public static long generarId() {
+    	int min = 10000;
+    	int max = 99999;
+    	int id;
+    	boolean existe = false;
+    	do {
+    		id = new Random().nextInt(max-min)+min;
+    		for (Usuario usuario:Usuario.getUsuariosTotales()) {
+    			if (usuario.getId()==id) {
+    				existe=true;
+    				break;
+    			}
+    		}
+    	}while(existe);
+    	return id;
+    }
+    
     //METODOS USADOS EN MATRICULAR MATERIA
     //La parte 1 de matricular materia es para seleccionar al estudiante
     public static void matricularMateria(){

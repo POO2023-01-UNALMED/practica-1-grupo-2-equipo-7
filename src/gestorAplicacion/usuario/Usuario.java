@@ -7,7 +7,6 @@ public abstract class Usuario implements Serializable{
     private static final long serialVersionUID = 1L;
     private long id;
     private String nombre;
-    private String tipo;
     private String pw;
     private static ArrayList<Usuario> usuariosTotales = new ArrayList<Usuario>();
     
@@ -36,15 +35,6 @@ public abstract class Usuario implements Serializable{
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-
-    public String getTipo() {
-        return tipo;
-    }
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
 
     public String getPw() {
         return pw;
