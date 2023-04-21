@@ -588,6 +588,19 @@ public class Main {
         scanner.close();
     }
     
+    //Esto me lo pidio efrain
+    public static void matricularMateriaParte4(Estudiante estudiante, Grupo grupo){
+        ArrayList<Materia> materiasInscritas=new ArrayList<Materia>(estudiante.getMaterias());
+        materiasInscritas.add(grupo.getMateria());
+        grupo.agregarEstudiante(estudiante);
+        grupo.getMateria().setCupos(grupo.getMateria().getCupos()-1);
+        grupo.setCupos(grupo.getCupos()-1);
+        estudiante.setCreditos(estudiante.getCreditos()+grupo.getMateria().getCreditos());
+        estudiante.setMaterias(materiasInscritas);
+        String imprimir="Materia "+grupo.getMateria().getNombre()+" - grupo #"+grupo.getNumero();
+        System.out.println(imprimir+ ". Ha sido matriculado al estudiante: "+estudiante.getNombre());
+
+}
 
     // METODOS USADOS EN GENERAR HORARIO: 
     // - Mostrar Materias confiltro
