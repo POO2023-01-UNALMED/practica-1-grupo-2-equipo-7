@@ -366,35 +366,30 @@ public class Main {
             Boolean invalido=false;
             System.out.println("Desea buscar al estudiante mediante una lista o mediante su ID o su nombre?");
             System.out.println("Ingrese la opción deseada: \n1- Lista de estudiantes disponibles\n2- Buscar al estudiante");
-            int opcion1=scn.nextInt();
+            int opcion=scn.nextInt();
             //Opcion Lista de estudiantes
-            if (opcion1==1){
-                /*
-                 * Opcion 1:
-                 * Busqueda de estudiante mediante la lista completa de estudiantes
-                 * Quitando los estudiantes que ya no pueden inscribir mas materias
-                 * Quitando los estudiantes que no tienen la matricula pagada
-                 */
-                ArrayList<Estudiante> totalEstudiantes=new ArrayList<Estudiante>(Estudiante.getEstudiantes());
-                for (int i=0;i<totalEstudiantes.size();i++){
-                    Estudiante est=totalEstudiantes.get(i);
-                    if (est.isMatriculaPagada()!=true){
-                        totalEstudiantes.remove(i);
-                    } else if (est.getCreditos()==Coordinador.getLimitesCreditos()){
-                        totalEstudiantes.remove(i);
-                    }
-                    if (i==totalEstudiantes.size()-1){
-                        break;
-                    }
-                }
+            if (opcion==1){
+
                 System.out.println("Lista de estudiantes disponibles para matricular: ");
-                for (int j=1;j<totalEstudiantes.size()+1;j++){
-                    Estudiante est=totalEstudiantes.get(j-1);
-                    System.out.println(j+" Nombre: "+est.getNombre()+" ID: "+est.getId());
+                ArrayList<Estudiante> totalEstudiantes=new ArrayList<Estudiante>(Estudiante.getEstudiantes());
+                for (int i=0;i<Estudiante.getEstudiantes().size();i++){
+                    Estudiante estudiante=Estudiante.getEstudiantes().get(i);
+                    boolean mostrar=true;
+                    if (estudiante.isMatriculaPagada()==false){
+                        mostrar=false;
+                    }
+                    if (estudiante.getCreditos()==Coordinador.getLimitesCreditos()){
+                        mostrar=false;
+                    }
+                    if (mostrar){
+                        totalEstudiantes.add(estudiante);
+                        System.out.println(totalEstudiantes.size()+" Nombre: "+estudiante.getNombre()+" ID: "+estudiante.getId());
+                    }
                 }
-                int opcion3 = scn.nextInt();
-                if (opcion3<totalEstudiantes.size() && opcion3>0){
-                    Estudiante seleccionado=totalEstudiantes.get(opcion3-1);
+                System.out.println("Por favor ingrese el número correpondiente al estudiante que desea seleccionar: ");
+                int opcion2 = scn.nextInt();
+                if (opcion2<=totalEstudiantes.size() && opcion2>=1){
+                    Estudiante seleccionado=totalEstudiantes.get(opcion2-1);
                     System.out.println("Estudiante seleccionado, nombre: "+seleccionado.getNombre()+" ID: "+seleccionado.getId());
                     matricularMateriaParte2(seleccionado);
                     salir=true;
@@ -402,12 +397,8 @@ public class Main {
                     invalido=true;
                 }
 
-            }else if(opcion1==2){
-                /*
-                 * Opcion 2:
-                 * Buscar al estudiante mediante su id y su nombre
-                 * si el estudiante que se desea buscar no exite se le notificará al usuario
-                 */
+            }else if(opcion==2){
+
                 System.out.println("Por favor ingrese el nombre del estudiante: ");
                 String nombre=scn.nextLine();
                 System.out.println("Por favor ingrese el ID del estudiante: ");
@@ -421,21 +412,22 @@ public class Main {
                     System.out.println("Estudiante seleccionado, nombre: "+seleccionado.getNombre()+" ID: "+seleccionado.getId());
                     matricularMateriaParte2(seleccionado);
                 }
+
             }else{
-                /*
-                 * Opcion invalida:
-                 * Desea salir o continuar?
-                 */
+
                 invalido=true;
+
             }
             if (invalido){
+
                 System.out.println("Opción invalida");
                 System.out.println("Desea intentarlo otra vez o desea salir?");
                 System.out.println("Ingrese la opción deseada: \n1- Intentarlo otra vez\n2- Salir");
-                int opcion2=scn.nextInt();
-                if (opcion2!=1){
+                int opcion3=scn.nextInt();
+                if (opcion3!=1){
                     salir=true;
                 }
+
             }
         }
         scn.close();
@@ -445,19 +437,15 @@ public class Main {
         Scanner scanner = new Scanner(System.in); 
         boolean salir=false;
         while(salir==false){
+
             Boolean invalido=false;
             System.out.println("Como desea buscar la materia?\n1- Mediante una lista de las materias disponibles\n2- Mediante una busqueda manual");
             int opt=scanner.nextInt();
             ArrayList<Materia> materiasTotales=new ArrayList<Materia>(Materia.getMateriasTotales());
             if (opt==1){
-                ArrayList<Materia> materiasDisponibles=new ArrayList<Materia>();
 
-                /*
-                * PRIMERO: 
-                * Quitamos las materias que el estudiante no puede ver por los prerrequisitos
-                * Revisamos cuales materias al ser matriculadas al estudiante le hacen sobrepasar el limite de creditos
-                * Y tambien revisamos la disponibilidad en los cupos de la materia
-                */
+                ArrayList<Materia> materiasDisponibles=new ArrayList<Materia>();
+                System.out.println("Lista de materias disponibles para matricular: ");
                 int limitesCreditos=Coordinador.getLimitesCreditos();
                 for (int i=0; i<materiasTotales.size();i++){
                     Materia materia=materiasTotales.get(i);
@@ -476,23 +464,13 @@ public class Main {
                     }
                     if (anadir){
                         materiasDisponibles.add(materia);
+                        System.out.println(materiasDisponibles.size()+" Nombre: "+materia.getNombre()+" Cupos: "+materia.getCupos());
+
                     }
-                }
-
-                /*
-                * SEGUNDO:
-                * En esta parte le mostramos una lista de posibles opciones a matricular
-                * Dependiendo de la respuesta del usuario el ciclo se romperá o continuará hasta que el usuario quiera
-                */
-                System.out.println("Lista de materias disponibles para matricular: ");
-                for (int m=1;m<materiasDisponibles.size()+1;m++){
-                    Materia materia=materiasDisponibles.get(m-1);
-                    System.out.println(m+" Nombre: "+materia.getNombre()+" Cupos: "+materia.getCupos());
-
                 }
                 System.out.println("Por favor ingrese el numero correspondiente a la materia que desea matricular");
                 int eleccion=scanner.nextInt();
-                if (0<eleccion-1 && eleccion-1<materiasDisponibles.size()){
+                if (1<=eleccion && eleccion<=materiasDisponibles.size()){
                     Materia seleccionada = materiasDisponibles.get(eleccion-1);
                     System.out.println("Materia seleccionada "+seleccionada.getNombre());
                     matricularMateriaParte3(estudiante, seleccionada);
@@ -502,11 +480,6 @@ public class Main {
                 }
 
             }else if(opt==2){
-                /*
-                 * Opcion 2:
-                 * Buscar la matetia mediante su codigo y su nombre
-                 * si la materia que se desea buscar no exite se le notificará al usuario
-                 */
                 System.out.println("Por favor ingrese el nombre de la materia deseada: ");
                 String nombre=scanner.nextLine();
                 System.out.println("Por favor ingrese el codigo de la materia deseada: ");
@@ -520,12 +493,14 @@ public class Main {
                     matricularMateriaParte3(estudiante, seleccionada);
                     salir=true;
                 }
+
             }else{
-                //Opcion invalida, desea continuar?
                 System.out.println("Materia no encontrada");
                 invalido=true;
             }
+
             if (invalido){
+
                 System.out.println("Opción invalida");
                 System.out.println("Desea intentarlo otra vez o desea salir?");
                 System.out.println("Ingrese la opción deseada: \n1- Intentarlo otra vez\n2- Salir");
@@ -533,6 +508,7 @@ public class Main {
                 if (opt2!=1){
                     salir=true;
                 }
+
             }
         }
         
@@ -544,25 +520,21 @@ public class Main {
         Scanner scanner=new Scanner(System.in);
         boolean salir=false;
         while (salir==false){
+
             Boolean invalido=false;
-            ArrayList<Grupo> gruposDisponibles=new ArrayList<Grupo>(materia.getGrupos());
-            for (int i=0;i<gruposDisponibles.size();i++){
-                Grupo grp=gruposDisponibles.get(i);
-                if (grp.getCupos()==0){
-                    gruposDisponibles.remove(i);
-                }
-                if (i==gruposDisponibles.size()-1){
-                    break;
-                }
-            }
             System.out.println("Grupos disponibles para matricular: ");
-            for (int j=0;j<gruposDisponibles.size();j++){
-                Grupo grp=gruposDisponibles.get(j);
-                System.out.println((j+1)+" Grupo #"+grp.getNumero()+ " cupos: "+grp.getCupos()+" Profesor: "+grp.getProfesor().getNombre());
+            ArrayList<Grupo> gruposDisponibles=new ArrayList<Grupo>();
+            for (int i=0;i<materia.getGrupos().size();i++){
+                Grupo grupo=materia.getGrupos().get(i);
+                if (grupo.getCupos()!=0){
+                    gruposDisponibles.add(grupo);
+                    System.out.println((gruposDisponibles.size())+" Grupo #"+grupo.getNumero()+ " cupos: "+grupo.getCupos()+" Profesor: "+grupo.getProfesor().getNombre());
+                }
             }
-            int opt3=scanner.nextInt();
-            if (opt3>0 && opt3<gruposDisponibles.size()-1){
-                Grupo grupoSeleccionado=gruposDisponibles.get(opt3-1);
+            
+            int opcion=scanner.nextInt();
+            if (opcion>0 && opcion<gruposDisponibles.size()-1){
+                Grupo grupoSeleccionado=gruposDisponibles.get(opcion-1);
                 ArrayList<Materia> materiasInscritas=new ArrayList<Materia>(estudiante.getMaterias());
                 materiasInscritas.add(materia);
                 grupoSeleccionado.agregarEstudiante(estudiante);
@@ -576,21 +548,23 @@ public class Main {
             }else{
                 invalido=true;
             }
+
             System.out.println("Desea visualizar el horario del estudiante?: \n1- Sí\n2- No");
-            int opcion=scanner.nextInt();
-            if (opcion==1){
+            int opcion2=scanner.nextInt();
+            if (opcion2==1){
                 estudiante.getHorario().mostrarHorario();
             }
+
             if (invalido){
                 System.out.println("Opción invalida");
                 System.out.println("Desea intentarlo otra vez o desea salir?");
                 System.out.println("Ingrese la opción deseada: \n1- Intentarlo otra vez\n2- Salir");
-                int opt2=scanner.nextInt();
-                if (opt2!=1){
+                int opcion3=scanner.nextInt();
+                if (opcion3!=1){
                     salir=true;
                 }
             }
-
+            
         }
         scanner.close();
     }
@@ -612,9 +586,7 @@ public class Main {
             estudiante.getHorario().mostrarHorario();
         }
         scanner.close();
-
-
-}
+    }
 
     // METODOS USADOS EN GENERAR HORARIO: 
     // - Mostrar Materias confiltro
@@ -710,6 +682,7 @@ public class Main {
         //     System.out.println("Escoja el numero del estudiante a asignar: ");
         //     Estudiante.mostrarEstudiantes();
         //     int opt4=scanner.nextInt();
+        scanner.close();
             
         }
     
