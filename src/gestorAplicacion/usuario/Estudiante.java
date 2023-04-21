@@ -27,6 +27,7 @@ public class Estudiante extends Usuario implements Serializable{
 
     public Estudiante(long id, String nombre, String pw, String programa, int semestre, String facultad, int creditos, int estrato, int sueldo) {
         super(id,nombre,pw);
+        super.setTipo("Estudiante");
         this.programa = programa;
         this.semestre = semestre;
         this.facultad = facultad;

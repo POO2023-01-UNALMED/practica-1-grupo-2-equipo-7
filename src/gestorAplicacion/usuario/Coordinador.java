@@ -13,6 +13,7 @@ public class Coordinador extends Usuario implements Serializable{
 
     public Coordinador(String facultad,long id, String nombre, String pw) {
         super(id, nombre,pw);
+        super.setTipo("Coordinador");
         this.facultad = facultad;
     }
 

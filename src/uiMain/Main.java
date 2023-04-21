@@ -54,8 +54,8 @@ public class Main {
         		logueado=true;
         	}
         	else if(opcion_log==2) {
-        		//boolean idExist = false;
-        		while(true) {
+        		boolean intentando = false;
+        		while(intentando) {
         			System.out.println("Ingrese su id de usuario:\nSi desea salir escriba el número 0.");
         			long id = scanner.nextLong();
         			if (id==0) {
@@ -67,6 +67,9 @@ public class Main {
         			else if (!existenciaId(id)){
         				System.out.println("El id ingresado no corresponde a ningún usuario registrado en el sistema.");
         			}
+        			else if (encontrarUsuario(id).getTipo()=="Estudiante") {
+        				System.out.println("Error. Solo pueden ingresar coordinadores en la plataforma.");
+        			}
         			else {
         				Usuario usuarioE = encontrarUsuario(id);
         				boolean pwCorect = false;
@@ -77,12 +80,12 @@ public class Main {
         						while(true) {
         							System.out.println("La contraseña es incorrecta.\n¿Desea intentar nuevamente?\n1. Si.\n2. No.");
         							int opCf = scanner.nextInt();
-        							if (opCf==1) {
-        								
+        							if (opCf==1) {	
         								break;
         							}
         							else if (opCf==2) {
         								pwCorect=true;
+        								intentando = false;
         								break;
         								
         							}
@@ -94,8 +97,9 @@ public class Main {
         					else {
         						System.out.println("Ha ingresado exitosamente al sistema.");
         						usuario = usuarioE;
-        						pwCorect=true;
+        						intentando=false;
         						logueado = true;				
+        						break;
         					}
         				}
         			}
@@ -499,6 +503,7 @@ public class Main {
     		return false;
     	}
     }
+    
     //METODOS USADOS EN MATRICULAR MATERIA
     //La parte 1 de matricular materia es para seleccionar al estudiante
     public static void matricularMateria(){
