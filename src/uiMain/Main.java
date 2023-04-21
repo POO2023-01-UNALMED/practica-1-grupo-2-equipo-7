@@ -456,8 +456,10 @@ public class Main {
                 /*
                 * PRIMERO: 
                 * Quitamos las materias que el estudiante no puede ver por los prerrequisitos
-                * 
+                * Revisamos cuales materias al ser matriculadas al estudiante le hacen sobrepasar el limite de creditos
+                * Y tambien revisamos la disponibilidad en los cupos de la materia
                 */
+                int limitesCreditos=Coordinador.getLimitesCreditos();
                 for (int i=0; i<materiasTotales.size();i++){
                     Materia materia=materiasTotales.get(i);
                     boolean anadir=true;
@@ -470,6 +472,11 @@ public class Main {
                             }
                         }
                     }
+                    if (materia.getCupos()<=0){
+                        anadir=false;
+                    }else if (estudiante.getCreditos()+materia.getCreditos()>limitesCreditos){
+                        anadir=false;
+                    }
                     if (anadir){
                         materiasDisponibles.add(materia);
                     }
@@ -477,25 +484,6 @@ public class Main {
 
                 /*
                 * SEGUNDO:
-                * Revisamos cuales materias al ser matriculadas al estudiante le hacen sobrepasar el limite de creditos
-                * Y tambien revisamos la disponibilidad en los cupos de la materia
-                * 
-                */
-                for (int l=0;l<materiasDisponibles.size();l++){
-                    Materia materia=materiasDisponibles.get(l);
-                    int limitesCreditos=Coordinador.getLimitesCreditos();
-                    if (materia.getCupos()<=0){
-                        materiasDisponibles.remove(l);
-                    }else if (estudiante.getCreditos()+materia.getCreditos()>limitesCreditos){
-                        materiasDisponibles.remove(l);
-                    }
-                    if (l==materiasDisponibles.size()-1){
-                        break;
-                    }
-                }
-
-                /*
-                * TERCERO:
                 * En esta parte le mostramos una lista de posibles opciones a matricular
                 * Dependiendo de la respuesta del usuario el ciclo se romperá o continuará hasta que el usuario quiera
                 */
