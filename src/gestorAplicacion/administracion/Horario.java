@@ -84,7 +84,7 @@ public class Horario implements Serializable{
             int horaFinal = Integer.parseInt(clase.substring(5, 7));
             
             Grupo grupoEliminado=null;
-            
+
             for (int hora = horaInicio; hora < horaFinal; hora++){
                 grupoEliminado = this.horario[dia][hora];
                 this.horario[dia][hora] = null;
@@ -181,4 +181,12 @@ public class Horario implements Serializable{
         }
         return horario;
     }
+
+    public ArrayList<Grupo> getGrupoContenidos() {
+        return grupoContenidos;
+    }
+    public void setGrupoContenidos(ArrayList<Grupo> grupoContenidos) {
+        this.grupoContenidos = grupoContenidos;
+    }
+    
 }

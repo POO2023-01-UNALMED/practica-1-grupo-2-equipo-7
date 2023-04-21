@@ -81,6 +81,7 @@ public class Main {
                             String opt3=scanner.nextLine();
     
                             fusionImpresiones(mostrarMateriasConFiltro(opt2, opt3));
+                            
                         }
                         else if (opt2 == 2){
                             System.out.println("Ingrese el numero de creditos: ");
@@ -610,7 +611,7 @@ public class Main {
     }
     //Esto me lo pidio efrain
     public static void matricularMateriaParte4(Estudiante estudiante, Grupo grupo){
-        Scanner scanner=new Scanner(System.in);
+        // Scanner scanner=new Scanner(System.in);
         ArrayList<Materia> materiasInscritas=new ArrayList<Materia>(estudiante.getMaterias());
         materiasInscritas.add(grupo.getMateria());
         grupo.agregarEstudiante(estudiante);
@@ -618,14 +619,14 @@ public class Main {
         grupo.setCupos(grupo.getCupos()-1);
         estudiante.setCreditos(estudiante.getCreditos()+grupo.getMateria().getCreditos());
         estudiante.setMaterias(materiasInscritas);
-        String imprimir="Materia "+grupo.getMateria().getNombre()+" - grupo #"+grupo.getNumero();
-        System.out.println(imprimir+ ". Ha sido matriculado al estudiante: "+estudiante.getNombre());
-        System.out.println("Desea visualizar el horario del estudiante?: \n1- Sí\n2- No");
-        int opcion=scanner.nextInt();
-        if (opcion==1){
-            estudiante.getHorario().mostrarHorario();
-        }
-        scanner.close();
+        // String imprimir="Materia "+grupo.getMateria().getNombre()+" - grupo #"+grupo.getNumero();
+        // System.out.println(imprimir+ ". Ha sido matriculado al estudiante: "+estudiante.getNombre());
+        // System.out.println("Desea visualizar el horario del estudiante?: \n1- Sí\n2- No");
+        // int opcion=scanner.nextInt();
+        // if (opcion==1){
+        //     estudiante.getHorario().mostrarHorario();
+        // }
+        // scanner.close();
     }
 
     // METODOS USADOS EN GENERAR HORARIO: 
@@ -711,22 +712,18 @@ public class Main {
         
         if ((boolean)informacion[0]){
             Horario pHorario= (Horario)informacion[1];
+            pHorario.mostrarHorario();
+            asignacionDeHorarioGenerado(pHorario);
         }
         else{
             System.out.println("No fue posible generar el horario, ya que "+((Materia)informacion[2]).getNombre()+" es un obstaculo");
         }
 
-        // System.out.println("Desea conservar el horario?\n1. Si \n2. No");
-        // int opt4=scanner.nextInt();
-        // if (opt4 == 1){
-        //     System.out.println("Escoja el numero del estudiante a asignar: ");
-        //     Estudiante.mostrarEstudiantes();
-        //     int opt4=scanner.nextInt();
-        scanner.close();
+        
             
         }
     
-    // Conexion de dos metodos
+    // - Conexion de dos metodos
     public static void fusionImpresiones(ArrayList<Materia> listaObjetivo){
         /*
          * La idea es factorizar un poco mas el codigo, al recibir un arreglo y aplicarle dos metodos ya establecidos
@@ -740,5 +737,53 @@ public class Main {
         }
     }
 
+    // - Asignar horario
+    public static void asignacionDeHorarioGenerado(Horario horario){
+        /*
+         * Decide si conservar un horario o no, ademas de asignarlo a un estudiante si es posible 
+         */
+        Scanner scanner=new Scanner(System.in);
+
+        System.out.println("Desea Conservar el horario?\n1. Si\n2. No");
+        int opt2=scanner.nextInt();
+        if (opt2==1){
+            System.out.println("Escoja un estudiante: ");
+            System.out.println(Estudiante.mostrarEstudiantes());
+
+            System.out.print("Elección: -> ");
+            int opt3=scanner.nextInt();
+
+            Estudiante seleccionEstudiante = Estudiante.getEstudiantes().get(opt3-1);
+            Horario tempHorario = seleccionEstudiante.getHorario();
+            seleccionEstudiante.setHorario(new Horario());
+
+            boolean flag = true;
+            for (Grupo pGrupo:horario.getGrupoContenidos()){
+                if (!Materia.puedeVerMateria(seleccionEstudiante, pGrupo)){
+                    flag = false;
+                    break;   
+                } 
+            }
+                
+
+            if (flag){
+                seleccionEstudiante.setHorario(horario);
+                seleccionEstudiante.desmatricularMaterias();
+                for (Grupo pGrupo:horario.getGrupoContenidos()){
+                    matricularMateriaParte4(seleccionEstudiante, pGrupo);
+                }
+                System.out.println("Horario asignado con exito al estudiante "+seleccionEstudiante.getNombre());
+            }else{
+                seleccionEstudiante.setHorario(tempHorario);
+                System.out.println("No es posible asignar el horario, el estudiante "+seleccionEstudiante.getNombre()+" no cumple los Pre-requisitos");
+            }
+
+
+        }
+        else{
+            System.out.println("Horario descartado");
+        }
+    }
+    
 }
 

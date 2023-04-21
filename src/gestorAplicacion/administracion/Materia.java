@@ -200,4 +200,43 @@ public class Materia implements Serializable{
         }
         return -1;
     }
+
+    public static boolean puedeVerMateria(Estudiante estudiante,Grupo grupo){
+        /*
+         * Comprueba si un estudiante puede estar en un grupo
+         */
+        
+        if (!(estudiante.getCreditos()+grupo.getMateria().getCreditos()<=Coordinador.getLimitesCreditos())){
+            return false;
+        }
+        if (!estudiante.getHorario().comprobarDisponibilidad(grupo.getHorario())){
+            return false;
+        }
+        if (!(grupo.getCupos()!=0)){
+            return false;
+        }
+        if (!comprobarPrerrequisitos(estudiante,grupo.getMateria())){
+            return false;
+        }
+        return true;
+    } 
+
+    public static boolean comprobarPrerrequisitos(Estudiante estudiante,Materia materia){
+        /*
+         * Comprueba si un estudiante cumple los pre-requisitos de una materia
+         */
+        
+        ArrayList<Materia> materiasVistas = new ArrayList<Materia>();
+        
+        for (Grupo pGrupo:estudiante.getGruposVistos()){
+            materiasVistas.add(pGrupo.getMateria());
+        }
+
+        for (Materia pMateria:materia.getPrerrequisitos()){
+            if(!materiasVistas.contains(pMateria)){
+                return false;
+            }    
+        }
+        return true;
+    }
 }

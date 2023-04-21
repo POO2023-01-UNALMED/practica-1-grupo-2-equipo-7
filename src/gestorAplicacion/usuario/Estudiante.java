@@ -146,6 +146,11 @@ public class Estudiante extends Usuario implements Serializable{
         this.gruposVistos = gruposVistos;
     }
 
+    public void setHorario(Horario horario) {
+        this.horario = horario;
+    }
+
+
     public void eliminarMateria(Materia materia){
         this.materias.remove(materia);
         this.creditos -= materia.getCreditos();
@@ -226,10 +231,18 @@ public class Estudiante extends Usuario implements Serializable{
     }
 
     public void desmatricularMaterias(){
+        /*
+         * Desmatricula todas las materia de un estudiante
+         */
         for (Grupo grupo: this.grupos){
+            grupo.getMateria().setCupos(grupo.getMateria().getCupos()+1);
+            grupo.setCupos(grupo.getCupos()+1);
+            this.setCreditos(this.getCreditos()-grupo.getMateria().getCreditos());
             grupo.eliminarEstudiante(this);
             this.eliminarGrupo(grupo);
+            this.setMaterias(new ArrayList<Materia>());
         }
+        
     }
 
     public ArrayList<Grupo> getGrupos() {
