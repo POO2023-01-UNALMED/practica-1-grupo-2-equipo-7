@@ -31,7 +31,17 @@ public class Main {
         		if (opcion_log==1) {
         			System.out.println("Ingrese su nombre completo:");
         			String nomb = scanner.nextLine();
+        			System.out.println("Ingrese la facultad a la que pertenece:");
+        			String facul = scanner.nextLine();
         			System.out.println("Ingrese su contraseña:");
+        			String cont = scanner.nextLine();
+        			long id = generarId();
+        			usuario = new Coordinador(facul,id,nomb,cont);
+        			System.out.println("Se ha creado un nuevo usuario a nombre de "+nomb+".");
+        			break;
+        		}
+        		else if(opcion_log==2) {
+        			
         		}
         	}
             //Aun no esta contruido la interfaz (mensajes bonitos en la terminal)
