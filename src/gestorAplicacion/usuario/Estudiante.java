@@ -8,7 +8,6 @@ public class Estudiante extends Usuario implements Serializable{
     private static final long serialVersionUID = 1L;
     private String programa;
     private int semestre;
-    private String facultad;
     private int creditos;
     private ArrayList<Materia> materias; 
     private ArrayList<Grupo> grupos;
@@ -25,13 +24,11 @@ public class Estudiante extends Usuario implements Serializable{
     private Beca beca;
     private ArrayList<Grupo> gruposVistos = new ArrayList<Grupo>();
 
-    public Estudiante(long id, String nombre, String pw, String programa, int semestre, String facultad, int creditos, int estrato, int sueldo) {
-        super(id,nombre,pw);
+    public Estudiante(long id, String nombre, String programa, int semestre, String facultad, int estrato, int sueldo) {
+        super(id,nombre,facultad);
         super.setTipo("Estudiante");
         this.programa = programa;
         this.semestre = semestre;
-        this.facultad = facultad;
-        this.creditos = creditos;
         this.materias = new ArrayList<Materia>();
         this.grupos = new ArrayList<Grupo>();
         this.estrato = estrato;
@@ -44,8 +41,8 @@ public class Estudiante extends Usuario implements Serializable{
         return "Nombre: "+ getNombre()+ " Documento: "+ getId();
     }
 
-    public Estudiante(long id, String nombre, String pw, String programa, int semestre, String facultad, int creditos, int estrato, int sueldo, ArrayList<Materia> materias, ArrayList<Grupo> gruposVistos) {
-        this(id,nombre,pw,programa,semestre,facultad,creditos, estrato, sueldo);
+    public Estudiante(long id, String nombre, String programa, int semestre, String facultad, int estrato, int sueldo, ArrayList<Materia> materias, ArrayList<Grupo> gruposVistos) {
+        this(id,nombre,programa,semestre,facultad, estrato, sueldo);
         this.materias = materias;
         this.gruposVistos = gruposVistos;
     }
@@ -86,14 +83,6 @@ public class Estudiante extends Usuario implements Serializable{
 
     public void setSemestre(int semestre) {
         this.semestre = semestre;
-    }
-
-    public String getFacultad() {
-        return facultad;
-    }
-
-    public void setFacultad(String facultad) {
-        this.facultad = facultad;
     }
 
     public int getCreditos() {

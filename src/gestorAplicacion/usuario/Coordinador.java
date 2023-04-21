@@ -6,15 +6,15 @@ import java.io.Serializable;
 // import gestorAplicacion.usuario.*;
 
 public class Coordinador extends Usuario implements Serializable{
-    private String facultad;
     private final static int limitesCreditos=20;
     // private static ArrayList<Materia> materiasTotales;
     private static final long serialVersionUID = 1L;
+    private static ArrayList<Coordinador> coordinadoresTotales = new ArrayList<Coordinador>();
 
     public Coordinador(String facultad,long id, String nombre, String pw) {
-        super(id, nombre,pw);
+        super(id, nombre,pw, facultad);
         super.setTipo("Coordinador");
-        this.facultad = facultad;
+        Coordinador.coordinadoresTotales.add(this);
     }
 
 
@@ -165,17 +165,15 @@ public class Coordinador extends Usuario implements Serializable{
                                                                                                                      
     // Getters - Setters
 
-    public String getFacultad() {
-        return this.facultad;
-    }
-        
+    
     public static int getLimitesCreditos() {
         return limitesCreditos;
     }
 
-    public void setFacultad(String facultad) {
-        this.facultad = facultad;
+    public static ArrayList<Coordinador> getCoordinadoresTotales() {
+        return coordinadoresTotales;
     }
+    
 }
 
 
