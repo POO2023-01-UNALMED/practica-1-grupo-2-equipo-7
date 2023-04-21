@@ -21,29 +21,91 @@ public class Main {
     public static void main(String[] args){
         Scanner scanner=new Scanner(System.in);
         Boolean continuar=true;
+        Boolean logueado = false;
         System.out.println("Bienvenido al Portal de Servicios Acacémicos S.M.M");
-        while(continuar){
-        	boolean logueando = true;
-        	Usuario usuario = null;
-        	while(logueando) {
-        		System.out.println("Seleccione como desea ingresar a la plataforma:\n1. Crear nuevo usuario.\n2. Ingresar usuario existente\n3. Mostrar lista de usuarios existentes.");
-        		int opcion_log = scanner.nextInt();
-        		if (opcion_log==1) {
-        			System.out.println("Ingrese su nombre completo:");
-        			String nomb = scanner.nextLine();
-        			System.out.println("Ingrese la facultad a la que pertenece:");
-        			String facul = scanner.nextLine();
-        			System.out.println("Ingrese su contraseña:");
-        			String cont = scanner.nextLine();
-        			long id = generarId();
-        			usuario = new Coordinador(facul,id,nomb,cont);
-        			System.out.println("Se ha creado un nuevo usuario a nombre de "+nomb+".");
-        			break;
-        		}
-        		else if(opcion_log==2) {
-        			
+        Usuario usuario = null;
+        while(!logueado) {
+        	System.out.println("Seleccione como desea ingresar a la plataforma:\n1. Crear nuevo usuario.\n2. Ingresar usuario existente.");
+        	int opcion_log = scanner.nextInt();
+        	if (opcion_log==1) {
+        		String nomb;
+        		boolean existe;
+        		do {
+        			System.out.println("Ingrese su nombre completo:\nSi desea salir introduzca la palabra Salir");
+        			nomb = scanner.nextLine();
+        			if (nomb=="Salir") {
+        				existe = false;
+        			}
+        			else if (existenciaUsuario(nomb)) {
+        				System.out.println("Ya existe un usuario asociado a este nombre.");
+        				existe=true;
+        			}
+        			else {
+        				existe=false;
+        			}
+        		}while (existe);
+        		System.out.println("Ingrese la facultad a la que pertenece:");
+        		String facul = scanner.nextLine();
+        		System.out.println("Ingrese su contraseña:");
+        		String cont = scanner.nextLine();
+        		long id = generarId();
+        		usuario = new Coordinador(facul,id,nomb,cont);
+        		System.out.println("Se ha creado un nuevo usuario a nombre de "+nomb+"con el id "+id+"asignado.\nRecuerde que este id será con el que inicie sesión en este usuario de ahora en adelante");
+        		logueado=true;
+        	}
+        	else if(opcion_log==2) {
+        		//boolean idExist = false;
+        		while(true) {
+        			System.out.println("Ingrese su id de usuario:\nSi desea salir escriba el número 0.");
+        			long id = scanner.nextLong();
+        			if (id==0) {
+        				break;
+        			}
+        			else if (id<10000||id>99999) {
+        				System.out.println("Id inválido. Ingrese un id de 5 cifras.");
+        			}
+        			else if (!existenciaId(id)){
+        				System.out.println("El id ingresado no corresponde a ningún usuario registrado en el sistema.");
+        			}
+        			else {
+        				Usuario usuarioE = encontrarUsuario(id);
+        				boolean pwCorect = false;
+        				while(!pwCorect){
+        					System.out.println("Ingrese la contraseña:");
+        					String cont = scanner.nextLine();
+        					if(!verificarPw(usuarioE,cont)) {
+        						while(true) {
+        							System.out.println("La contraseña es incorrecta.\n¿Desea intentar nuevamente?\n1. Si.\n2. No.");
+        							int opCf = scanner.nextInt();
+        							if (opCf==1) {
+        								
+        								break;
+        							}
+        							else if (opCf==2) {
+        								pwCorect=true;
+        								break;
+        								
+        							}
+        							else {
+        								System.out.println("Valor inválido. Ingrese el número de una de las opciones mencionadas.");
+        							}
+        						}
+        					}
+        					else {
+        						System.out.println("Ha ingresado exitosamente al sistema.");
+        						usuario = usuarioE;
+        						pwCorect=true;
+        						logueado = true;				
+        					}
+        				}
+        			}
         		}
         	}
+        	else {
+        		System.out.println("Valor inválido. Ingrese el número de una de las opciones mencionadas");
+        	}
+        }
+        while(continuar){
             //Aun no esta contruido la interfaz (mensajes bonitos en la terminal)
             //Por aquí irá el menu con las opciones
             System.out.println("A continuación encontrará los diferentes servicios ofrecidos por la plataforma.");
@@ -379,7 +441,7 @@ public class Main {
         scanner.close();
     }
 
-    //METODO USADO PARA EL LOG
+    //METODOS USADOS PARA EL LOG
     public static long generarId() {
     	int min = 10000;
     	int max = 99999;
@@ -397,6 +459,46 @@ public class Main {
     	return id;
     }
     
+    public static boolean existenciaUsuario(String nombre) {
+    	boolean exist = false;
+    	for (Usuario usuario:Usuario.getUsuariosTotales()) {
+    		if (usuario.getNombre()==nombre) {
+    			exist = true;
+    			break;
+    		}
+    	}
+    	return exist;
+    }
+    
+    public static boolean existenciaId(long id) {
+    	boolean exist = false;
+    	for (Usuario usuario:Usuario.getUsuariosTotales()) {
+    		if (usuario.getId()==id) {
+    			exist = true;
+    			break;
+    		}
+    	}
+    	return exist;
+    }
+    
+    public static Usuario encontrarUsuario(long id) {
+    	Usuario encontrado = null;
+    	for (Usuario usuario:Usuario.getUsuariosTotales()) {
+    		if (usuario.getId()==id) {
+    			encontrado = usuario;
+    		}
+    	}
+    	return encontrado;
+    }
+    
+    public static boolean verificarPw(Usuario usuario, String pw) {
+    	if (usuario.getPw()==pw) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
+    }
     //METODOS USADOS EN MATRICULAR MATERIA
     //La parte 1 de matricular materia es para seleccionar al estudiante
     public static void matricularMateria(){

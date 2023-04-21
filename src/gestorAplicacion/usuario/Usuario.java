@@ -20,6 +20,15 @@ public abstract class Usuario implements Serializable{
         usuariosTotales.add(this);
     }
 
+    public static String mostrarUsuarios() {
+    	String retorno = "";
+    	int i = 1;
+    	for(Usuario usuario:usuariosTotales) {
+    		retorno += (i++)+". "+usuario.nombre+", id: "+usuario.id+"\n";
+    	}
+    	return retorno;
+    }
+    
     public long getId() {
         return id;
     }
