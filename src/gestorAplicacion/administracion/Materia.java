@@ -17,27 +17,26 @@ public class Materia implements Serializable{
     private ArrayList<Materia> prerrequisitos;
     private ArrayList<Grupo> grupos;
     // Es publico para que coordinador tenda acceso 
-    public static ArrayList<Materia> materiasTotales;
+    public static ArrayList<Materia> materiasTotales = new ArrayList<Materia>();
 
-    public Materia(String nombre, int codigo, String descripcion, int creditos, String facultad, int cupos) {
+    public Materia(String nombre, int codigo, String descripcion, int creditos, String facultad) {
         this.nombre = nombre;
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.creditos = creditos;
         this.facultad = facultad;
-        this.cupos = cupos;
         this.prerrequisitos = new ArrayList<Materia>();
         this.grupos = new ArrayList<Grupo>();
         materiasTotales.add(this);
     }
 
-    public Materia(String nombre, int codigo, String descripcion, int creditos, String facultad, int cupos, ArrayList<Materia> prerrequisitos) {
-        this(nombre, codigo, descripcion, creditos, facultad, cupos);
+    public Materia(String nombre, int codigo, String descripcion, int creditos, String facultad, ArrayList<Materia> prerrequisitos) {
+        this(nombre, codigo, descripcion, creditos, facultad);
         this.prerrequisitos = prerrequisitos;
     }
 
-    public Materia(String nombre, int codigo, String descripcion,int creditos, String facultad, int cupos, ArrayList<Materia> prerrequisitos, ArrayList<Grupo> grupos) {
-        this(nombre, codigo, descripcion, creditos, facultad, cupos, prerrequisitos);
+    public Materia(String nombre, int codigo, String descripcion,int creditos, String facultad, ArrayList<Materia> prerrequisitos, ArrayList<Grupo> grupos) {
+        this(nombre, codigo, descripcion, creditos, facultad, prerrequisitos);
         this.grupos = grupos;
     }
     

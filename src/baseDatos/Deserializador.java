@@ -15,6 +15,7 @@ import gestorAplicacion.usuario.Coordinador;
 import gestorAplicacion.usuario.Estudiante;
 import gestorAplicacion.usuario.Profesor;
 import gestorAplicacion.usuario.Usuario;
+import gestorAplicacion.administracion.Beca;
 
 public class Deserializador {
 
@@ -44,7 +45,16 @@ public class Deserializador {
     }
 
     public static void deserializarListas(){
-        //Clases a deserializar
+
+        deserializar(Estudiante.getEstudiantes(), "Estudiantes");
+        deserializar(Grupo.getGruposTotales(), "Grupos");
+        deserializar(Materia.materiasTotales, "Materias");
+        deserializar(Usuario.getUsuariosTotales(), "Usuarios");
+        deserializar(Coordinador.getCoordinadoresTotales(), "Coordinadores");
+        deserializar(Horario.getHorariosTotales(), "Horarios");
+        deserializar(Salon.salones, "Salones");
+        // deserializar(Beca.getBecas(), "Becas");
+        deserializar(Profesor.getProfesores(), "Profesores");
     }
     
 }

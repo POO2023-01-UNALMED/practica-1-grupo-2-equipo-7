@@ -9,15 +9,24 @@ public abstract class Usuario implements Serializable{
     private String nombre;
     private String tipo;
     private String pw;
+    private String facultad;
     private static ArrayList<Usuario> usuariosTotales = new ArrayList<Usuario>();
     
     
     public abstract String toString();
 
-    public Usuario(long id, String nombre, String pw){
+    public Usuario(long id, String nombre, String facultad) {
+        this.id = id;
+        this.nombre = nombre;
+        this.facultad = facultad;
+        usuariosTotales.add(this);
+    }
+
+    public Usuario(long id, String nombre, String pw, String facultad){
         this.id = id;
         this.nombre = nombre;
         this.pw = pw;
+        this.facultad = facultad;
         usuariosTotales.add(this);
     }
 
@@ -60,6 +69,14 @@ public abstract class Usuario implements Serializable{
     }
     public void setPw(String pw) {
         this.pw = pw;
+    }
+    
+    public String getFacultad() {
+        return facultad;
+    }
+
+    public void setFacultad(String facultad) {
+        this.facultad = facultad;
     }
 
     public static ArrayList<Usuario> getUsuariosTotales() {

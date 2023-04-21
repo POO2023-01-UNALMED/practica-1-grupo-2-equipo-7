@@ -15,10 +15,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import baseDatos.Serializador;
 import baseDatos.Deserializador;
 
 public class Main {
     public static void main(String[] args){
+        Deserializador.deserializarListas();
         Scanner scanner=new Scanner(System.in);
         Boolean continuar=true;
         Boolean logueado = false;
@@ -113,7 +115,7 @@ public class Main {
             //Aun no esta contruido la interfaz (mensajes bonitos en la terminal)
             //Por aquí irá el menu con las opciones
             System.out.println("A continuación encontrará los diferentes servicios ofrecidos por la plataforma.");
-            System.out.println("Ingrese la opcion deseada: \n1. Matricular Materia.\n2. Generar Horario.\n3. Eliminar o agregar Materia / Grupo.\n4. Desmatricular Alumno. \n5. Busqueda y Postulación de Becas.");
+            System.out.println("Ingrese la opcion deseada: \n1. Matricular Materia.\n2. Generar Horario.\n3. Eliminar o agregar Materia / Grupo.\n4. Desmatricular Alumno. \n5. Busqueda y Postulación de Becas. \n6. Salir y Guardar");
             int opcion = scanner.nextInt();
             switch(opcion) {
             case 1:
@@ -327,6 +329,7 @@ public class Main {
                 while (true){
                     System.out.println("Elija como quiere seleccionar el alumno: \n1.Ver la lista de estudiantes. \n2.Buscar estudiante por ID y nombre. \n3.Salir");
                     int eleccion = scanner.nextInt();
+                    
                     Scanner scanner2 = new Scanner(System.in);
                     if (eleccion == 1){
                         System.out.println("Elija el número del estudiante");
@@ -427,6 +430,13 @@ public class Main {
                 //El nombre aun se puede cambiar
                 System.out.println("Has seleccionado la opción 5 (Busqueda y Postulación Becas).");
                 break;
+
+            case 6:
+                Serializador.serializarListas();
+                System.out.println("Has salido del programa");
+                continuar = false;
+                break;
+
             default:
                 System.out.println("Opción inválida");
                 System.out.println("Desea continuar?");
