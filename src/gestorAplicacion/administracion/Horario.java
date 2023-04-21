@@ -7,8 +7,10 @@ public class Horario implements Serializable{
     private Grupo[][] horario = new Grupo[7][24];
     private ArrayList<Grupo> grupoContenidos = new ArrayList<Grupo>();
     private static final long serialVersionUID = 1L;
+    private static ArrayList<Horario> horariosTotales = new ArrayList<Horario>();
 
     public Horario() {
+        Horario.horariosTotales.add(this);
     }
 
     public Horario(int diaSemana, int horaInicio, int horaFinal, Grupo grupo) {
@@ -187,6 +189,9 @@ public class Horario implements Serializable{
     }
     public void setGrupoContenidos(ArrayList<Grupo> grupoContenidos) {
         this.grupoContenidos = grupoContenidos;
+    }
+    public static ArrayList<Horario> getHorariosTotales() {
+        return horariosTotales;
     }
     
 }

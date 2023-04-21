@@ -15,39 +15,107 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import baseDatos.Serializador;
 import baseDatos.Deserializador;
 
 public class Main {
     public static void main(String[] args){
+        Deserializador.deserializarListas();
         Scanner scanner=new Scanner(System.in);
         Boolean continuar=true;
+        Boolean logueado = false;
         System.out.println("Bienvenido al Portal de Servicios Acacémicos S.M.M");
-        while(continuar){
-        	boolean logueando = true;
-        	Usuario usuario = null;
-        	while(logueando) {
-        		System.out.println("Seleccione como desea ingresar a la plataforma:\n1. Crear nuevo usuario.\n2. Ingresar usuario existente\n3. Mostrar lista de usuarios existentes.");
-        		int opcion_log = scanner.nextInt();
-        		if (opcion_log==1) {
-        			System.out.println("Ingrese su nombre completo:");
-        			String nomb = scanner.nextLine();
-        			System.out.println("Ingrese la facultad a la que pertenece:");
-        			String facul = scanner.nextLine();
-        			System.out.println("Ingrese su contraseña:");
-        			String cont = scanner.nextLine();
-        			long id = generarId();
-        			usuario = new Coordinador(facul,id,nomb,cont);
-        			System.out.println("Se ha creado un nuevo usuario a nombre de "+nomb+".");
-        			break;
-        		}
-        		else if(opcion_log==2) {
-        			
+        Usuario usuario = null;
+        while(!logueado) {
+        	System.out.println("Seleccione como desea ingresar a la plataforma:\n1. Crear nuevo usuario.\n2. Ingresar usuario existente.");
+        	int opcion_log = scanner.nextInt();
+        	if (opcion_log==1) {
+        		String nomb;
+        		boolean existe;
+        		do {
+        			System.out.println("Ingrese su nombre completo:\nSi desea salir introduzca la palabra Salir");
+        			nomb = scanner.nextLine();
+        			if (nomb=="Salir") {
+        				existe = false;
+        			}
+        			else if (existenciaUsuario(nomb)) {
+        				System.out.println("Ya existe un usuario asociado a este nombre.");
+        				existe=true;
+        			}
+        			else {
+        				existe=false;
+        			}
+        		}while (existe);
+        		System.out.println("Ingrese la facultad a la que pertenece:");
+        		String facul = scanner.nextLine();
+        		System.out.println("Ingrese su contraseña:");
+        		String cont = scanner.nextLine();
+        		long id = generarId();
+        		usuario = new Coordinador(facul,id,nomb,cont);
+        		System.out.println("Se ha creado un nuevo usuario a nombre de "+nomb+"con el id "+id+"asignado.\nRecuerde que este id será con el que inicie sesión en este usuario de ahora en adelante");
+        		logueado=true;
+        	}
+        	else if(opcion_log==2) {
+        		boolean intentando = false;
+        		while(intentando) {
+        			System.out.println("Ingrese su id de usuario:\nSi desea salir escriba el número 0.");
+        			long id = scanner.nextLong();
+        			if (id==0) {
+        				break;
+        			}
+        			else if (id<10000||id>99999) {
+        				System.out.println("Id inválido. Ingrese un id de 5 cifras.");
+        			}
+        			else if (!existenciaId(id)){
+        				System.out.println("El id ingresado no corresponde a ningún usuario registrado en el sistema.");
+        			}
+        			else if (encontrarUsuario(id).getTipo()=="Estudiante") {
+        				System.out.println("Error. Solo pueden ingresar coordinadores en la plataforma.");
+        			}
+        			else {
+        				Usuario usuarioE = encontrarUsuario(id);
+        				boolean pwCorect = false;
+        				while(!pwCorect){
+        					System.out.println("Ingrese la contraseña:");
+        					String cont = scanner.nextLine();
+        					if(!verificarPw(usuarioE,cont)) {
+        						while(true) {
+        							System.out.println("La contraseña es incorrecta.\n¿Desea intentar nuevamente?\n1. Si.\n2. No.");
+        							int opCf = scanner.nextInt();
+        							if (opCf==1) {	
+        								break;
+        							}
+        							else if (opCf==2) {
+        								pwCorect=true;
+        								intentando = false;
+        								break;
+        								
+        							}
+        							else {
+        								System.out.println("Valor inválido. Ingrese el número de una de las opciones mencionadas.");
+        							}
+        						}
+        					}
+        					else {
+        						System.out.println("Ha ingresado exitosamente al sistema.");
+        						usuario = usuarioE;
+        						intentando=false;
+        						logueado = true;				
+        						break;
+        					}
+        				}
+        			}
         		}
         	}
+        	else {
+        		System.out.println("Valor inválido. Ingrese el número de una de las opciones mencionadas");
+        	}
+        }
+        while(continuar){
             //Aun no esta contruido la interfaz (mensajes bonitos en la terminal)
             //Por aquí irá el menu con las opciones
             System.out.println("A continuación encontrará los diferentes servicios ofrecidos por la plataforma.");
-            System.out.println("Ingrese la opcion deseada: \n1. Matricular Materia.\n2. Generar Horario.\n3. Eliminar o agregar Materia / Grupo.\n4. Desmatricular Alumno. \n5. Busqueda y Postulación de Becas.");
+            System.out.println("Ingrese la opcion deseada: \n1. Matricular Materia.\n2. Generar Horario.\n3. Eliminar o agregar Materia / Grupo.\n4. Desmatricular Alumno. \n5. Busqueda y Postulación de Becas. \n6. Salir y Guardar");
             int opcion = scanner.nextInt();
             switch(opcion) {
             case 1:
@@ -262,6 +330,7 @@ public class Main {
                 while (true){
                     System.out.println("Elija como quiere seleccionar el alumno: \n1.Ver la lista de estudiantes. \n2.Buscar estudiante por ID y nombre. \n3.Salir");
                     int eleccion = scanner.nextInt();
+                    
                     Scanner scanner2 = new Scanner(System.in);
                     if (eleccion == 1){
                         System.out.println("Elija el número del estudiante");
@@ -362,6 +431,13 @@ public class Main {
                 //El nombre aun se puede cambiar
                 System.out.println("Has seleccionado la opción 5 (Busqueda y Postulación Becas).");
                 break;
+
+            case 6:
+                Serializador.serializarListas();
+                System.out.println("Has salido del programa");
+                continuar = false;
+                break;
+
             default:
                 System.out.println("Opción inválida");
                 System.out.println("Desea continuar?");
@@ -380,7 +456,7 @@ public class Main {
         scanner.close();
     }
 
-    //METODO USADO PARA EL LOG
+    //METODOS USADOS PARA EL LOG
     public static long generarId() {
     	int min = 10000;
     	int max = 99999;
@@ -396,6 +472,47 @@ public class Main {
     		}
     	}while(existe);
     	return id;
+    }
+    
+    public static boolean existenciaUsuario(String nombre) {
+    	boolean exist = false;
+    	for (Usuario usuario:Usuario.getUsuariosTotales()) {
+    		if (usuario.getNombre()==nombre) {
+    			exist = true;
+    			break;
+    		}
+    	}
+    	return exist;
+    }
+    
+    public static boolean existenciaId(long id) {
+    	boolean exist = false;
+    	for (Usuario usuario:Usuario.getUsuariosTotales()) {
+    		if (usuario.getId()==id) {
+    			exist = true;
+    			break;
+    		}
+    	}
+    	return exist;
+    }
+    
+    public static Usuario encontrarUsuario(long id) {
+    	Usuario encontrado = null;
+    	for (Usuario usuario:Usuario.getUsuariosTotales()) {
+    		if (usuario.getId()==id) {
+    			encontrado = usuario;
+    		}
+    	}
+    	return encontrado;
+    }
+    
+    public static boolean verificarPw(Usuario usuario, String pw) {
+    	if (usuario.getPw()==pw) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
     }
     
     //METODOS USADOS EN MATRICULAR MATERIA

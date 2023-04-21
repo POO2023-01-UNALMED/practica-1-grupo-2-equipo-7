@@ -1,4 +1,5 @@
 package gestorAplicacion.administracion;
+import java.util.ArrayList;
 
 public class Beca {
     private int cupos;
@@ -8,6 +9,7 @@ public class Beca {
     private int creditosInscritosRequeridos;
     private int ayudaEconomica;
     private boolean necesitaRecomendacion;
+    private static ArrayList<Beca> becas = new ArrayList<Beca>();
 
     public Beca(int cupos, String convenio, double promedioRequerido, double avanceRequerido,
             int creditosInscritosRequeridos, int ayudaEconomica, boolean necesitaRecomendacion) {
@@ -76,5 +78,8 @@ public class Beca {
         this.necesitaRecomendacion = necesitaRecomendacion;
     }
 
+    public static ArrayList<Beca> getBecas() {
+        return becas;
+    }
     
 }

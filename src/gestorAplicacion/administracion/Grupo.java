@@ -12,6 +12,7 @@ public class Grupo implements Serializable{
     private int cupos;
     private Salon salon;
     private ArrayList<Estudiante> estudiantes;
+	private static ArrayList<Grupo> gruposTotales = new ArrayList<Grupo>();
 
     public Grupo(Materia materia, int numero, Profesor profesor, ArrayList<String> horario, int cupos, Salon salon){
       this.materia = materia;
@@ -21,6 +22,7 @@ public class Grupo implements Serializable{
       this.cupos=cupos;
       this.salon=salon;
       this.estudiantes=new ArrayList<Estudiante>();
+	  Grupo.gruposTotales.add(this);
     } 
 
     public String mostrarInformacionGrupo(){
@@ -109,4 +111,9 @@ public class Grupo implements Serializable{
 	public void setMateria(Materia materia) {
 		this.materia = materia;
 	}
+
+	public static ArrayList<Grupo> getGruposTotales() {
+		return gruposTotales;
+	}
+	
 }

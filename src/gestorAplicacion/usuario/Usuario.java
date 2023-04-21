@@ -7,20 +7,48 @@ public abstract class Usuario implements Serializable{
     private static final long serialVersionUID = 1L;
     private long id;
     private String nombre;
+    private String tipo;
     private String pw;
+    private String facultad;
     private static ArrayList<Usuario> usuariosTotales = new ArrayList<Usuario>();
     
     
     public abstract String toString();
 
-    public Usuario(long id, String nombre, String pw){
+    public Usuario(long id, String nombre, String facultad) {
         this.id = id;
         this.nombre = nombre;
-        this.pw = pw;
+        this.facultad = facultad;
         usuariosTotales.add(this);
     }
 
-    public long getId() {
+    public Usuario(long id, String nombre, String pw, String facultad){
+        this.id = id;
+        this.nombre = nombre;
+        this.pw = pw;
+        this.facultad = facultad;
+        usuariosTotales.add(this);
+    }
+
+    public static String mostrarUsuarios() {
+    	String retorno = "";
+    	int i = 1;
+    	for(Usuario usuario:usuariosTotales) {
+    		retorno += (i++)+". "+usuario.nombre+", id: "+usuario.id+"\n";
+    	}
+    	return retorno;
+    }
+    
+    
+    public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public long getId() {
         return id;
     }
     public void setId(long id) {
@@ -41,6 +69,14 @@ public abstract class Usuario implements Serializable{
     }
     public void setPw(String pw) {
         this.pw = pw;
+    }
+    
+    public String getFacultad() {
+        return facultad;
+    }
+
+    public void setFacultad(String facultad) {
+        this.facultad = facultad;
     }
 
     public static ArrayList<Usuario> getUsuariosTotales() {

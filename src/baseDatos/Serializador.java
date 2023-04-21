@@ -41,6 +41,15 @@ public class Serializador {
     public static void serializarListas(){
         // Aqui van las clases que vamos a serealizar: ejem:
         Serializador.serializar(Estudiante.getEstudiantes(), "Estudiantes");
+        Serializador.serializar(Grupo.getGruposTotales(), "Grupos");
+        Serializador.serializar(Materia.materiasTotales, "Materias");
+        Serializador.serializar(Usuario.getUsuariosTotales(), "Usuarios");
+        Serializador.serializar(Coordinador.getCoordinadoresTotales(), "Coordinadores");
+        Serializador.serializar(Horario.getHorariosTotales(), "Horarios");
+        Serializador.serializar(Salon.salones, "Salones");
+        Serializador.serializar(Beca.getBecas(), "Becas");
+        Serializador.serializar(Profesor.getProfesores(), "Profesores");
+
         // y asi ...
     }
 
