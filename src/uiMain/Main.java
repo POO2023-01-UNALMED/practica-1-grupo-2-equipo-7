@@ -547,6 +547,7 @@ public class Main {
         Scanner scanner=new Scanner(System.in);
         boolean salir=false;
         while (salir==false){
+            Boolean invalido=false;
             ArrayList<Grupo> gruposDisponibles=new ArrayList<Grupo>(materia.getGrupos());
             for (int i=0;i<gruposDisponibles.size();i++){
                 Grupo grp=gruposDisponibles.get(i);
@@ -576,6 +577,14 @@ public class Main {
                 System.out.println(imprimir+ ". Ha sido matriculado al estudiante: "+estudiante.getNombre());
                 break;
             }else{
+                invalido=true;
+            }
+            System.out.println("Desea visualizar el horario del estudiante?: \n1- Sí\n2- No");
+            int opcion=scanner.nextInt();
+            if (opcion==1){
+                estudiante.getHorario().mostrarHorario();
+            }
+            if (invalido){
                 System.out.println("Opción invalida");
                 System.out.println("Desea intentarlo otra vez o desea salir?");
                 System.out.println("Ingrese la opción deseada: \n1- Intentarlo otra vez\n2- Salir");
@@ -584,6 +593,7 @@ public class Main {
                     salir=true;
                 }
             }
+
         }
         scanner.close();
     }
