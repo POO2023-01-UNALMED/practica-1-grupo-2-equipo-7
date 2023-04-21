@@ -276,10 +276,52 @@ public class Main {
                         System.out.println("1. Desmatricular de una materia \n2. Desmatricular del sistema \n3. Retroceder");
                         int opcion_1 = scanner2.nextInt();
                         if (opcion_1 == 1){
-
+                            Scanner scanner3 = new Scanner(System.in);
+                            while (true){
+                                
+                                System.out.println("Elija como quiere seleccionar la materia y el grupo");
+                                System.out.println("1. Ver lista de materias y grupos \n2. Buscar materia y grupo");
+                                int opcion_2 = scanner3.nextInt();
+                                switch(opcion_2){
+                                    case 1:
+                                    System.out.println(estudiante.mostrarMaterias());
+                                    System.out.print("Ingrese el numero de la materia: ");
+                                    int numeroMateria = scanner3.nextInt();
+                                    System.out.print("Ingrese el numero del grupo: ");
+                                    int numeroGrupo = scanner3.nextInt();
+                                    Grupo grupo = estudiante.getMaterias().get(numeroMateria).getGrupos().get(numeroGrupo);
+                                    if (grupo.existenciaEstudiante(estudiante)){
+                                        grupo.eliminarEstudiante(estudiante);
+                                        estudiante.getHorario().liberarHorario(grupo.getHorario());
+                                        System.out.println("El estudiante ha sido desmatriculado de la materia y el grupo");
+                                        break;
+                                    }
+                                    else{
+                                        System.out.println("El estudiante no está matriculado en el grupo");
+                                    }
+                                    break;
+                                    case 2:
+                                    System.out.print("Ingrese el nombre de la materia: ");
+                                    String nombreMateria = scanner3.nextLine();
+                                    Materia materia = estudiante.buscarMateriaPorNombre(nombreMateria);
+                                    if (materia != null){
+                                        Grupo grupoEstudiante = materia.buscarGrupoDeEstudiante(estudiante);
+                                        grupoEstudiante.eliminarEstudiante(estudiante);
+                                        estudiante.getHorario().liberarHorario(grupoEstudiante.getHorario());
+                                        System.out.println("El estudiante ha sido desmatriculado de la materia y el grupo");
+                                        break;
+                                    }
+                                    else{
+                                        System.out.println("El estudiante no tiene matriculada esta materia");
+                                    }                                   
+                                }
+                                scanner3.close();
+                            }
                         }
                         else if(opcion_1 == 2){
-
+                            estudiante.desmatricularMaterias();
+                            System.out.println("El estudiante ha sido desmatriculado del sistema");
+                            break;
                         }
                         else if(opcion_1 == 3){
                             break;
@@ -289,6 +331,7 @@ public class Main {
                         }
                     }
                     scanner2.close();
+                    break;
                 }
 
                 break;

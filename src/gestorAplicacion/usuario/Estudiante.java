@@ -148,12 +148,12 @@ public class Estudiante extends Usuario implements Serializable{
 
     public void eliminarMateria(Materia materia){
         this.materias.remove(materia);
+        this.creditos -= materia.getCreditos();
     }
 
     public void eliminarGrupo(Grupo grupo){
         this.grupos.remove(grupo);
         this.eliminarMateria(grupo.getMateria());
-        this.horario.liberarHorario(grupo.getHorario());
     }
 
     public boolean pagarMatricula(){
@@ -203,6 +203,31 @@ public class Estudiante extends Usuario implements Serializable{
             estudiantes += "\n" + (i++) + ". " + estudiante;
         }
         return estudiantes.substring(1, estudiantes.length());
+    }
+
+    public Materia buscarMateriaPorNombre(String nombre){
+        
+        for (Materia materia : this.materias){
+            if (materia.getNombre().equals(nombre)){
+                return materia;
+            }
+        }
+        return null;
+    }
+
+    public void desmatricularMaterias(){
+        for (Grupo grupo: this.grupos){
+            grupo.eliminarEstudiante(this);
+            this.eliminarGrupo(grupo);
+        }
+    }
+
+    public ArrayList<Grupo> getGrupos() {
+        return grupos;
+    }
+
+    public Horario getHorario() {
+        return horario;
     }
 
 }

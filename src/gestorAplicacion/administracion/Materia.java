@@ -172,6 +172,18 @@ public class Materia implements Serializable{
     	}
     }
 
+    public Grupo buscarGrupoDeEstudiante(Estudiante estudiante){
+
+        for (Grupo grupo: this.grupos){
+            for (Estudiante e: grupo.getEstudiantes()){
+                if (e == estudiante){
+                    return grupo;
+                }
+            }
+        }
+        return null;
+    }
+
     public static ArrayList<Materia> getMateriasTotales(){
         return materiasTotales;
     }
