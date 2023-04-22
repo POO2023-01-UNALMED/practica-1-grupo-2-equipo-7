@@ -38,8 +38,26 @@ public abstract class Usuario implements Serializable{
     	}
     	return retorno;
     }
-    
-    
+
+    public boolean comprobacionFacultad(Usuario usuario){
+        String facultad1 = this.getFacultad().toLowerCase();
+        String facultad2 = usuario.getFacultad().toLowerCase();
+        if (facultad1.equals(facultad2)){
+            return true;
+        }
+        return false;
+    }
+
+    public void desmatricularDelSistema(Usuario usuario){
+
+        for (Usuario u: Usuario.getUsuariosTotales()){
+
+            if (usuario.equals(u)){
+                    Usuario.getUsuariosTotales().remove(usuario);
+                }
+        }
+    }
+
     public String getTipo() {
 		return tipo;
 	}

@@ -94,6 +94,13 @@ public class Horario implements Serializable{
             grupoContenidos.remove(grupoEliminado);
         }
     }
+
+    public void vaciarHorario(ArrayList<Grupo> grupos) {
+        
+        for (Grupo grupo : grupos){
+            liberarHorario(grupo.getHorario());
+        }
+    }
     
     public boolean comprobarDisponibilidad(String clase){
 

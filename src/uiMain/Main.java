@@ -104,7 +104,7 @@ public class Main {
         					}
         					else {
         						System.out.println("Ha ingresado exitosamente al sistema.");
-        						usuario = usuarioE;
+        						usuario = (Coordinador)usuarioE;
         						intentando=false;
         						logueado = true;				
         						break;
@@ -356,26 +356,30 @@ public class Main {
             case 4:
                 System.out.println("Has seleccionado la opción 4 (Desmatricular Alumno).");
                 Estudiante estudiante = null;
+                Scanner scanner2 = new Scanner(System.in);
                 while (true){
                     System.out.println("Elija como quiere seleccionar el alumno: \n1.Ver la lista de estudiantes. \n2.Buscar estudiante por ID y nombre. \n3.Salir");
                     int eleccion = scanner.nextInt();
-                    
-                    Scanner scanner2 = new Scanner(System.in);
+                    scanner.nextLine();
                     if (eleccion == 1){
                         System.out.println("Elija el número del estudiante");
                         System.out.println(Estudiante.mostrarEstudiantes());
                         int numeroEstudiante = scanner2.nextInt();
+                        scanner2.nextLine();
                         estudiante = Estudiante.getEstudiantes().get(numeroEstudiante-1);
+                        break;
                     }
                     else if(eleccion == 2){
                         System.out.print("Ingrese el nombre del estudiante: ");
                         String nombre = scanner2.nextLine();
                         System.out.print("Ingrese el id del estudiante: ");
                         long id = scanner2.nextLong();
+                        scanner2.nextLine();
                         int numeroEstudiante = Estudiante.buscarEstudiante(nombre, id);
                         if (numeroEstudiante != -1){
                             System.out.println("El estudiante ha sido encontrado\n");
                             estudiante = Estudiante.getEstudiantes().get(numeroEstudiante);
+                            break;
                         }
                         else{
                             System.out.println("El estudiante no ha sido encontrado, busque nuevamente\n");
@@ -387,15 +391,15 @@ public class Main {
                     else{
                         System.out.println("Ingresa una opción valida\n");
                     }
-                    scanner2.close();
+                    
                 }
 
                 while(true && estudiante != null){
-                    Scanner scanner2 = new Scanner(System.in);
                     while(true){
                         System.out.println("Seleccione de que quiere desmatricular al estudiante:");
                         System.out.println("1. Desmatricular de una materia \n2. Desmatricular del sistema \n3. Retroceder");
                         int opcion_1 = scanner2.nextInt();
+                        scanner2.nextLine();
                         if (opcion_1 == 1){
                             Scanner scanner3 = new Scanner(System.in);
                             while (true){
@@ -403,13 +407,16 @@ public class Main {
                                 System.out.println("Elija como quiere seleccionar la materia y el grupo");
                                 System.out.println("1. Ver lista de materias y grupos \n2. Buscar materia y grupo");
                                 int opcion_2 = scanner3.nextInt();
+                                scanner3.nextLine();
                                 switch(opcion_2){
                                     case 1:
                                     System.out.println(estudiante.mostrarMaterias());
                                     System.out.print("Ingrese el numero de la materia: ");
                                     int numeroMateria = scanner3.nextInt();
+                                    scanner3.nextLine();
                                     System.out.print("Ingrese el numero del grupo: ");
                                     int numeroGrupo = scanner3.nextInt();
+                                    scanner3.nextLine();
                                     Grupo grupo = estudiante.getMaterias().get(numeroMateria).getGrupos().get(numeroGrupo);
                                     if (grupo.existenciaEstudiante(estudiante)){
                                         grupo.eliminarEstudiante(estudiante);
@@ -436,13 +443,22 @@ public class Main {
                                         System.out.println("El estudiante no tiene matriculada esta materia");
                                     }                                   
                                 }
-                                scanner3.close();
+                                
                             }
                         }
                         else if(opcion_1 == 2){
-                            estudiante.desmatricularMaterias();
-                            System.out.println("El estudiante ha sido desmatriculado del sistema");
-                            break;
+                            if (usuario.comprobacionFacultad(estudiante)){
+                                estudiante.getHorario().vaciarHorario(estudiante.getGrupos());
+                                estudiante.desmatricularMaterias();
+                                usuario.desmatricularDelSistema(estudiante);
+                                System.out.println("El estudiante ha sido desmatriculado del sistema");
+                                break;
+
+                            }
+                            else{
+                                System.out.println("El estudiante es de una facultad diferente a la suya");
+                                System.out.println("Puede volver a intentar con otro estudiante o salir\n");
+                            }
                         }
                         else if(opcion_1 == 3){
                             break;
@@ -451,7 +467,7 @@ public class Main {
                             System.out.println("Ingresa una opcion valida\n");
                         }
                     }
-                    scanner2.close();
+                    // scanner2.close();
                     break;
                 }
 
@@ -482,7 +498,7 @@ public class Main {
             }
         }
 
-        scanner.close();
+        // scanner.close();
     }
     
     //METODO USADO EN AGREGAR GRUPO

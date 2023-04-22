@@ -67,6 +67,23 @@ public class Coordinador extends Usuario implements Serializable{
         }
     }
 
+    public void desmatricularDelSistema(Estudiante estudiante){
+        // Desmatricular no seria simplemente llamar un metodo de estudiante?
+        // Tambien seria que dentro de materias de estudiante no este esta materia
+        for (Estudiante e: Estudiante.getEstudiantes()){
+            if (e.equals(estudiante)){
+                Estudiante.getEstudiantes().remove(e);
+            }
+        }
+        for (Usuario usuario: Usuario.getUsuariosTotales()){
+            if (usuario instanceof Estudiante){
+                if (((Estudiante) usuario).equals(estudiante)){
+                    Usuario.getUsuariosTotales().remove(usuario);
+                }
+            }
+        }
+    }
+
 
     // ligadura dinamica?
     public static Object[] crearHorarioAleatorio(ArrayList<Materia> materias){
