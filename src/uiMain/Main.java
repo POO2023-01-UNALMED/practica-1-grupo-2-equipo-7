@@ -745,7 +745,9 @@ public class Main {
 
             for (int i=0;i<materia.getGrupos().size();i++){
                 Grupo grupo=materia.getGrupos().get(i);
-
+                if (!estudiante.getHorario().comprobarDisponibilidad(grupo.getHorario())){
+                    continue;
+                }
                 if (grupo.getCupos()!=0){
                     gruposDisponibles.add(grupo);
                     System.out.println((gruposDisponibles.size())+" Grupo #"+grupo.getNumero()+ " cupos: "+grupo.getCupos()+" Profesor: "+grupo.getProfesor().getNombre());
@@ -786,7 +788,7 @@ public class Main {
         }
         scanner.close();
     }
-   
+   //La parte 4 de matricular materia es para matricularle al estudiante un grupo en especifico
     public static void matricularMateriaParte4(Estudiante estudiante, Grupo grupo){
         ArrayList<Materia> materiasInscritas=new ArrayList<Materia>(estudiante.getMaterias());
         materiasInscritas.add(grupo.getMateria());
