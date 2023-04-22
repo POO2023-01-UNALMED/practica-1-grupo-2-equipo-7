@@ -27,6 +27,7 @@ public class Main {
         System.out.println("Bienvenido al Portal de Servicios Acacémicos S.M.M");
         Usuario usuario = null;
         while(!logueado) {
+        	Scanner scanner2 = new Scanner(System.in);
         	System.out.println("Seleccione como desea ingresar a la plataforma:\n1. Crear nuevo usuario.\n2. Ingresar usuario existente.");
         	int opcion_log = scanner.nextInt();
         	if (opcion_log==1) {
@@ -34,7 +35,7 @@ public class Main {
         		boolean existe;
         		do {
         			System.out.println("Ingrese su nombre completo:\nSi desea salir introduzca la palabra Salir");
-        			nomb = scanner.nextLine();
+        			nomb = scanner2.nextLine();
         			if (nomb=="Salir") {
         				existe = false;
         			}
@@ -47,19 +48,21 @@ public class Main {
         			}
         		}while (existe);
         		System.out.println("Ingrese la facultad a la que pertenece:");
-        		String facul = scanner.nextLine();
+        		String facul = scanner2.nextLine();
         		System.out.println("Ingrese su contraseña:");
-        		String cont = scanner.nextLine();
+        		String cont = scanner2.nextLine();
         		long id = generarId();
         		usuario = new Coordinador(facul,id,nomb,cont);
-        		System.out.println("Se ha creado un nuevo usuario a nombre de "+nomb+"con el id "+id+"asignado.\nRecuerde que este id será con el que inicie sesión en este usuario de ahora en adelante");
+        		System.out.println("Se ha creado un nuevo usuario a nombre de "+nomb+"con el id "+id+" asignado.\nRecuerde que este id será con el que inicie sesión en este usuario de ahora en adelante");
         		logueado=true;
+        		scanner2.close();
         	}
         	else if(opcion_log==2) {
-        		boolean intentando = false;
+        		Scanner scanner3 = new Scanner(System.in);
+        		boolean intentando = true;
         		while(intentando) {
         			System.out.println("Ingrese su id de usuario:\nSi desea salir escriba el número 0.");
-        			long id = scanner.nextLong();
+        			long id = scanner3.nextLong();
         			if (id==0) {
         				break;
         			}
@@ -77,11 +80,11 @@ public class Main {
         				boolean pwCorect = false;
         				while(!pwCorect){
         					System.out.println("Ingrese la contraseña:");
-        					String cont = scanner.nextLine();
+        					String cont = scanner3.nextLine();
         					if(!verificarPw(usuarioE,cont)) {
         						while(true) {
         							System.out.println("La contraseña es incorrecta.\n¿Desea intentar nuevamente?\n1. Si.\n2. No.");
-        							int opCf = scanner.nextInt();
+        							int opCf = scanner3.nextInt();
         							if (opCf==1) {	
         								break;
         							}
@@ -106,6 +109,7 @@ public class Main {
         				}
         			}
         		}
+        		scanner3.close();
         	}
         	else {
         		System.out.println("Valor inválido. Ingrese el número de una de las opciones mencionadas");
@@ -188,8 +192,9 @@ public class Main {
                     System.out.println("Has seleccionado la opción 3 (Agregar grupo.)");
                     boolean salida = false;
                     while(!salida) {
+                    	Scanner scanner3 = new Scanner(System.in);
 	                    System.out.println("Ingrese la materia a la cual desea agregar el grupo (Con mayúscula inicial solo en la primera palabra).\nSi desea salir ingrese la palabra Salir:");
-	                    String materiaStr = scanner.nextLine();
+	                    String materiaStr = scanner3.nextLine();
 	                    if (materiaStr=="Salir") {
 	                    	salida=true;
 	                    	break;
@@ -207,13 +212,14 @@ public class Main {
 	                    }
 	                    Profesor profesorSel = null;
 		                while(true) {
+		                	Scanner scanner4 = new Scanner(System.in);
 		                    System.out.println("Ingrese el método por el cual quiere asignar el profesor para el nuevo grupo:\n1. Seleccionar del listado de profesores.\n2. Asignar un profesor nuevo.\n3. Salir");
-		                    int opcion_profe = scanner.nextInt();
+		                    int opcion_profe = scanner4.nextInt();
 		                    
 		                    if (opcion_profe==1) {
 		                    	System.out.println("Seleccione uno de los siguientes profesores");
 		                    	System.out.print(Profesor.mostrarProfesMateria(materiaSel));
-		                    	int seleccionProfe = scanner.nextInt();
+		                    	int seleccionProfe = scanner4.nextInt();
 		                    	ArrayList<Profesor> preProfes = Profesor.profesoresDeMateria(materiaSel);
 		                    	profesorSel = preProfes.get(seleccionProfe-1);
 		                    	break;
@@ -221,11 +227,11 @@ public class Main {
 		                    
 		                    else if(opcion_profe==2){
 		                    	System.out.println("Ingrese el nombre completo del profesor: ");
-		                    	String nomb = scanner.nextLine();
+		                    	String nomb = scanner4.nextLine();
 		                    	System.out.println("Ingrese la facultad a la que pertenece el profesor: ");
-		                    	String facu = scanner.nextLine();
+		                    	String facu = scanner4.nextLine();
 		                    	System.out.println("Ingrese las materias (separadas por comas con su respectivo espacio) para las cuales el profesor está capacitado:");
-		                    	String materias = scanner.nextLine();
+		                    	String materias = scanner4.nextLine();
 		                    	String[] mate = materias.split(", ");
 		                    	ArrayList<Materia> mates = new ArrayList<Materia>();
 		                    	for (String smateria:mate) {
@@ -248,11 +254,23 @@ public class Main {
 		                    }
 	                	}
 		                if(salida) {break;}
-		                
-			            System.out.println("Ingrese el horario de clase del grupo.\nPor cada sesión de clase ingrese un horario con el formato d-hi-hf, donde d es el número del día de la semana, hi es la hora inicial y hf es la hora final.\nSepare cada uno de estos por comas con su respectivo espacio:");
-			            String hor = scanner.nextLine();
-			            String[] horario = hor.split(", ");
-			            ArrayList<String> horarioSel= new ArrayList<String>(Arrays.asList(horario));
+		                ArrayList<String> horarioSel = null;
+		                while(true) {
+		                	System.out.println("Ingrese el horario de clase del grupo.\nPor cada sesión de clase ingrese un horario con el formato d-hi-hf, donde d es el número del día de la semana, hi es la hora inicial y hf es la hora final.\nSepare cada uno de estos por comas con su respectivo espacio:\nSi desea salir ingrese la palabra Salir.");
+		                	String hor = scanner.nextLine();
+		                	if (hor=="Salir") {
+		                		salida=true;
+		                		break;
+		                	}
+		                	else {
+		                		
+		                	}
+		                	
+		                	String[] horario = hor.split(", ");
+		                	horarioSel = new ArrayList<String>(Arrays.asList(horario));
+	                	
+		                }
+		                if(salida) {break;}
 			            System.out.println("Ingrese la cantidad de cupos con la que contará el grupo:");
 			            int cuposSel = scanner.nextInt();
 			            Salon salonSel = null;
@@ -454,6 +472,35 @@ public class Main {
         }
 
         scanner.close();
+    }
+    
+    //METODO USADO EN AGREGAR GRUPO
+    public static boolean formatoHorario(String horario) {
+    	boolean formato = false;
+    	int dia = Integer.parseInt(horario.substring(0));
+    	if(horario.length()==7) {
+    		if(dia>=0&&dia<=7) {
+    			if(horario.substring(1)=="-") {
+    				String hi = horario.substring(2, 4);
+    				if(hi.matches("\\d+")) {
+    					int horI = Integer.parseInt(hi);
+    					if(horI>=0&&horI<=23) {
+    						if(horario.substring(4)=="-") {
+    							String hf = horario.substring(5, 7);
+    							if(hi.matches("\\d+")) {
+    								int horF = Integer.parseInt(hf);
+    								if(horF>horI&&horF>0&&horF<=23) {
+    									formato = true;
+    								}
+    							}
+    						}
+    					}
+    				}
+    			}
+    		}
+    		
+    	}
+    	return formato;
     }
 
     //METODOS USADOS PARA EL LOG
