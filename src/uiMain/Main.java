@@ -24,7 +24,7 @@ public class Main {
         Scanner scanner=new Scanner(System.in);
         Boolean continuar=true;
         Boolean logueado = false;
-        System.out.println("Bienvenido al Portal de Servicios Acacémicos S.M.M");
+        System.out.println("Bienvenido al Portal de Servicios Academicos S.M.M");
         Usuario usuario = null;
         while(!logueado) {
         	Scanner scanner2 = new Scanner(System.in);
@@ -50,11 +50,11 @@ public class Main {
         		}while (existe);
         		System.out.println("Ingrese la facultad a la que pertenece:");
         		String facul = scanner2.nextLine();
-        		System.out.println("Ingrese su contraseña:");
+        		System.out.println("Ingrese su contrasena:");
         		String cont = scanner2.nextLine();
         		long id = generarId();
         		usuario = new Coordinador(facul,id,nomb,cont);
-        		System.out.println("Se ha creado un nuevo usuario a nombre de "+nomb+"con el id "+id+" asignado.\nRecuerde que este id será con el que inicie sesión en este usuario de ahora en adelante");
+        		System.out.println("Se ha creado un nuevo usuario a nombre de "+nomb+" con el id "+id+" asignado.\nRecuerde que este id sera con el que inicie sesion en este usuario de ahora en adelante");
         		logueado=true;
         		// scanner2.close();
         	}
@@ -62,17 +62,17 @@ public class Main {
         		Scanner scanner3 = new Scanner(System.in);
         		boolean intentando = true;
         		while(intentando) {
-        			System.out.println("Ingrese su id de usuario:\nSi desea salir escriba el número 0.");
+        			System.out.println("Ingrese su id de usuario:\nSi desea salir escriba el numero 0.");
         			long id = scanner3.nextLong();
                     scanner3.nextLine();
         			if (id==0) {
         				break;
         			}
         			else if (id<10000||id>99999) {
-        				System.out.println("Id inválido. Ingrese un id de 5 cifras.");
+        				System.out.println("Id invalido. Ingrese un id de 5 cifras.");
         			}
         			else if (!existenciaId(id)){
-        				System.out.println("El id ingresado no corresponde a ningún usuario registrado en el sistema.");
+        				System.out.println("El id ingresado no corresponde a ningun usuario registrado en el sistema.");
         			}
         			else if (encontrarUsuario(id).getTipo()=="Estudiante") {
         				System.out.println("Error. Solo pueden ingresar coordinadores en la plataforma.");
@@ -81,11 +81,11 @@ public class Main {
         				Usuario usuarioE = encontrarUsuario(id);
         				boolean pwCorect = false;
         				while(!pwCorect){
-        					System.out.println("Ingrese la contraseña:");
+        					System.out.println("Ingrese la contrasena:");
         					String cont = scanner3.nextLine();
         					if(!verificarPw(usuarioE,cont)) {
         						while(true) {
-        							System.out.println("La contraseña es incorrecta.\n¿Desea intentar nuevamente?\n1. Si.\n2. No.");
+        							System.out.println("La contrasena es incorrecta.\nDesea intentar nuevamente?\n1. Si.\n2. No.");
         							int opCf = scanner3.nextInt();
                                     scanner3.nextLine();
         							if (opCf==1) {	
@@ -98,7 +98,7 @@ public class Main {
         								
         							}
         							else {
-        								System.out.println("Valor inválido. Ingrese el número de una de las opciones mencionadas.");
+        								System.out.println("Valor invalido. Ingrese el numero de una de las opciones mencionadas.");
         							}
         						}
         					}
@@ -115,22 +115,22 @@ public class Main {
         		// scanner3.close();
         	}
         	else {
-        		System.out.println("Valor inválido. Ingrese el número de una de las opciones mencionadas");
+        		System.out.println("Valor invalido. Ingrese el numero de una de las opciones mencionadas");
         	}
         }
         while(continuar){
             //Aun no esta contruido la interfaz (mensajes bonitos en la terminal)
-            //Por aquí irá el menu con las opciones
-            System.out.println("A continuación encontrará los diferentes servicios ofrecidos por la plataforma.");
-            System.out.println("Ingrese la opcion deseada: \n1. Matricular Materia.\n2. Generar Horario.\n3. Eliminar o agregar Materia / Grupo.\n4. Desmatricular Alumno. \n5. Busqueda y Postulación de Becas. \n6. Salir y Guardar");
+            //Por aqui ira el menu con las opciones
+            System.out.println("A continuacion encontrara los diferentes servicios ofrecidos por la plataforma.");
+            System.out.println("Ingrese la opcion deseada: \n1. Matricular Materia.\n2. Generar Horario.\n3. Eliminar o agregar Materia / Grupo.\n4. Desmatricular Alumno. \n5. Busqueda y Postulacion de Becas. \n6. Salir y Guardar");
             int opcion = scanner.nextInt();
             switch(opcion) {
             case 1:
-                System.out.println("Has seleccionado la opción 1 (Matricular materia)");
+                System.out.println("Has seleccionado la opcion 1 (Matricular materia)");
                 matricularMateria();
                 break;
             case 2:
-                System.out.println("Has seleccionado la opción 2 (Generar Horario).");
+                System.out.println("Has seleccionado la opcion 2 (Generar Horario).");
                 System.out.println("Esta Opcion te permitira generar una horario aleatorio segun unas materias dadas.");
                 
                 boolean salir = true;
@@ -180,23 +180,23 @@ public class Main {
                 }
                 break;
             case 3:
-                System.out.println("Has seleccionado la opción 3 (Eliminar o agregar Materia / Grupo).");
-                System.out.println("Ingrese la opción que se ajuste a su búsqueda:\n1.Agregar Materia.       2.Eliminar Materia.\n3.Agregar Grupo.         4.Eliminar Grupo.");
+                System.out.println("Has seleccionado la opcion 3 (Eliminar o agregar Materia / Grupo).");
+                System.out.println("Ingrese la opcion que se ajuste a su busqueda:\n1.Agregar Materia.       2.Eliminar Materia.\n3.Agregar Grupo.         4.Eliminar Grupo.");
                 int opcion_3 = scanner.nextInt();
                 if(opcion_3 == 1){
-                    System.out.println("Has seleccionado la opción 1 (Agregar materia.)");
+                    System.out.println("Has seleccionado la opcion 1 (Agregar materia.)");
                     //Funcionalidad agregar materia//
                 }
                 else if(opcion_3 == 2){
-                    System.out.println("Has seleccionado la opción 2 (Eliminar materia.)");
+                    System.out.println("Has seleccionado la opcion 2 (Eliminar materia.)");
                     //Funcionalidad eliminar materia//
                 }
                 else if(opcion_3 == 3){
-                    System.out.println("Has seleccionado la opción 3 (Agregar grupo.)");
+                    System.out.println("Has seleccionado la opcion 3 (Agregar grupo.)");
                     boolean salida = false;
                     while(!salida) {
                     	Scanner scanner3 = new Scanner(System.in);
-	                    System.out.println("Ingrese la materia a la cual desea agregar el grupo (Con mayúscula inicial solo en la primera palabra).\nSi desea salir ingrese la palabra Salir:");
+	                    System.out.println("Ingrese la materia a la cual desea agregar el grupo.\nSi desea salir ingrese la palabra Salir:");
 	                    String materiaStr = scanner3.nextLine();
 	                    if (materiaStr.equals("Salir")) {
 	                    	salida=true;
@@ -216,7 +216,7 @@ public class Main {
 	                    Profesor profesorSel = null;
 		                while(true) {
 		                	Scanner scanner4 = new Scanner(System.in);
-		                    System.out.println("Ingrese el método por el cual quiere asignar el profesor para el nuevo grupo:\n1. Seleccionar del listado de profesores.\n2. Asignar un profesor nuevo.\n3. Salir");
+		                    System.out.println("Ingrese el metodo por el cual quiere asignar el profesor para el nuevo grupo:\n1. Seleccionar del listado de profesores.\n2. Asignar un profesor nuevo.\n3. Salir");
 		                    int opcion_profe = scanner4.nextInt();
 		                    
 		                    if (opcion_profe==1) {
@@ -233,7 +233,7 @@ public class Main {
 		                    	String nomb = scanner4.nextLine();
 		                    	System.out.println("Ingrese la facultad a la que pertenece el profesor: ");
 		                    	String facu = scanner4.nextLine();
-		                    	System.out.println("Ingrese las materias (separadas por comas con su respectivo espacio) para las cuales el profesor está capacitado:");
+		                    	System.out.println("Ingrese las materias (separadas por comas con su respectivo espacio) para las cuales el profesor esta capacitado:");
 		                    	String materias = scanner4.nextLine();
 		                    	String[] mate = materias.split(", ");
 		                    	ArrayList<Materia> mates = new ArrayList<Materia>();
@@ -253,13 +253,13 @@ public class Main {
 		                    	break;
 		                    }
 		                    else {
-		                    	System.out.println("Valor erroneo. Ingrese un valor válido.");
+		                    	System.out.println("Valor erroneo. Ingrese un valor valido.");
 		                    }
 	                	}
 		                if(salida) {break;}
 		                ArrayList<String> horarioSel = null;
 		                while(true) {
-		                	System.out.println("Ingrese el horario de clase del grupo.\nPor cada sesión de clase ingrese un horario con el formato d-hi-hf, donde d es el número del día de la semana, hi es la hora inicial y hf es la hora final.\nSepare cada uno de estos por comas con su respectivo espacio:\nSi desea salir ingrese la palabra Salir.");
+		                	System.out.println("Ingrese el horario de clase del grupo.\nPor cada sesion de clase ingrese un horario con el formato d-hi-hf, donde d es el numero del dia de la semana, hi es la hora inicial y hf es la hora final.\nSepare cada uno de estos por comas con su respectivo espacio:\nSi desea salir ingrese la palabra Salir.");
 		                	String hor = scanner.nextLine();
 		                	String[] horario = hor.split(", ");
 		                	if (hor.equals("Salir")) {
@@ -271,7 +271,7 @@ public class Main {
 		                		for(String hora:horario) {
 		                			correcto = formatoHorario(hora);
 		                			if(!correcto) {
-		                				System.out.println("El horario ingresado no está en el formato correcto.");
+		                				System.out.println("El horario ingresado no esta en el formato correcto.");
 		                				break;
 		                			}
 		                		}
@@ -282,11 +282,11 @@ public class Main {
 		                	}
 		                }
 		                if(salida) {break;}
-			            System.out.println("Ingrese la cantidad de cupos con la que contará el grupo:");
+			            System.out.println("Ingrese la cantidad de cupos con la que contara el grupo:");
 			            int cuposSel = scanner.nextInt();
 			            Salon salonSel = null;
 			            while(true) {
-			            	System.out.println("Ingrese el salón donde se darán las sesiones de clase del grupo.\nSi desea salir ingrese la palabra Salir:");
+			            	System.out.println("Ingrese el salon donde se daran las sesiones de clase del grupo.\nSi desea salir ingrese la palabra Salir:");
 			            	String nomSalon = scanner.nextLine();
 			            	if (nomSalon.equals("Salir")) {
 			            		salida = true;
@@ -299,7 +299,7 @@ public class Main {
 			            		}
 			            	}
 			            	if (salonSel==null) {
-			            		System.out.println("El salón ingresado no existe. Ingrese un salón válido.");
+			            		System.out.println("El salon ingresado no existe. Ingrese un salon valido.");
 			            	}
 			            }
 			            if(salida) {break;}
@@ -310,7 +310,7 @@ public class Main {
                     }
                 }
                 else if(opcion_3 == 4){
-                    System.out.println("Has seleccionado la opción 4 (Eliminar grupo.)");
+                    System.out.println("Has seleccionado la opcion 4 (Eliminar grupo.)");
                     boolean salida = false;
                     while(!salida) {
                     	System.out.println("ingrese la materia a la cual le desea eliminar un grupo.\nSi desea salir escriba la palabra Salir:");
@@ -326,14 +326,14 @@ public class Main {
                     		}
                     	}
                     	if(materiaSel==null) {
-                    		System.out.println("La materia ingresada no existe. Ingrese una materia válida.");
+                    		System.out.println("La materia ingresada no existe. Ingrese una materia valida.");
                     		continue;
                     	}
                     	while(true) {
-                    		System.out.println("Ingrese el número del grupo que desea eliminar\nSi desea salir escriba el número 0");
+                    		System.out.println("Ingrese el numero del grupo que desea eliminar\nSi desea salir escriba el numero 0");
                     		int numSel = scanner.nextInt();
                     		if (numSel<0||numSel>materiaSel.getGrupos().size()) {
-                    			System.out.println("El número de grupo ingresado no existe. Ingrese el número de un grupo válido.");
+                    			System.out.println("El numero de grupo ingresado no existe. Ingrese el numero de un grupo valido.");
                     		}
                     		else if(numSel==0) {
                     			salida = true;
@@ -341,7 +341,7 @@ public class Main {
                     		}
                     		else {
                     			materiaSel.eliminarGrupo(numSel);
-                    			System.out.println("El grupo "+numSel+" de la materia "+materiaSel+" ha sido eliminado con éxito");
+                    			System.out.println("El grupo "+numSel+" de la materia "+materiaSel+" ha sido eliminado con exito");
                     			break;
                     		}
                     		break;
@@ -349,12 +349,12 @@ public class Main {
                     }
                 }
                 else if(0 > opcion_3 || opcion_3 > 4){
-                    System.out.println("Opción inválida.");
+                    System.out.println("Opcion invalida.");
                     continue;
                 }
                 break;
             case 4:
-                System.out.println("Has seleccionado la opción 4 (Desmatricular Alumno).");
+                System.out.println("Has seleccionado la opcion 4 (Desmatricular Alumno).");
                 Estudiante estudiante = null;
                 Scanner scanner2 = new Scanner(System.in);
                 while (true){
@@ -362,7 +362,7 @@ public class Main {
                     int eleccion = scanner.nextInt();
                     scanner.nextLine();
                     if (eleccion == 1){
-                        System.out.println("Elija el número del estudiante");
+                        System.out.println("Elija el numero del estudiante");
                         System.out.println(Estudiante.mostrarEstudiantes());
                         int numeroEstudiante = scanner2.nextInt();
                         scanner2.nextLine();
@@ -389,7 +389,7 @@ public class Main {
                         break;
                     }
                     else{
-                        System.out.println("Ingresa una opción valida\n");
+                        System.out.println("Ingresa una opcion valida\n");
                     }
                     
                 }
@@ -425,7 +425,7 @@ public class Main {
                                         break;
                                     }
                                     else{
-                                        System.out.println("El estudiante no está matriculado en el grupo");
+                                        System.out.println("El estudiante no esta matriculado en el grupo");
                                     }
                                     break;
                                     case 2:
@@ -474,7 +474,7 @@ public class Main {
                 break;
             case 5:
                 //El nombre aun se puede cambiar
-                System.out.println("Has seleccionado la opción 5 (Busqueda y Postulación Becas).");
+                System.out.println("Has seleccionado la opcion 5 (Busqueda y Postulacion Becas).");
                 break;
 
             case 6:
@@ -484,11 +484,11 @@ public class Main {
                 break;
 
             default:
-                System.out.println("Opción inválida");
+                System.out.println("Opcion invalida");
                 System.out.println("Desea continuar?");
-                System.out.println("Opción 1- SI");
-                System.out.println("Opción 2- NO");
-                System.out.println("Por favor ingrese la opción deseada");
+                System.out.println("Opcion 1- SI");
+                System.out.println("Opcion 2- NO");
+                System.out.println("Por favor ingrese la opcion deseada");
                 int continuarint=scanner.nextInt();
                 if (continuarint==1){
                     continue;
@@ -587,7 +587,7 @@ public class Main {
 
             Boolean invalido=false;
             System.out.println("Desea buscar al estudiante mediante una lista o mediante su ID o su nombre?");
-            System.out.println("Ingrese la opción deseada: \n1- Lista de estudiantes disponibles\n2- Buscar al estudiante");
+            System.out.println("Ingrese la opcion deseada: \n1- Lista de estudiantes disponibles\n2- Buscar al estudiante");
             int opcion=scn.nextInt();
 
             if (opcion==1){
@@ -609,7 +609,7 @@ public class Main {
                     }
                 }
 
-                System.out.println("Por favor ingrese el número correpondiente al estudiante que desea seleccionar: ");
+                System.out.println("Por favor ingrese el numero correpondiente al estudiante que desea seleccionar: ");
                 int opcion2 = scn.nextInt();
                 if (opcion2<=totalEstudiantes.size() && opcion2>=1){
                     Estudiante seleccionado=totalEstudiantes.get(opcion2-1);
@@ -618,7 +618,7 @@ public class Main {
                     salir=true;
 
                 }else{
-                    System.out.println("Opción invalida");
+                    System.out.println("Opcion invalida");
                     invalido=true;
                 }
 
@@ -643,14 +643,14 @@ public class Main {
 
             }else{
 
-                System.out.println("Opción invalida");
+                System.out.println("Opcion invalida");
                 invalido=true;
 
             }
             if (invalido){
 
                 System.out.println("Desea intentarlo otra vez o desea salir?");
-                System.out.println("Ingrese la opción deseada: \n1- Intentarlo otra vez\n2- Salir");
+                System.out.println("Ingrese la opcion deseada: \n1- Intentarlo otra vez\n2- Salir");
                 int opcion3=scn.nextInt();
 
                 if (opcion3!=1){
@@ -705,7 +705,7 @@ public class Main {
 
                 } else{
 
-                    System.out.println("Opción invalida");
+                    System.out.println("Opcion invalida");
                     invalido=true;
                 }
 
@@ -732,14 +732,14 @@ public class Main {
 
             }else{
 
-                System.out.println("Opción invalida");
+                System.out.println("Opcion invalida");
                 invalido=true;
             }
 
             if (invalido){
 
                 System.out.println("Desea intentarlo otra vez o desea salir?");
-                System.out.println("Ingrese la opción deseada: \n1- Intentarlo otra vez\n2- Salir");
+                System.out.println("Ingrese la opcion deseada: \n1- Intentarlo otra vez\n2- Salir");
                 int opcion2=scanner.nextInt();
                 if (opcion2!=1){
                     salir=true;
@@ -785,7 +785,7 @@ public class Main {
                 System.out.println(imprimir+ ". Ha sido matriculado al estudiante: "+estudiante.getNombre());
                 salir=true;
 
-                System.out.println("Desea visualizar el horario del estudiante?: \n1- Sí\n2- No");
+                System.out.println("Desea visualizar el horario del estudiante?: \n1- Si\n2- No");
                 int opcion2=scanner.nextInt();
 
                 if (opcion2==1){
@@ -793,9 +793,9 @@ public class Main {
                 }
 
             }else{
-                System.out.println("Opción invalida");
+                System.out.println("Opcion invalida");
                 System.out.println("Desea intentarlo otra vez o desea salir?");
-                System.out.println("Ingrese la opción deseada: \n1- Intentarlo otra vez\n2- Salir");
+                System.out.println("Ingrese la opcion deseada: \n1- Intentarlo otra vez\n2- Salir");
                 int opcion3=scanner.nextInt();
                 if (opcion3!=1){
                     salir=true;
@@ -936,7 +936,7 @@ public class Main {
             System.out.println("Escoja un estudiante: ");
             System.out.println(Estudiante.mostrarEstudiantes());
 
-            System.out.print("Elección: -> ");
+            System.out.print("Eleccion: -> ");
             int opt3=scanner.nextInt();
 
             Estudiante seleccionEstudiante = Estudiante.getEstudiantes().get(opt3-1);
