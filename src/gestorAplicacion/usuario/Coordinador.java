@@ -48,9 +48,9 @@ public class Coordinador extends Usuario implements Serializable{
         }
     }
 
-    public void contratarProfesor(String nombre, String facultad){
-        Profesor profesor = new Profesor(nombre,facultad);
-    }
+    // public void contratarProfesor(String nombre, String facultad){
+    //     Profesor profesor = new Profesor(nombre,facultad);
+    // }
 
 
     // FUSIONE resturarEstudiantesInscritosEnMateria Y resturarProfesoresInvolucradosEnMateria EN resturarMateria.
@@ -139,20 +139,24 @@ public class Coordinador extends Usuario implements Serializable{
 
     /*Metodo agregarMateria: Recibira los parámetros necesarios para crear una materia, si esta no se encuentra en
     la base de datos, la creara con sus respectivos atributos*/
-    public void agregarMateria(String nombre, int codigo, String descripcion,int creditos, String facultad, int cupos, ArrayList<Materia> prerrequisitos, ArrayList<Grupo> grupos){
+    public void agregarMateria(String nombre, int codigo, String descripcion,int creditos, String facultad, ArrayList<Materia> prerrequisitos, ArrayList<Grupo> grupos){
         for (Materia materia : Materia.getMateriasTotales()){
             if (materia.getNombre().equals(nombre) == false){
-                Materia nMateria = new Materia(nombre, codigo, descripcion, creditos, facultad, cupos, prerrequisitos, grupos);
+                Materia nMateria = new Materia(nombre, codigo, descripcion, creditos, facultad, prerrequisitos, grupos);
             }
         }
     }
     /*Metodo candidato a beca: ... */
     public boolean candidatoABeca(Estudiante estudiante, Beca tipoDeBeca){
         if (tipoDeBeca.getCupos() > 0){
-            if ((estudiante.calcularPromedio >= tipoDeBeca.getPromedioRequerido()) && (estudiante.calcularAvance >= tipoDeBeca.getAvanceRequerido()) && (estudiante.getCreditos() >= tipoDeBeca.getCreditosInscritosRequeridos())){
-                if (tipoDeBeca.necesitaRecomendacion){
-                    if (recomendarEstudiante(estudiante)){
-                        return true;
+            if ((estudiante.getPromedio() >= tipoDeBeca.getPromedioRequerido()) && (estudiante.getAvance() >= tipoDeBeca.getAvanceRequerido()) && (estudiante.getCreditos() >= tipoDeBeca.getCreditosInscritosRequeridos())){
+                if (tipoDeBeca.getNecesitaRecomendacion()){
+                    if (tipoDeBeca.getNecesitaRecomendacion()){
+                        if (Profesor.recomendarEstudiante(estudiante)){
+                            return true;
+                        }else{
+                            return true;
+                        }
                     }else return false;
                 } else return true; //no necesita recomendacion, pero cumple los demás requisitos
             }

@@ -91,24 +91,24 @@ public class Profesor implements Serializable{
     	return this.materiasDadas.contains(materia);
     }
 
-    public boolean recomendarEstudiante(Estudiante estudiante){
+    public static boolean recomendarEstudiante(Estudiante estudiante){
+        boolean bool = false;
         for (Profesor profesor : Profesor.getProfesores()){
             int chance = 0;
-            int suerte = (int)(Math. random()*10+1);
             for(Grupo grupo : estudiante.getGruposVistos()){
-                if (grupo.getProfesor().equals(profesor.getNombre()) == true){
+                int suerte = (int)(Math.random()*10+1);
+                if (grupo.getProfesor().getNombre().equals(profesor.getNombre()) == true){
                     chance += 5;
                 }
                 if (estudiante.getFacultad().equals(profesor.getFacultad()) == true){
                     chance += 3;
                 }
                 if (chance >= suerte){
-                    return true;
-                }else if (chance < suerte){
-                    return false;
-                }   
+                    bool= true;
+                }  
             }
         }
+        return bool;
     }
     
     public static String mostrarProfesores() {

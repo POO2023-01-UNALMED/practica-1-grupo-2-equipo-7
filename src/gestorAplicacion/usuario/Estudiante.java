@@ -243,4 +243,19 @@ public class Estudiante extends Usuario implements Serializable{
         return horario;
     }
 
+    public double getPromedio() {
+        return promedio;
+    }
+    public void setPromedio(double promedio) {
+        this.promedio = promedio;
+    }
+
+    public double getAvance() {
+        return avance;
+    }
+
+    public void setAvance(double avance) {
+        this.avance = avance;
+    }
+    
 }
