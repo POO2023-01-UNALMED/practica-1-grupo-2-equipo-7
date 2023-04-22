@@ -261,17 +261,25 @@ public class Main {
 		                while(true) {
 		                	System.out.println("Ingrese el horario de clase del grupo.\nPor cada sesión de clase ingrese un horario con el formato d-hi-hf, donde d es el número del día de la semana, hi es la hora inicial y hf es la hora final.\nSepare cada uno de estos por comas con su respectivo espacio:\nSi desea salir ingrese la palabra Salir.");
 		                	String hor = scanner.nextLine();
+		                	String[] horario = hor.split(", ");
 		                	if (hor=="Salir") {
 		                		salida=true;
 		                		break;
 		                	}
 		                	else {
-		                		
+		                		boolean correcto = false;
+		                		for(String hora:horario) {
+		                			correcto = formatoHorario(hora);
+		                			if(!correcto) {
+		                				System.out.println("El horario ingresado no está en el formato correcto.");
+		                				break;
+		                			}
+		                		}
+		                		if (correcto) {
+		                			horarioSel = new ArrayList<String>(Arrays.asList(horario));
+		                			break;
+		                		}
 		                	}
-		                	
-		                	String[] horario = hor.split(", ");
-		                	horarioSel = new ArrayList<String>(Arrays.asList(horario));
-	                	
 		                }
 		                if(salida) {break;}
 			            System.out.println("Ingrese la cantidad de cupos con la que contará el grupo:");
@@ -480,28 +488,16 @@ public class Main {
     //METODO USADO EN AGREGAR GRUPO
     public static boolean formatoHorario(String horario) {
     	boolean formato = false;
+    	String hi = horario.substring(2, 4);
+    	int horI = Integer.parseInt(hi);
+    	String hf = horario.substring(5, 7);
+    	int horF = Integer.parseInt(hf);
+
     	int dia = Integer.parseInt(horario.substring(0));
-    	if(horario.length()==7) {
-    		if(dia>=0&&dia<=7) {
-    			if(horario.substring(1)=="-") {
-    				String hi = horario.substring(2, 4);
-    				if(hi.matches("\\d+")) {
-    					int horI = Integer.parseInt(hi);
-    					if(horI>=0&&horI<=23) {
-    						if(horario.substring(4)=="-") {
-    							String hf = horario.substring(5, 7);
-    							if(hi.matches("\\d+")) {
-    								int horF = Integer.parseInt(hf);
-    								if(horF>horI&&horF>0&&horF<=23) {
-    									formato = true;
-    								}
-    							}
-    						}
-    					}
-    				}
-    			}
+    	if(horario.length()==7&&dia>=0&&dia<=7&&horario.substring(1).equals("-")&&hi.matches("\\d+")&&horI>=0&&horI<=23) {
+    		if(horI>=0&&horI<=23&&horario.substring(4).equals("-")&&hi.matches("\\d+")&&horF>horI&&horF>0&&horF<=23) {
+    			formato = true;
     		}
-    		
     	}
     	return formato;
     }
