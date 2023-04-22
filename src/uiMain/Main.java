@@ -198,13 +198,13 @@ public class Main {
                     	Scanner scanner3 = new Scanner(System.in);
 	                    System.out.println("Ingrese la materia a la cual desea agregar el grupo (Con mayúscula inicial solo en la primera palabra).\nSi desea salir ingrese la palabra Salir:");
 	                    String materiaStr = scanner3.nextLine();
-	                    if (materiaStr=="Salir") {
+	                    if (materiaStr.equals("Salir")) {
 	                    	salida=true;
 	                    	break;
 	                    }
 	                    Materia materiaSel = null;
 	                    for (Materia materia:Materia.materiasTotales) {
-	                    	if (materia.getNombre()==materiaStr) {
+	                    	if (materia.getNombre().equals(materiaStr)) {
 	                    		materiaSel = materia;
 	                    		break;
 	                    	}
@@ -239,7 +239,7 @@ public class Main {
 		                    	ArrayList<Materia> mates = new ArrayList<Materia>();
 		                    	for (String smateria:mate) {
 		                    		for (Materia materia:Materia.getMateriasTotales()) {
-		                    			if (smateria==materia.getNombre()) {
+		                    			if (smateria.equals(materia.getNombre())) {
 		                    				mates.add(materia);
 		                    				break;
 		                    			}
@@ -262,7 +262,7 @@ public class Main {
 		                	System.out.println("Ingrese el horario de clase del grupo.\nPor cada sesión de clase ingrese un horario con el formato d-hi-hf, donde d es el número del día de la semana, hi es la hora inicial y hf es la hora final.\nSepare cada uno de estos por comas con su respectivo espacio:\nSi desea salir ingrese la palabra Salir.");
 		                	String hor = scanner.nextLine();
 		                	String[] horario = hor.split(", ");
-		                	if (hor=="Salir") {
+		                	if (hor.equals("Salir")) {
 		                		salida=true;
 		                		break;
 		                	}
@@ -288,12 +288,12 @@ public class Main {
 			            while(true) {
 			            	System.out.println("Ingrese el salón donde se darán las sesiones de clase del grupo.\nSi desea salir ingrese la palabra Salir:");
 			            	String nomSalon = scanner.nextLine();
-			            	if (nomSalon=="Salir") {
+			            	if (nomSalon.equals("Salir")) {
 			            		salida = true;
 			            		break;
 			            	}
 			            	for (Salon salon:Salon.salones) {
-			            		if(nomSalon==salon.getLugar()) {
+			            		if(nomSalon.equals(salon.getLugar())) {
 			            			salonSel = salon;
 			            			break;
 			            		}
@@ -304,7 +304,7 @@ public class Main {
 			            }
 			            if(salida) {break;}
 			            int numSel = materiaSel.getGrupos().size();
-			            materiaSel.agregarGrupo(numSel, profesorSel, horarioSel, cuposSel, salonSel);
+			            materiaSel.agregarGrupo(numSel+1, profesorSel, horarioSel, cuposSel, salonSel);
 			            System.out.println("El grupo "+numSel+" de la materia "+materiaSel+" ha sido asignado correctamente");
 			            break;
                     }
@@ -316,11 +316,11 @@ public class Main {
                     	System.out.println("ingrese la materia a la cual le desea eliminar un grupo.\nSi desea salir escriba la palabra Salir:");
                     	String materiaNom = scanner.nextLine();
                     	Materia materiaSel = null;
-                    	if(materiaNom=="Salida") {
+                    	if(materiaNom.equals("Salida")) {
                     		break;
                     	}
                     	for (Materia materia:Materia.getMateriasTotales()) {
-                    		if (materiaNom==materia.getNombre()) {
+                    		if (materiaNom.equals(materia.getNombre())) {
                     			materiaSel = materia;
                     			break;
                     		}
