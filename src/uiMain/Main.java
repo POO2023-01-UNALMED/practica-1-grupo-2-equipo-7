@@ -30,6 +30,7 @@ public class Main {
         	Scanner scanner2 = new Scanner(System.in);
         	System.out.println("Seleccione como desea ingresar a la plataforma:\n1. Crear nuevo usuario.\n2. Ingresar usuario existente.");
         	int opcion_log = scanner.nextInt();
+            scanner.nextLine();
         	if (opcion_log==1) {
         		String nomb;
         		boolean existe;
@@ -55,7 +56,7 @@ public class Main {
         		usuario = new Coordinador(facul,id,nomb,cont);
         		System.out.println("Se ha creado un nuevo usuario a nombre de "+nomb+"con el id "+id+" asignado.\nRecuerde que este id será con el que inicie sesión en este usuario de ahora en adelante");
         		logueado=true;
-        		scanner2.close();
+        		// scanner2.close();
         	}
         	else if(opcion_log==2) {
         		Scanner scanner3 = new Scanner(System.in);
@@ -63,6 +64,7 @@ public class Main {
         		while(intentando) {
         			System.out.println("Ingrese su id de usuario:\nSi desea salir escriba el número 0.");
         			long id = scanner3.nextLong();
+                    scanner3.nextLine();
         			if (id==0) {
         				break;
         			}
@@ -85,6 +87,7 @@ public class Main {
         						while(true) {
         							System.out.println("La contraseña es incorrecta.\n¿Desea intentar nuevamente?\n1. Si.\n2. No.");
         							int opCf = scanner3.nextInt();
+                                    scanner3.nextLine();
         							if (opCf==1) {	
         								break;
         							}
@@ -109,7 +112,7 @@ public class Main {
         				}
         			}
         		}
-        		scanner3.close();
+        		// scanner3.close();
         	}
         	else {
         		System.out.println("Valor inválido. Ingrese el número de una de las opciones mencionadas");
@@ -554,7 +557,7 @@ public class Main {
     }
     
     public static boolean verificarPw(Usuario usuario, String pw) {
-    	if (usuario.getPw()==pw) {
+    	if (usuario.getPw().equals(pw)) {
     		return true;
     	}
     	else {
