@@ -728,7 +728,6 @@ public class Main {
     }
     //Esto me lo pidio efrain
     public static void matricularMateriaParte4(Estudiante estudiante, Grupo grupo){
-        // Scanner scanner=new Scanner(System.in);
         ArrayList<Materia> materiasInscritas=new ArrayList<Materia>(estudiante.getMaterias());
         materiasInscritas.add(grupo.getMateria());
         grupo.agregarEstudiante(estudiante);
@@ -736,14 +735,7 @@ public class Main {
         grupo.setCupos(grupo.getCupos()-1);
         estudiante.setCreditos(estudiante.getCreditos()+grupo.getMateria().getCreditos());
         estudiante.setMaterias(materiasInscritas);
-        // String imprimir="Materia "+grupo.getMateria().getNombre()+" - grupo #"+grupo.getNumero();
-        // System.out.println(imprimir+ ". Ha sido matriculado al estudiante: "+estudiante.getNombre());
-        // System.out.println("Desea visualizar el horario del estudiante?: \n1- Sí\n2- No");
-        // int opcion=scanner.nextInt();
-        // if (opcion==1){
-        //     estudiante.getHorario().mostrarHorario();
-        // }
-        // scanner.close();
+
     }
 
     // METODOS USADOS EN GENERAR HORARIO: 
