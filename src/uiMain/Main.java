@@ -181,7 +181,7 @@ public class Main {
                 break;
             case 3:
                 System.out.println("Has seleccionado la opción 3 (Eliminar o agregar Materia / Grupo).");
-                System.out.println("Ingrese la opción que se ajuste a su búsqueda:\n1. Agregar Materia.       2.Eliminar Materia.\n3.Agregar Grupo.          4.Eliminar Grupo.");
+                System.out.println("Ingrese la opción que se ajuste a su búsqueda:\n1.Agregar Materia.       2.Eliminar Materia.\n3.Agregar Grupo.         4.Eliminar Grupo.");
                 int opcion_3 = scanner.nextInt();
                 if(opcion_3 == 1){
                     System.out.println("Has seleccionado la opción 1 (Agregar materia.)");

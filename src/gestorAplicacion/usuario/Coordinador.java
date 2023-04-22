@@ -156,10 +156,10 @@ public class Coordinador extends Usuario implements Serializable{
 
     /*Metodo agregarMateria: Recibira los parámetros necesarios para crear una materia, si esta no se encuentra en
     la base de datos, la creara con sus respectivos atributos*/
-    public void agregarMateria(String nombre, int codigo, String descripcion,int creditos, String facultad, ArrayList<Materia> prerrequisitos, ArrayList<Grupo> grupos){
+    public void agregarMateria(String nombre, int codigo, String descripcion,int creditos, String facultad, ArrayList<Materia> prerrequisitos){
         for (Materia materia : Materia.getMateriasTotales()){
             if (materia.getNombre().equals(nombre) == false){
-                Materia nMateria = new Materia(nombre, codigo, descripcion, creditos, facultad, prerrequisitos, grupos);
+                Materia nMateria = new Materia(nombre, codigo, descripcion, creditos, facultad, prerrequisitos);
             }
         }
     }
