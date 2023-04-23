@@ -185,7 +185,48 @@ public class Main {
                 int opcion_3 = scanner.nextInt();
                 if(opcion_3 == 1){
                     System.out.println("Has seleccionado la opcion 1 (Agregar materia.)");
-                    //Funcionalidad agregar materia//
+                    if(opcion_3 == 1){
+                        System.out.println("Has seleccionado la opción 1 (Agregar materia.)");
+                        boolean fin = false;
+                        Materia materiaN = null;
+                        while(!fin){
+                            Scanner scanner3_2 = new Scanner(System.in);
+                            System.out.println("Ingresa el nombre de la materia que desea agregar.");
+                            String nombre = scanner3_2.nextLine();
+                            for (Materia materia : Materia.getMateriasTotales()){
+                                if (materia.getNombre().equals(nombre) == true){
+                                    System.out.println("La materia que intenta crear, ya se existe actualmente.");
+                                    fin = true;
+                                }
+                            }                      
+                            System.out.println("Ingresa el código de la materia que desea agregar.");
+                            int codigo = scanner3_2.nextInt();
+                            for (Materia materia : Materia.getMateriasTotales()){
+                                if (materia.getCodigo() == codigo){
+                                    System.out.println("El código que intenta asignarle a la materia, ya le corresponde a una existente.");
+                                    fin = true;
+                                }
+                            }
+                            System.out.println("Ingrese una breve descripción de la materia.");
+                            String descrip = scanner3_2.nextLine();
+                            System.out.println("Ingresa los créditos que le asigna a la materia.");
+                            int creditos = scanner3_2.nextInt();
+                            System.out.println("Ingrese la facultad a la que pertenece la materia");
+                            String facu = scanner3_2.nextLine();
+                            
+                            System.out.println("Ingrese los prerrequisitos que tiene la materia para poder ser inscritas por el estudiante (separadas por comas con su respectivo espacio)");
+                            String prerreq = scanner3_2.nextLine();
+                            String[] pReq = prerreq.split(", ");
+                            ArrayList<Materia> pRequisitos = new ArrayList<Materia>();
+                            for(String r: pReq){
+                                pRequisitos.add(r);
+                            }
+                            materiaN.agregarMateria(nombre, codigo, descrip, creditos, facu, pRequisitos);
+                            System.out.println("La materia "+ nombre + "ha sido creada con éxito.");
+                            break;                                                                 
+                        }
+                        
+                    }
                 }
                 else if(opcion_3 == 2){
                     System.out.println("Has seleccionado la opcion 2 (Eliminar materia.)");

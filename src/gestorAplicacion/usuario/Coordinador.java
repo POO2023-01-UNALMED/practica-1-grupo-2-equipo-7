@@ -160,6 +160,7 @@ public class Coordinador extends Usuario implements Serializable{
         for (Materia materia : Materia.getMateriasTotales()){
             if (materia.getNombre().equals(nombre) == false){
                 Materia nMateria = new Materia(nombre, codigo, descripcion, creditos, facultad, prerrequisitos);
+                Materia.materiasTotales.add(nMateria);
             }
         }
     }
