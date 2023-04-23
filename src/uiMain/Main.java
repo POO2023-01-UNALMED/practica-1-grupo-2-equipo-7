@@ -219,7 +219,13 @@ public class Main {
                             String[] pReq = prerreq.split(", ");
                             ArrayList<Materia> pRequisitos = new ArrayList<Materia>();
                             for(String r: pReq){
-                                pRequisitos.add(r);
+                                for(Materia materia:Materia.getMateriasTotales()){
+                                    if (r.equals(materia.getNombre()) == true){
+                                        pRequisitos.add(materia);
+    
+                                    }
+    
+                                }
                             }
                             materiaN.agregarMateria(nombre, codigo, descrip, creditos, facu, pRequisitos);
                             System.out.println("La materia "+ nombre + "ha sido creada con éxito.");
