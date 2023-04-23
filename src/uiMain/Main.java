@@ -864,10 +864,10 @@ public class Main {
         // imprimir Lista
         
         int con =1;
-        System.out.printf("%-3s %-40s %-10s %-10s%n", "Num", "Nombre", "Facultad","Codigo");
+        System.out.printf("%-3s %-60s %-20s %-10s%n", "Num", "Nombre", "Facultad","Codigo");
         
         for (Materia pMateria:ListaAMostrar){
-            System.out.printf("%-3n %-40s %-10s %-15n%n",con,pMateria.getNombre(),pMateria.getFacultad(),pMateria.getCodigo());
+            System.out.printf("%-3d %-60s %-20s %-10d%n",con,pMateria.getNombre(),pMateria.getFacultad(),pMateria.getCodigo());
             con++;
         }       
     }
