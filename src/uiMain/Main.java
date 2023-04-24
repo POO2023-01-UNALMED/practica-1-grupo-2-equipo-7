@@ -315,7 +315,7 @@ public class Main {
 		                    			}
 		                    		}
 		                    	}
-		                    	profesorSel = new Profesor(nomb,facu,new Horario(),mates);
+		                    	profesorSel = new Profesor(nomb,facu,mates);
 		                    	break;
 		                    }
 		                    else if(opcion_profe==3){
