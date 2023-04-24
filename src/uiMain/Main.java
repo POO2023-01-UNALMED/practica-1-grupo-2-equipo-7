@@ -486,7 +486,7 @@ public class Main {
                                     System.out.print("Ingrese el numero del grupo: ");
                                     int numeroGrupo = scanner3.nextInt();
                                     scanner3.nextLine();
-                                    Grupo grupo = estudiante.getMaterias().get(numeroMateria).getGrupos().get(numeroGrupo);
+                                    Grupo grupo = estudiante.getMaterias().get(numeroMateria).getGrupos().get(numeroGrupo-1);
                                     if (grupo.existenciaEstudiante(estudiante)){
                                         grupo.eliminarEstudiante(estudiante);
                                         estudiante.getHorario().liberarHorario(grupo.getHorario());
