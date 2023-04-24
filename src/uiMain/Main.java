@@ -190,9 +190,9 @@ public class Main {
                         boolean fin = false;
                         Materia materiaN = null;
                         while(!fin){
-                            Scanner scanner3_2 = new Scanner(System.in);
+                            Scanner scanner3_1 = new Scanner(System.in);
                             System.out.println("Ingresa el nombre de la materia que desea agregar.");
-                            String nombre = scanner3_2.nextLine();
+                            String nombre = scanner3_1.nextLine();
                             for (Materia materia : Materia.getMateriasTotales()){
                                 if (materia.getNombre().equals(nombre) == true){
                                     System.out.println("La materia que intenta crear, ya se existe actualmente.");
@@ -200,7 +200,7 @@ public class Main {
                                 }
                             }                      
                             System.out.println("Ingresa el código de la materia que desea agregar.");
-                            int codigo = scanner3_2.nextInt();
+                            int codigo = scanner3_1.nextInt();
                             for (Materia materia : Materia.getMateriasTotales()){
                                 if (materia.getCodigo() == codigo){
                                     System.out.println("El código que intenta asignarle a la materia, ya le corresponde a una existente.");
@@ -208,14 +208,14 @@ public class Main {
                                 }
                             }
                             System.out.println("Ingrese una breve descripción de la materia.");
-                            String descrip = scanner3_2.nextLine();
+                            String descrip = scanner3_1.nextLine();
                             System.out.println("Ingresa los créditos que le asigna a la materia.");
-                            int creditos = scanner3_2.nextInt();
+                            int creditos = scanner3_1.nextInt();
                             System.out.println("Ingrese la facultad a la que pertenece la materia");
-                            String facu = scanner3_2.nextLine();
+                            String facu = scanner3_1.nextLine();
                             
                             System.out.println("Ingrese los prerrequisitos que tiene la materia para poder ser inscritas por el estudiante (separadas por comas con su respectivo espacio)");
-                            String prerreq = scanner3_2.nextLine();
+                            String prerreq = scanner3_1.nextLine();
                             String[] pReq = prerreq.split(", ");
                             ArrayList<Materia> pRequisitos = new ArrayList<Materia>();
                             for(String r: pReq){
@@ -235,8 +235,30 @@ public class Main {
                     }
                 }
                 else if(opcion_3 == 2){
-                    System.out.println("Has seleccionado la opcion 2 (Eliminar materia.)");
-                    //Funcionalidad eliminar materia//
+                    System.out.println("Has seleccionado la opción 2 (Eliminar materia.)");
+                    boolean terminar = false;
+                    while(!terminar){
+                        Scanner scanner3_2 = new Scanner(System.in);
+                        System.out.println("Ingresa el nombre de la materia que desea eliminar.");
+                        String nomMat = scanner3_2.nextLine();
+                        ArrayList<String> nombresMaterias = new ArrayList<String>();
+                        for (Materia materia : Materia.getMateriasTotales()){
+                            String a = materia.getNombre();
+                            nombresMaterias.add(a);
+                        }
+                        if ((!nombresMaterias.contains(nomMat)) == false){
+                            System.out.println("La materia que desea eliminar no existe en la base de datos.");
+                            terminar = true;
+                        }
+                        for (Materia materia : Materia.getMateriasTotales()){
+                            if (materia.getNombre().equals(nomMat) == true){
+                                materia.eliminarMateria(materia);
+                                break;
+                            }
+                        }
+                        System.out.println("La materia "+ nomMat + "ha sido eliminada con éxito.");
+                        break;                     
+                    }                    
                 }
                 else if(opcion_3 == 3){
                     System.out.println("Has seleccionado la opcion 3 (Agregar grupo.)");
