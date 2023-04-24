@@ -180,6 +180,7 @@ public class Main {
                 }
                 break;
             case 3:
+            Coordinador c = (Coordinador) usuario;
                 System.out.println("Has seleccionado la opcion 3 (Eliminar o agregar Materia / Grupo).");
                 System.out.println("Ingrese la opcion que se ajuste a su busqueda:\n1.Agregar Materia.       2.Eliminar Materia.\n3.Agregar Grupo.         4.Eliminar Grupo.");
                 int opcion_3 = scanner.nextInt();
@@ -227,7 +228,7 @@ public class Main {
     
                                 }
                             }
-                            materiaN.agregarMateria(nombre, codigo, descrip, creditos, facu, pRequisitos);
+                            c.agregarMateria(nombre, codigo, descrip, creditos, facu, pRequisitos);
                             System.out.println("La materia "+ nombre + "ha sido creada con éxito.");
                             break;                                                                 
                         }
@@ -252,7 +253,7 @@ public class Main {
                         }
                         for (Materia materia : Materia.getMateriasTotales()){
                             if (materia.getNombre().equals(nomMat) == true){
-                                materia.eliminarMateria(materia);
+                                c.eliminarMateria(materia);
                                 break;
                             }
                         }
