@@ -375,7 +375,12 @@ public class Main {
 			            if(salida) {break;}
 			            int numSel = materiaSel.getGrupos().size();
 			            materiaSel.agregarGrupo(numSel+1, profesorSel, horarioSel, cuposSel, salonSel);
-			            System.out.println("El grupo "+numSel+" de la materia "+materiaSel+" ha sido asignado correctamente");
+			            if (materiaSel.getGrupos().size()==numSel+1) {
+			            	System.out.println("El grupo "+numSel+" de la materia "+materiaSel+" ha sido asignado correctamente");
+			            }
+			            else {
+			            	System.out.println("El grupo no ha sido agregado. El salón y/o el profesor no contaba/n con disponibilidad en el horario asignado.");
+			            }
 			            break;
                     }
                 }
