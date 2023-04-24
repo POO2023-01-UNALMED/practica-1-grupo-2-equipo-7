@@ -12,6 +12,7 @@ public class Salon implements Serializable{
     public Salon(String lugar,int aforo){
         this.lugar = lugar;
         this.aforo = aforo;
+        this.horario = new Horario();
         salones.add(this);
     }
     
