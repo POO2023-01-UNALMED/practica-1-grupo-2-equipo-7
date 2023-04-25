@@ -593,13 +593,13 @@ public class Main {
                         for(Estudiante est : Estudiante.getEstudiantes()){
                             if(est.getNombre().equals(estNombre) == true){
                                 if(tipoBeca.getCupos() == 0){
-                                    System.out.println("La beca "+tipoBeca+" no cuenta con vacantes disponibles en el momento.");
+                                    System.out.println("La beca "+tipoBeca.getConvenio()+" no cuenta con vacantes disponibles en el momento.");
                                 }
                                 else if (e.candidatoABeca(est,tipoBeca)){
-                                    System.out.println("El estudiante cumple con los requisitos para aplicar a la beca " +tipoBeca+".");
+                                    System.out.println("El estudiante cumple con los requisitos para aplicar a la beca " +tipoBeca.getConvenio()+".");
                                 }
                                 else if (e.candidatoABeca(est,tipoBeca) == false){
-                                    System.out.println("El estudiante no cumple con los requisitos para aplicar a la beca " +tipoBeca+".");
+                                    System.out.println("El estudiante no cumple con los requisitos para aplicar a la beca " +tipoBeca.getConvenio()+".");
                                 }                                
                             }
                         }
@@ -608,19 +608,26 @@ public class Main {
                         Scanner scanner5_3 = new Scanner(System.in);
                         System.out.println("Ingrese el número de cupos totales que tendrá la nueva beca:");
                         int cuposBeca =  scanner5_3.nextInt();
+                        scanner5_3.nextLine();
                         System.out.println("Ingrese el nombre de la beca:");
                         String nombreBeca =  scanner5_3.nextLine();
+                        // scanner5_3.nextLine();
                         System.out.println("Ingrese el promedio requerido que debe tener el estudiante para poder aplicar a la beca:");
                         double promedioBeca =  scanner5_3.nextDouble();
+                        scanner5_3.nextLine();
                         System.out.println("Ingrese el número que representa el porcentaje de avance con el que debe contar el estudiante para poder aplicar a la beca:");
                         double avanceBeca =  scanner5_3.nextDouble();
+                        scanner5_3.nextLine();
                         System.out.println("Ingrese el número de créditos inscritos en el semestre que debe tener el estudiante para aplicar beca:");
                         int creditosBeca =  scanner5_3.nextInt();
+                        scanner5_3.nextLine();
                         System.out.println("Ingrese la ayuda económica a la que puede acceder el estudiante una vez tenga la beca (Sin puntos ni comas):");
                         int ayudaBeca =  scanner5_3.nextInt();
+                        scanner5_3.nextLine();
                         System.out.println("¿La beca necesita de recomendación por parte de un profesor?");
                         System.out.println("1.Sí.          2.No.");
                         int booleano =  scanner5_3.nextInt();
+                        scanner5_3.nextLine();
                         boolean recomendacionBeca;
                         while(true){
                             if(booleano == 1){
@@ -1167,12 +1174,12 @@ public class Main {
     }
     
     public static void mostrarBecas(){
+        int i = 1;
         for (Beca beca: Beca.getBecas()){
-            int i = 1;
             String a = beca.getConvenio();
             System.out.println(i +". "+ a + ".");
             i += 1;
-            }
+        }
     } 
 
 

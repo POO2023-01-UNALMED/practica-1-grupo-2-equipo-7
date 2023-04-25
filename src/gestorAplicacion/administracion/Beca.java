@@ -1,7 +1,10 @@
 package gestorAplicacion.administracion;
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Beca {
+
+public class Beca implements Serializable{
+    private static final long serialVersionUID = 1L;
     private int cupos;
     private String convenio;
     private double promedioRequerido;
@@ -11,6 +14,7 @@ public class Beca {
     private boolean necesitaRecomendacion;
     private static ArrayList<Beca> becas = new ArrayList<Beca>();
 
+
     public Beca(int cupos, String convenio, double promedioRequerido, double avanceRequerido,
             int creditosInscritosRequeridos, int ayudaEconomica, boolean necesitaRecomendacion) {
         this.cupos = cupos;
@@ -19,7 +23,8 @@ public class Beca {
         this.avanceRequerido = avanceRequerido;
         this.creditosInscritosRequeridos = creditosInscritosRequeridos;
         this.ayudaEconomica = ayudaEconomica;                         
-        this.necesitaRecomendacion = necesitaRecomendacion;                                                                    
+        this.necesitaRecomendacion = necesitaRecomendacion;       
+        becas.add(this);                                                             
     }
 
     public int getCupos() {

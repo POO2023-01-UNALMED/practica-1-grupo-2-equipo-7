@@ -53,7 +53,7 @@ public class Deserializador {
         deserializar(Coordinador.getCoordinadoresTotales(), "Coordinadores");
         deserializar(Horario.getHorariosTotales(), "Horarios");
         deserializar(Salon.salones, "Salones");
-        // deserializar(Beca.getBecas(), "Becas");
+        deserializar(Beca.getBecas(), "Becas");
         deserializar(Profesor.getProfesores(), "Profesores");
     }
     
