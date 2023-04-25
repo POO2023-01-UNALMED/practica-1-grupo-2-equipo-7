@@ -5,6 +5,7 @@ import gestorAplicacion.administracion.Grupo;
 import gestorAplicacion.administracion.Horario;
 import gestorAplicacion.administracion.Materia;
 import gestorAplicacion.administracion.Salon;
+import gestorAplicacion.administracion.Beca;
 import gestorAplicacion.usuario.Coordinador;
 import gestorAplicacion.usuario.Estudiante;
 import gestorAplicacion.usuario.Profesor;
@@ -193,7 +194,7 @@ public class Main {
                 }
                 break;
             case 3:
-            Coordinador c = (Coordinador) usuario;
+            Coordinador m = (Coordinador) usuario;
                 System.out.println("Has seleccionado la opcion 3 (Eliminar o agregar Materia / Grupo).");
                 System.out.println("Ingrese la opcion que se ajuste a su busqueda:\n1.Agregar Materia.       2.Eliminar Materia.\n3.Agregar Grupo.         4.Eliminar Grupo.");
                 int opcion_3 = scanner.nextInt();
@@ -241,7 +242,7 @@ public class Main {
     
                                 }
                             }
-                            c.agregarMateria(nombre, codigo, descrip, creditos, facu, pRequisitos);
+                            m.agregarMateria(nombre, codigo, descrip, creditos, facu, pRequisitos);
                             System.out.println("La materia "+ nombre + "ha sido creada con éxito.");
                             break;                                                                 
                         }
@@ -266,7 +267,7 @@ public class Main {
                         }
                         for (Materia materia : Materia.getMateriasTotales()){
                             if (materia.getNombre().equals(nomMat) == true){
-                                c.eliminarMateria(materia);
+                                m.eliminarMateria(materia);
                                 break;
                             }
                         }
@@ -565,8 +566,94 @@ public class Main {
 
                 break;
             case 5:
-                //El nombre aun se puede cambiar
+            Coordinador e = (Coordinador) usuario;
                 System.out.println("Has seleccionado la opcion 5 (Busqueda y Postulacion Becas).");
+                boolean end = false;
+                while(!end){
+                    Scanner scanner_5 = new Scanner(System.in); 
+                    System.out.println("Ingrese el número que corresponde a la opción que mejor se adapta a su búsqueda:");
+                    System.out.println("1.Ver listado de becas existentes actualmente.       2.Comprobar si un estudiante es candidato a beca.\n3.Crear nueva beca.                                  4. Eliminar beca.");
+                    int opcion_5 = scanner_5.nextInt();
+                    if (opcion_5 == 1){
+                        System.out.println("Has seleccionado la opción 1 (Ver listado de becas existentes actualmente.)");
+                        System.out.println("A continuación podrá ver la lista de becas existentes en el momento:");
+                        mostrarBecas();
+                    }
+                    else if(opcion_5 == 2){
+                        Scanner scanner5_2 = new Scanner(System.in);
+                        System.out.println("Has seleccionado la opción 2 (Comprobar si un estudiante es candidato a beca.)");
+                        System.out.println("Ingrese el nombre del estudiante");
+                        String estNombre = scanner5_2.nextLine();
+                        System.out.println("Ingrese el número que corresponde a la beca que quiere aplicar el estudiante.");
+                        mostrarBecas();
+                        int nBeca = scanner5_2.nextInt();
+                        Beca tipoBeca = (Beca.getBecas()).get(nBeca-1);
+
+                        for(Estudiante est : Estudiante.getEstudiantes()){
+                            if(est.getNombre().equals(estNombre) == true){
+                                if(tipoBeca.getCupos() == 0){
+                                    System.out.println("La beca "+tipoBeca+" no cuenta con vacantes disponibles en el momento.");
+                                }
+                                else if (e.candidatoABeca(est,tipoBeca)){
+                                    System.out.println("El estudiante cumple con los requisitos para aplicar a la beca " +tipoBeca+".");
+                                }
+                                else if (e.candidatoABeca(est,tipoBeca) == false){
+                                    System.out.println("El estudiante no cumple con los requisitos para aplicar a la beca " +tipoBeca+".");
+                                }                                
+                            }
+                        }
+                    }else if(opcion_5 == 3){
+                        System.out.println("Has seleccionado la opción 3 (Crear nueva beca.)");
+                        Scanner scanner5_3 = new Scanner(System.in);
+                        System.out.println("Ingrese el número de cupos totales que tendrá la nueva beca:");
+                        int cuposBeca =  scanner5_3.nextInt();
+                        System.out.println("Ingrese el nombre de la beca:");
+                        String nombreBeca =  scanner5_3.nextLine();
+                        System.out.println("Ingrese el promedio requerido que debe tener el estudiante para poder aplicar a la beca:");
+                        double promedioBeca =  scanner5_3.nextDouble();
+                        System.out.println("Ingrese el número que representa el porcentaje de avance con el que debe contar el estudiante para poder aplicar a la beca:");
+                        double avanceBeca =  scanner5_3.nextDouble();
+                        System.out.println("Ingrese el número de créditos inscritos en el semestre que debe tener el estudiante para aplicar beca:");
+                        int creditosBeca =  scanner5_3.nextInt();
+                        System.out.println("Ingrese la ayuda económica a la que puede acceder el estudiante una vez tenga la beca (Sin puntos ni comas):");
+                        int ayudaBeca =  scanner5_3.nextInt();
+                        System.out.println("¿La beca necesita de recomendación por parte de un profesor?");
+                        System.out.println("1.Sí.          2.No.");
+                        int booleano =  scanner5_3.nextInt();
+                        boolean recomendacionBeca;
+                        while(true){
+                            if(booleano == 1){
+                            recomendacionBeca = true;
+                            break;
+                        }                        
+                        else if(booleano == 2){
+                            recomendacionBeca = false;
+                            break;
+                        }
+                        else if(booleano != 1 || booleano != 2){
+                            System.out.println("Valor inválido, por favor intente nuevamente.");
+                            continue;
+                        }
+                        }
+                        
+                        Beca nBeca = new Beca(cuposBeca, nombreBeca, promedioBeca, avanceBeca, creditosBeca, ayudaBeca, recomendacionBeca);
+                    }
+                    else if(opcion_5 == 4){
+                        System.out.println("Has seleccionado la opción 4 (Eliminar beca.)");
+                        Scanner scanner5_4 = new Scanner(System.in);
+                        System.out.println("Ingrese el número que corresponde a la beca que quiere eliminar:");
+                        mostrarBecas();
+                        int becaSel = scanner5_4.nextInt();
+                        Beca delBeca = (Beca.getBecas()).get(becaSel-1);
+                        Beca.eliminarBeca(delBeca);                     
+                    }
+                    else if(0 > opcion_5 || opcion_5 > 4){
+                        System.out.println("Opcion invalida.");
+                        continue;
+                    }
+                    break;
+                    
+                }
                 break;
 
             case 6:
@@ -1069,5 +1156,16 @@ public class Main {
         }
     }
     
+    public static void mostrarBecas(){
+        for (Beca beca: Beca.getBecas()){
+            int i = 1;
+            String a = beca.getConvenio();
+            System.out.println(i +". "+ a + ".");
+            i += 1;
+            }
+    } 
+
+
+
 }
 

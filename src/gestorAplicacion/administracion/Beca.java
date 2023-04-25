@@ -73,13 +73,17 @@ public class Beca {
     public boolean getNecesitaRecomendacion() {
         return necesitaRecomendacion;
     }
-    
+     
     public void setNecesitaRecomendacion(boolean necesitaRecomendacion) {
         this.necesitaRecomendacion = necesitaRecomendacion;
     }
 
     public static ArrayList<Beca> getBecas() {
         return becas;
+    }
+
+    public static void eliminarBeca (Beca beca){
+        becas.remove(beca);
     }
     
 }
