@@ -158,20 +158,20 @@ public class Horario implements Serializable{
     }
 }
 
-        String horario = "HORA    LUNES    MARTES    MIERCOLES    JUEVES    VIERNES    SABADO    DOMINGO\n";
+        String horario = "HORA        LUNES        MARTES        MIERCOLES        JUEVES        VIERNES        SABADO        DOMINGO\n";
 
         for (int i = 0; i < 24; i++){
 
             if (i < 9){
                 String horaConCeroDelante = "0" + i;
                 String horaSiguienteConCeroDelante = "0" + (i+1);
-                horario += "" + horaConCeroDelante + "-" + horaSiguienteConCeroDelante + "\t";
+                horario += "" + horaConCeroDelante + "-" + horaSiguienteConCeroDelante + "       ";
             }
             else if (i == 9){
-                horario += "09-10" + "\t";
+                horario += "09-10" + "       ";
             }
             else{
-                horario += "" + i + "-" + (i + 1) + "\t";
+                horario += "" + i + "-" + (i + 1) + "       ";
             }
 
             for (int j = 0; j < 7; j++){
@@ -180,9 +180,9 @@ public class Horario implements Serializable{
                     materia = "";
                 }
                 else{
-                    materia = this.horario[j][i].getMateria().getNombre();
+                    materia = this.horario[j][i].getMateria().getAbreviatura();
                 }
-                int cantidad_espacios = ((DiaSemana.getDiaPorIndice(j).length + 4) - materia.length());
+                int cantidad_espacios = ((DiaSemana.getDiaPorIndice(j).length + 8) - materia.length());
                 String espacios = new String(new char[cantidad_espacios]).replace("\0", " ");
                 horario += materia + espacios;
             }

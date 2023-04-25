@@ -18,6 +18,7 @@ public class Materia implements Serializable{
     private ArrayList<Grupo> grupos;
     // Es publico para que coordinador tenda acceso 
     public static ArrayList<Materia> materiasTotales = new ArrayList<Materia>();
+    private String abreviatura;
 
     public Materia(String nombre, int codigo, String descripcion, int creditos, String facultad) {
         this.nombre = nombre;
@@ -27,7 +28,9 @@ public class Materia implements Serializable{
         this.facultad = facultad;
         this.prerrequisitos = new ArrayList<Materia>();
         this.grupos = new ArrayList<Grupo>();
+        this.hacerAbreviatura(nombre);
         materiasTotales.add(this);
+
     }
 
     public Materia(String nombre, int codigo, String descripcion, int creditos, String facultad, ArrayList<Materia> prerrequisitos) {
@@ -94,6 +97,14 @@ public class Materia implements Serializable{
             cantidad+=pGrupo.getCupos();
         }
         return cantidad;
+    }
+
+    public String getAbreviatura() {
+        return abreviatura;
+    }
+
+    public void setAbreviatura(String abreviatura) {
+        this.abreviatura = abreviatura;
     }
 
     //Esta un poco ambigua la definicion de este metodo
@@ -245,5 +256,30 @@ public class Materia implements Serializable{
             }    
         }
         return true;
+    }
+
+    public void hacerAbreviatura(String nombre){
+        String abreviatura = "";
+
+        if (nombre.length() <= 13){
+            this.abreviatura = nombre;
+        }
+        else{
+            String[] palabras = nombre.split("\\s");
+            for (String palabra : palabras){
+                if (palabra.length() >= 3){
+                    abreviatura += palabra.substring(0, 3) + " ";
+                }
+                else{
+                    abreviatura += palabra.substring(0, palabra.length()) + " ";
+                }
+            }
+            if (abreviatura.length() <= 13){
+                this.abreviatura = abreviatura;
+            }
+            else{
+                this.abreviatura = abreviatura.substring(0, 13);
+            }
+        }
     }
 }

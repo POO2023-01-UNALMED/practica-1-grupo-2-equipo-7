@@ -982,7 +982,7 @@ public class Main {
                 int opcion2=scanner.nextInt();
 
                 if (opcion2==1){
-                    estudiante.getHorario().mostrarHorario();
+                    System.out.println(estudiante.getHorario().mostrarHorario());
                 }
 
             }else{
@@ -1093,7 +1093,7 @@ public class Main {
         
         if ((boolean)informacion[0]){
             Horario pHorario= (Horario)informacion[1];
-            pHorario.mostrarHorario();
+            System.out.println(pHorario.mostrarHorario());
             asignacionDeHorarioGenerado(pHorario);
         }
         else{
