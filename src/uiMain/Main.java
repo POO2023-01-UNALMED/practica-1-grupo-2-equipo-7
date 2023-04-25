@@ -11,7 +11,6 @@ import gestorAplicacion.usuario.Estudiante;
 import gestorAplicacion.usuario.Profesor;
 import gestorAplicacion.usuario.Usuario;
 
-// import java.net.SecureCacheResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -765,9 +764,13 @@ public class Main {
     }
     
     //METODOS USADOS EN MATRICULAR MATERIA
-    //La parte 1 de matricular materia es para seleccionar al estudiante
+
+    /*
+     * La parte 1 de la funcionalidad matricular materia:
+     * Es para seleccionar al estudiante que se le va a matricular una materia
+     */
     public static void matricularMateria(){
-        Scanner scn = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         boolean salir=false;
 
     	while(salir==false){
@@ -775,31 +778,27 @@ public class Main {
             Boolean invalido=false;
             System.out.println("Desea buscar al estudiante mediante una lista o mediante su ID o su nombre?");
             System.out.println("Ingrese la opcion deseada: \n1- Lista de estudiantes disponibles\n2- Buscar al estudiante");
-            int opcion=scn.nextInt();
-            scn.nextLine();
+            int opcion=scanner.nextInt();
+            scanner.nextLine();
 
             if (opcion==1){
 
                 System.out.println("Lista de estudiantes disponibles para matricular: ");
                 ArrayList<Estudiante> totalEstudiantes=new ArrayList<Estudiante>();
-                for (int i=0;i<Estudiante.getEstudiantes().size();i++){
-                    Estudiante estudiante=Estudiante.getEstudiantes().get(i);
-                    boolean mostrar=true;
+                for (Estudiante estudiante: Estudiante.getEstudiantes()){
                     if (estudiante.isMatriculaPagada()==false){
-                        mostrar=false;
+                        continue;
                     }
                     if (estudiante.getCreditos()==Coordinador.getLimitesCreditos()){
-                        mostrar=false;
+                        continue;
                     }
-                    if (mostrar){
-                        totalEstudiantes.add(estudiante);
-                        System.out.println(totalEstudiantes.size()+" Nombre: "+estudiante.getNombre()+" ID: "+estudiante.getId());
-                    }
+                    totalEstudiantes.add(estudiante);
+                    System.out.println(totalEstudiantes.size()+" Nombre: "+estudiante.getNombre()+" ID: "+estudiante.getId());
                 }
 
                 System.out.println("Por favor ingrese el numero correpondiente al estudiante que desea seleccionar: ");
-                int opcion2 = scn.nextInt();
-                scn.nextLine();
+                int opcion2 = scanner.nextInt();
+                scanner.nextLine();
                 if (opcion2<=totalEstudiantes.size() && opcion2>=1){
                     Estudiante seleccionado=totalEstudiantes.get(opcion2-1);
                     System.out.println("Estudiante seleccionado, nombre: "+seleccionado.getNombre()+" ID: "+seleccionado.getId());
@@ -814,10 +813,10 @@ public class Main {
             }else if(opcion==2){
 
                 System.out.println("Por favor ingrese el nombre del estudiante: ");
-                String nombre=scn.nextLine();
+                String nombre=scanner.nextLine();
                 System.out.println("Por favor ingrese el ID del estudiante: ");
-                long id=scn.nextLong();
-                scn.nextLine();
+                long id=scanner.nextLong();
+                scanner.nextLine();
                 int index=Estudiante.buscarEstudiante(nombre, id);
 
                 if (index==-1){
@@ -841,7 +840,7 @@ public class Main {
 
                 System.out.println("Desea intentarlo otra vez o desea salir?");
                 System.out.println("Ingrese la opcion deseada: \n1- Intentarlo otra vez\n2- Salir");
-                int opcion3=scn.nextInt();
+                int opcion3=scanner.nextInt();
 
                 if (opcion3!=1){
                     salir=true;
@@ -849,9 +848,12 @@ public class Main {
 
             }
         }
-        // scn.close();
     }
-    //La parte 2 de matricular materia es dependiendo del estudiante cuales materias puede ver
+    
+    /*
+     * La parte 2 de la funcionalidad matricular materia:
+     * Es para seleccionar la materia que se desea matricular
+     */
     public static void matricularMateriaParte2(Estudiante estudiante){
         Scanner scanner = new Scanner(System.in); 
         boolean salir=false;
@@ -866,22 +868,17 @@ public class Main {
                 ArrayList<Materia> materiasDisponibles=new ArrayList<Materia>();
                 System.out.println("Lista de materias disponibles para matricular: ");
                 int limitesCreditos=Coordinador.getLimitesCreditos();
-                for (int i=0; i<materiasTotales.size();i++){
-                    Materia materia=materiasTotales.get(i);
-                    boolean anadir=true;
-                    if (!Materia.comprobarPrerrequisitos(estudiante, materia)){
-                        anadir=false;
+                for (Materia materia: materiasTotales){
+                    if (Materia.comprobarPrerrequisitos(estudiante, materia)==false){
+                        continue;
                     }
                     if (materia.getCupos()<=0){
-                        anadir=false;
+                        continue;
                     }else if (estudiante.getCreditos()+materia.getCreditos()>limitesCreditos){
-                        anadir=false;
+                        continue;
                     }
-                    if (anadir){
-                        materiasDisponibles.add(materia);
-                        System.out.println(materiasDisponibles.size()+" Nombre: "+materia.getNombre()+" Cupos: "+materia.getCupos());
-
-                    }
+                    materiasDisponibles.add(materia);
+                    System.out.println(materiasDisponibles.size()+" Nombre: "+materia.getNombre()+" Cupos: "+materia.getCupos());
                 }
                 System.out.println("Por favor ingrese el numero correspondiente a la materia que desea matricular");
                 int eleccion=scanner.nextInt();
@@ -905,6 +902,7 @@ public class Main {
                 String nombre=scanner.nextLine();
                 System.out.println("Por favor ingrese el codigo de la materia deseada: ");
                 int codigo=scanner.nextInt();
+                scanner.nextLine();
                 int index=Materia.buscarMateria(nombre, codigo);
 
                 if (index==-1){
@@ -937,9 +935,12 @@ public class Main {
 
             }
         }
-        // scanner.close();
     }
-    //La parte 3 de matricular materia es para finalizar la funcionalidad
+    /*
+     * La parte 3 de la funcionalidad matricular materia:
+     * Es para seleccionar el grupo de la materia seleccionada 
+     * Y tambien para finalizar la funcionalidad
+     */
     public static void matricularMateriaParte3(Estudiante estudiante, Materia materia){
         Scanner scanner=new Scanner(System.in);
         Boolean salir=false;
@@ -949,8 +950,7 @@ public class Main {
             System.out.println("Grupos disponibles para matricular: ");
             ArrayList<Grupo> gruposDisponibles=new ArrayList<Grupo>();
 
-            for (int i=0;i<materia.getGrupos().size();i++){
-                Grupo grupo=materia.getGrupos().get(i);
+            for (Grupo grupo: materia.getGrupos()){
                 if (!estudiante.getHorario().comprobarDisponibilidad(grupo.getHorario())){
                     continue;
                 }
@@ -995,7 +995,6 @@ public class Main {
                 }
             }
         }
-        // scanner.close();
     }
    //La parte 4 de matricular materia es para matricularle al estudiante un grupo en especifico
     public static void matricularMateriaParte4(Estudiante estudiante, Grupo grupo){
@@ -1004,6 +1003,9 @@ public class Main {
         grupo.agregarEstudiante(estudiante);
         grupo.getMateria().setCupos(grupo.getMateria().getCupos()-1);
         grupo.setCupos(grupo.getCupos()-1);
+        ArrayList<Grupo> gruposInscritos=new ArrayList<Grupo>(estudiante.getGrupos());
+        gruposInscritos.add(grupo);
+        estudiante.setGrupos(gruposInscritos);
         estudiante.setCreditos(estudiante.getCreditos()+grupo.getMateria().getCreditos());
         estudiante.setMaterias(materiasInscritas);
     }
