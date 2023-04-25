@@ -2,6 +2,8 @@ package gestorAplicacion.usuario;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import gestorAplicacion.administracion.Materia;
+
 
 public abstract class Usuario implements Serializable{
     private static final long serialVersionUID = 1L;
@@ -57,7 +59,14 @@ public abstract class Usuario implements Serializable{
                     break;
                 }
         }
-        System.out.println("PASA POR AQUI:C");
+    }
+
+    public void eliminarMateria(Materia materia){
+
+    }
+
+    public void agregarMateria(String nombre, int codigo, String descripcion,int creditos, String facultad, ArrayList<Materia> prerrequisitos){
+        
     }
 
     public String getTipo() {

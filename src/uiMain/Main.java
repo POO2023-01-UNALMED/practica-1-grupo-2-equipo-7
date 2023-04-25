@@ -25,18 +25,21 @@ public class Main {
         Boolean continuar=true;
         Boolean logueado = false;
         System.out.println("Bienvenido al Portal de Servicios Academicos S.M.M");
-        
+
         // Zona de Pruebas -------------------------------------------------------------------
 
         // Estudiante.getEstudiantes().get(0).setSueldo(99999999);
         // Estudiante.getEstudiantes().get(0).pagarMatricula();
-        // Materia.getMateriasTotales().get(0).setCupos(20);
+        // Materia.getMateriasTotales().get(0).setCupos(20)
         
         // System.out.println(Estudiante.getEstudiantes().get(0).getMaterias().get(0).getNombre());
         // System.out.println(Grupo.getGruposTotales().get(0).getEstudiantes().get(0).getNombre());
         
  
         // Zona de Pruebas -------------------------------------------------------------------
+        for (Grupo grupo : Materia.getMateriasTotales().get(0).getGrupos()){
+            System.out.println(grupo.getNumero());
+        }
 
         Usuario usuario = null;
         while(!logueado) {
@@ -91,12 +94,12 @@ public class Main {
         				System.out.println("Error. Solo pueden ingresar coordinadores en la plataforma.");
         			}
         			else {
-        				Usuario usuarioE = (Coordinador)encontrarUsuario(id);
+        				Coordinador coordinadorE = (Coordinador) encontrarUsuario(id);
         				boolean pwCorect = false;
         				while(!pwCorect){
         					System.out.println("Ingrese la contrasena:");
         					String cont = scanner3.nextLine();
-        					if(!verificarPw(usuarioE,cont)) {
+        					if(!verificarPw(coordinadorE,cont)) {
         						while(true) {
         							System.out.println("La contrasena es incorrecta.\nDesea intentar nuevamente?\n1. Si.\n2. No.");
         							int opCf = scanner3.nextInt();
@@ -117,7 +120,7 @@ public class Main {
         					}
         					else {
         						System.out.println("Ha ingresado exitosamente al sistema.");
-        						usuario = (Coordinador)usuarioE;
+        						usuario = coordinadorE;
         						intentando=false;
         						logueado = true;				
         						break;
@@ -137,6 +140,7 @@ public class Main {
             System.out.println("A continuacion encontrara los diferentes servicios ofrecidos por la plataforma.");
             System.out.println("Ingrese la opcion deseada: \n1. Matricular Materia.\n2. Generar Horario.\n3. Eliminar o agregar Materia / Grupo.\n4. Desmatricular Alumno. \n5. Busqueda y Postulacion de Becas. \n6. Salir y Guardar");
             int opcion = scanner.nextInt();
+            scanner.nextLine();
             switch(opcion) {
             case 1:
                 System.out.println("Has seleccionado la opcion 1 (Matricular materia)");
@@ -152,6 +156,7 @@ public class Main {
                     
                     System.out.println("Elija como quiere seleccionar las materias: \n1.Ver la lista de materias. \n2.Buscar por criterio (Facultad - Creditos - Codigo). \n3.Salir");
                     int opt=scanner.nextInt();
+                    scanner.nextLine();
                     
 
                     // Ver la lista de materias
@@ -163,6 +168,7 @@ public class Main {
                     else if (opt ==2){
                         System.out.println("Por cual criterio quiere buscar: \n1. Facultad. \n2. Creditos. \n3. Codigo");
                         int opt2=scanner.nextInt();
+                        scanner.nextLine();
                         
                         if (opt2==1){
                             System.out.println("Ingrese la facultad: ");
@@ -193,10 +199,10 @@ public class Main {
                 }
                 break;
             case 3:
-            Coordinador m = (Coordinador) usuario;
                 System.out.println("Has seleccionado la opcion 3 (Eliminar o agregar Materia / Grupo).");
                 System.out.println("Ingrese la opcion que se ajuste a su busqueda:\n1.Agregar Materia.       2.Eliminar Materia.\n3.Agregar Grupo.         4.Eliminar Grupo.");
                 int opcion_3 = scanner.nextInt();
+                scanner.nextLine();
                 if(opcion_3 == 1){
                     System.out.println("Has seleccionado la opcion 1 (Agregar materia.)");
                     if(opcion_3 == 1){
@@ -215,6 +221,7 @@ public class Main {
                             }                      
                             System.out.println("Ingresa el código de la materia que desea agregar.");
                             int codigo = scanner3_1.nextInt();
+                            scanner3_1.nextLine();
                             for (Materia materia : Materia.getMateriasTotales()){
                                 if (materia.getCodigo() == codigo){
                                     System.out.println("El código que intenta asignarle a la materia, ya le corresponde a una existente.");
@@ -225,6 +232,7 @@ public class Main {
                             String descrip = scanner3_1.nextLine();
                             System.out.println("Ingresa los créditos que le asigna a la materia.");
                             int creditos = scanner3_1.nextInt();
+                            scanner3_1.nextLine();
                             System.out.println("Ingrese la facultad a la que pertenece la materia");
                             String facu = scanner3_1.nextLine();
                             
@@ -241,7 +249,7 @@ public class Main {
     
                                 }
                             }
-                            m.agregarMateria(nombre, codigo, descrip, creditos, facu, pRequisitos);
+                            usuario.agregarMateria(nombre, codigo, descrip, creditos, facu, pRequisitos);
                             System.out.println("La materia "+ nombre + "ha sido creada con éxito.");
                             break;                                                                 
                         }
@@ -266,7 +274,7 @@ public class Main {
                         }
                         for (Materia materia : Materia.getMateriasTotales()){
                             if (materia.getNombre().equals(nomMat) == true){
-                                m.eliminarMateria(materia);
+                                usuario.eliminarMateria(materia);
                                 break;
                             }
                         }
@@ -301,11 +309,13 @@ public class Main {
 		                	Scanner scanner4 = new Scanner(System.in);
 		                    System.out.println("Ingrese el metodo por el cual quiere asignar el profesor para el nuevo grupo:\n1. Seleccionar del listado de profesores.\n2. Asignar un profesor nuevo.\n3. Salir");
 		                    int opcion_profe = scanner4.nextInt();
+                            scanner4.nextLine();
 		                    
 		                    if (opcion_profe==1) {
 		                    	System.out.println("Seleccione uno de los siguientes profesores");
 		                    	System.out.print(Profesor.mostrarProfesMateria(materiaSel));
 		                    	int seleccionProfe = scanner4.nextInt();
+                                scanner4.nextLine();
 		                    	ArrayList<Profesor> preProfes = Profesor.profesoresDeMateria(materiaSel);
 		                    	profesorSel = preProfes.get(seleccionProfe-1);
 		                    	break;
@@ -369,6 +379,7 @@ public class Main {
 		                if(salida) {break;}
 			            System.out.println("Ingrese la cantidad de cupos con la que contara el grupo:");
 			            int cuposSel = scanner.nextInt();
+                        scanner.nextLine();
 			            Salon salonSel = null;
 			            while(true) {
 			            	System.out.println("Ingrese el salon donde se daran las sesiones de clase del grupo.\nSi desea salir ingrese la palabra Salir:");
@@ -384,14 +395,18 @@ public class Main {
 			            		}
 			            	}
 			            	if (salonSel==null) {
+                                
 			            		System.out.println("El salon ingresado no existe. Ingrese un salon valido.");
 			            	}
+                            else{
+                                break;
+                            }
 			            }
 			            if(salida) {break;}
 			            int numSel = materiaSel.getGrupos().size();
 			            materiaSel.agregarGrupo(numSel+1, profesorSel, horarioSel, cuposSel, salonSel);
 			            if (materiaSel.getGrupos().size()==numSel+1) {
-			            	System.out.println("El grupo "+numSel+" de la materia "+materiaSel+" ha sido asignado correctamente");
+			            	System.out.println("El grupo "+numSel+1+" de la materia "+materiaSel.getNombre()+" ha sido asignado correctamente");
 			            }
 			            else {
 			            	System.out.println("El grupo no ha sido agregado. El salón y/o el profesor no contaba/n con disponibilidad en el horario asignado.");
@@ -406,7 +421,7 @@ public class Main {
                     	System.out.println("ingrese la materia a la cual le desea eliminar un grupo.\nSi desea salir escriba la palabra Salir:");
                     	String materiaNom = scanner.nextLine();
                     	Materia materiaSel = null;
-                    	if(materiaNom.equals("Salida")) {
+                    	if(materiaNom.equals("Salir")) {
                     		break;
                     	}
                     	for (Materia materia:Materia.getMateriasTotales()) {
@@ -422,6 +437,7 @@ public class Main {
                     	while(true) {
                     		System.out.println("Ingrese el numero del grupo que desea eliminar\nSi desea salir escriba el numero 0");
                     		int numSel = scanner.nextInt();
+                            scanner.nextLine();
                     		if (numSel<0||numSel>materiaSel.getGrupos().size()) {
                     			System.out.println("El numero de grupo ingresado no existe. Ingrese el numero de un grupo valido.");
                     		}
@@ -430,8 +446,8 @@ public class Main {
                     			break;
                     		}
                     		else {
-                    			materiaSel.eliminarGrupo(numSel);
-                    			System.out.println("El grupo "+numSel+" de la materia "+materiaSel+" ha sido eliminado con exito");
+                    			materiaSel.eliminarGrupo(numSel-1);
+                    			System.out.println("El grupo "+numSel+" de la materia "+materiaSel.getNombre()+" ha sido eliminado con exito");
                     			break;
                     		}
                     		break;
@@ -580,6 +596,7 @@ public class Main {
                     System.out.println("Ingrese el número que corresponde a la opción que mejor se adapta a su búsqueda:");
                     System.out.println("1.Ver listado de becas existentes actualmente.       2.Comprobar si un estudiante es candidato a beca.\n3.Crear nueva beca.                                  4. Eliminar beca.");
                     int opcion_5 = scanner_5.nextInt();
+                    scanner_5.nextLine();
                     if (opcion_5 == 1){
                         System.out.println("Has seleccionado la opción 1 (Ver listado de becas existentes actualmente.)");
                         System.out.println("A continuación podrá ver la lista de becas existentes en el momento:");
@@ -593,6 +610,7 @@ public class Main {
                         System.out.println("Ingrese el número que corresponde a la beca que quiere aplicar el estudiante.");
                         mostrarBecas();
                         int nBeca = scanner5_2.nextInt();
+                        scanner5_2.nextLine();
                         Beca tipoBeca = (Beca.getBecas()).get(nBeca-1);
 
                         for(Estudiante est : Estudiante.getEstudiantes()){
@@ -657,6 +675,7 @@ public class Main {
                         System.out.println("Ingrese el número que corresponde a la beca que quiere eliminar:");
                         mostrarBecas();
                         int becaSel = scanner5_4.nextInt();
+                        scanner5_4.nextLine();
                         Beca delBeca = (Beca.getBecas()).get(becaSel-1);
                         Beca.eliminarBeca(delBeca);                     
                     }
@@ -682,6 +701,7 @@ public class Main {
                 System.out.println("Opcion 2- NO");
                 System.out.println("Por favor ingrese la opcion deseada");
                 int continuarint=scanner.nextInt();
+                scanner.nextLine();
                 if (continuarint==1){
                     continue;
                 } else{
@@ -761,6 +781,16 @@ public class Main {
     	for (Usuario usuario:Usuario.getUsuariosTotales()) {
     		if (usuario.getId()==id) {
     			encontrado = usuario;
+    		}
+    	}
+    	return encontrado;
+    }
+
+    public static Usuario encontrarCoordinador(long id) {
+    	Coordinador encontrado = null;
+    	for (Coordinador coordinador:Coordinador.getCoordinadoresTotales()) {
+    		if (coordinador.getId()==id) {
+    			encontrado = coordinador;
     		}
     	}
     	return encontrado;
@@ -853,7 +883,7 @@ public class Main {
                 System.out.println("Desea intentarlo otra vez o desea salir?");
                 System.out.println("Ingrese la opcion deseada: \n1- Intentarlo otra vez\n2- Salir");
                 int opcion3=scanner.nextInt();
-
+                scanner.nextLine();
                 if (opcion3!=1){
                     salir=true;
                 }
@@ -874,6 +904,7 @@ public class Main {
             Boolean invalido=false;
             System.out.println("Como desea buscar la materia?\n1- Mediante una lista de las materias disponibles\n2- Mediante una busqueda manual");
             int opcion=scanner.nextInt();
+            scanner.nextLine();
             ArrayList<Materia> materiasTotales=new ArrayList<Materia>(Materia.getMateriasTotales());
             if (opcion==1){
 
@@ -894,6 +925,7 @@ public class Main {
                 }
                 System.out.println("Por favor ingrese el numero correspondiente a la materia que desea matricular");
                 int eleccion=scanner.nextInt();
+                scanner.nextLine();
 
                 if (1<=eleccion && eleccion<=materiasDisponibles.size()){
 
@@ -941,6 +973,7 @@ public class Main {
                 System.out.println("Desea intentarlo otra vez o desea salir?");
                 System.out.println("Ingrese la opcion deseada: \n1- Intentarlo otra vez\n2- Salir");
                 int opcion2=scanner.nextInt();
+                scanner.nextLine();
                 if (opcion2!=1){
                     salir=true;
                 }
@@ -973,6 +1006,7 @@ public class Main {
             }
             
             int opcion=scanner.nextInt();
+            scanner.nextLine();
             if (opcion>0 && opcion<=gruposDisponibles.size()){
 
                 Grupo grupoSeleccionado=gruposDisponibles.get(opcion-1);
@@ -992,6 +1026,7 @@ public class Main {
 
                 System.out.println("Desea visualizar el horario del estudiante?: \n1- Si\n2- No");
                 int opcion2=scanner.nextInt();
+                scanner.nextLine();
 
                 if (opcion2==1){
                     System.out.println(estudiante.getHorario().mostrarHorario());
@@ -1002,6 +1037,7 @@ public class Main {
                 System.out.println("Desea intentarlo otra vez o desea salir?");
                 System.out.println("Ingrese la opcion deseada: \n1- Intentarlo otra vez\n2- Salir");
                 int opcion3=scanner.nextInt();
+                scanner.nextLine();
                 if (opcion3!=1){
                     salir=true;
                 }
@@ -1094,6 +1130,7 @@ public class Main {
         while(flag){
             System.out.print("-> ");
             int opt3=scanner.nextInt();
+            scanner.nextLine();
             if (opt3!=0){
                 listaMateriasAGenerar.add(ListaAGenerar.get(opt3-1));
             }
@@ -1139,12 +1176,14 @@ public class Main {
 
         System.out.println("Desea Conservar el horario?\n1. Si\n2. No");
         int opt2=scanner.nextInt();
+        scanner.nextLine();
         if (opt2==1){
             System.out.println("Escoja un estudiante: ");
             System.out.println(Estudiante.mostrarEstudiantes());
 
             System.out.print("Eleccion: -> ");
             int opt3=scanner.nextInt();
+            scanner.nextLine();
 
             Estudiante seleccionEstudiante = Estudiante.getEstudiantes().get(opt3-1);
             Horario tempHorario = seleccionEstudiante.getHorario();
