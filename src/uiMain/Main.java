@@ -366,6 +366,7 @@ public class Main {
 		                		}
 		                	}
 		                }
+		                //scanHor.close();
 		                if(salida) {break;}
 			            System.out.println("Ingrese la cantidad de cupos con la que contara el grupo:");
 			            int cuposSel = scanner.nextInt();
@@ -684,18 +685,20 @@ public class Main {
     //METODO USADO EN AGREGAR GRUPO
     public static boolean formatoHorario(String horario) {
     	boolean formato = false;
-    	String hi = horario.substring(2, 4);
-    	String hf = horario.substring(5, 7);
-    	String diaS = horario.substring(0,1);
-    	
-    	if(hi.matches("\\d+")&&hf.matches("\\d+")&&diaS.matches("\\d+")) {
-    		int horI = Integer.parseInt(hi);
-    		int horF = Integer.parseInt(hf);
-    		int dia = Integer.parseInt(diaS);
+    	if (horario.length()==7) {
+    		String hi = horario.substring(2, 4);
+    		String hf = horario.substring(5, 7);
+    		String diaS = horario.substring(0,1);
     		
-    		if(horario.length()==7&&dia>=0&&dia<=7&&horario.substring(1,2).equals("-")&&hi.matches("\\d+")&&horI>=0&&horI<=23) {
-    			if(horI>=0&&horI<=23&&horario.substring(4,5).equals("-")&&hi.matches("\\d+")&&horF>horI&&horF>0&&horF<=23) {
-    				formato = true;
+    		if(hi.matches("\\d+")&&hf.matches("\\d+")&&diaS.matches("\\d+")) {
+    			int horI = Integer.parseInt(hi);
+    			int horF = Integer.parseInt(hf);
+    			int dia = Integer.parseInt(diaS);
+    			
+    			if(dia>=0&&dia<=7&&horario.substring(1,2).equals("-")&&hi.matches("\\d+")&&horI>=0&&horI<=23) {
+    				if(horI>=0&&horI<=23&&horario.substring(4,5).equals("-")&&hi.matches("\\d+")&&horF>horI&&horF>0&&horF<=23) {
+    					formato = true;
+    				}
     			}
     		}
     	}
