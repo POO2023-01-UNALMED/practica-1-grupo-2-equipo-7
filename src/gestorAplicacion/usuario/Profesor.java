@@ -28,6 +28,15 @@ public class Profesor implements Serializable{
         this.materiasDadas = materiasDadas;
         Profesor.profesores.add(this);
     }
+    
+    public Profesor(String nombre, String facultad, ArrayList<Materia> materiasDadas){
+        this.nombre = nombre;
+        this.facultad = facultad;
+        this.horario = new Horario();
+        this.materiasDadas = materiasDadas;
+        Profesor.profesores.add(this);
+    }
+    
     public String getNombre() {
         return nombre;
     }

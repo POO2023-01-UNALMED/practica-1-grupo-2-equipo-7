@@ -34,6 +34,7 @@ public class Estudiante extends Usuario implements Serializable{
         this.estrato = estrato;
         this.sueldo = sueldo;
         this.valorMatricula = 1234567 * estrato;
+        this.horario = new Horario();
         Estudiante.estudiantes.add(this);
     }
 
