@@ -343,8 +343,9 @@ public class Main {
 		                if(salida) {break;}
 		                ArrayList<String> horarioSel = null;
 		                while(true) {
+		                	Scanner scanHor = new Scanner(System.in);
 		                	System.out.println("Ingrese el horario de clase del grupo.\nPor cada sesion de clase ingrese un horario con el formato d-hi-hf, donde d es el numero del dia de la semana, hi es la hora inicial y hf es la hora final.\nSepare cada uno de estos por comas con su respectivo espacio:\nSi desea salir ingrese la palabra Salir.");
-		                	String hor = scanner.nextLine();
+		                	String hor = scanHor.nextLine();
 		                	String[] horario = hor.split(", ");
 		                	if (hor.equals("Salir")) {
 		                		salida=true;
@@ -684,14 +685,18 @@ public class Main {
     public static boolean formatoHorario(String horario) {
     	boolean formato = false;
     	String hi = horario.substring(2, 4);
-    	int horI = Integer.parseInt(hi);
     	String hf = horario.substring(5, 7);
-    	int horF = Integer.parseInt(hf);
-
-    	int dia = Integer.parseInt(horario.substring(0));
-    	if(horario.length()==7&&dia>=0&&dia<=7&&horario.substring(1).equals("-")&&hi.matches("\\d+")&&horI>=0&&horI<=23) {
-    		if(horI>=0&&horI<=23&&horario.substring(4).equals("-")&&hi.matches("\\d+")&&horF>horI&&horF>0&&horF<=23) {
-    			formato = true;
+    	String diaS = horario.substring(0,1);
+    	
+    	if(hi.matches("\\d+")&&hf.matches("\\d+")&&diaS.matches("\\d+")) {
+    		int horI = Integer.parseInt(hi);
+    		int horF = Integer.parseInt(hf);
+    		int dia = Integer.parseInt(diaS);
+    		
+    		if(horario.length()==7&&dia>=0&&dia<=7&&horario.substring(1,2).equals("-")&&hi.matches("\\d+")&&horI>=0&&horI<=23) {
+    			if(horI>=0&&horI<=23&&horario.substring(4,5).equals("-")&&hi.matches("\\d+")&&horF>horI&&horF>0&&horF<=23) {
+    				formato = true;
+    			}
     		}
     	}
     	return formato;
