@@ -37,9 +37,6 @@ public class Main {
         
  
         // Zona de Pruebas -------------------------------------------------------------------
-        for (Grupo grupo : Materia.getMateriasTotales().get(0).getGrupos()){
-            System.out.println(grupo.getNumero());
-        }
 
         Usuario usuario = null;
         while(!logueado) {

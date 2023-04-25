@@ -265,5 +265,13 @@ public class Estudiante extends Usuario implements Serializable{
         this.grupos = grupos;
     }
 
+	public Beca getBeca() {
+		return beca;
+	}
+
+	public void setBeca(Beca beca) {
+		this.beca = beca;
+	}
+
     
 }

@@ -62,11 +62,12 @@ public abstract class Usuario implements Serializable{
     }
 
     public void eliminarMateria(Materia materia){
-
+    	Materia.getMateriasTotales().remove(materia);
     }
 
     public void agregarMateria(String nombre, int codigo, String descripcion,int creditos, String facultad, ArrayList<Materia> prerrequisitos){
-        
+    	Materia nMateria = new Materia(nombre, codigo, descripcion, creditos, facultad, prerrequisitos);
+    	Materia.getMateriasTotales().add(nMateria);
     }
 
     public String getTipo() {
