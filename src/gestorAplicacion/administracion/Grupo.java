@@ -42,9 +42,10 @@ public class Grupo implements Serializable{
 
     public void eliminarEstudiante(Estudiante estudiante){
       for (int i=0;i<this.estudiantes.size();i++){
-        if (this.estudiantes.get(i).equals(estudiante)){
-          		this.estudiantes.remove(i);
+        if (this.estudiantes.get(i) == estudiante){
+          		this.estudiantes.remove(estudiante);
 		  		this.cupos++;
+				System.out.println("SI PASAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 				estudiante.eliminarGrupo(this);
 		  		break;
         }
