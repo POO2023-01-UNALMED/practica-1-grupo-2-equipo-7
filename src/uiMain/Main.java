@@ -91,7 +91,7 @@ public class Main {
         				System.out.println("Error. Solo pueden ingresar coordinadores en la plataforma.");
         			}
         			else {
-        				Usuario usuarioE = encontrarUsuario(id);
+        				Usuario usuarioE = (Coordinador)encontrarUsuario(id);
         				boolean pwCorect = false;
         				while(!pwCorect){
         					System.out.println("Ingrese la contrasena:");
@@ -492,6 +492,10 @@ public class Main {
                         scanner2.nextLine();
                         if (opcion_1 == 1){
                             Scanner scanner3 = new Scanner(System.in);
+                            if (estudiante.getMaterias().size() == 0){
+                                System.out.println("El estudiante no tiene ninguna materia matriculada. Intente otra opción o retroceda para seleccionar otro estudiante\n");
+                            }
+                            else{
                             while (true){
                                 boolean terminado = false;
                                 System.out.println("Elija como quiere seleccionar la materia y el grupo");
@@ -540,12 +544,13 @@ public class Main {
                                 }
                             }
                         }
+                        }
                         else if(opcion_1 == 2){
                             if (usuario.comprobacionFacultad(estudiante)){
                                 estudiante.getHorario().vaciarHorario(estudiante.getGrupos());
                                 estudiante.desmatricularMaterias();
                                 usuario.desmatricularDelSistema(estudiante);
-                                System.out.println("El estudiante ha sido desmatriculado del sistema");
+                                System.out.println("El estudiante ha sido desmatriculado del sistema\n");
                                 break;
 
                             }

@@ -54,8 +54,10 @@ public abstract class Usuario implements Serializable{
 
             if (usuario.equals(u)){
                     Usuario.getUsuariosTotales().remove(usuario);
+                    break;
                 }
         }
+        System.out.println("PASA POR AQUI:C");
     }
 
     public String getTipo() {
