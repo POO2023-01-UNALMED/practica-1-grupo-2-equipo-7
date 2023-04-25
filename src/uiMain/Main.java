@@ -25,6 +25,13 @@ public class Main {
         Boolean continuar=true;
         Boolean logueado = false;
         System.out.println("Bienvenido al Portal de Servicios Academicos S.M.M");
+        for (Estudiante estudiante : Estudiante.getEstudiantes()){
+            System.out.println(estudiante.getNombre());
+        }
+        System.out.println(Estudiante.getEstudiantes().get(0).mostrarMaterias());
+        for (Estudiante estudiante: Materia.getMateriasTotales().get(0).getGrupos().get(0).getEstudiantes()){
+            System.out.println(estudiante.getNombre());
+        }
         Usuario usuario = null;
         while(!logueado) {
         	Scanner scanner2 = new Scanner(System.in);
@@ -478,7 +485,7 @@ public class Main {
                         if (opcion_1 == 1){
                             Scanner scanner3 = new Scanner(System.in);
                             while (true){
-                                
+                                boolean terminado = false;
                                 System.out.println("Elija como quiere seleccionar la materia y el grupo");
                                 System.out.println("1. Ver lista de materias y grupos \n2. Buscar materia y grupo");
                                 int opcion_2 = scanner3.nextInt();
@@ -492,11 +499,12 @@ public class Main {
                                     System.out.print("Ingrese el numero del grupo: ");
                                     int numeroGrupo = scanner3.nextInt();
                                     scanner3.nextLine();
-                                    Grupo grupo = estudiante.getMaterias().get(numeroMateria).getGrupos().get(numeroGrupo-1);
+                                    Grupo grupo = estudiante.getMaterias().get(numeroMateria-1).getGrupos().get(numeroGrupo-1);
                                     if (grupo.existenciaEstudiante(estudiante)){
                                         grupo.eliminarEstudiante(estudiante);
                                         estudiante.getHorario().liberarHorario(grupo.getHorario());
                                         System.out.println("El estudiante ha sido desmatriculado de la materia y el grupo");
+                                        terminado = true;
                                         break;
                                     }
                                     else{
@@ -512,13 +520,16 @@ public class Main {
                                         grupoEstudiante.eliminarEstudiante(estudiante);
                                         estudiante.getHorario().liberarHorario(grupoEstudiante.getHorario());
                                         System.out.println("El estudiante ha sido desmatriculado de la materia y el grupo");
+                                        terminado = true;
                                         break;
                                     }
                                     else{
                                         System.out.println("El estudiante no tiene matriculada esta materia");
                                     }                                   
                                 }
-                                
+                                if (terminado){
+                                    break;
+                                }
                             }
                         }
                         else if(opcion_1 == 2){
@@ -664,6 +675,7 @@ public class Main {
             System.out.println("Desea buscar al estudiante mediante una lista o mediante su ID o su nombre?");
             System.out.println("Ingrese la opcion deseada: \n1- Lista de estudiantes disponibles\n2- Buscar al estudiante");
             int opcion=scn.nextInt();
+            scn.nextLine();
 
             if (opcion==1){
 
@@ -686,6 +698,7 @@ public class Main {
 
                 System.out.println("Por favor ingrese el numero correpondiente al estudiante que desea seleccionar: ");
                 int opcion2 = scn.nextInt();
+                scn.nextLine();
                 if (opcion2<=totalEstudiantes.size() && opcion2>=1){
                     Estudiante seleccionado=totalEstudiantes.get(opcion2-1);
                     System.out.println("Estudiante seleccionado, nombre: "+seleccionado.getNombre()+" ID: "+seleccionado.getId());
@@ -703,6 +716,7 @@ public class Main {
                 String nombre=scn.nextLine();
                 System.out.println("Por favor ingrese el ID del estudiante: ");
                 long id=scn.nextLong();
+                scn.nextLine();
                 int index=Estudiante.buscarEstudiante(nombre, id);
 
                 if (index==-1){
@@ -734,7 +748,7 @@ public class Main {
 
             }
         }
-        scn.close();
+        // scn.close();
     }
     //La parte 2 de matricular materia es dependiendo del estudiante cuales materias puede ver
     public static void matricularMateriaParte2(Estudiante estudiante){
@@ -822,7 +836,7 @@ public class Main {
 
             }
         }
-        scanner.close();
+        // scanner.close();
     }
     //La parte 3 de matricular materia es para finalizar la funcionalidad
     public static void matricularMateriaParte3(Estudiante estudiante, Materia materia){
@@ -846,16 +860,19 @@ public class Main {
             }
             
             int opcion=scanner.nextInt();
-            if (opcion>0 && opcion<gruposDisponibles.size()-1){
+            if (opcion>0 && opcion<=gruposDisponibles.size()){
 
                 Grupo grupoSeleccionado=gruposDisponibles.get(opcion-1);
                 ArrayList<Materia> materiasInscritas=new ArrayList<Materia>(estudiante.getMaterias());
+                ArrayList<Grupo> gruposInscritos=new ArrayList<Grupo>(estudiante.getGrupos());
+                gruposInscritos.add(grupoSeleccionado);
                 materiasInscritas.add(materia);
                 grupoSeleccionado.agregarEstudiante(estudiante);
                 grupoSeleccionado.getMateria().setCupos(grupoSeleccionado.getMateria().getCupos()-1);
                 grupoSeleccionado.setCupos(grupoSeleccionado.getCupos()-1);
                 estudiante.setCreditos(estudiante.getCreditos()+materia.getCreditos());
                 estudiante.setMaterias(materiasInscritas);
+                estudiante.setGrupos(gruposInscritos);
                 String imprimir="Materia "+materia.getNombre()+" - grupo #"+grupoSeleccionado.getNumero();
                 System.out.println(imprimir+ ". Ha sido matriculado al estudiante: "+estudiante.getNombre());
                 salir=true;
@@ -877,7 +894,7 @@ public class Main {
                 }
             }
         }
-        scanner.close();
+        // scanner.close();
     }
    //La parte 4 de matricular materia es para matricularle al estudiante un grupo en especifico
     public static void matricularMateriaParte4(Estudiante estudiante, Grupo grupo){

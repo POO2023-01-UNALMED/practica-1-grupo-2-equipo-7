@@ -50,8 +50,9 @@ public class Estudiante extends Usuario implements Serializable{
     
     public String mostrarMaterias() {
     	String retorno = "";
+        int i = 1;
     	for (Grupo grupo:grupos) {
-    		retorno += "- "+grupo.getMateria().getNombre()+" | Grupo "+grupo.getNumero()+"\n";
+    		retorno += "" + (i++) + "- "+grupo.getMateria().getNombre()+" | Grupo "+grupo.getNumero()+"\n";
     	}
     	return retorno;
     }
@@ -258,5 +259,10 @@ public class Estudiante extends Usuario implements Serializable{
     public void setAvance(double avance) {
         this.avance = avance;
     }
+
+    public void setGrupos(ArrayList<Grupo> grupos) {
+        this.grupos = grupos;
+    }
+
     
 }
