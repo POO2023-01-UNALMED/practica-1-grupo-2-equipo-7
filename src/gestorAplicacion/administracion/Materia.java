@@ -104,6 +104,7 @@ public class Materia implements Serializable{
     	Grupo grupo = new Grupo(this, numero, profesor, horario, cupos, salon);
     	
     	//No se si sería mejor crear otro metodo para añadir un grupo o añadirlo aquí mismo. Hay que hablarlo.
+        cantidadCupos();
     	this.grupos.add(grupo);
     	
     	return grupo;
@@ -144,19 +145,13 @@ public class Materia implements Serializable{
     	Grupo grupo = this.grupos.get(numero-1);
     	grupo.getProfesor().desvincularGrupo(grupo);
     	grupo.getSalon().getHorario().liberarHorario(grupo.getHorario());;
-    	for (Estudiante estudiante:grupo.getEstudiantes()) {
-    		ArrayList<Grupo> gEstudiante = estudiante.getGrupos();
-    		if(gEstudiante.contains(grupo)) {
-    			int indice = gEstudiante.indexOf(grupo);
-    			gEstudiante.remove(indice);
-    		}
-    	}
         this.grupos.remove(grupo);
         for(int i=numero-1;i<this.grupos.size();i++) {
         	Grupo grupoCamb = this.grupos.get(i);
         	int nGrupoAnt = grupoCamb.getNumero();
         	grupoCamb.setNumero(nGrupoAnt-1);
         }
+        
     }
     
     public void agregarGrupo(int numero, Profesor profesor, ArrayList<String> horario, int cupos, Salon salon) {
