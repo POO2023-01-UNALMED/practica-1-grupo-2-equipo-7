@@ -91,6 +91,7 @@ public class Estudiante extends Usuario implements Serializable{
         return creditos;
     }
 
+
     public void setCreditos(int creditos) {
         this.creditos = creditos;
     }

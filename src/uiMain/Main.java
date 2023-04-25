@@ -10,7 +10,7 @@ import gestorAplicacion.usuario.Estudiante;
 import gestorAplicacion.usuario.Profesor;
 import gestorAplicacion.usuario.Usuario;
 
-import java.net.SecureCacheResponse;
+// import java.net.SecureCacheResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -25,13 +25,19 @@ public class Main {
         Boolean continuar=true;
         Boolean logueado = false;
         System.out.println("Bienvenido al Portal de Servicios Academicos S.M.M");
-        for (Estudiante estudiante : Estudiante.getEstudiantes()){
-            System.out.println(estudiante.getNombre());
-        }
-        System.out.println(Estudiante.getEstudiantes().get(0).mostrarMaterias());
-        for (Estudiante estudiante: Materia.getMateriasTotales().get(0).getGrupos().get(0).getEstudiantes()){
-            System.out.println(estudiante.getNombre());
-        }
+        
+        // Zona de Pruebas -------------------------------------------------------------------
+
+        // Estudiante.getEstudiantes().get(0).setSueldo(99999999);
+        // Estudiante.getEstudiantes().get(0).pagarMatricula();
+        // Materia.getMateriasTotales().get(0).setCupos(20);
+        
+        // System.out.println(Estudiante.getEstudiantes().get(0).getMaterias().get(0).getNombre());
+        // System.out.println(Grupo.getGruposTotales().get(0).getEstudiantes().get(0).getNombre());
+        
+ 
+        // Zona de Pruebas -------------------------------------------------------------------
+
         Usuario usuario = null;
         while(!logueado) {
         	Scanner scanner2 = new Scanner(System.in);
@@ -680,7 +686,7 @@ public class Main {
             if (opcion==1){
 
                 System.out.println("Lista de estudiantes disponibles para matricular: ");
-                ArrayList<Estudiante> totalEstudiantes=new ArrayList<Estudiante>(Estudiante.getEstudiantes());
+                ArrayList<Estudiante> totalEstudiantes=new ArrayList<Estudiante>();
                 for (int i=0;i<Estudiante.getEstudiantes().size();i++){
                     Estudiante estudiante=Estudiante.getEstudiantes().get(i);
                     boolean mostrar=true;
