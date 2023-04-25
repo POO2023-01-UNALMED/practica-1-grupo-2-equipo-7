@@ -88,6 +88,14 @@ public class Materia implements Serializable{
         this.grupos = grupos;
     }
     
+    public int cantidadCupos(){
+        int cantidad = 0;
+        for (Grupo pGrupo:getGrupos()){
+            cantidad+=pGrupo.getCupos();
+        }
+        return cantidad;
+    }
+
     //Esta un poco ambigua la definicion de este metodo
     public Grupo crearGrupo(int numero, Profesor profesor, ArrayList<String> horario, int cupos, Salon salon){
         
