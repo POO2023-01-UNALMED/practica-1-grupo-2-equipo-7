@@ -262,7 +262,12 @@ public class Main {
                                 Materia materiaN = new Materia(nombre, codigo, descrip, creditos, facu);
                                 System.out.println("La materia "+ nombre + "ha sido creada con éxito.");
                                 break; 
-                            }                               
+                            }
+                            else if(0 > decision || decision > 2){
+                                System.out.println("Opcion invalida.");
+                                continue;
+                            }
+                            break;                               
                             
                         }
                         
