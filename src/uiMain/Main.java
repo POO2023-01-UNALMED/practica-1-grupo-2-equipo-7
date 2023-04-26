@@ -245,7 +245,7 @@ public class Main {
                             scanner3_1.nextLine();
                             if(decision == 1){                              
                                 System.out.println("Ha escogido crear la materia con prerrequisitos.");
-                                System.out.println("Ingrese los prerrequisitos que tiene la materia para poder ser inscritas por el estudiante (separadas por comas con su respectivo espacio)");
+                                System.out.println("Ingrese los prerrequisitos que tiene la materia para poder ser inscritas por el estudiante (separadas por comas con su respectivo espacio).");
                                 String prerreq = scanner3_1.nextLine();
                                 String[] pReq = prerreq.split(", ");
                                 ArrayList<Materia> pRequisitos = new ArrayList<Materia>();
