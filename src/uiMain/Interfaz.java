@@ -3,12 +3,12 @@ package uiMain;
 import java.util.ArrayList;
 import gestorAplicacion.administracion.*;
 import java.util.Scanner;
-import gestorAplicacion.usuario.*;;
+import gestorAplicacion.usuario.*;
+import java.util.Random;
 
 public interface Interfaz {
     
     // METODOS USADOS EN GENERAR HORARIO: 
- 
     public static ArrayList<Materia> mostrarMateriasConFiltro(int opcionFiltro,String filtro){
         /*
         * Muestra solo las materias que cumplan el filtro dado (segundo parametro)
@@ -176,6 +176,338 @@ public interface Interfaz {
         estudiante.setGrupos(gruposInscritos);
         estudiante.setCreditos(estudiante.getCreditos()+grupo.getMateria().getCreditos());
         estudiante.setMaterias(materiasInscritas);
+    }
+
+    //METODO USADO EN BECA
+    public static void mostrarBecas(){
+        int i = 1;
+        for (Beca beca: Beca.getBecas()){
+            String a = beca.getConvenio();
+            System.out.println(i +". "+ a + ".");
+            i += 1;
+        }
+    } 
+
+    //METODOS USADOS EN MATRICULAR MATERIA
+    public static void matricularMateria(){
+        /*
+         *La parte 1 de la funcionalidad matricular materia:
+        * Es para seleccionar al estudiante que se le va a matricular una materia 
+         */
+        Scanner scanner = new Scanner(System.in);
+        boolean salir=false;
+
+    	while(salir==false){
+
+            Boolean invalido=false;
+            System.out.println("Desea buscar al estudiante mediante una lista o mediante su ID o su nombre?");
+            System.out.println("Ingrese la opcion deseada: \n1- Lista de estudiantes disponibles\n2- Buscar al estudiante");
+            int opcion=scanner.nextInt();
+            scanner.nextLine();
+
+            if (opcion==1){
+
+                System.out.println("Lista de estudiantes disponibles para matricular: ");
+                ArrayList<Estudiante> totalEstudiantes=new ArrayList<Estudiante>();
+                for (Estudiante estudiante: Estudiante.getEstudiantes()){
+                    if (estudiante.isMatriculaPagada()==false){
+                        continue;
+                    }
+                    if (estudiante.getCreditos()==Coordinador.getLimitesCreditos()){
+                        continue;
+                    }
+                    totalEstudiantes.add(estudiante);
+                    System.out.println(totalEstudiantes.size()+" Nombre: "+estudiante.getNombre()+" ID: "+estudiante.getId());
+                }
+
+                System.out.println("Por favor ingrese el numero correpondiente al estudiante que desea seleccionar: ");
+                int opcion2 = scanner.nextInt();
+                scanner.nextLine();
+                if (opcion2<=totalEstudiantes.size() && opcion2>=1){
+                    Estudiante seleccionado=totalEstudiantes.get(opcion2-1);
+                    System.out.println("Estudiante seleccionado, nombre: "+seleccionado.getNombre()+" ID: "+seleccionado.getId());
+                    matricularMateriaParte2(seleccionado);
+                    salir=true;
+
+                }else{
+                    System.out.println("Opcion invalida");
+                    invalido=true;
+                }
+
+            }else if(opcion==2){
+
+                System.out.println("Por favor ingrese el nombre del estudiante: ");
+                String nombre=scanner.nextLine();
+                System.out.println("Por favor ingrese el ID del estudiante: ");
+                long id=scanner.nextLong();
+                scanner.nextLine();
+                int index=Estudiante.buscarEstudiante(nombre, id);
+
+                if (index==-1){
+                    System.out.println("Estudiante no encontrado");
+                    invalido=true;
+
+                }else{
+                    Estudiante seleccionado=Estudiante.getEstudiantes().get(index);
+                    System.out.println("Estudiante seleccionado, nombre: "+seleccionado.getNombre()+" ID: "+seleccionado.getId());
+                    matricularMateriaParte2(seleccionado);
+                    salir=true;
+                }
+
+            }else{
+
+                System.out.println("Opcion invalida");
+                invalido=true;
+
+            }
+            if (invalido){
+
+                System.out.println("Desea intentarlo otra vez o desea salir?");
+                System.out.println("Ingrese la opcion deseada: \n1- Intentarlo otra vez\n2- Salir");
+                int opcion3=scanner.nextInt();
+                scanner.nextLine();
+                if (opcion3!=1){
+                    salir=true;
+                }
+
+            }
+        }
+    }
+    
+    public static void matricularMateriaParte2(Estudiante estudiante){
+        /*
+         * La parte 2 de la funcionalidad matricular materia:
+         * Es para seleccionar la materia que se desea matricular
+         */
+        Scanner scanner = new Scanner(System.in); 
+        boolean salir=false;
+        while(salir==false){
+
+            Boolean invalido=false;
+            System.out.println("Como desea buscar la materia?\n1- Mediante una lista de las materias disponibles\n2- Mediante una busqueda manual");
+            int opcion=scanner.nextInt();
+            scanner.nextLine();
+            ArrayList<Materia> materiasTotales=new ArrayList<Materia>(Materia.getMateriasTotales());
+            if (opcion==1){
+
+                ArrayList<Materia> materiasDisponibles=new ArrayList<Materia>();
+                System.out.println("Lista de materias disponibles para matricular: ");
+                int limitesCreditos=Coordinador.getLimitesCreditos();
+                for (Materia materia: materiasTotales){
+                    if (Materia.comprobarPrerrequisitos(estudiante, materia)==false){
+                        continue;
+                    }
+                    if (materia.getCupos()<=0){
+                        continue;
+                    }else if (estudiante.getCreditos()+materia.getCreditos()>limitesCreditos){
+                        continue;
+                    }
+                    materiasDisponibles.add(materia);
+                    System.out.println(materiasDisponibles.size()+" Nombre: "+materia.getNombre()+" Cupos: "+materia.getCupos());
+                }
+                System.out.println("Por favor ingrese el numero correspondiente a la materia que desea matricular");
+                int eleccion=scanner.nextInt();
+                scanner.nextLine();
+
+                if (1<=eleccion && eleccion<=materiasDisponibles.size()){
+
+                    Materia seleccionada = materiasDisponibles.get(eleccion-1);
+                    System.out.println("Materia seleccionada "+seleccionada.getNombre());
+                    matricularMateriaParte3(estudiante, seleccionada);
+                    salir=true;
+
+                } else{
+
+                    System.out.println("Opcion invalida");
+                    invalido=true;
+                }
+
+            }else if(opcion==2){
+
+                System.out.println("Por favor ingrese el nombre de la materia deseada: ");
+                String nombre=scanner.nextLine();
+                System.out.println("Por favor ingrese el codigo de la materia deseada: ");
+                int codigo=scanner.nextInt();
+                scanner.nextLine();
+                int index=Materia.buscarMateria(nombre, codigo);
+
+                if (index==-1){
+
+                    System.out.println("Materia no encontrada");
+                    invalido=true;
+
+                }else{
+
+                    Materia seleccionada=materiasTotales.get(index);
+                    System.out.println("Materia seleccionada "+seleccionada.getNombre());
+                    matricularMateriaParte3(estudiante, seleccionada);
+                    salir=true;
+                }
+
+            }else{
+
+                System.out.println("Opcion invalida");
+                invalido=true;
+            }
+
+            if (invalido){
+
+                System.out.println("Desea intentarlo otra vez o desea salir?");
+                System.out.println("Ingrese la opcion deseada: \n1- Intentarlo otra vez\n2- Salir");
+                int opcion2=scanner.nextInt();
+                scanner.nextLine();
+                if (opcion2!=1){
+                    salir=true;
+                }
+
+            }
+        }
+    }
+    
+    public static void matricularMateriaParte3(Estudiante estudiante, Materia materia){
+        /*
+         * La parte 3 de la funcionalidad matricular materia:
+         * Es para seleccionar el grupo de la materia seleccionada 
+         * Y tambien para finalizar la funcionalidad
+         */
+        Scanner scanner=new Scanner(System.in);
+        Boolean salir=false;
+
+        while (salir==false){
+
+            System.out.println("Grupos disponibles para matricular: ");
+            ArrayList<Grupo> gruposDisponibles=new ArrayList<Grupo>();
+
+            for (Grupo grupo: materia.getGrupos()){
+                if (!estudiante.getHorario().comprobarDisponibilidad(grupo.getHorario())){
+                    continue;
+                }
+                if (grupo.getCupos()!=0){
+                    gruposDisponibles.add(grupo);
+                    System.out.println((gruposDisponibles.size())+" Grupo #"+grupo.getNumero()+ " cupos: "+grupo.getCupos()+" Profesor: "+grupo.getProfesor().getNombre());
+                }
+            }
+            
+            int opcion=scanner.nextInt();
+            scanner.nextLine();
+            if (opcion>0 && opcion<=gruposDisponibles.size()){
+
+                Grupo grupoSeleccionado=gruposDisponibles.get(opcion-1);
+                ArrayList<Materia> materiasInscritas=new ArrayList<Materia>(estudiante.getMaterias());
+                ArrayList<Grupo> gruposInscritos=new ArrayList<Grupo>(estudiante.getGrupos());
+                gruposInscritos.add(grupoSeleccionado);
+                materiasInscritas.add(materia);
+                grupoSeleccionado.agregarEstudiante(estudiante);
+                grupoSeleccionado.getMateria().setCupos(grupoSeleccionado.getMateria().getCupos()-1);
+                grupoSeleccionado.setCupos(grupoSeleccionado.getCupos()-1);
+                estudiante.setCreditos(estudiante.getCreditos()+materia.getCreditos());
+                estudiante.setMaterias(materiasInscritas);
+                estudiante.setGrupos(gruposInscritos);
+                String imprimir="Materia "+materia.getNombre()+" - grupo #"+grupoSeleccionado.getNumero();
+                System.out.println(imprimir+ ". Ha sido matriculado al estudiante: "+estudiante.getNombre());
+                salir=true;
+
+                System.out.println("Desea visualizar el horario del estudiante?: \n1- Si\n2- No");
+                int opcion2=scanner.nextInt();
+                scanner.nextLine();
+
+                if (opcion2==1){
+                    System.out.println(estudiante.getHorario().mostrarHorario());
+                }
+
+            }else{
+                System.out.println("Opcion invalida");
+                System.out.println("Desea intentarlo otra vez o desea salir?");
+                System.out.println("Ingrese la opcion deseada: \n1- Intentarlo otra vez\n2- Salir");
+                int opcion3=scanner.nextInt();
+                scanner.nextLine();
+                if (opcion3!=1){
+                    salir=true;
+                }
+            }
+        }
+    }
+  
+    //METODOS USADOS PARA EL LOG
+    public static long generarId() {
+    	int min = 10000;
+    	int max = 99999;
+    	int id;
+    	boolean existe = false;
+    	do {
+    		id = new Random().nextInt(max-min)+min;
+    		for (Usuario usuario:Usuario.getUsuariosTotales()) {
+    			if (usuario.getId()==id) {
+    				existe=true;
+    				break;
+    			}
+    		}
+    	}while(existe);
+    	return id;
+    }
+    
+    public static boolean existenciaUsuario(String nombre) {
+    	boolean exist = false;
+    	for (Usuario usuario:Usuario.getUsuariosTotales()) {
+    		if (usuario.getNombre()==nombre) {
+    			exist = true;
+    			break;
+    		}
+    	}
+    	return exist;
+    }
+    
+    public static boolean existenciaId(long id) {
+    	boolean exist = false;
+    	for (Usuario usuario:Usuario.getUsuariosTotales()) {
+    		if (usuario.getId()==id) {
+    			exist = true;
+    			break;
+    		}
+    	}
+    	return exist;
+    }
+    
+    public static Usuario encontrarUsuario(long id) {
+    	Usuario encontrado = null;
+    	for (Usuario usuario:Usuario.getUsuariosTotales()) {
+    		if (usuario.getId()==id) {
+    			encontrado = usuario;
+    		}
+    	}
+    	return encontrado;
+    }
+
+    public static boolean verificarPw(Usuario usuario, String pw) {
+    	if (usuario.getPw().equals(pw)) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
+    }
+    
+    //METODOS USADOS EN AGREGAR GRUPO
+    public static boolean formatoHorario(String horario) {
+    	boolean formato = false;
+    	if (horario.length()==7) {
+    		String hi = horario.substring(2, 4);
+    		String hf = horario.substring(5, 7);
+    		String diaS = horario.substring(0,1);
+    		
+    		if(hi.matches("\\d+")&&hf.matches("\\d+")&&diaS.matches("\\d+")) {
+    			int horI = Integer.parseInt(hi);
+    			int horF = Integer.parseInt(hf);
+    			int dia = Integer.parseInt(diaS);
+    			
+    			if(dia>=0&&dia<=7&&horario.substring(1,2).equals("-")&&hi.matches("\\d+")&&horI>=0&&horI<=23) {
+    				if(horI>=0&&horI<=23&&horario.substring(4,5).equals("-")&&hi.matches("\\d+")&&horF>horI&&horF>0&&horF<=23) {
+    					formato = true;
+    				}
+    			}
+    		}
+    	}
+    	return formato;
     }
 
 }
