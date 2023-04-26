@@ -27,11 +27,13 @@ public class Main {
         System.out.println("Bienvenido al Portal de Servicios Academicos S.M.M");
 
         // Zona de Pruebas -------------------------------------------------------------------
-
+        for (Estudiante estudiante: Estudiante.getEstudiantes()){
+            System.out.println(estudiante);
+        }
         // Estudiante.getEstudiantes().get(0).setSueldo(99999999);
         // Estudiante.getEstudiantes().get(0).pagarMatricula();
         // Materia.getMateriasTotales().get(0).setCupos(20)
-        
+
         // System.out.println(Estudiante.getEstudiantes().get(0).getMaterias().get(0).getNombre());
         // System.out.println(Grupo.getGruposTotales().get(0).getEstudiantes().get(0).getNombre());
         
