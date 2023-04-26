@@ -30,6 +30,11 @@ public class Main {
         for (Estudiante estudiante: Estudiante.getEstudiantes()){
             System.out.println(estudiante);
         }
+
+        for(Materia materia: Materia.getMateriasTotales()){
+            System.out.println(materia.getNombre());
+        }
+
         // Estudiante.getEstudiantes().get(0).setSueldo(99999999);
         // Estudiante.getEstudiantes().get(0).pagarMatricula();
         // Materia.getMateriasTotales().get(0).setCupos(20)
@@ -254,13 +259,13 @@ public class Main {
                                     }
                                 }
                                 usuario.agregarMateria(nombre, codigo, descrip, creditos, facu, pRequisitos);
-                                System.out.println("La materia "+ nombre + "ha sido creada con éxito.");
+                                System.out.println("La materia "+ nombre + " ha sido creada con éxito.");
                                 break; 
                             }
                             else if(decision == 2){
                                 System.out.println("Ha escogido crear la materia sin prerrequisitos.");
                                 Materia materiaN = new Materia(nombre, codigo, descrip, creditos, facu);
-                                System.out.println("La materia "+ nombre + "ha sido creada con éxito.");
+                                System.out.println("La materia "+ nombre + " ha sido creada con éxito.");
                                 break; 
                             }
                             else if(0 > decision || decision > 2){
