@@ -205,9 +205,8 @@ public class Main {
                 if(opcion_3 == 1){
                     System.out.println("Has seleccionado la opcion 1 (Agregar materia.)");
                     if(opcion_3 == 1){
-                        System.out.println("Has seleccionado la opción 1 (Agregar materia.)");
                         boolean fin = false;
-                        Materia materiaN = null;
+                        
                         while(!fin){
                             Scanner scanner3_1 = new Scanner(System.in);
                             System.out.println("Ingresa el nombre de la materia que desea agregar.");
@@ -235,22 +234,36 @@ public class Main {
                             System.out.println("Ingrese la facultad a la que pertenece la materia");
                             String facu = scanner3_1.nextLine();
                             
-                            System.out.println("Ingrese los prerrequisitos que tiene la materia para poder ser inscritas por el estudiante (separadas por comas con su respectivo espacio)");
-                            String prerreq = scanner3_1.nextLine();
-                            String[] pReq = prerreq.split(", ");
-                            ArrayList<Materia> pRequisitos = new ArrayList<Materia>();
-                            for(String r: pReq){
-                                for(Materia materia:Materia.getMateriasTotales()){
-                                    if (r.equals(materia.getNombre()) == true){
-                                        pRequisitos.add(materia);
-    
+                            System.out.println("Ingrese cómo desea crear la materia:");
+                            System.out.println("1.Con prerrequisitos.       2.Sin prerrequisitos.");
+                            int decision = scanner3_1.nextInt();
+                            scanner3_1.nextLine();
+                            if(decision == 1){                              
+                                System.out.println("Ha escogido crear la materia con prerrequisitos.");
+                                System.out.println("Ingrese los prerrequisitos que tiene la materia para poder ser inscritas por el estudiante (separadas por comas con su respectivo espacio)");
+                                String prerreq = scanner3_1.nextLine();
+                                String[] pReq = prerreq.split(", ");
+                                ArrayList<Materia> pRequisitos = new ArrayList<Materia>();
+                                for(String r: pReq){
+                                    for(Materia materia:Materia.getMateriasTotales()){
+                                        if (r.equals(materia.getNombre()) == true){
+                                            pRequisitos.add(materia);
+                                            
+                                        }
+                                        
                                     }
-    
                                 }
+                                usuario.agregarMateria(nombre, codigo, descrip, creditos, facu, pRequisitos);
+                                System.out.println("La materia "+ nombre + "ha sido creada con éxito.");
+                                break; 
                             }
-                            usuario.agregarMateria(nombre, codigo, descrip, creditos, facu, pRequisitos);
-                            System.out.println("La materia "+ nombre + "ha sido creada con éxito.");
-                            break;                                                                 
+                            else if(decision == 2){
+                                System.out.println("Ha escogido crear la materia sin prerrequisitos.");
+                                Materia materiaN = new Materia(nombre, codigo, descrip, creditos, facu);
+                                System.out.println("La materia "+ nombre + "ha sido creada con éxito.");
+                                break; 
+                            }                               
+                            
                         }
                         
                     }
