@@ -33,16 +33,17 @@ public class Main implements Interfaz{
         // Estudiante Eest3 = new Estudiante(7631,"Daniela Giraldo Zapata","Arquitectura",2,"Facultad de arquitectura",2,0);
         // Estudiante Eest4 = new Estudiante(7731,"Juliana Gonzales Giraldo","Ingenieria forestal",0,"Facultad de ciencias agrarias",4,0);
         // Estudiante Eest5 = new Estudiante(7001,"Alfredo Zapata Mani","Ingenieria civil",0,"Facultad de minas",4,0);
+        
 
         for (Estudiante estudiante: Estudiante.getEstudiantes()){
             System.out.println(estudiante);
-            // System.out.println(estudiante.getPrograma());
+            System.out.println(estudiante.getPrograma());
             // System.out.println(estudiante.getFacultad());
         }
 
-        for(Materia materia: Materia.getMateriasTotales()){
-            System.out.println(materia.getNombre());
-        }
+        /*for(Materia materia:Materia.getMateriasTotales()) {
+        	System.out.println(materia.getNombre()+"\n"+materia.getFacultad());
+        }*/
 
         // System.out.println(Materia.getMateriasTotales().get(9).getPrerrequisitos().get(0).getNombre());
 

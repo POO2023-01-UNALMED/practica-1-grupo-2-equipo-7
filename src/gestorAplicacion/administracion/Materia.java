@@ -43,7 +43,15 @@ public class Materia implements Serializable{
         this.grupos = grupos;
     }
     
-    public String getNombre() {
+    public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public String getNombre() {
         return this.nombre;
     }
     
