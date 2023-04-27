@@ -27,8 +27,9 @@ public class Main implements Interfaz{
         System.out.println("Bienvenido al Portal de Servicios Academicos S.M.M");
 
         // Zona de Pruebas -------------------------------------------------------------------
-        // Estudiante Eestl = new Estudiante(7651,"Juan Jose Silba Gomez","Estadistica",1,"Falcultad de Ciencias",7,100000000);
-        // Eestl.pagarMatricula();
+        // Estudiante estA_5 = new Estudiante(4114,"Javier Gomez Gomez","Ingenieria electrica",6,"Facultad de minas",2,100000);
+        
+        // estA_3.pagarMatricula();
         // Estudiante Eest2 = new Estudiante(7652,"Efrain Gomez Ramirez","Ingenieria de Sistemas e Informatica",3,"Falcultad de Minas",10,10000000);
         // Estudiante Eest3 = new Estudiante(7631,"Daniela Giraldo Zapata","Arquitectura",2,"Facultad de arquitectura",2,0);
         // Estudiante Eest4 = new Estudiante(7731,"Juliana Gonzales Giraldo","Ingenieria forestal",0,"Facultad de ciencias agrarias",4,0);
@@ -36,14 +37,14 @@ public class Main implements Interfaz{
         
 
         for (Estudiante estudiante: Estudiante.getEstudiantes()){
-            System.out.println(estudiante);
+            System.out.println("\n"+estudiante);
             System.out.println(estudiante.getPrograma());
-            // System.out.println(estudiante.getFacultad());
+            System.out.println(estudiante.getFacultad());
         }
 
-        /*for(Materia materia:Materia.getMateriasTotales()) {
-        	System.out.println(materia.getNombre()+"\n"+materia.getFacultad());
-        }*/
+        for(Materia materia:Materia.getMateriasTotales()) {
+        	System.out.println("\n"+materia.getNombre()+"\n"+materia.getFacultad());
+        }
 
         // System.out.println(Materia.getMateriasTotales().get(9).getPrerrequisitos().get(0).getNombre());
 
