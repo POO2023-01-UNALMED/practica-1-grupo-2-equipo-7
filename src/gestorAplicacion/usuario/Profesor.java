@@ -139,9 +139,9 @@ public class Profesor implements Serializable{
     
     public static ArrayList<Profesor> profesoresDeMateria(Materia materia) {
     	ArrayList<Profesor> profes = new ArrayList<Profesor>();
-    	for (Grupo grupo:materia.getGrupos()) {
-    		if(!profes.contains(grupo.getProfesor())) {
-    			profes.add(grupo.getProfesor());
+    	for (Profesor profesor:Profesor.getProfesores()) {
+    		if(profesor.daMateria(materia)&&!profes.contains(profesor)) {
+    			profes.add(profesor);
     		}
     	}
     	return profes;
