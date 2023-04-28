@@ -246,12 +246,19 @@ public interface Interfaz {
                 if (index==-1){
                     System.out.println("Estudiante no encontrado");
                     invalido=true;
-
                 }else{
                     Estudiante seleccionado=Estudiante.getEstudiantes().get(index);
-                    System.out.println("Estudiante seleccionado, nombre: "+seleccionado.getNombre()+" ID: "+seleccionado.getId());
-                    matricularMateriaParte2(seleccionado);
-                    salir=true;
+                    if (seleccionado.isMatriculaPagada()==false){
+                        System.out.println("La matricula del estudiante no esta pagada");
+                        invalido=true;
+                    } else if (seleccionado.getCreditos()>=Coordinador.getLimitesCreditos()){
+                        System.out.println("El estudiante no puede matricular más materias");
+                        invalido=true;
+                    }else{
+                        System.out.println("Estudiante seleccionado, nombre: "+seleccionado.getNombre()+" ID: "+seleccionado.getId());
+                        matricularMateriaParte2(seleccionado);
+                        salir=true;
+                    }
                 }
 
             }else{
@@ -339,9 +346,21 @@ public interface Interfaz {
                 }else{
 
                     Materia seleccionada=materiasTotales.get(index);
-                    System.out.println("Materia seleccionada "+seleccionada.getNombre());
-                    matricularMateriaParte3(estudiante, seleccionada);
-                    salir=true;
+
+                    if (seleccionada.getCupos()==0){
+                        System.out.println("Materia sin cupos disponibles");
+                        invalido=true;
+                    }else if(Materia.comprobarPrerrequisitos(estudiante, seleccionada)==false){
+                        System.out.println("El estudiante no cumple con los prerrequisitos de la materia");
+                        invalido=true;
+                    }else if(estudiante.getCreditos()+seleccionada.getCreditos()>Coordinador.getLimitesCreditos()){
+                        System.out.println("El estudiante tiene creditos insuficientes");
+                        invalido=true;
+                    }else{
+                        System.out.println("Materia seleccionada "+seleccionada.getNombre());
+                        matricularMateriaParte3(estudiante, seleccionada);
+                        salir=true; 
+                    }  
                 }
 
             }else{
