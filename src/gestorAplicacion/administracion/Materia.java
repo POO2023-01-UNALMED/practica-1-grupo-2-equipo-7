@@ -181,7 +181,7 @@ public class Materia implements Serializable{
     	//el metodo recibe los parametros necesarios para crear un nuevo grupo
     	boolean dispSalon = true;
     	boolean dispProfesor = true;
-    	boolean daMateria = profesor.daMateria(this);
+    	boolean daMateria = profesor.daMateria(this.nombre);
     	
     	//Se comprueba la disponibilidad del profesor y el salon para el horario ingresado
     	for(String hor:horario) {
@@ -293,5 +293,15 @@ public class Materia implements Serializable{
                 this.abreviatura = abreviatura.substring(0, 13);
             }
         }
+    }
+    
+    public static Materia encontrarMateria(String nombre) {
+    	Materia mater = null;
+    	for(Materia materia:Materia.getMateriasTotales()) {
+    		if(materia.getNombre().equals(nombre)) {
+    			mater = materia;
+    		}
+    	}
+    	return mater;
     }
 }

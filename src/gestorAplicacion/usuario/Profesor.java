@@ -96,8 +96,13 @@ public class Profesor implements Serializable{
         }
     }
 
-    public boolean daMateria(Materia materia) {
-    	return this.materiasDadas.contains(materia);
+    public boolean daMateria(String nombre) {
+    	for(Materia materia:this.getMateriasDadas()) {
+    		if(materia.getNombre().equals(nombre)) {
+    			return true;
+    		}
+    	}
+    	return false;
     }
 
     public static boolean recomendarEstudiante(Estudiante estudiante){
@@ -137,20 +142,20 @@ public class Profesor implements Serializable{
     	return r;
     }
     
-    public static ArrayList<Profesor> profesoresDeMateria(Materia materia) {
+    public static ArrayList<Profesor> profesoresDeMateria(String nombre) {
     	ArrayList<Profesor> profes = new ArrayList<Profesor>();
     	for (Profesor profesor:Profesor.getProfesores()) {
-    		if(profesor.daMateria(materia)&&!profes.contains(profesor)) {
+    		if(profesor.daMateria(nombre)&&!profes.contains(profesor)) {
     			profes.add(profesor);
     		}
     	}
     	return profes;
     }
     
-    public static String mostrarProfesMateria(Materia materia) {
+    public static String mostrarProfesMateria(String nombre) {
     	String r = "";
     	int i = 1;
-    	ArrayList<Profesor> profes = profesoresDeMateria(materia);
+    	ArrayList<Profesor> profes = profesoresDeMateria(nombre);
     	for (Profesor profesor:profes) {
     		r += (i++)+". "+profesor.getNombre()+".\n"; 
     	}

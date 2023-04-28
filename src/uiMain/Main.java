@@ -27,7 +27,7 @@ public class Main implements Interfaz{
         System.out.println("Bienvenido al Portal de Servicios Academicos S.M.M");
 
         // Zona de Pruebas -------------------------------------------------------------------
-      
+
         // Zona de Pruebas -------------------------------------------------------------------
 
         Usuario usuario = null;
@@ -322,10 +322,10 @@ public class Main implements Interfaz{
 		                    
 		                    if (opcion_profe==1) {
 		                    	System.out.println("Seleccione uno de los siguientes profesores");
-		                    	System.out.print(Profesor.mostrarProfesMateria(materiaSel));
+		                    	System.out.print(Profesor.mostrarProfesMateria(materiaSel.getNombre()));
 		                    	int seleccionProfe = scanner4.nextInt();
                                 scanner4.nextLine();
-		                    	ArrayList<Profesor> preProfes = Profesor.profesoresDeMateria(materiaSel);
+		                    	ArrayList<Profesor> preProfes = Profesor.profesoresDeMateria(materiaSel.getNombre());
 		                    	profesorSel = preProfes.get(seleccionProfe-1);
 		                    	break;
 		                    }
