@@ -7,7 +7,7 @@ public class Materia implements Serializable{
     
     //nombre y codigo las declare como constantes. �Estan de acuerdo? si
     private static final long serialVersionUID = 1L;
-    private final String nombre;
+    private String nombre;
     private final int codigo;
     private String descripcion;
     private int creditos;
@@ -53,6 +53,10 @@ public class Materia implements Serializable{
 
 	public String getNombre() {
         return this.nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
     
     public int getCodigo() {

@@ -123,7 +123,7 @@ public class Profesor implements Serializable{
     public static String mostrarProfesores() {
     	String r = "";
     	int i = 1;
-    	for(Profesor profesor:profesores) {
+    	for(Profesor profesor:Profesor.profesores) {
     		r += (i++)+". "+profesor.getNombre()+". Materias: ";
     		for (Materia materia:profesor.getMateriasDadas()) {
     			if (profesor.getMateriasDadas().indexOf(materia) == profesor.getMateriasDadas().size()-1) {
