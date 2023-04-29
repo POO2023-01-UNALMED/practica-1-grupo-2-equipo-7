@@ -27,6 +27,23 @@ public class Main implements Interfaz{
         System.out.println("Bienvenido al Portal de Servicios Academicos S.M.M");
 
         // Zona de Pruebas -------------------------------------------------------------------
+        // for (Profesor pProfesor:Profesor.getProfesores()){
+        //     System.out.println(pProfesor.getNombre());
+        //     for (Materia pMateria:pProfesor.getMateriasDadas()){
+        //         System.out.println(pMateria.getNombre());
+        //     }
+        //     System.out.println();
+        // }
+
+        // for(Materia materia:Materia.getMateriasTotales()) {
+        // 	System.out.println("\n"+materia.getNombre());
+        // }
+
+        for (Grupo pGrupo:Grupo.getGruposTotales()){
+            // System.out.println("Grupo numero: "+pGrupo.getNumero()+" de la materia: "+pGrupo.getMateria().getNombre()+" se da en el salon: "+pGrupo.getSalon().getLugar()+ " por el profesor: "+pGrupo.getProfesor().getNombre());
+            // System.out.println();
+            // System.out.println();
+        }
 
         // Zona de Pruebas -------------------------------------------------------------------
 
@@ -415,7 +432,7 @@ public class Main implements Interfaz{
 			            int numSel = materiaSel.getGrupos().size();
 			            materiaSel.agregarGrupo(numSel+1, profesorSel, horarioSel, cuposSel, salonSel);
 			            if (materiaSel.getGrupos().size()==numSel+1) {
-			            	System.out.println("El grupo "+numSel+1+" de la materia "+materiaSel.getNombre()+" ha sido asignado correctamente");
+			            	System.out.println("El grupo "+(numSel+1)+" de la materia "+materiaSel.getNombre()+" ha sido asignado correctamente");
 			            }
 			            else {
 			            	System.out.println("El grupo no ha sido agregado. El salón y/o el profesor no contaba/n con disponibilidad en el horario asignado.");
