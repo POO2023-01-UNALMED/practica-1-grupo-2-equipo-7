@@ -27,6 +27,10 @@ public class Main implements Interfaz{
         System.out.println("Bienvenido al Portal de Servicios Academicos S.M.M");
 
         // Zona de Pruebas -------------------------------------------------------------------
+        // for (Materia materias: Materia.getMateriasTotales()){
+        //    System.out.println(materias.getNombre()); 
+        //    System.out.println(materias.getFacultad()+"\n");
+        // }
         
         // Zona de Pruebas -------------------------------------------------------------------
 
