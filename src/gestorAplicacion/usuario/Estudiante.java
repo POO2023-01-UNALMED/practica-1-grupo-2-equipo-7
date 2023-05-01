@@ -119,6 +119,11 @@ public class Estudiante extends Usuario implements Serializable{
     public void setSueldo(int sueldo) {
         this.sueldo = sueldo;
     }
+
+    public int getValorMatricula() {
+        return valorMatricula;
+    }
+
     
     public boolean isMatriculaPagada() {
         return matriculaPagada;

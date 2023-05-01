@@ -9,18 +9,20 @@ public class Beca implements Serializable{
     private String convenio;
     private double promedioRequerido;
     private double avanceRequerido;
+    private int estratoMinimo;
     private int creditosInscritosRequeridos;
     private int ayudaEconomica;
     private boolean necesitaRecomendacion;
     private static ArrayList<Beca> becas = new ArrayList<Beca>();
 
 
-    public Beca(int cupos, String convenio, double promedioRequerido, double avanceRequerido,
+    public Beca(int cupos, String convenio, double promedioRequerido, double avanceRequerido, int estratoMinimo,
             int creditosInscritosRequeridos, int ayudaEconomica, boolean necesitaRecomendacion) {
         this.cupos = cupos;
         this.convenio = convenio;
         this.promedioRequerido = promedioRequerido;
         this.avanceRequerido = avanceRequerido;
+        this.estratoMinimo = estratoMinimo;
         this.creditosInscritosRequeridos = creditosInscritosRequeridos;
         this.ayudaEconomica = ayudaEconomica;                         
         this.necesitaRecomendacion = necesitaRecomendacion;       
@@ -57,6 +59,13 @@ public class Beca implements Serializable{
 
     public void setAvanceRequerido(double avanceRequerido) {
         this.avanceRequerido = avanceRequerido;
+    }
+
+    public int getEstratoMinimo() {
+        return estratoMinimo;
+    }
+    public void setEstratoMinimo(int estratoMinimo) {
+        this.estratoMinimo = estratoMinimo;
     }
 
     public int getCreditosInscritosRequeridos() {

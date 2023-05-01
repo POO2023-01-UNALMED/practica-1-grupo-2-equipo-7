@@ -170,10 +170,12 @@ public class Coordinador extends Usuario implements Serializable{
             Materia nMateria = new Materia(nombre, codigo, descripcion, creditos, facultad, prerrequisitos);
         }
     }
-    /*Metodo candidato a beca: ... */
+    /*Metodo candidato a beca: el metodo recibe un objeto de tipo estudiante y uno de tipo beca, el cual verifica que el estudiante cumpla con los requisitos necesarios para
+    aplicar a la beca que se ingresa en los parametros y devuelve un booleano que indica si este es candidato a beca o no*/
     public boolean candidatoABeca(Estudiante estudiante, Beca tipoDeBeca){
         if (tipoDeBeca.getCupos() > 0){
-            if ((estudiante.getPromedio() >= tipoDeBeca.getPromedioRequerido()) && (estudiante.getAvance() >= tipoDeBeca.getAvanceRequerido()) && (estudiante.getCreditos() >= tipoDeBeca.getCreditosInscritosRequeridos())){
+            if ((estudiante.getPromedio() >= tipoDeBeca.getPromedioRequerido()) && (estudiante.getAvance() >= tipoDeBeca.getAvanceRequerido()) && 
+            (estudiante.getCreditos() >= tipoDeBeca.getCreditosInscritosRequeridos()) && (estudiante.getEstrato() <= tipoDeBeca.getEstratoMinimo())){
                 if (tipoDeBeca.getNecesitaRecomendacion()){
                     if (tipoDeBeca.getNecesitaRecomendacion()){
                         if (Profesor.recomendarEstudiante(estudiante)){
@@ -182,7 +184,7 @@ public class Coordinador extends Usuario implements Serializable{
                             return true;
                         }
                     }else return false;
-                } else return true; //no necesita recomendacion, pero cumple los demás requisitos
+                } else return true; //no necesita recomendacion, pero cumple los demas requisitos
             }
             else return false;
         }

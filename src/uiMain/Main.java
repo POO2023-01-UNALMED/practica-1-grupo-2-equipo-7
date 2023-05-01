@@ -24,7 +24,7 @@ public class Main implements Interfaz{
         Scanner scanner=new Scanner(System.in);
         Boolean continuar=true;
         Boolean logueado = false;
-        System.out.println("Bienvenido al Portal de Servicios Academicos S.M.M");
+        System.out.println("\nBienvenido al Portal de Servicios Academicos S.M.M");
 
         // Zona de Pruebas -------------------------------------------------------------------
         // for (Materia materias: Materia.getMateriasTotales()){
@@ -37,7 +37,7 @@ public class Main implements Interfaz{
         Usuario usuario = null;
         while(!logueado) {
         	Scanner scanner2 = new Scanner(System.in);
-        	System.out.println("Seleccione como desea ingresar a la plataforma:\n1. Crear nuevo usuario.\n2. Ingresar usuario existente.");
+        	System.out.println("\nSeleccione como desea ingresar a la plataforma:\n1. Crear nuevo usuario.\n2. Ingresar usuario existente.");
         	int opcion_log = scanner.nextInt();
             scanner.nextLine();
         	if (opcion_log==1) {
@@ -130,7 +130,7 @@ public class Main implements Interfaz{
         while(continuar){
             //Aun no esta contruido la interfaz (mensajes bonitos en la terminal)
             //Por aqui ira el menu con las opciones
-            System.out.println("A continuacion encontrara los diferentes servicios ofrecidos por la plataforma.");
+            System.out.println("\nA continuacion encontrara los diferentes servicios ofrecidos por la plataforma.");
             System.out.println("Ingrese la opcion deseada: \n1. Matricular Materia.\n2. Generar Horario.\n3. Eliminar o agregar Materia / Grupo.\n4. Desmatricular Alumno. \n5. Busqueda y Postulacion de Becas. \n6. Salir y Guardar");
             int opcion = scanner.nextInt();
             scanner.nextLine();
@@ -213,24 +213,24 @@ public class Main implements Interfaz{
                                     fin = true;
                                 }
                             }                      
-                            System.out.println("Ingresa el código de la materia que desea agregar.");
+                            System.out.println("Ingresa el codigo de la materia que desea agregar.");
                             int codigo = scanner3_1.nextInt();
                             scanner3_1.nextLine();
                             for (Materia materia : Materia.getMateriasTotales()){
                                 if (materia.getCodigo() == codigo){
-                                    System.out.println("El código que intenta asignarle a la materia, ya le corresponde a una existente.");
+                                    System.out.println("El codigo que intenta asignarle a la materia, ya le corresponde a una existente.");
                                     fin = true;
                                 }
                             }
-                            System.out.println("Ingrese una breve descripción de la materia.");
+                            System.out.println("Ingrese una breve descripcion de la materia.");
                             String descrip = scanner3_1.nextLine();
-                            System.out.println("Ingresa los créditos que le asigna a la materia.");
+                            System.out.println("Ingresa los creditos que le asigna a la materia.");
                             int creditos = scanner3_1.nextInt();
                             scanner3_1.nextLine();
                             System.out.println("Ingrese la facultad a la que pertenece la materia");
                             String facu = scanner3_1.nextLine();
                             
-                            System.out.println("Ingrese cómo desea crear la materia:");
+                            System.out.println("Ingrese como desea crear la materia:");
                             System.out.println("1.Con prerrequisitos.       2.Sin prerrequisitos.");
                             int decision = scanner3_1.nextInt();
                             scanner3_1.nextLine();
@@ -250,13 +250,13 @@ public class Main implements Interfaz{
                                     }
                                 }
                                 usuario.agregarMateria(nombre, codigo, descrip, creditos, facu, pRequisitos);
-                                System.out.println("La materia "+ nombre + " ha sido creada con éxito.");
+                                System.out.println("La materia "+ nombre + " ha sido creada con exito.");
                                 break; 
                             }
                             else if(decision == 2){
                                 System.out.println("Ha escogido crear la materia sin prerrequisitos.");
                                 Materia materiaN = new Materia(nombre, codigo, descrip, creditos, facu);
-                                System.out.println("La materia "+ nombre + " ha sido creada con éxito.");
+                                System.out.println("La materia "+ nombre + " ha sido creada con exito.");
                                 break; 
                             }
                             else if(0 > decision || decision > 2){
@@ -270,7 +270,7 @@ public class Main implements Interfaz{
                     }
                 }
                 else if(opcion_3 == 2){
-                    System.out.println("Has seleccionado la opción 2 (Eliminar materia.)");
+                    System.out.println("Has seleccionado la opcion 2 (Eliminar materia.)");
                     boolean terminar = false;
                     while(!terminar){
                         Scanner scanner3_2 = new Scanner(System.in);
@@ -291,7 +291,7 @@ public class Main implements Interfaz{
                                 break;
                             }
                         }
-                        System.out.println("La materia "+ nomMat + "ha sido eliminada con éxito.");
+                        System.out.println("La materia "+ nomMat + "ha sido eliminada con exito.");
                         break;                     
                     }                    
                 }
@@ -422,7 +422,7 @@ public class Main implements Interfaz{
 			            	System.out.println("El grupo "+(numSel+1)+" de la materia "+materiaSel.getNombre()+" ha sido asignado correctamente");
 			            }
 			            else {
-			            	System.out.println("El grupo no ha sido agregado. El salón y/o el profesor no contaba/n con disponibilidad en el horario asignado.");
+			            	System.out.println("El grupo no ha sido agregado. El salon y/o el profesor no contaba/n con disponibilidad en el horario asignado.");
 			            }
 			            break;
                     }
@@ -522,7 +522,7 @@ public class Main implements Interfaz{
                         if (opcion_1 == 1){
                             Scanner scanner3 = new Scanner(System.in);
                             if (estudiante.getMaterias().size() == 0){
-                                System.out.println("El estudiante no tiene ninguna materia matriculada. Intente otra opción o retroceda para seleccionar otro estudiante\n");
+                                System.out.println("El estudiante no tiene ninguna materia matriculada. Intente otra opcion o retroceda para seleccionar otro estudiante\n");
                             }
                             else{
                             while (true){
@@ -606,21 +606,22 @@ public class Main implements Interfaz{
                 boolean end = false;
                 while(!end){
                     Scanner scanner_5 = new Scanner(System.in); 
-                    System.out.println("Ingrese el número que corresponde a la opción que mejor se adapta a su búsqueda:");
-                    System.out.println("1.Ver listado de becas existentes actualmente.       2.Comprobar si un estudiante es candidato a beca.\n3.Crear nueva beca.                                  4. Eliminar beca.");
+                    System.out.println("Ingrese el numero que corresponde a la opcion que mejor se adapta a su busqueda:");
+                    System.out.println("1.Ver listado de becas existentes actualmente.       2.Aplicar beca a estudiante.\n3.Crear nueva beca.                                  4.Eliminar beca.");
                     int opcion_5 = scanner_5.nextInt();
                     scanner_5.nextLine();
                     if (opcion_5 == 1){
-                        System.out.println("Has seleccionado la opción 1 (Ver listado de becas existentes actualmente.)");
-                        System.out.println("A continuación podrá ver la lista de becas existentes en el momento:");
+                        System.out.println("Has seleccionado la opcion 1 (Ver listado de becas existentes actualmente.)");
+                        System.out.println("A continuacion podra ver la lista de becas existentes en el momento:");
                         Interfaz.mostrarBecas();
+                        continue;
                     }
                     else if(opcion_5 == 2){
                         Scanner scanner5_2 = new Scanner(System.in);
-                        System.out.println("Has seleccionado la opción 2 (Comprobar si un estudiante es candidato a beca.)");
+                        System.out.println("Has seleccionado la opcion 2 (Aplicar beca a estudiante.)");
                         System.out.println("Ingrese el nombre del estudiante");
                         String estNombre = scanner5_2.nextLine();
-                        System.out.println("Ingrese el número que corresponde a la beca que quiere aplicar el estudiante.");
+                        System.out.println("Ingrese el numero que corresponde a la beca que quiere aplicar el estudiante.");
                         Interfaz.mostrarBecas();
                         int nBeca = scanner5_2.nextInt();
                         scanner5_2.nextLine();
@@ -630,9 +631,20 @@ public class Main implements Interfaz{
                             if(est.getNombre().equals(estNombre) == true){
                                 if(tipoBeca.getCupos() == 0){
                                     System.out.println("La beca "+tipoBeca.getConvenio()+" no cuenta con vacantes disponibles en el momento.");
+                                    break;
                                 }
                                 else if (e.candidatoABeca(est,tipoBeca)){
-                                    System.out.println("El estudiante cumple con los requisitos para aplicar a la beca " +tipoBeca.getConvenio()+".");
+                                    System.out.println("El estudiante "+ est.getNombre() +" cumple con los requisitos para aplicar a la beca " +tipoBeca.getConvenio()+".");
+                                    est.setSueldo(tipoBeca.getAyudaEconomica());
+                                    System.out.println("La ayuda economica ha sido cargada al sueldo del estudiante "+est.getNombre()+".");
+                                    if (est.pagarMatricula()){
+                                        System.out.println("La matricula ha sido pagada.");
+                                    }
+                                    else if (est.pagarMatricula() == false){
+                                        System.out.println("La matricula aun no ha sido pagada en su totalidad.");
+                                    }
+                                    break;
+
                                 }
                                 else if (e.candidatoABeca(est,tipoBeca) == false){
                                     System.out.println("El estudiante no cumple con los requisitos para aplicar a la beca " +tipoBeca.getConvenio()+".");
@@ -640,9 +652,9 @@ public class Main implements Interfaz{
                             }
                         }
                     }else if(opcion_5 == 3){
-                        System.out.println("Has seleccionado la opción 3 (Crear nueva beca.)");
+                        System.out.println("Has seleccionado la opcion 3 (Crear nueva beca.)");
                         Scanner scanner5_3 = new Scanner(System.in);
-                        System.out.println("Ingrese el número de cupos totales que tendrá la nueva beca:");
+                        System.out.println("Ingrese el numero de cupos totales que tendra la nueva beca:");
                         int cuposBeca =  scanner5_3.nextInt();
                         scanner5_3.nextLine();
                         System.out.println("Ingrese el nombre de la beca:");
@@ -651,17 +663,20 @@ public class Main implements Interfaz{
                         System.out.println("Ingrese el promedio requerido que debe tener el estudiante para poder aplicar a la beca:");
                         double promedioBeca =  scanner5_3.nextDouble();
                         scanner5_3.nextLine();
-                        System.out.println("Ingrese el número que representa el porcentaje de avance con el que debe contar el estudiante para poder aplicar a la beca:");
+                        System.out.println("Ingrese el numero que representa el porcentaje de avance con el que debe contar el estudiante para poder aplicar a la beca:");
                         double avanceBeca =  scanner5_3.nextDouble();
                         scanner5_3.nextLine();
-                        System.out.println("Ingrese el número de créditos inscritos en el semestre que debe tener el estudiante para aplicar beca:");
+                        System.out.println("Ingrese el estrato minimo que debe tener el estudiante para poder aplicar a la beca:");
+                        int estratoBeca =  scanner5_3.nextInt();
+                        scanner5_3.nextLine();
+                        System.out.println("Ingrese el numero de creditos inscritos en el semestre que debe tener el estudiante para aplicar beca:");
                         int creditosBeca =  scanner5_3.nextInt();
                         scanner5_3.nextLine();
-                        System.out.println("Ingrese la ayuda económica a la que puede acceder el estudiante una vez tenga la beca (Sin puntos ni comas):");
+                        System.out.println("Ingrese la ayuda economica a la que puede acceder el estudiante una vez tenga la beca (Sin puntos ni comas):");
                         int ayudaBeca =  scanner5_3.nextInt();
                         scanner5_3.nextLine();
-                        System.out.println("¿La beca necesita de recomendación por parte de un profesor?");
-                        System.out.println("1.Sí.          2.No.");
+                        System.out.println("¿La beca necesita de recomendacion por parte de un profesor?");
+                        System.out.println("1.Si.          2.No.");
                         int booleano =  scanner5_3.nextInt();
                         scanner5_3.nextLine();
                         boolean recomendacionBeca;
@@ -675,22 +690,26 @@ public class Main implements Interfaz{
                             break;
                         }
                         else if(booleano != 1 || booleano != 2){
-                            System.out.println("Valor inválido, por favor intente nuevamente.");
+                            System.out.println("Valor invalido, por favor intente nuevamente.");
                             continue;
                         }
                         }
                         
-                        Beca nBeca = new Beca(cuposBeca, nombreBeca, promedioBeca, avanceBeca, creditosBeca, ayudaBeca, recomendacionBeca);
+                        Beca nBeca = new Beca(cuposBeca, nombreBeca, promedioBeca, avanceBeca, estratoBeca, creditosBeca, ayudaBeca, recomendacionBeca);
+                        System.out.println("La beca "+ nombreBeca +" ha sido creada con exito.");
+                        break;
                     }
                     else if(opcion_5 == 4){
-                        System.out.println("Has seleccionado la opción 4 (Eliminar beca.)");
+                        System.out.println("Has seleccionado la opcion 4 (Eliminar beca.)");
                         Scanner scanner5_4 = new Scanner(System.in);
-                        System.out.println("Ingrese el número que corresponde a la beca que quiere eliminar:");
+                        System.out.println("Ingrese el numero que corresponde a la beca que quiere eliminar:");
                         Interfaz.mostrarBecas();
                         int becaSel = scanner5_4.nextInt();
                         scanner5_4.nextLine();
                         Beca delBeca = (Beca.getBecas()).get(becaSel-1);
-                        Beca.eliminarBeca(delBeca);                     
+                        Beca.eliminarBeca(delBeca);
+                        System.out.println("La beca "+ delBeca.getConvenio() +" ha sido eliminada con exito.");
+                        break;                     
                     }
                     else if(0 > opcion_5 || opcion_5 > 4){
                         System.out.println("Opcion invalida.");
