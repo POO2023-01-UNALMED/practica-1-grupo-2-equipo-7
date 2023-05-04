@@ -28,9 +28,11 @@ public class Main implements Interfaz{
 
         // Zona de Pruebas -------------------------------------------------------------------
         // for (Materia materias: Materia.getMateriasTotales()){
-        //    System.out.println(materias.getNombre()); 
-        //    System.out.println(materias.getFacultad()+"\n");
+        //    System.out.println(materias.getGrupos().size()); 
         // }
+
+        // Salon slaon2=new Salon("M7-402", 100);
+
         
         // Zona de Pruebas -------------------------------------------------------------------
 
