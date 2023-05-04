@@ -666,7 +666,7 @@ public class Main implements Interfaz{
                         System.out.println("Ingrese el numero que representa el porcentaje de avance con el que debe contar el estudiante para poder aplicar a la beca:");
                         double avanceBeca =  scanner5_3.nextDouble();
                         scanner5_3.nextLine();
-                        System.out.println("Ingrese el estrato minimo que debe tener el estudiante para poder aplicar a la beca:");
+                        System.out.println("Ingrese el estrato maximo que puede tener el estudiante para poder aplicar a la beca:");
                         int estratoBeca =  scanner5_3.nextInt();
                         scanner5_3.nextLine();
                         System.out.println("Ingrese el numero de creditos inscritos en el semestre que debe tener el estudiante para aplicar beca:");
