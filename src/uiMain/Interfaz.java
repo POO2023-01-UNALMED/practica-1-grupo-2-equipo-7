@@ -308,6 +308,9 @@ public interface Interfaz {
                     }else if (estudiante.getCreditos()+materia.getCreditos()>limitesCreditos){
                         continue;
                     }
+                    if (estudiante.getMaterias().contains(materia)){
+                        continue;
+                    }
                     materiasDisponibles.add(materia);
                     System.out.println(materiasDisponibles.size()+" Nombre: "+materia.getNombre()+" Cupos: "+materia.getCupos());
                 }
@@ -424,6 +427,7 @@ public interface Interfaz {
                 String imprimir="Materia "+materia.getNombre()+" - grupo #"+grupoSeleccionado.getNumero();
                 System.out.println(imprimir+ ". Ha sido matriculado al estudiante: "+estudiante.getNombre());
                 salir=true;
+                estudiante.getHorario().ocuparHorario(grupoSeleccionado);
 
                 System.out.println("Desea visualizar el horario del estudiante?: \n1- Si\n2- No");
                 int opcion2=scanner.nextInt();
