@@ -425,8 +425,6 @@ public class Main implements Interfaz{
 			            if(salida) {break;}
 			            int numSel = materiaSel.getGrupos().size();
 			            materiaSel.agregarGrupo(numSel+1, profesorSel, horarioSel, cuposSel, salonSel);
-			            int sumCupos = materiaSel.getCupos()+cuposSel;
-			            materiaSel.setCupos(sumCupos);
 			            if (materiaSel.getGrupos().size()==numSel+1) {
 			            	System.out.println("El grupo "+(numSel+1)+" de la materia "+materiaSel.getNombre()+" ha sido asignado correctamente");
 			            }

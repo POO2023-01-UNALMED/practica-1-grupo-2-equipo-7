@@ -169,6 +169,7 @@ public class Materia implements Serializable{
     	grupo.getProfesor().desvincularGrupo(grupo);
     	grupo.getSalon().getHorario().liberarHorario(grupo.getHorario());
         this.grupos.remove(grupo);
+        this.cupos -= grupo.getCupos();
         for(int i=numero-1;i<this.grupos.size();i++) {
         	Grupo grupoCamb = this.grupos.get(i);
         	int nGrupoAnt = grupoCamb.getNumero();
@@ -197,6 +198,7 @@ public class Materia implements Serializable{
     	//En caso de contar con disponibilidad, se procede a declarar el nuevo grupo y agregarselo a su respectiva meteria, profesor y salon
     	if(dispProfesor&&dispSalon&&daMateria) {
     		Grupo nGrupo = crearGrupo(numero,profesor,horario,cupos,salon);
+    		this.cupos += cupos;
     		salon.getHorario().ocuparHorario(horario, nGrupo);
     		profesor.vincularGrupo(nGrupo);
     	}
