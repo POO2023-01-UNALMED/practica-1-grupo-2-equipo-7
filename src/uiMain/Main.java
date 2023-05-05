@@ -327,13 +327,18 @@ public class Main implements Interfaz{
                             scanner4.nextLine();
 		                    
 		                    if (opcion_profe==1) {
-		                    	System.out.println("Seleccione uno de los siguientes profesores");
-		                    	System.out.print(Profesor.mostrarProfesMateria(materiaSel.getNombre()));
-		                    	int seleccionProfe = scanner4.nextInt();
-                                scanner4.nextLine();
-		                    	ArrayList<Profesor> preProfes = Profesor.profesoresDeMateria(materiaSel.getNombre());
-		                    	profesorSel = preProfes.get(seleccionProfe-1);
-		                    	break;
+		                    	if(Profesor.profesoresDeMateria(materiaSel.getNombre()).size()==0) {
+		                    		System.out.println("No existen profesores registrados capacitados para dictar la materia");
+		                    	}
+		                    	else {
+		                    		System.out.println("Seleccione uno de los siguientes profesores");
+		                    		System.out.print(Profesor.mostrarProfesMateria(materiaSel.getNombre()));
+		                    		int seleccionProfe = scanner4.nextInt();
+		                    		scanner4.nextLine();
+		                    		ArrayList<Profesor> preProfes = Profesor.profesoresDeMateria(materiaSel.getNombre());
+		                    		profesorSel = preProfes.get(seleccionProfe-1);
+		                    		break;
+		                    	}
 		                    }
 		                    
 		                    else if(opcion_profe==2){
