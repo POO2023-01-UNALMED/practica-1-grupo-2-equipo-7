@@ -32,7 +32,13 @@ public class Main implements Interfaz{
         // }
 
         // Salon slaon2=new Salon("M7-402", 100);
-
+        // for (Materia materia: Materia.getMateriasTotales()){
+        //     int suma=0;
+        //     for (Grupo grupo: materia.getGrupos()){
+        //         suma+=grupo.getCupos();
+        //     }
+        //     materia.setCupos(suma);
+        // }
         
         // Zona de Pruebas -------------------------------------------------------------------
 
