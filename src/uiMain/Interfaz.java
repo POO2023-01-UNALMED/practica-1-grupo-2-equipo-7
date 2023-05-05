@@ -50,29 +50,28 @@ public interface Interfaz {
  
     public static void imprimirListaPorConsola(ArrayList<Materia> ListaAMostrar){
         /*
-            * Toma una lista y la imprime con un formato especial
-            */
-        // imprimir Lista
+         * Toma una lista y la imprime con un formato especial
+         */
         
         int con =1;
-        System.out.printf("%-3s %-60s %-20s %-10s%n", "Num", "Nombre", "Facultad","Codigo");
+        System.out.printf("%-3s %-60s %-45s %-10s%n", "Num", "Nombre", "Facultad","Codigo");
         
         for (Materia pMateria:ListaAMostrar){
-            System.out.printf("%-3d %-60s %-20s %-10d%n",con,pMateria.getNombre(),pMateria.getFacultad(),pMateria.getCodigo());
+            System.out.printf("%-3d %-60s %-45s %-10d%n",con,pMateria.getNombre(),pMateria.getFacultad(),pMateria.getCodigo());
             con++;
         }       
     }
   
     public static void imprimirHorarioGenerado(ArrayList<Materia> ListaAGenerar){
         /*
-            * Muestra el horario generado ademas de que recoge la informacion para costruirlo
-            */
+         * Muestra el horario generado ademas de que recoge la informacion para costruirlo
+         */
 
         // Elecciones del usuario
         Scanner scanner=new Scanner(System.in);
         ArrayList<Materia> listaMateriasAGenerar = new ArrayList<Materia>();
 
-        System.out.println("Indique uno por uno los numeros de la materias que quiere incluir en su horario y envie 0 cuando termine: ");
+        System.out.println("Indique uno por uno los numeros de la materias que quiere incluir en su horario tenga en cuenta que las primeras que envie tendran mayor prioridad, evite repetir materias para evitar errores y envie 0 cuando termine: ");
         boolean flag = true;
         while(flag){
             System.out.print("-> ");
@@ -109,7 +108,7 @@ public interface Interfaz {
                 imprimirHorarioGenerado(listaObjetivo);
             }
             else{
-                System.out.println("Ningun elemente hizo encontrado con el filtro dado");
+                System.out.println("Ningun elemento ha sido encontrado con el filtro dado");
             }
         }
   

@@ -108,35 +108,53 @@ public class Coordinador extends Usuario implements Serializable{
         Materia materiaObstaculo = null;
 
 
-        int[] gPosible = new int[materias.size()];        
+        int[] gPosible = new int[materias.size()];   
+        int[] mPosibles = new int[materias.size()];    
         int i =0; // indice de materias
         
         while (true){
             ArrayList<String> pClases = materias.get(i).getGrupos().get(gPosible[i]).getHorario();
-            if (!horario.comprobarDisponibilidad(pClases)){
-                if(gPosible[i]==materias.get(i).getGrupos().size()-1){
-                    ok = false;
-                    horario = null;
-                    materiaObstaculo = materias.get(i);
+            if (horario.comprobarDisponibilidad(pClases)){
+                
+                // Se la asignamos al horario
+                horario.ocuparHorario(materias.get(i).getGrupos().get(gPosible[i]));
+                // Al ponerse 1 significa que si es posible poner dicha materia
+                mPosibles[i] =1;
+                // Pasamos a la siguiente materia
+                i++;
+                // Comprobamos si es la ultima 
+                if (i==materias.size()){
                     break;
                 }
-                else{
+
+            }else{
+                // Pasamos al siguiente grupo en la materia i
+                gPosible[i]++;
+
+                // Comprobamos si la materia es imposible de dar
+                if (gPosible[i]==materias.get(i).getGrupos().size()){
+                    // Tenemos que probar todas las posibilidades por lo tanto probamos con el siguiente grupo de la maeria i-1
+                    i--;
+                    horario.liberarHorario(materias.get(i).getGrupos().get(gPosible[i]).getHorario());
                     gPosible[i]++;
+                    gPosible[i+1]=0;
+
+                    // Comprobamos si, aunque iteramos todas las posibilidades no se puede poner la materia i
+                    if (gPosible[i]==materias.get(i).getGrupos().size()){
+                        int m =0;
+                        for (int k:mPosibles){
+                            if (k==0){
+                                materiaObstaculo = materias.get(m);
+                                ok = false;
+                            }else{
+                                m++;
+                            }
+                        }
+                        break;
+                    }
                 }
+
             }
-            
-            else if(i==materias.size()-1){
-                for (int k=0;k<materias.size();k++){
-                    Grupo grupo = materias.get(k).getGrupos().get(gPosible[k]);
-                    horario.ocuparHorario(grupo);
-                }
-                break;
-            }
-            
-            else{
-                i++;
-            };
-            // }
         }
 
         resultado[0] = ok;
