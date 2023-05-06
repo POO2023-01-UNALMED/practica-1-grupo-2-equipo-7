@@ -31,11 +31,10 @@ public class Main implements Interfaz{
         // for (Materia pMateria:Materia.getMateriasTotales()){
         //     System.out.println();
         //     System.out.println(pMateria.getNombre());
+        //     System.out.println("Cupos materia: "+pMateria.getCupos());
         //     for(Grupo pGrupo:pMateria.getGrupos()){
-        //         System.out.println(pGrupo.getSalon().getLugar()+": ");
-        //         for(String pHora:pGrupo.getHorario()){
-        //             System.out.println(pHora);
-        //         }
+        //         // System.out.println(pGrupo.getSalon().getLugar()+": ");
+        //         System.out.println("Cupos grupo: "+pGrupo.getCupos());
         //     }
         // }
 
