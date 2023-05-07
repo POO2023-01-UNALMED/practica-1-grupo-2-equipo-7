@@ -649,7 +649,7 @@ public class Main implements Interfaz{
                         }
 
                         if(nomEst.contains(estNombre) == false){
-                            System.out.println("El nombre ingresado no fue encontrado entre los estudiantes actuales, intentelo otra vez (Recuerde que este debe ir con mayúscula inicial en cada palabra y sin tildes).");
+                            System.out.println("El nombre ingresado no fue encontrado entre los estudiantes actuales, intentelo otra vez (Recuerde que este debe ir con mayuscula inicial en cada palabra y sin tildes).");
                             continue;
                         }
 
