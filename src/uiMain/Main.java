@@ -616,6 +616,7 @@ public class Main implements Interfaz{
                 break;
             case 5:
             Coordinador e = (Coordinador) usuario;
+            ArrayList<Estudiante> estudiantesBeneficiados = new ArrayList<Estudiante>();
                 System.out.println("Has seleccionado la opcion 5 (Busqueda y Postulacion Becas).");
                 boolean end = false;
                 while(!end){
@@ -641,6 +642,18 @@ public class Main implements Interfaz{
                         scanner5_2.nextLine();
                         Beca tipoBeca = (Beca.getBecas()).get(nBeca-1);
 
+                        ArrayList<String> nomEst = new ArrayList<String>();
+                        for(Estudiante estu : Estudiante.getEstudiantes()){
+                            String nom = estu.getNombre();
+                            nomEst.add(nom);
+                        }
+
+                        if(nomEst.contains(estNombre) == false){
+                            System.out.println("El nombre ingresado no fue encontrado entre los estudiantes actuales, intentelo otra vez (Recuerde que este debe ir con mayúscula inicial en cada palabra y sin tildes).");
+                                    continue;
+                        }
+                        
+                        
                         for(Estudiante est : Estudiante.getEstudiantes()){
                             if(est.getNombre().equals(estNombre) == true){
                                 if(tipoBeca.getCupos() == 0){
