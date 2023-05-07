@@ -28,21 +28,7 @@ public class Main implements Interfaz{
 
         // Zona de Pruebas -------------------------------------------------------------------
 
-        // for (Materia pMateria:Materia.getMateriasTotales()){
-        //     System.out.println();
-        //     System.out.println(pMateria.getNombre());
-        //     System.out.println("Cupos materia: "+pMateria.getCupos());
-        //     for(Grupo pGrupo:pMateria.getGrupos()){
-        //         // System.out.println(pGrupo.getSalon().getLugar()+": ");
-        //         System.out.println("Cupos grupo: "+pGrupo.getCupos());
-        //     }
-        // }
-
-
-        // for (Materia materias: Materia.getMateriasTotales()){
-        //    System.out.println(materias.getGrupos().size()); 
-        // }
-
+       
         // Salon slaon2=new Salon("M7-402", 100);
         // for (Materia materia: Materia.getMateriasTotales()){
         //     int suma=0;

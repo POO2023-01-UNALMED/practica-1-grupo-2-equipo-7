@@ -19,7 +19,7 @@ import gestorAplicacion.administracion.Beca;
 
 public class Deserializador {
 
-    public static <T> void deserializar(ArrayList<T> lista, String nombre){
+    private static <T> void deserializar(ArrayList<T> lista, String nombre){
         
         File archivo = new File("");
         FileInputStream fis;

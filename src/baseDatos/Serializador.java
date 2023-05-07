@@ -12,7 +12,7 @@ import gestorAplicacion.usuario.*;
 
 public class Serializador {
 
-    public static void serializar(ArrayList<? extends Object> lista, String nombre) {
+    private static void serializar(ArrayList<? extends Object> lista, String nombre) {
     
         File archivo = new File("");
 
