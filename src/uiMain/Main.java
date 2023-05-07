@@ -650,9 +650,15 @@ public class Main implements Interfaz{
 
                         if(nomEst.contains(estNombre) == false){
                             System.out.println("El nombre ingresado no fue encontrado entre los estudiantes actuales, intentelo otra vez (Recuerde que este debe ir con mayúscula inicial en cada palabra y sin tildes).");
-                                    continue;
+                            continue;
                         }
-                        
+
+                        for(Estudiante becado : estudiantesBeneficiados){
+                            if(becado.getNombre().equals(estNombre) == true){
+                                System.out.println("El estudiante ya ha aplicado exitosamente a una beca, no puede aplicar a otra durante el semestre academico actual.");
+                                break;
+                            }
+                        }
                         
                         for(Estudiante est : Estudiante.getEstudiantes()){
                             if(est.getNombre().equals(estNombre) == true){
@@ -661,9 +667,12 @@ public class Main implements Interfaz{
                                     break;
                                 }
                                 else if (e.candidatoABeca(est,tipoBeca)){
+                                    estudiantesBeneficiados.add(est);
                                     System.out.println("El estudiante "+ est.getNombre() +" cumple con los requisitos para aplicar a la beca " +tipoBeca.getConvenio()+".");
+                                    estudiantesBeneficiados.add(est);
                                     est.setSueldo(tipoBeca.getAyudaEconomica());
                                     System.out.println("La ayuda economica ha sido cargada al sueldo del estudiante "+est.getNombre()+".");
+
                                     if (est.pagarMatricula()){
                                         System.out.println("La matricula ha sido pagada.");
                                     }
