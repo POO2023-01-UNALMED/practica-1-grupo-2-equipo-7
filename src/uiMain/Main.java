@@ -29,7 +29,10 @@ public class Main implements Interfaz{
         // Zona de Pruebas -------------------------------------------------------------------
 
        
-        // Salon slaon2=new Salon("M7-402", 100);
+        // Salon slaon2=new Salon("41-201", 100);
+        // for (Salon salon: Salon.getSalones()){
+        //     System.out.println(salon.getLugar());
+        // }
         // for (Materia materia: Materia.getMateriasTotales()){
         //     int suma=0;
         //     for (Grupo grupo: materia.getGrupos()){
