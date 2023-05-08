@@ -7,12 +7,12 @@ import gestorAplicacion.administracion.Materia;
 
 public abstract class Usuario implements Serializable{
     private static final long serialVersionUID = 1L;
-    private long id;
-    private String nombre;
-    private String tipo;
-    private String pw;
-    private String facultad;
-    private static ArrayList<Usuario> usuariosTotales = new ArrayList<Usuario>();
+    protected long id;
+    protected String nombre;
+    protected String tipo;
+    protected String pw;
+    protected String facultad;
+    protected static ArrayList<Usuario> usuariosTotales = new ArrayList<Usuario>();
     
     
     public abstract String toString();
