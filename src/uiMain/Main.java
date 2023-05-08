@@ -616,6 +616,7 @@ public class Main implements Interfaz{
                 break;
             case 5:
             Coordinador e = (Coordinador) usuario;
+            ArrayList<Estudiante> estudiantesBeneficiados = new ArrayList<Estudiante>();
                 System.out.println("Has seleccionado la opcion 5 (Busqueda y Postulacion Becas).");
                 boolean end = false;
                 while(!end){
@@ -641,6 +642,24 @@ public class Main implements Interfaz{
                         scanner5_2.nextLine();
                         Beca tipoBeca = (Beca.getBecas()).get(nBeca-1);
 
+                        ArrayList<String> nomEst = new ArrayList<String>();
+                        for(Estudiante estu : Estudiante.getEstudiantes()){
+                            String nom = estu.getNombre();
+                            nomEst.add(nom);
+                        }
+
+                        if(nomEst.contains(estNombre) == false){
+                            System.out.println("El nombre ingresado no fue encontrado entre los estudiantes actuales, intentelo otra vez (Recuerde que este debe ir con mayuscula inicial en cada palabra y sin tildes).");
+                            continue;
+                        }
+
+                        for(Estudiante becado : estudiantesBeneficiados){
+                            if(becado.getNombre().equals(estNombre) == true){
+                                System.out.println("El estudiante ya ha aplicado exitosamente a una beca, no puede aplicar a otra durante el semestre academico actual.");
+                                break;
+                            }
+                        }
+                        
                         for(Estudiante est : Estudiante.getEstudiantes()){
                             if(est.getNombre().equals(estNombre) == true){
                                 if(tipoBeca.getCupos() == 0){
@@ -648,9 +667,12 @@ public class Main implements Interfaz{
                                     break;
                                 }
                                 else if (e.candidatoABeca(est,tipoBeca)){
+                                    estudiantesBeneficiados.add(est);
                                     System.out.println("El estudiante "+ est.getNombre() +" cumple con los requisitos para aplicar a la beca " +tipoBeca.getConvenio()+".");
+                                    estudiantesBeneficiados.add(est);
                                     est.setSueldo(tipoBeca.getAyudaEconomica());
                                     System.out.println("La ayuda economica ha sido cargada al sueldo del estudiante "+est.getNombre()+".");
+
                                     if (est.pagarMatricula()){
                                         System.out.println("La matricula ha sido pagada.");
                                     }
