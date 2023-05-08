@@ -232,13 +232,18 @@ public class Estudiante extends Usuario implements Serializable{
         /*
          * Desmatricula todas las materia de un estudiante
          */
+        ArrayList<Grupo> gruposEliminar = new ArrayList<>();
         for (Grupo grupo: this.grupos){
             grupo.getMateria().setCupos(grupo.getMateria().getCupos()+1);
             grupo.setCupos(grupo.getCupos()+1);
             this.setCreditos(this.getCreditos()-grupo.getMateria().getCreditos());
             grupo.eliminarEstudiante(this);
-            this.eliminarGrupo(grupo);
+            gruposEliminar.add(grupo);
             this.setMaterias(new ArrayList<Materia>());
+        }
+        int num = gruposEliminar.size();
+        for (int i = 0;i<num;i++){
+            this.eliminarGrupo(gruposEliminar.get(i));
         }
         
     }

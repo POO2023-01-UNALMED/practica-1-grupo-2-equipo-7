@@ -38,7 +38,7 @@ public interface Interfaz {
         // filtro == 3 == Codigo 
         else if (opcionFiltro == 3){
             for (Materia pMateria:Materia.getMateriasTotales()){
-                if(pMateria.getCodigo()==Integer.parseInt(filtro)){
+                if(Integer.toString(pMateria.getCodigo()).contains(filtro)){
                     listaFiltrada.add(pMateria);
                 }
             }

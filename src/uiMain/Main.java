@@ -189,7 +189,7 @@ public class Main implements Interfaz{
 
                         }
                         else if (opt2 == 3){
-                            System.out.println("Ingrese el codigo: ");
+                            System.out.println("Ingrese el codigo o la parte del codigo a filtrar: ");
                             String opt3=scanner.nextLine();
     
                             Interfaz.fusionImpresiones(Interfaz.mostrarMateriasConFiltro(opt2, opt3));
