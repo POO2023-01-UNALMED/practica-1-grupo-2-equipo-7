@@ -44,7 +44,7 @@ public class Main implements Interfaz{
         // for(Profesor profe : Profesor.getProfesores()){
         //     System.out.println(profe.getFacultad());
         // }
-        
+
         // for(Estudiante estudiantee : Estudiante.getEstudiantes()){
         //     System.out.println(estudiantee.getNombre());
         //     System.out.println(estudiantee.getFacultad());
