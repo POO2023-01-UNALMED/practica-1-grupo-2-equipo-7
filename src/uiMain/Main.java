@@ -28,27 +28,7 @@ public class Main implements Interfaz{
 
         // Zona de Pruebas -------------------------------------------------------------------
 
-        // for (Salon salon: Salon.getSalones()){
-        //     System.out.println(salon.getLugar());
-        //     System.out.println(salon.getAforo());
-        // }
-        // for (Materia materia: Materia.getMateriasTotales()){
-        //     int suma=0;
-        //     for (Grupo grupo: materia.getGrupos()){
-        //         suma+=grupo.getCupos();
-        //     }
-        //     materia.setCupos(suma);
-        // }
-
-        // Profesor.getProfesores().get(19).setFacultad("Facultad de ciencias humanas y economica");
-        // for(Profesor profe : Profesor.getProfesores()){
-        //     System.out.println(profe.getFacultad());
-        // }
-
-        // for(Estudiante estudiantee : Estudiante.getEstudiantes()){
-        //     System.out.println(estudiantee.getNombre());
-        //     System.out.println(estudiantee.getFacultad());
-        // }
+       
         
         // Zona de Pruebas -------------------------------------------------------------------
 
@@ -684,10 +664,10 @@ public class Main implements Interfaz{
                                     System.out.println("La ayuda economica ha sido cargada al sueldo del estudiante "+est.getNombre()+".");
 
                                     if (est.pagarMatricula()){
-                                        System.out.println("La matricula ha sido pagada.");
+                                        System.out.println("Con la ayuda economica, su matricula ha sido pagada con totalidad.");
                                     }
                                     else if (est.pagarMatricula() == false){
-                                        System.out.println("La matricula aun no ha sido pagada en su totalidad.");
+                                        System.out.println("Con la ayuda economica, su matricula aún no ha sido pagada con totalidad.");
                                     }
                                     break;
 
