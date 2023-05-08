@@ -28,15 +28,6 @@ public class Main implements Interfaz{
 
         // Zona de Pruebas -------------------------------------------------------------------
 
-       
-        // Salon salonAn_1=new Salon("43-309", 60);
-        // Salon salonAn_2=new Salon("21-331", 60);
-        // Salon salonAn_3=new Salon("11-225", 60);
-        // Salon salonAn_4=new Salon("M3-112", 55);
-        // Salon salonAn_5=new Salon("41-103", 60);
-        // Salon salonAn_6=new Salon("12-304", 100);
-        // Salon salonAn_7=new Salon("M8B-98-09", 50);
-
         // for (Salon salon: Salon.getSalones()){
         //     System.out.println(salon.getLugar());
         //     System.out.println(salon.getAforo());
