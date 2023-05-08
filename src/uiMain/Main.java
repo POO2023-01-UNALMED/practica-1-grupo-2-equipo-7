@@ -39,10 +39,12 @@ public class Main implements Interfaz{
         //     }
         //     materia.setCupos(suma);
         // }
-        Profesor.getProfesores().get(19).setFacultad("Facultad de ciencias humanas y economica");
-        for(Profesor profe : Profesor.getProfesores()){
-            System.out.println(profe.getFacultad());
-        }
+
+        // Profesor.getProfesores().get(19).setFacultad("Facultad de ciencias humanas y economica");
+        // for(Profesor profe : Profesor.getProfesores()){
+        //     System.out.println(profe.getFacultad());
+        // }
+        
         // for(Estudiante estudiantee : Estudiante.getEstudiantes()){
         //     System.out.println(estudiantee.getNombre());
         //     System.out.println(estudiantee.getFacultad());
