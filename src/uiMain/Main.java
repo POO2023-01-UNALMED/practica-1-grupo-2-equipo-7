@@ -625,12 +625,7 @@ public class Main implements Interfaz{
                         System.out.println("Has seleccionado la opcion 2 (Aplicar beca a estudiante.)");
                         System.out.println("Ingrese el nombre del estudiante");
                         String estNombre = scanner5_2.nextLine();
-                        System.out.println("Ingrese el numero que corresponde a la beca que quiere aplicar el estudiante.");
-                        Interfaz.mostrarBecas();
-                        int nBeca = scanner5_2.nextInt();
-                        scanner5_2.nextLine();
-                        Beca tipoBeca = (Beca.getBecas()).get(nBeca-1);
-
+                        
                         ArrayList<String> nomEst = new ArrayList<String>();
                         for(Estudiante estu : Estudiante.getEstudiantes()){
                             String nom = estu.getNombre();
@@ -645,9 +640,16 @@ public class Main implements Interfaz{
                         for(Estudiante becado : estudiantesBeneficiados){
                             if(becado.getNombre().equals(estNombre) == true){
                                 System.out.println("El estudiante ya ha aplicado exitosamente a una beca, no puede aplicar a otra durante el semestre academico actual.");
-                                break;
+                                end = true;;
                             }
                         }
+
+                        System.out.println("Ingrese el numero que corresponde a la beca que quiere aplicar el estudiante.");
+                        Interfaz.mostrarBecas();
+                        int nBeca = scanner5_2.nextInt();
+                        scanner5_2.nextLine();
+                        Beca tipoBeca = (Beca.getBecas()).get(nBeca-1);
+
                         
                         for(Estudiante est : Estudiante.getEstudiantes()){
                             if(est.getNombre().equals(estNombre) == true){
@@ -685,6 +687,13 @@ public class Main implements Interfaz{
                         scanner5_3.nextLine();
                         System.out.println("Ingrese el nombre de la beca:");
                         String nombreBeca =  scanner5_3.nextLine();
+                        for(Beca beca : Beca.getBecas()){
+                            if(beca.getConvenio().equals(nombreBeca)){
+                                System.out.println("Ya existe una beca con el nombre que se pretende dar, intentelo nuevamente.");
+                            }
+                        }
+                        end = true;
+                        if(end){continue;}
                         // scanner5_3.nextLine();
                         System.out.println("Ingrese el promedio requerido que debe tener el estudiante para poder aplicar a la beca:");
                         double promedioBeca =  scanner5_3.nextDouble();
