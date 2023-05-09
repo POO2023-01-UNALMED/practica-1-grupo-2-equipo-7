@@ -28,6 +28,17 @@ public class Main implements Interfaz{
 
         // Zona de Pruebas -------------------------------------------------------------------
         
+
+        // Para ver todos los grupos de todas las materias
+
+        // int con=1;
+        // for (Materia pMateria:Materia.getMateriasTotales()){
+        //     System.out.println("\n"+con+". "+pMateria.getNombre());
+        //     con++;
+        //     for (Grupo pGrupo:pMateria.getGrupos()){
+        //         System.out.println(pGrupo.getNumero()+". "+pGrupo.getSalon().getLugar());
+        //     }
+        // }
         
         
         // Zona de Pruebas -------------------------------------------------------------------
