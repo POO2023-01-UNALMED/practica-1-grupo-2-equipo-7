@@ -690,9 +690,10 @@ public class Main implements Interfaz{
                         for(Beca beca : Beca.getBecas()){
                             if(beca.getConvenio().equals(nombreBeca)){
                                 System.out.println("Ya existe una beca con el nombre que se pretende dar, intentelo nuevamente.");
+                                end = true;
                             }
                         }
-                        end = true;
+                        
                         if(end){continue;}
                         // scanner5_3.nextLine();
                         System.out.println("Ingrese el promedio requerido que debe tener el estudiante para poder aplicar a la beca:");
@@ -712,10 +713,10 @@ public class Main implements Interfaz{
                         scanner5_3.nextLine();
                         System.out.println("¿La beca necesita de recomendacion por parte de un profesor?");
                         System.out.println("1.Si.          2.No.");
+                        boolean recomendacionBeca = true;
+                        while(true){
                         int booleano =  scanner5_3.nextInt();
                         scanner5_3.nextLine();
-                        boolean recomendacionBeca;
-                        while(true){
                             if(booleano == 1){
                             recomendacionBeca = true;
                             break;
