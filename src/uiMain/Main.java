@@ -27,8 +27,8 @@ public class Main implements Interfaz{
         System.out.println("\nBienvenido al Portal de Servicios Academicos S.M.M");
 
         // Zona de Pruebas -------------------------------------------------------------------
-
-       
+        
+        
         
         // Zona de Pruebas -------------------------------------------------------------------
 
