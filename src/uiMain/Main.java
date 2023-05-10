@@ -367,17 +367,30 @@ public class Main implements Interfaz{
 		                    	String nomb = scanner4.nextLine();
 		                    	System.out.println("Ingrese la facultad a la que pertenece el profesor: ");
 		                    	String facu = scanner4.nextLine();
-		                    	System.out.println("Ingrese las materias (separadas por comas con su respectivo espacio) para las cuales el profesor esta capacitado:");
-		                    	String materias = scanner4.nextLine();
-		                    	String[] mate = materias.split(", ");
-		                    	ArrayList<Materia> mates = new ArrayList<Materia>();
-		                    	for (String smateria:mate) {
-		                    		for (Materia materia:Materia.getMateriasTotales()) {
-		                    			if (smateria.equals(materia.getNombre())) {
-		                    				mates.add(materia);
-		                    				break;
-		                    			}
-		                    		}
+		                    	boolean maters = false;
+		                    	ArrayList<Materia> mates = null;
+		                    	while(!maters) {
+			                    	System.out.println("Ingrese las materias (separadas por comas con su respectivo espacio) para las cuales el profesor esta capacitado:");
+			                    	String materias = scanner4.nextLine();
+			                    	String[] mate = materias.split(", ");
+			                    	mates = new ArrayList<Materia>();
+			                    	for (String smateria:mate) {
+			                    		for (Materia materia:Materia.getMateriasTotales()) {
+			                    			if (smateria.equals(materia.getNombre())) {
+			                    				mates.add(materia);
+			                    				break;
+			                    			}
+			                    		}
+			                    	}
+			                    	if(mate.length!=mates.size()) {
+			                    		System.out.println("Alguna de las materias ingresadas no existe. Intente nuevamente");
+			                    	}
+			                    	else if (!(Arrays.asList(mate).contains(materiaSel.getNombre()))){
+			                    		System.out.println("Debe incluir la materia a la que corresponde este nuevo grupo. Intente nuevamente.");
+			                    	}
+			                    	else {
+			                    		maters = true;
+			                    	}
 		                    	}
 		                    	profesorSel = new Profesor(nomb,facu,mates);
 		                    	break;
