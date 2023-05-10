@@ -31,14 +31,14 @@ public class Main implements Interfaz{
 
         // Para ver todos los grupos de todas las materias
 
-        // int con=1;
-        // for (Materia pMateria:Materia.getMateriasTotales()){
-        //     System.out.println("\n"+con+". "+pMateria.getNombre());
-        //     con++;
-        //     for (Grupo pGrupo:pMateria.getGrupos()){
-        //         System.out.println(pGrupo.getNumero()+". "+pGrupo.getSalon().getLugar());
-        //     }
-        // }
+        /* int con=1;
+         for (Materia pMateria:Materia.getMateriasTotales()){
+             System.out.println("\n"+con+". "+pMateria.getNombre());
+             con++;
+             for (Grupo pGrupo:pMateria.getGrupos()){
+                 System.out.println(pGrupo.getNumero()+". "+pGrupo.getSalon().getLugar());
+             }
+         }*/
         
         
         // Zona de Pruebas -------------------------------------------------------------------
@@ -52,11 +52,13 @@ public class Main implements Interfaz{
         	if (opcion_log==1) {
         		String nomb;
         		boolean existe;
+        		boolean salir = false;
         		do {
         			System.out.println("Ingrese su nombre completo:\nSi desea salir introduzca la palabra Salir");
         			nomb = scanner2.nextLine();
-        			if (nomb=="Salir") {
+        			if (nomb.equals("Salir")) {
         				existe = false;
+        				salir = true;
         			}
         			else if (Interfaz.existenciaUsuario(nomb)) {
         				System.out.println("Ya existe un usuario asociado a este nombre.");
@@ -66,10 +68,19 @@ public class Main implements Interfaz{
         				existe=false;
         			}
         		}while (existe);
+        		if (salir){
+        			continue;
+        		}
         		System.out.println("Ingrese la facultad a la que pertenece:");
         		String facul = scanner2.nextLine();
+        		if(facul.equals("Salir")) {
+        			continue;
+        		}
         		System.out.println("Ingrese su contrasena:");
         		String cont = scanner2.nextLine();
+        		if(facul.equals("Salir")) {
+        			continue;
+        		}
         		long id = Interfaz.generarId();
         		usuario = new Coordinador(facul,id,nomb,cont);
         		System.out.println("Se ha creado un nuevo usuario a nombre de "+nomb+" con el id "+id+" asignado.\nRecuerde que este id sera con el que inicie sesion en este usuario de ahora en adelante");
@@ -204,9 +215,12 @@ public class Main implements Interfaz{
                 break;
             case 3:
                 System.out.println("Has seleccionado la opcion 3 (Eliminar o agregar Materia / Grupo).");
-                System.out.println("Ingrese la opcion que se ajuste a su busqueda:\n1.Agregar Materia.       2.Eliminar Materia.\n3.Agregar Grupo.         4.Eliminar Grupo.");
+                System.out.println("Ingrese la opcion que se ajuste a su busqueda:\n1.Agregar Materia.       2.Eliminar Materia.\n3.Agregar Grupo.         4.Eliminar Grupo.\n5.Salir.");
                 int opcion_3 = scanner.nextInt();
                 scanner.nextLine();
+                if(opcion_3==5){
+                	continue;
+                }
                 if(opcion_3 == 1){
                     System.out.println("Has seleccionado la opcion 1 (Agregar materia.)");
                     if(opcion_3 == 1){
@@ -473,7 +487,7 @@ public class Main implements Interfaz{
                     			break;
                     		}
                     		else {
-                    			materiaSel.eliminarGrupo(numSel-1);
+                    			materiaSel.eliminarGrupo(numSel);
                     			System.out.println("El grupo "+numSel+" de la materia "+materiaSel.getNombre()+" ha sido eliminado con exito");
                     			break;
                     		}
