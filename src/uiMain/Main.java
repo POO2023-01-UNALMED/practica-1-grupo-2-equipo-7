@@ -149,8 +149,8 @@ public class Main implements Interfaz{
                 Interfaz.matricularMateria();
                 break;
             case 2:
-                System.out.println("Has seleccionado la opcion 2 (Generar Horario).");
-                System.out.println("Esta Opcion te permitira generar una horario aleatorio segun unas materias dadas.");
+                System.out.println("\nHas seleccionado la opcion 2 (Generar Horario).");
+                System.out.println("Esta Opcion te permitira generar una horario segun unas materias dadas.");
                 
                 boolean salir = true;
                 while(salir){

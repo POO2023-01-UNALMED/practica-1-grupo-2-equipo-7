@@ -64,7 +64,7 @@ public interface Interfaz {
   
     public static void imprimirHorarioGenerado(ArrayList<Materia> ListaAGenerar){
         /*
-         * Muestra el horario generado ademas de que recoge la informacion para costruirlo
+         * Muestra el horario generado ademas de que recoge la informacion para costruirlo, ademas comprueba si una materia esta vacia o no
          */
 
         // Elecciones del usuario
@@ -84,15 +84,28 @@ public interface Interfaz {
                 flag = false;
             }
         }
-        Object[] informacion = Coordinador.crearHorarioAleatorio(listaMateriasAGenerar);
-        
-        if ((boolean)informacion[0]){
-            Horario pHorario= (Horario)informacion[1];
-            System.out.println(pHorario.mostrarHorario());
-            asignacionDeHorarioGenerado(pHorario);
+        boolean ok =true;
+        String materiaVacia="";
+        for (Materia pMateria:listaMateriasAGenerar){
+            if (pMateria.getGrupos().size()==0){
+                ok = false;
+                materiaVacia = pMateria.getNombre();
+                break;
+            }
         }
-        else{
-            System.out.println("No fue posible generar el horario, ya que "+((Materia)informacion[2]).getNombre()+" es un obstaculo");
+        if (ok){
+            Object[] informacion = Coordinador.crearHorario(listaMateriasAGenerar);
+            
+            if ((boolean)informacion[0]){
+                Horario pHorario= (Horario)informacion[1];
+                System.out.println(pHorario.mostrarHorario());
+                asignacionDeHorarioGenerado(pHorario);
+            }
+            else{
+                System.out.println("No fue posible generar el horario, ya que "+((Materia)informacion[2]).getNombre()+" es un obstaculo");
+            }
+        }else{
+            System.out.println("No se pudo generar el horario, ya que la materia "+materiaVacia+" no tiene ningun grupo registrado");
         }
 
         

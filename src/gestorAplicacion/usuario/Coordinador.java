@@ -91,7 +91,7 @@ public class Coordinador extends Usuario implements Serializable{
 
 
     // ligadura dinamica?
-    public static Object[] crearHorarioAleatorio(ArrayList<Materia> materias){
+    public static Object[] crearHorario(ArrayList<Materia> materias){
         /**
          * Toma una lista de materias que se desean ver.
          * 
@@ -106,6 +106,7 @@ public class Coordinador extends Usuario implements Serializable{
         Horario horario =  new Horario();
         boolean ok = true;
         Materia materiaObstaculo = null;
+
 
 
         int[] gPosible = new int[materias.size()];   
