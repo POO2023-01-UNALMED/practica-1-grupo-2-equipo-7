@@ -371,6 +371,9 @@ public interface Interfaz {
                     }else if(estudiante.getCreditos()+seleccionada.getCreditos()>Coordinador.getLimitesCreditos()){
                         System.out.println("El estudiante tiene creditos insuficientes");
                         invalido=true;
+                    }else if (estudiante.getMaterias().contains(seleccionada)){
+                        System.out.println("El estudiante ya esta viendo esta materia");
+                        invalido=true;
                     }else{
                         System.out.println("Materia seleccionada "+seleccionada.getNombre());
                         matricularMateriaParte3(estudiante, seleccionada);
