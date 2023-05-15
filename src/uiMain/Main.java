@@ -39,8 +39,8 @@ public class Main implements Interfaz{
                  System.out.println(pGrupo.getNumero()+". "+pGrupo.getSalon().getLugar());
              }
          }*/
-        
-        
+
+
         // Zona de Pruebas -------------------------------------------------------------------
 
         Usuario usuario = null;
@@ -71,14 +71,24 @@ public class Main implements Interfaz{
         		if (salir){
         			continue;
         		}
-        		System.out.println("Ingrese la facultad a la que pertenece:");
-        		String facul = scanner2.nextLine();
-        		if(facul.equals("Salir")) {
-        			continue;
+        		String facul = null;
+        		while(true) {
+        			System.out.println("Seleccione la facultad a la que pertenece:");
+        			System.out.println(Coordinador.mostrarFacultades());
+        			int fac = scanner2.nextInt();
+        			scanner2.nextLine();
+        			if(fac<=0||fac>Coordinador.getFacultades().length) {
+        				System.out.println("Valor invalido. Intente nuevamente");;
+        			}
+        			else {
+        				facul = Coordinador.getFacultades()[fac-1];
+        				break;
+        			}
         		}
-        		System.out.println("Ingrese su contrasena:");
+        	
+        		System.out.println("Ingrese su contrasena:\nSi desea salir introduzca la palabra Salir");
         		String cont = scanner2.nextLine();
-        		if(facul.equals("Salir")) {
+        		if(cont.equals("Salir")) {
         			continue;
         		}
         		long id = Interfaz.generarId();
@@ -357,23 +367,25 @@ public class Main implements Interfaz{
                     boolean salida = false;
                     while(!salida) {
                     	Scanner scanner3 = new Scanner(System.in);
-	                    System.out.println("Ingrese la materia a la cual desea agregar el grupo.\nSi desea salir ingrese la palabra Salir:");
-	                    String materiaStr = scanner3.nextLine();
-	                    if (materiaStr.equals("Salir")) {
+	                    System.out.println("Seleccione la materia a la cual desea agregar el grupo:");
+	                    System.out.print(Materia.mostrarMaterias());
+	                    System.out.println((Materia.getMateriasTotales().size()+1)+". Salir");
+	                    
+	                    int materiaN = scanner3.nextInt();
+	                    scanner3.nextLine();
+	                    Materia materiaSel = null;
+	                    if (materiaN==Materia.getMateriasTotales().size()+1) {
 	                    	salida=true;
 	                    	break;
 	                    }
-	                    Materia materiaSel = null;
-	                    for (Materia materia:Materia.materiasTotales) {
-	                    	if (materia.getNombre().equals(materiaStr)) {
-	                    		materiaSel = materia;
-	                    		break;
-	                    	}
-	                    }
-	                    if (materiaSel==null) {
-	                    	System.out.println("La materia no ha sido encontrada. Ingrese un nombre de una materia valida.");
+	                    else if(materiaN<=0 || materiaN>Materia.getMateriasTotales().size()+1) {
+	                    	System.out.println("Valor invalido. Intente nuevamente.");
 	                    	continue;
 	                    }
+	                    else {
+	                    	materiaSel = Materia.getMateriasTotales().get(materiaN-1);
+	                    }
+	                    
 	                    Profesor profesorSel = null;
 		                while(true) {
 		                	Scanner scanner4 = new Scanner(System.in);
@@ -404,22 +416,28 @@ public class Main implements Interfaz{
 		                    	boolean maters = false;
 		                    	ArrayList<Materia> mates = null;
 		                    	while(!maters) {
-			                    	System.out.println("Ingrese las materias (separadas por comas con su respectivo espacio) para las cuales el profesor esta capacitado:");
-			                    	String materias = scanner4.nextLine();
-			                    	String[] mate = materias.split(", ");
+			                    	System.out.println("Ingrese los numeros correspondientes a las materias para las cuales el profesor esta capacitado:\nCuando termine ingrese el numero 0.");
+			                    	System.out.println(Materia.mostrarMaterias());
 			                    	mates = new ArrayList<Materia>();
-			                    	for (String smateria:mate) {
-			                    		for (Materia materia:Materia.getMateriasTotales()) {
-			                    			if (smateria.equals(materia.getNombre())) {
-			                    				mates.add(materia);
-			                    				break;
-			                    			}
+			                    	while(true) {
+			                    		int mat = scanner4.nextInt();
+			                    		scanner4.nextLine();
+			                    		if(mat==0) {
+			                    			break;
+			                    		}
+			                    		else if(mat<0 || mat>Materia.getMateriasTotales().size()){
+			                    			System.out.println("Ha seleccionado un valor invalido. Ingrese uno nuevo o finalice la seleccion de materias");
+			                    		}
+			                    		else {
+			                    			Materia mate = Materia.getMateriasTotales().get(mat-1);
+			                    			mates.add(mate);
 			                    		}
 			                    	}
-			                    	if(mate.length!=mates.size()) {
-			                    		System.out.println("Alguna de las materias ingresadas no existe. Intente nuevamente");
+
+			                    	if(mates.size()==0) {
+			                    		System.out.println("Debe seleccionar al menos una materia. Intente nuevamente");
 			                    	}
-			                    	else if (!(Arrays.asList(mate).contains(materiaSel.getNombre()))){
+			                    	else if (!mates.contains(Materia.encontrarMateria(materiaSel.getNombre()))){
 			                    		System.out.println("Debe incluir la materia a la que corresponde este nuevo grupo. Intente nuevamente.");
 			                    	}
 			                    	else {

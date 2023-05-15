@@ -306,4 +306,13 @@ public class Materia implements Serializable{
     	}
     	return mater;
     }
+    
+    public static String mostrarMaterias() {
+    	String retorno = "";
+    	int i = 1;
+    	for(Materia materia:Materia.materiasTotales) {
+    		retorno += (i++)+". "+materia.nombre+".\n";
+    	}
+    	return retorno;
+    }
 }

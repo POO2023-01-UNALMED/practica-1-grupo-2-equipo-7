@@ -10,6 +10,7 @@ public class Coordinador extends Usuario implements Serializable{
     // private static ArrayList<Materia> materiasTotales;
     private static final long serialVersionUID = 1L;
     private static ArrayList<Coordinador> coordinadoresTotales = new ArrayList<Coordinador>();
+    private static String[] facultades = {"Facultad de arquitectura", "Facultad de ciencias", "Facultad de ciencias agrarias" , "Facultad de ciencias humanas y economicas", "Facultad de minas", "Sede"};
 
     public Coordinador(String facultad,long id, String nombre, String pw) {
         super(id, nombre,pw, facultad);
@@ -213,6 +214,15 @@ public class Coordinador extends Usuario implements Serializable{
             return false;
         }
     }
+    
+    public static String mostrarFacultades() {
+    	String retorno = "";
+    	int i = 1;
+    	for(String facultad:facultades) {
+    		retorno += (i++)+". "+facultad+"\n";
+    	}
+    	return retorno;
+    }
         
 
                                                                                                                      
@@ -225,6 +235,17 @@ public class Coordinador extends Usuario implements Serializable{
     public static ArrayList<Coordinador> getCoordinadoresTotales() {
         return coordinadoresTotales;
     }
+
+
+	public static String[] getFacultades() {
+		return facultades;
+	}
+
+
+	public static void setFacultades(String[] facultades) {
+		Coordinador.facultades = facultades;
+	}
+    
     
 }
 
