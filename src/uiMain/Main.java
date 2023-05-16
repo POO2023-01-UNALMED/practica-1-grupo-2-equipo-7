@@ -597,30 +597,35 @@ public class Main implements Interfaz{
                     System.out.println("Has seleccionado la opcion 4 (Eliminar grupo.)");
                     boolean salida = false;
                     while(!salida) {
-                    	System.out.println("ingrese la materia a la cual le desea eliminar un grupo.\nSi desea salir escriba la palabra Salir:");
-                    	String materiaNom = scanner.nextLine();
-                    	Materia materiaSel = null;
-                    	if(materiaNom.equals("Salir")) {
-                    		break;
-                    	}
-                    	for (Materia materia:Materia.getMateriasTotales()) {
-                    		if (materiaNom.equals(materia.getNombre())) {
-                    			materiaSel = materia;
-                    			break;
-                    		}
-                    	}
-                    	if(materiaSel==null) {
-                    		System.out.println("La materia ingresada no existe. Ingrese una materia valida.");
-                    		continue;
-                    	}
+                        System.out.println("Seleccione la materia a la cual desea eliminar el grupo:");
+	                    System.out.print(Materia.mostrarMaterias());
+	                    System.out.println((Materia.getMateriasTotales().size()+1)+". Salir");
+	                    
+	                    int materiaN = scanner.nextInt();
+	                    scanner.nextLine();
+	                    Materia materiaSel = null;
+	                    if (materiaN==Materia.getMateriasTotales().size()+1) {
+	                    	salida=true;
+	                    	break;
+	                    }
+	                    else if(materiaN<=0 || materiaN>Materia.getMateriasTotales().size()+1) {
+	                    	System.out.println("Valor invalido. Intente nuevamente.");
+	                    	continue;
+	                    }
+	                    else {
+	                    	materiaSel = Materia.getMateriasTotales().get(materiaN-1);
+	                    }
+
                     	while(true) {
-                    		System.out.println("Ingrese el numero del grupo que desea eliminar\nSi desea salir escriba el numero 0");
+                    		System.out.println("Seleccione el numero del grupo que desea eliminar:");
+                    		System.out.print(materiaSel.mostrarGrupos());
+                    		System.out.println((materiaSel.getGrupos().size()+1)+". Salir.");
                     		int numSel = scanner.nextInt();
                             scanner.nextLine();
-                    		if (numSel<0||numSel>materiaSel.getGrupos().size()) {
+                    		if (numSel<=0||numSel>(materiaSel.getGrupos().size()+1)) {
                     			System.out.println("El numero de grupo ingresado no existe. Ingrese el numero de un grupo valido.");
                     		}
-                    		else if(numSel==0) {
+                    		else if(numSel==(materiaSel.getGrupos().size()+1)) {
                     			salida = true;
                     			break;
                     		}
@@ -629,7 +634,6 @@ public class Main implements Interfaz{
                     			System.out.println("El grupo "+numSel+" de la materia "+materiaSel.getNombre()+" ha sido eliminado con exito");
                     			break;
                     		}
-                    		break;
                     	}
                     }
                 }

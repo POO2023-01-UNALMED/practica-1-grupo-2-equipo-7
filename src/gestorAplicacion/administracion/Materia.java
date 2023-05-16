@@ -297,6 +297,15 @@ public class Materia implements Serializable{
         }
     }
     
+    public String mostrarGrupos() {
+    	String retorno = "";
+    	int i = 1;
+    	for(Grupo grupo:this.grupos) {
+    		retorno += (i++)+". "+grupo.getNumero()+".\n";
+    	}
+    	return retorno;
+    }
+    
     public static Materia encontrarMateria(String nombre) {
     	Materia mater = null;
     	for(Materia materia:Materia.getMateriasTotales()) {
