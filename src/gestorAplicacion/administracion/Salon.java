@@ -16,6 +16,15 @@ public class Salon implements Serializable{
         salones.add(this);
     }
     
+    public static String mostrarSalones() {
+    	String retorno = "";
+    	int i = 1;
+    	for(Salon salon:salones) {
+    		retorno += (i++)+". "+salon.lugar+".\n";
+    	}
+    	return retorno;
+    }
+    
     public static ArrayList<Salon> getSalones() {
 		return salones;
 	}

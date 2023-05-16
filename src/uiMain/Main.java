@@ -411,8 +411,7 @@ public class Main implements Interfaz{
 		                    else if(opcion_profe==2){
 		                    	System.out.println("Ingrese el nombre completo del profesor: ");
 		                    	String nomb = scanner4.nextLine();
-		                    	System.out.println("Ingrese la facultad a la que pertenece el profesor: ");
-		                    	String facu = scanner4.nextLine();
+		                    	String facu = materiaSel.getFacultad();
 		                    	boolean maters = false;
 		                    	ArrayList<Materia> mates = null;
 		                    	while(!maters) {
@@ -456,30 +455,106 @@ public class Main implements Interfaz{
 		                    }
 	                	}
 		                if(salida) {break;}
-		                ArrayList<String> horarioSel = null;
+		                int sesiones = 0;
 		                while(true) {
-		                	Scanner scanHor = new Scanner(System.in);
-		                	System.out.println("Ingrese el horario de clase del grupo.\nPor cada sesion de clase ingrese un horario con el formato d-hi-hf, donde d es el numero del dia de la semana, hi es la hora inicial y hf es la hora final.\nSepare cada uno de estos por comas con su respectivo espacio:\nSi desea salir ingrese la palabra Salir.");
-		                	String hor = scanHor.nextLine();
-		                	String[] horario = hor.split(", ");
-		                	if (hor.equals("Salir")) {
-		                		salida=true;
-		                		break;
+		                	Scanner scanSes = new Scanner(System.in);
+		                	System.out.println("Ingrese la cantidad de sesiones de clase que tendra el grupo a la semana:");
+		                	sesiones = scanSes.nextInt();
+		                	scanSes.nextLine();
+		                	if(sesiones<=0||sesiones>6) {
+		                		System.out.println("El numero de sesiones de clase debe ser entre 1 y 6. Ingrese un nuevo valor");
 		                	}
 		                	else {
-		                		boolean correcto = false;
-		                		for(String hora:horario) {
-		                			correcto = Interfaz.formatoHorario(hora);
-		                			if(!correcto) {
-		                				System.out.println("El horario ingresado no esta en el formato correcto.");
-		                				break;
-		                			}
+		                		break;
+		                	}
+		                }
+		                System.out.println("A continuacion debe repetir el proceso de seleccion de horario una vez por cada sesion de clase.");
+		                ArrayList<String> horarioSel = new ArrayList<String>();
+		                for(int i=0; i<sesiones; i++) {
+		                	Scanner scanHor = new Scanner(System.in);
+		                	int dia = 0;
+		                	while(true) {
+		                		System.out.println("Seleccione el dia se la semana al que corresponde la sesion de clase.\n1. Lunes.\n2. Martes.\n3. Miercoles\n4. Jueves\n5. Viernes.\n6. Sabado.\n7. Domingo.\n8. Salir");
+		                		dia = scanHor.nextInt();
+		                		scanHor.nextLine();
+		                		if(dia==8) {
+		                			salida = true;
+		                			break;
 		                		}
-		                		if (correcto) {
-		                			horarioSel = new ArrayList<String>(Arrays.asList(horario));
+		                		else if(dia<=0||dia>8) {
+		                			System.out.println("Valor invalido. Seleccione un dia valido.");
+		                		}
+		                		else {
 		                			break;
 		                		}
 		                	}
+		                	if(salida) {
+		                		break;
+		                	}
+		                	int hi = 0;
+		                	while(true) {
+		                		System.out.println("Seleccione la hora de inicio de la clase:\n1. 6 am.\n2. 8 am\n3. 10 am\n4. 12 pm\n5. 2 pm\n6. 4 pm\n7. 6 pm\n8. Salir.");
+		                		hi = scanHor.nextInt();
+		                		scanHor.nextLine();
+		                		if(hi==8) {
+		                			salida = true;
+		                			break;
+		                		}
+		                		else if(hi<=0||hi>8) {
+		                			System.out.println("Valor invalido. Seleccione una hora valida");
+		                		}
+		                		else {
+		                			hi = hi+4+hi;
+		                			break;
+		                		}
+		                	}
+		                	if(salida) {
+		                		break;
+		                	}
+		                	int hf = 0;
+		                	while(true) {
+		                		System.out.println("Seleccione la hora de finalizacion de la clase:\n1. 8am\n2. 10am\n3. 12 pm\n4. 2 pm\n5. 4 pm\n6. 6pm\n7. 8pm\n8. Salir.");
+		                		hf = scanHor.nextInt();
+		                		scanHor.nextLine();
+		                		if(hf==8) {
+		                			salida = true;
+		                			break;
+		                		}
+		                		else if(hf<=0||hf>8) {
+		                			System.out.println("Valor invalido. Seleccione una hora valida");
+		                		}
+		                		else {
+		                			hf = hf+6+hf;
+		                			if(hf<=hi) {
+		                				System.out.println("La hora de finalizacion debe ser mayor a la hora de inicio. Seleccione otra hora.");
+		                			}
+		                			else {
+		                				break;
+		                			}
+		                		}
+		                	}
+		                	String hor = "";
+		                	if(hi<10) {
+		                		hor += dia+"-0"+hi;
+		                		if(hf<10) {
+		                			hor += "-0"+hf;
+		                		}
+		                		else {
+		                			hor +="-"+hf;
+		                		}
+		                	}
+		                	else {
+		                		hor += dia+"-"+hi+"-"+hf;
+		                	}
+		                	if(horarioSel.contains(hor)) {
+		                		System.out.println("Ya se agrego una sesion de clase igual. Ingrese una nueva.");
+		                		sesiones++;
+		                	}
+		                	else {
+		                		horarioSel.add(hor);
+		                		System.out.println("Se ha agregado el horario "+hor);
+		                	}
+
 		                }
 		                //scanHor.close();
 		                if(salida) {break;}
@@ -488,25 +563,23 @@ public class Main implements Interfaz{
                         scanner.nextLine();
 			            Salon salonSel = null;
 			            while(true) {
-			            	System.out.println("Ingrese el salon donde se daran las sesiones de clase del grupo.\nSi desea salir ingrese la palabra Salir:");
-			            	String nomSalon = scanner.nextLine();
-			            	if (nomSalon.equals("Salir")) {
+			            	System.out.println("Seleccione el salon donde se daran las sesiones de clase del grupo:");
+			            	System.out.print(Salon.mostrarSalones());
+			            	System.out.println((Salon.salones.size()+1)+". Salir.");
+			            	int numSalon = scanner.nextInt();
+			            	scanner.nextLine();
+			            	if (numSalon==Salon.salones.size()+1) {
 			            		salida = true;
 			            		break;
 			            	}
-			            	for (Salon salon:Salon.salones) {
-			            		if(nomSalon.equals(salon.getLugar())) {
-			            			salonSel = salon;
-			            			break;
-			            		}
+			            	else if(numSalon<=0||numSalon>(Salon.salones.size()+1)) {
+			            		System.out.println("Valor invalido. Seleccione un salon valido.");
 			            	}
-			            	if (salonSel==null) {
-                                
-			            		System.out.println("El salon ingresado no existe. Ingrese un salon valido.");
+			            	else {
+			            		salonSel = Salon.getSalones().get(numSalon-1);
+			            		break;
 			            	}
-                            else{
-                                break;
-                            }
+			            	
 			            }
 			            if(salida) {break;}
 			            int numSel = materiaSel.getGrupos().size();
