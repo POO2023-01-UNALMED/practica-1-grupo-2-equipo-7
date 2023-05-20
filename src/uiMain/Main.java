@@ -343,23 +343,29 @@ public class Main implements Interfaz{
                         Scanner scanner3_2 = new Scanner(System.in);
                         System.out.println("Ingresa el nombre de la materia que desea eliminar.");
                         String nomMat = scanner3_2.nextLine();
+                        boolean existencia = true;
                         ArrayList<String> nombresMaterias = new ArrayList<String>();
                         for (Materia materia : Materia.getMateriasTotales()){
                             String a = materia.getNombre();
                             nombresMaterias.add(a);
                         }
-                        if ((!nombresMaterias.contains(nomMat)) == false){
-                            System.out.println("La materia que desea eliminar no existe en la base de datos.");
-                            terminar = true;
+                        if ((nombresMaterias.contains(nomMat)) == false){
+                            System.out.println("La materia que desea eliminar no existe en la base de datos o no la ha ingresado correctamente, intentelo nuevamente.");
+                            existencia = false;
                         }
-                        for (Materia materia : Materia.getMateriasTotales()){
-                            if (materia.getNombre().equals(nomMat) == true){
-                                usuario.eliminarMateria(materia);
-                                break;
+                        if(existencia){
+                            for (Materia materia : Materia.getMateriasTotales()){
+                                if (materia.getNombre().equals(nomMat) == true){
+                                    usuario.eliminarMateria(materia);
+                                    break;
+                                }
                             }
+                            System.out.println("La materia "+ nomMat + " ha sido eliminada con exito.");
+                            break;                     
                         }
-                        System.out.println("La materia "+ nomMat + "ha sido eliminada con exito.");
-                        break;                     
+                        else{
+                            continue;
+                        }
                     }                    
                 }
                 else if(opcion_3 == 3){
