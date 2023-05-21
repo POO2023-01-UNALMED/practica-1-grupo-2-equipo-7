@@ -27,7 +27,25 @@ public class Main implements Interfaz{
         System.out.println("\nBienvenido al Portal de Servicios Academicos S.M.M");
 
         // Zona de Pruebas -------------------------------------------------------------------
-        
+        // int z = 1;
+        // for (Estudiante estudiante : Estudiante.getEstudiantes()){
+        //     System.out.println((z++) + " " + estudiante.getNombre() + " " + estudiante.getId());
+        // }
+        // System.out.println(Estudiante.getEstudiantes().get(0).getHorario().mostrarHorario());
+
+        // for (Materia materia : Materia.getMateriasTotales()){
+        //     System.out.println(materia.getNombre());
+        // }
+        // Materia.getMateriasTotales().get(11).getGrupos().get(0).getEstudiantes().remove(0);
+        // int cupos = Materia.getMateriasTotales().get(11).getGrupos().get(0).getCupos();
+        // Materia.getMateriasTotales().get(11).getGrupos().get(0).setCupos(cupos + 1);
+
+        // for (Materia materia : Materia.getMateriasTotales()){
+        //     System.out.println(materia.getNombre());
+        // }
+        // for (Estudiante estudiante : Materia.getMateriasTotales().get(11).getGrupos().get(0).getEstudiantes()){
+        //     System.out.println(estudiante.getNombre());
+        // }
 
         // Para ver todos los grupos de todas las materias
 
@@ -716,7 +734,10 @@ public class Main implements Interfaz{
                                     System.out.print("Ingrese el numero del grupo: ");
                                     int numeroGrupo = scanner3.nextInt();
                                     scanner3.nextLine();
-                                    Grupo grupo = estudiante.getMaterias().get(numeroMateria-1).getGrupos().get(numeroGrupo-1);
+                                    Materia materiaE = estudiante.getMaterias().get(numeroMateria-1);
+                                    Grupo grupoE = estudiante.getMaterias().get(numeroMateria-1).getGrupos().get(numeroGrupo-1);
+                                    Grupo grupo = Grupo.buscarGrupo(materiaE, grupoE);
+                                    System.out.println("Se ha seleccionado la materia " + estudiante.getMaterias().get(numeroMateria-1).getNombre());
                                     if (grupo.existenciaEstudiante(estudiante)){
                                         grupo.eliminarEstudiante(estudiante);
                                         estudiante.getHorario().liberarHorario(grupo.getHorario());
@@ -733,7 +754,8 @@ public class Main implements Interfaz{
                                     String nombreMateria = scanner3.nextLine();
                                     Materia materia = estudiante.buscarMateriaPorNombre(nombreMateria);
                                     if (materia != null){
-                                        Grupo grupoEstudiante = materia.buscarGrupoDeEstudiante(estudiante);
+                                        Grupo grupoEst = materia.buscarGrupoDeEstudiante(estudiante);
+                                        Grupo grupoEstudiante = Grupo.buscarGrupo(materia, grupoEst);
                                         grupoEstudiante.eliminarEstudiante(estudiante);
                                         estudiante.getHorario().liberarHorario(grupoEstudiante.getHorario());
                                         System.out.println("El estudiante ha sido desmatriculado de la materia y el grupo");

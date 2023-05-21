@@ -33,23 +33,46 @@ public class Grupo implements Serializable{
 
     public boolean existenciaEstudiante(Estudiante estudiante){
       for (int j=0;j<this.estudiantes.size();j++){
-        if (this.estudiantes.get(j)==estudiante){
+        if (this.estudiantes.get(j).getId() == estudiante.getId()){
           return true;
         }
       }
       return false;
     }
 
-    public void eliminarEstudiante(Estudiante estudiante){
-      for (int i=0;i<this.estudiantes.size();i++){
-        if (this.estudiantes.get(i) == estudiante){
-          		this.estudiantes.remove(estudiante);
-		  		this.cupos++;
-				estudiante.eliminarGrupo(this);
-		  		break;
-        }
-      }
+	public void eliminarEstudiante(Estudiante estudiante){
+		int indice = -1;
+		for (int i=0;i<this.estudiantes.size();i++){
+			if (this.estudiantes.get(i).getNombre().equals(estudiante.getNombre())){
+					indice = i;
+					this.cupos++;
+					estudiante.eliminarGrupo(this);
+					break;
+			}
+		}
+		if (indice != -1){
+			this.estudiantes.remove(indice);
+		}
     }
+
+	public static Grupo buscarGrupo(Materia materiaE, Grupo grupoE){
+		int indicei = -1;
+		int indicej = -1;
+		for (int i = 0; i<Materia.getMateriasTotales().size(); i++){
+			Materia materia = Materia.getMateriasTotales().get(i);
+			if (materia.getNombre().equals(materiaE.getNombre())){
+				indicei = i;
+				for (int j = 0; j<materia.getGrupos().size(); j++){
+					Grupo grupo = materia.getGrupos().get(j);
+					if (grupo.getNumero() == grupoE.getNumero()){
+						indicej = j;
+						break;
+					}
+				}
+			}
+		}
+		return Materia.getMateriasTotales().get(indicei).getGrupos().get(indicej);
+	}
 
     public void agregarEstudiante(Estudiante estudiante){
       this.estudiantes.add(estudiante);
