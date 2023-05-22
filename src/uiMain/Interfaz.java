@@ -260,26 +260,33 @@ public interface Interfaz {
                 System.out.println("Por favor ingrese el nombre del estudiante: ");
                 String nombre=scanner.nextLine();
                 System.out.println("Por favor ingrese el ID del estudiante: ");
-                long id=scanner.nextLong();
-                scanner.nextLine();
-                int index=Estudiante.buscarEstudiante(nombre, id);
+                long id=0;
+                String idPrueba=scanner.nextLine();
+                try {
 
-                if (index==-1){
-                    System.out.println("Estudiante no encontrado");
-                    invalido=true;
-                }else{
-                    Estudiante seleccionado=Estudiante.getEstudiantes().get(index);
-                    if (seleccionado.isMatriculaPagada()==false){
-                        System.out.println("La matricula del estudiante no esta pagada");
-                        invalido=true;
-                    } else if (seleccionado.getCreditos()>=Coordinador.getLimitesCreditos()){
-                        System.out.println("El estudiante no puede matricular más materias");
+                    int index=Estudiante.buscarEstudiante(nombre, id);
+
+                    id=Long.parseLong(idPrueba);
+                    if (index==-1){
+                        System.out.println("Estudiante no encontrado");
                         invalido=true;
                     }else{
-                        System.out.println("Estudiante seleccionado, nombre: "+seleccionado.getNombre()+" ID: "+seleccionado.getId());
-                        matricularMateriaParte2(seleccionado);
-                        salir=true;
+                        Estudiante seleccionado=Estudiante.getEstudiantes().get(index);
+                        if (seleccionado.isMatriculaPagada()==false){
+                            System.out.println("La matricula del estudiante no esta pagada");
+                            invalido=true;
+                        } else if (seleccionado.getCreditos()>=Coordinador.getLimitesCreditos()){
+                            System.out.println("El estudiante no puede matricular más materias");
+                            invalido=true;
+                        }else{
+                            System.out.println("Estudiante seleccionado, nombre: "+seleccionado.getNombre()+" ID: "+seleccionado.getId());
+                            matricularMateriaParte2(seleccionado);
+                            salir=true;
+                        }
                     }
+                } catch (NumberFormatException e) {
+                    System.out.println("Opcion invalida");
+                    invalido=true;
                 }
 
             }else{
