@@ -423,17 +423,23 @@ public interface Interfaz {
 
             System.out.println("Grupos disponibles para matricular: ");
             ArrayList<Grupo> gruposDisponibles=new ArrayList<Grupo>();
-
+            boolean mostro=false;
             for (Grupo grupo: materia.getGrupos()){
                 if (!estudiante.getHorario().comprobarDisponibilidad(grupo.getHorario())){
                     continue;
                 }
                 if (grupo.getCupos()!=0){
                     gruposDisponibles.add(grupo);
+                    mostro=true;
                     System.out.println((gruposDisponibles.size())+" Grupo #"+grupo.getNumero()+ " cupos: "+grupo.getCupos()+" Profesor: "+grupo.getProfesor().getNombre());
                 }
             }
-            
+            if (mostro==false){
+                System.out.println("La materia no cuenta con grupos disponibles para el estudiante");
+                salir=true;
+                break;
+            }
+                
             int opcion=scanner.nextInt();
             scanner.nextLine();
             if (opcion>0 && opcion<=gruposDisponibles.size()){
@@ -444,8 +450,8 @@ public interface Interfaz {
                 gruposInscritos.add(grupoSeleccionado);
                 materiasInscritas.add(materia);
                 grupoSeleccionado.agregarEstudiante(estudiante);
-                grupoSeleccionado.getMateria().setCupos(grupoSeleccionado.getMateria().getCupos()-1);
                 grupoSeleccionado.setCupos(grupoSeleccionado.getCupos()-1);
+                grupoSeleccionado.getMateria().cantidadCupos();
                 estudiante.setCreditos(estudiante.getCreditos()+materia.getCreditos());
                 estudiante.setMaterias(materiasInscritas);
                 estudiante.setGrupos(gruposInscritos);
