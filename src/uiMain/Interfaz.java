@@ -136,13 +136,22 @@ public interface Interfaz {
         scanner.nextLine();
         if (opt2==1){
             System.out.println("Escoja un estudiante: ");
-            System.out.println(Estudiante.mostrarEstudiantes());
+            // System.out.println(Estudiante.mostrarEstudiantes());
+
+            ArrayList<Estudiante> estudiantesDisponibles = new ArrayList<>();
+            int con=1;
+            for (Estudiante pEstudiante : Estudiante.getEstudiantes()){
+                if(pEstudiante.isMatriculaPagada()){
+                    estudiantesDisponibles.add(pEstudiante);
+                    System.out.printf("%-3d %-40s %-4s %-12d%n",con++,pEstudiante.getNombre(),"ID:",pEstudiante.getId());
+                }
+            }
 
             System.out.print("Eleccion: -> ");
             int opt3=scanner.nextInt();
             scanner.nextLine();
 
-            Estudiante seleccionEstudiante = Estudiante.getEstudiantes().get(opt3-1);
+            Estudiante seleccionEstudiante = estudiantesDisponibles.get(opt3-1);
             Horario tempHorario = seleccionEstudiante.getHorario();
             seleccionEstudiante.setHorario(new Horario());
 
