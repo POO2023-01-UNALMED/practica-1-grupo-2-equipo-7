@@ -304,6 +304,10 @@ public class Main implements Interfaz{
                                     }
                                 }
 
+                                if(pRequisitos.size() == 0){
+                                    System.out.println("Ha escogido crear la materia con prerrequisitos pero no ingreso ninguna materia valida, intentelo nuevamente.");
+                                    continue;
+                                }
                                     System.out.println("Las prerrequisitos con los que quedará la materia son:");
                                     int j = 1;
                                     for(Materia prerrequisito : pRequisitos){
