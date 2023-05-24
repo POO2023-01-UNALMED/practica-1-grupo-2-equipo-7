@@ -35,49 +35,6 @@ public class Main implements Interfaz{
         + "                                 ");
         System.out.println("\nBienvenido al Portal de Servicios Academicos S.M.M");
 
-<<<<<<< HEAD
-=======
-        // Zona de Pruebas -------------------------------------------------------------------
-        // int z = 1;
-        // for (Estudiante estudiante : Estudiante.getEstudiantes()){
-        //     System.out.println((z++) + " " + estudiante.getNombre() + " " + estudiante.getId() + " " + estudiante.getEstrato());
-        // }
-        // for(Beca beca : Beca.getBecas() ){
-        //     System.out.println(beca.getConvenio() + " " + beca.getAvanceRequerido() + " " + beca.getCreditosInscritosRequeridos() + " " + beca.getEstratoMinimo()
-        //     );
-
-        // }
-        // System.out.println(Estudiante.getEstudiantes().get(0).getHorario().mostrarHorario());
-
-        // for (Materia materia : Materia.getMateriasTotales()){
-        //     System.out.println(materia.getNombre());
-        // }
-        // Materia.getMateriasTotales().get(11).getGrupos().get(0).getEstudiantes().remove(0);
-        // int cupos = Materia.getMateriasTotales().get(11).getGrupos().get(0).getCupos();
-        // Materia.getMateriasTotales().get(11).getGrupos().get(0).setCupos(cupos + 1);
-
-        // for (Materia materia : Materia.getMateriasTotales()){
-        //     System.out.println(materia.getNombre());
-        // }
-        // for (Estudiante estudiante : Materia.getMateriasTotales().get(11).getGrupos().get(0).getEstudiantes()){
-        //     System.out.println(estudiante.getNombre());
-        // }
-
-        // Para ver todos los grupos de todas las materias
-
-        /* int con=1;
-         for (Materia pMateria:Materia.getMateriasTotales()){
-             System.out.println("\n"+con+". "+pMateria.getNombre());
-             con++;
-             for (Grupo pGrupo:pMateria.getGrupos()){
-                 System.out.println(pGrupo.getNumero()+". "+pGrupo.getSalon().getLugar());
-             }
-         }*/
-
-
-        // Zona de Pruebas -------------------------------------------------------------------
-
->>>>>>> 9c51043073adf7e4f54cf620095a87048f7455d2
         Usuario usuario = null;
         while(!logueado) {
         	Scanner scanner2 = new Scanner(System.in);
