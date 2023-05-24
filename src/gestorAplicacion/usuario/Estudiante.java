@@ -38,14 +38,14 @@ public class Estudiante extends Usuario implements Serializable{
         Estudiante.estudiantes.add(this);
     }
 
-    public String toString(){
-        return "Nombre: "+ getNombre()+ " Documento: "+ getId();
-    }
-
     public Estudiante(long id, String nombre, String programa, int semestre, String facultad, int estrato, int sueldo, ArrayList<Materia> materias, ArrayList<Grupo> gruposVistos) {
         this(id,nombre,programa,semestre,facultad, estrato, sueldo);
         this.materias = materias;
         this.gruposVistos = gruposVistos;
+    }
+
+    public String toString(){
+        return "Nombre: "+ getNombre()+ " Documento: "+ getId();
     }
     
     public String mostrarMaterias() {
@@ -70,84 +70,6 @@ public class Estudiante extends Usuario implements Serializable{
         }
         return -1;
     }
-
-    public String getPrograma() {
-        return programa;
-    }
-
-    public void setPrograma(String programa) {
-        this.programa = programa;
-    }
-
-    public int getSemestre() {
-        return semestre;
-    }
-
-    public void setSemestre(int semestre) {
-        this.semestre = semestre;
-    }
-
-    public int getCreditos() {
-        return creditos;
-    }
-
-
-    public void setCreditos(int creditos) {
-        this.creditos = creditos;
-    }
-
-    public ArrayList<Materia> getMaterias() {
-        return materias;
-    }
-
-    public void setMaterias(ArrayList<Materia> materias) {
-        this.materias = materias;
-    }
-
-    public int getEstrato() {
-        return estrato;
-    }
-
-    public void setEstrato(int estrato) {
-        this.estrato = estrato;
-    }
-
-    public int getSueldo() {
-        return sueldo;
-    }
-
-    public void setSueldo(int sueldo) {
-        this.sueldo = sueldo;
-    }
-
-    public int getValorMatricula() {
-        return valorMatricula;
-    }
-
-    
-    public boolean isMatriculaPagada() {
-        return matriculaPagada;
-    }
-
-    public static ArrayList<Estudiante> getEstudiantes() {
-        return Estudiante.estudiantes;
-    }
-
-    public static void setEstudiantes(ArrayList<Estudiante> estudiantes) {
-        Estudiante.estudiantes = estudiantes;
-    }
-
-    public ArrayList<Grupo> getGruposVistos() {
-        return gruposVistos;
-    }
-    public void setGruposVistos(ArrayList<Grupo> gruposVistos) {
-        this.gruposVistos = gruposVistos;
-    }
-
-    public void setHorario(Horario horario) {
-        this.horario = horario;
-    }
-
 
     public void eliminarMateria(Materia materia){
         this.materias.remove(materia);
@@ -244,6 +166,83 @@ public class Estudiante extends Usuario implements Serializable{
             gruposEliminar.get(i).eliminarEstudiante(this);
         }
         
+    }
+
+    public String getPrograma() {
+        return programa;
+    }
+
+    public void setPrograma(String programa) {
+        this.programa = programa;
+    }
+
+    public int getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(int semestre) {
+        this.semestre = semestre;
+    }
+
+    public int getCreditos() {
+        return creditos;
+    }
+
+
+    public void setCreditos(int creditos) {
+        this.creditos = creditos;
+    }
+
+    public ArrayList<Materia> getMaterias() {
+        return materias;
+    }
+
+    public void setMaterias(ArrayList<Materia> materias) {
+        this.materias = materias;
+    }
+
+    public int getEstrato() {
+        return estrato;
+    }
+
+    public void setEstrato(int estrato) {
+        this.estrato = estrato;
+    }
+
+    public int getSueldo() {
+        return sueldo;
+    }
+
+    public void setSueldo(int sueldo) {
+        this.sueldo = sueldo;
+    }
+
+    public int getValorMatricula() {
+        return valorMatricula;
+    }
+
+    
+    public boolean isMatriculaPagada() {
+        return matriculaPagada;
+    }
+
+    public static ArrayList<Estudiante> getEstudiantes() {
+        return Estudiante.estudiantes;
+    }
+
+    public static void setEstudiantes(ArrayList<Estudiante> estudiantes) {
+        Estudiante.estudiantes = estudiantes;
+    }
+
+    public ArrayList<Grupo> getGruposVistos() {
+        return gruposVistos;
+    }
+    public void setGruposVistos(ArrayList<Grupo> gruposVistos) {
+        this.gruposVistos = gruposVistos;
+    }
+
+    public void setHorario(Horario horario) {
+        this.horario = horario;
     }
 
     public ArrayList<Grupo> getGrupos() {

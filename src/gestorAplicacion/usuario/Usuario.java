@@ -13,9 +13,6 @@ public abstract class Usuario implements Serializable{
     protected String pw;
     protected String facultad;
     protected static ArrayList<Usuario> usuariosTotales = new ArrayList<Usuario>();
-    
-    
-    public abstract String toString();
 
     public Usuario(long id, String nombre, String facultad) {
         this.id = id;
@@ -31,6 +28,8 @@ public abstract class Usuario implements Serializable{
         this.facultad = facultad;
         usuariosTotales.add(this);
     }
+
+    public abstract String toString();
 
     public static String mostrarUsuarios() {
     	String retorno = "";

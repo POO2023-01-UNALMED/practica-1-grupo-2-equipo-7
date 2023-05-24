@@ -37,51 +37,6 @@ public class Profesor implements Serializable{
         Profesor.profesores.add(this);
     }
     
-    public String getNombre() {
-        return nombre;
-    }
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getFacultad() {
-        return facultad;
-    }
-    public void setFacultad(String facultad) {
-        this.facultad = facultad;
-    }
-
-    public ArrayList<Materia> getMateriasDadas() {
-        return materiasDadas;
-    }
-    public void setMateriasDadas(ArrayList<Materia> materiasDadas) {
-        this.materiasDadas = materiasDadas;
-    }
-
-    public ArrayList<Grupo> getGrupos() {
-        return grupos;
-    }
-    public void setGrupos(ArrayList<Grupo> grupos) {
-        this.grupos = grupos;
-    }
-
-    public static ArrayList<Profesor> getProfesores() {
-        return profesores;
-    }
-    public static void setProfesores(ArrayList<Profesor> profesores) {
-        Profesor.profesores = profesores;
-    }
-    
-    //FALTA: ORGANIZAR LAS FUNCIONALIDADES QUE NOS UNIERON Y HACER EL CONSTRUCTOR CORRESPONDIENTE
-
-    public void setHorario(Horario horario) {
-    	this.horario = horario;
-    }
-    
-    public Horario getHorario() {
-    	return this.horario;
-    }
-    
     public void vincularGrupo(Grupo g) {
     	this.grupos.add(g);
     	this.horario.ocuparHorario(g.getHorario(), g);
@@ -160,6 +115,49 @@ public class Profesor implements Serializable{
     		r += (i++)+". "+profesor.getNombre()+".\n"; 
     	}
     	return r;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getFacultad() {
+        return facultad;
+    }
+    public void setFacultad(String facultad) {
+        this.facultad = facultad;
+    }
+
+    public ArrayList<Materia> getMateriasDadas() {
+        return materiasDadas;
+    }
+    public void setMateriasDadas(ArrayList<Materia> materiasDadas) {
+        this.materiasDadas = materiasDadas;
+    }
+
+    public ArrayList<Grupo> getGrupos() {
+        return grupos;
+    }
+    public void setGrupos(ArrayList<Grupo> grupos) {
+        this.grupos = grupos;
+    }
+
+    public static ArrayList<Profesor> getProfesores() {
+        return profesores;
+    }
+    public static void setProfesores(ArrayList<Profesor> profesores) {
+        Profesor.profesores = profesores;
+    }
+    
+    public void setHorario(Horario horario) {
+    	this.horario = horario;
+    }
+    
+    public Horario getHorario() {
+    	return this.horario;
     }
 
 }
