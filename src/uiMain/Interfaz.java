@@ -369,36 +369,43 @@ public interface Interfaz {
                 System.out.println("Por favor ingrese el nombre de la materia deseada: ");
                 String nombre=scanner.nextLine();
                 System.out.println("Por favor ingrese el codigo de la materia deseada: ");
-                int codigo=scanner.nextInt();
-                scanner.nextLine();
-                int index=Materia.buscarMateria(nombre, codigo);
+                String codigoPrueba=scanner.nextLine();
+                int codigo;
+                try {
+                    codigo=Integer.parseInt(codigoPrueba);
 
-                if (index==-1){
+                    int index=Materia.buscarMateria(nombre, codigo);
 
-                    System.out.println("Materia no encontrada");
-                    invalido=true;
+                    if (index==-1){
 
-                }else{
-
-                    Materia seleccionada=materiasTotales.get(index);
-
-                    if (seleccionada.getCupos()==0){
-                        System.out.println("Materia sin cupos disponibles");
+                        System.out.println("Materia no encontrada");
                         invalido=true;
-                    }else if(Materia.comprobarPrerrequisitos(estudiante, seleccionada)==false){
-                        System.out.println("El estudiante no cumple con los prerrequisitos de la materia");
-                        invalido=true;
-                    }else if(estudiante.getCreditos()+seleccionada.getCreditos()>Coordinador.getLimitesCreditos()){
-                        System.out.println("El estudiante tiene creditos insuficientes");
-                        invalido=true;
-                    }else if (estudiante.getMaterias().contains(seleccionada)){
-                        System.out.println("El estudiante ya esta viendo esta materia");
-                        invalido=true;
+
                     }else{
-                        System.out.println("Materia seleccionada "+seleccionada.getNombre());
-                        matricularMateriaParte3(estudiante, seleccionada);
-                        salir=true; 
-                    }  
+
+                        Materia seleccionada=materiasTotales.get(index);
+
+                        if (seleccionada.getCupos()==0){
+                            System.out.println("Materia sin cupos disponibles");
+                            invalido=true;
+                        }else if(Materia.comprobarPrerrequisitos(estudiante, seleccionada)==false){
+                            System.out.println("El estudiante no cumple con los prerrequisitos de la materia");
+                            invalido=true;
+                        }else if(estudiante.getCreditos()+seleccionada.getCreditos()>Coordinador.getLimitesCreditos()){
+                            System.out.println("El estudiante tiene creditos insuficientes");
+                            invalido=true;
+                        }else if (estudiante.getMaterias().contains(seleccionada)){
+                            System.out.println("El estudiante ya esta viendo esta materia");
+                            invalido=true;
+                        }else{
+                            System.out.println("Materia seleccionada "+seleccionada.getNombre());
+                            matricularMateriaParte3(estudiante, seleccionada);
+                            salir=true; 
+                        }  
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Opcion invalida");
+                    invalido=true;
                 }
 
             }else{
