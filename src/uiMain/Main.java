@@ -134,7 +134,7 @@ public class Main implements Interfaz{
         						}
         					}
         					else {
-        						System.out.println("Ha ingresado exitosamente al sistema.");
+        						System.out.println("\nHola "+coordinadorE.getNombre()+" Ha ingresado exitosamente al sistema.");
         						usuario = coordinadorE;
         						intentando=false;
         						logueado = true;				
