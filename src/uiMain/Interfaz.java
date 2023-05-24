@@ -461,7 +461,6 @@ public interface Interfaz {
                 gruposInscritos.add(grupoSeleccionado);
                 materiasInscritas.add(materia);
                 grupoSeleccionado.agregarEstudiante(estudiante);
-                grupoSeleccionado.setCupos(grupoSeleccionado.getCupos()-1);
                 grupoSeleccionado.getMateria().cantidadCupos();
                 estudiante.setCreditos(estudiante.getCreditos()+materia.getCreditos());
                 estudiante.setMaterias(materiasInscritas);
