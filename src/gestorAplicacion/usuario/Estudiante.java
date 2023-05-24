@@ -20,8 +20,8 @@ public class Estudiante extends Usuario implements Serializable{
     private double promedio;
     private double avance;
     private final static int creditosParaGraduarse = 120;
-    private ArrayList<Double> notas = new ArrayList<Double>();;
     private Beca beca;
+    private ArrayList<Double> notas = new ArrayList<Double>();
     private ArrayList<Grupo> gruposVistos = new ArrayList<Grupo>();
 
     public Estudiante(long id, String nombre, String programa, int semestre, String facultad, int estrato, int sueldo) {
@@ -103,21 +103,18 @@ public class Estudiante extends Usuario implements Serializable{
         this.promedio = promedio;
     }
 
-    private void calcularAvance(){
+    public void calcularAvance(){
         double creditosVistos = 0;
 
-        for (Materia materia: materias){
-            creditosVistos += materia.getCreditos();
+        for (Grupo pGrupo: gruposVistos){
+            creditosVistos += pGrupo.getMateria().getCreditos();
         }
 
         this.avance = (creditosVistos * 100.0) / creditosParaGraduarse;
     }
 
-    private void agregarNotas(ArrayList<Double> notas){
-
-        for (double nota: notas){
-            this.notas.add(nota);
-        }
+    public void agregarNota(double nota){ 
+        this.notas.add(nota);
         this.calcularPromedio();
     }
 

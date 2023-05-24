@@ -24,6 +24,13 @@ public class Grupo implements Serializable{
       this.estudiantes=new ArrayList<Estudiante>();
 	  Grupo.gruposTotales.add(this);
     } 
+    
+	public Grupo(Materia materia, int numero, Profesor profesor){
+      this.materia = materia;
+      this.numero=numero;
+      this.profesor=profesor;
+	  Grupo.gruposTotales.add(this);
+    } 
 
     public String mostrarInformacionGrupo(){
 			String retorno= "Número del grupo: "+this.numero+", Profesor: "+this.profesor+", Horario: "+this.horario+", Cupos: "+this.cupos+", Salón: "+this.salon;

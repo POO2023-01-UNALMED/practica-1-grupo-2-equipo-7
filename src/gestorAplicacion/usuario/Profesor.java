@@ -64,18 +64,21 @@ public class Profesor implements Serializable{
         boolean bool = false;
         for (Profesor profesor : Profesor.getProfesores()){
             int chance = 0;
+            int suerte = (int)(Math.random()*10+1);
+
             for(Grupo grupo : estudiante.getGruposVistos()){
-                int suerte = (int)(Math.random()*10+1);
                 if (grupo.getProfesor().getNombre().equals(profesor.getNombre()) == true){
                     chance += 5;
+                    break;
                 }
-                if (estudiante.getFacultad().equals(profesor.getFacultad()) == true){
-                    chance += 3;
-                }
-                if (chance >= suerte){
-                    bool= true;
-                }  
             }
+            
+            if (estudiante.getFacultad().equals(profesor.getFacultad()) == true){
+                chance += 3;
+            }
+            if (chance >= suerte){
+                bool= true;
+            }  
         }
         return bool;
     }

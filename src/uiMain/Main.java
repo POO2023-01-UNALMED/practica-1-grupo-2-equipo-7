@@ -1,6 +1,9 @@
 package uiMain;
 
 import java.util.Scanner;
+
+import javax.management.MBeanTrustPermission;
+
 import gestorAplicacion.administracion.Grupo;
 import gestorAplicacion.administracion.Horario;
 import gestorAplicacion.administracion.Materia;
@@ -11,9 +14,9 @@ import gestorAplicacion.usuario.Estudiante;
 import gestorAplicacion.usuario.Profesor;
 import gestorAplicacion.usuario.Usuario;
 
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
-// import java.util.Random; por el momento no se usa aqui
 
 import baseDatos.Serializador;
 import baseDatos.Deserializador;
@@ -24,42 +27,13 @@ public class Main implements Interfaz{
         Scanner scanner=new Scanner(System.in);
         Boolean continuar=true;
         Boolean logueado = false;
+        System.out.println("  ____        __  __       __  __ \n"
+        + " / ___|      |  \\/  |     |  \\/  |\n"
+        + " \\___ \\      | |\\/| |     | |\\/| |\n"
+        + "  ___) |  _  | |  | |  _  | |  | |\n"
+        + " |____/  (_) |_|  |_| (_) |_|  |_|\n"
+        + "                                 ");
         System.out.println("\nBienvenido al Portal de Servicios Academicos S.M.M");
-
-        // Zona de Pruebas -------------------------------------------------------------------
-        // int z = 1;
-        // for (Estudiante estudiante : Estudiante.getEstudiantes()){
-        //     System.out.println((z++) + " " + estudiante.getNombre() + " " + estudiante.getId());
-        // }
-        // System.out.println(Estudiante.getEstudiantes().get(0).getHorario().mostrarHorario());
-
-        // for (Materia materia : Materia.getMateriasTotales()){
-        //     System.out.println(materia.getNombre());
-        // }
-        // Materia.getMateriasTotales().get(11).getGrupos().get(0).getEstudiantes().remove(0);
-        // int cupos = Materia.getMateriasTotales().get(11).getGrupos().get(0).getCupos();
-        // Materia.getMateriasTotales().get(11).getGrupos().get(0).setCupos(cupos + 1);
-
-        // for (Materia materia : Materia.getMateriasTotales()){
-        //     System.out.println(materia.getNombre());
-        // }
-        // for (Estudiante estudiante : Materia.getMateriasTotales().get(11).getGrupos().get(0).getEstudiantes()){
-        //     System.out.println(estudiante.getNombre());
-        // }
-
-        // Para ver todos los grupos de todas las materias
-
-        /* int con=1;
-         for (Materia pMateria:Materia.getMateriasTotales()){
-             System.out.println("\n"+con+". "+pMateria.getNombre());
-             con++;
-             for (Grupo pGrupo:pMateria.getGrupos()){
-                 System.out.println(pGrupo.getNumero()+". "+pGrupo.getSalon().getLugar());
-             }
-         }*/
-
-
-        // Zona de Pruebas -------------------------------------------------------------------
 
         Usuario usuario = null;
         while(!logueado) {
@@ -175,9 +149,8 @@ public class Main implements Interfaz{
         		System.out.println("Valor invalido. Ingrese el numero de una de las opciones mencionadas");
         	}
         }
+        
         while(continuar){
-            //Aun no esta contruido la interfaz (mensajes bonitos en la terminal)
-            //Por aqui ira el menu con las opciones
             System.out.println("\nA continuacion encontrara los diferentes servicios ofrecidos por la plataforma.");
             System.out.println("Ingrese la opcion deseada: \n1. Matricular Materia.\n2. Generar Horario.\n3. Eliminar o agregar Materia / Grupo.\n4. Desmatricular Alumno. \n5. Busqueda y Postulacion de Becas. \n6. Salir y Guardar");
             int opcion = scanner.nextInt();
@@ -215,7 +188,6 @@ public class Main implements Interfaz{
                             System.out.println("Ingrese la facultad: ");
                             String opt3=scanner.nextLine();
     
-                            // fusionImpresiones(mostrarMateriasConFiltro(opt2, opt3));
                             Interfaz.fusionImpresiones(Interfaz.mostrarMateriasConFiltro(opt2, opt3));
 
                             
@@ -813,7 +785,6 @@ public class Main implements Interfaz{
                             System.out.println("Ingresa una opcion valida\n");
                         }
                     }
-                    // scanner2.close();
                     break;
                 }
 
@@ -910,7 +881,6 @@ public class Main implements Interfaz{
                         }
                         
                         if(end){continue;}
-                        // scanner5_3.nextLine();
                         System.out.println("Ingrese el promedio requerido que debe tener el estudiante para poder aplicar a la beca:");
                         double promedioBeca =  scanner5_3.nextDouble();
                         scanner5_3.nextLine();
@@ -992,8 +962,6 @@ public class Main implements Interfaz{
                 }
             }
         }
-
-        // scanner.close();
     }
 
 }

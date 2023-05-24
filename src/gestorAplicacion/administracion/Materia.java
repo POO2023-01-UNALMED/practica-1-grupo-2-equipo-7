@@ -161,7 +161,7 @@ public class Materia implements Serializable{
         if (!estudiante.getHorario().comprobarDisponibilidad(grupo.getHorario())){
             return false;
         }
-        if (!(grupo.getCupos()!=0)){
+        if (grupo.getCupos()==0){
             return false;
         }
         if (!comprobarPrerrequisitos(estudiante,grupo.getMateria())){
@@ -182,9 +182,16 @@ public class Materia implements Serializable{
         }
 
         for (Materia pMateria:materia.getPrerrequisitos()){
-            if(!materiasVistas.contains(pMateria)){
+            boolean flag = false;
+            for(Materia pVistas:materiasVistas){
+                if (pMateria.getCodigo()==pVistas.getCodigo()){
+                    flag =true;
+                    break;
+                }
+            }
+            if(!flag){
                 return false;
-            }    
+            }
         }
         return true;
     }
