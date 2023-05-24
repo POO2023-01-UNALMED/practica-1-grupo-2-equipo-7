@@ -4,19 +4,15 @@ import gestorAplicacion.usuario.*;
 import java.io.Serializable;
 
 public class Materia implements Serializable{
-    
-    //nombre y codigo las declare como constantes. �Estan de acuerdo? si
     private static final long serialVersionUID = 1L;
     private String nombre;
     private final int codigo;
     private String descripcion;
     private int creditos;
     private String facultad;
-    //�Este atributo cupos si se necesita en esta clase?
     private int cupos;
     private ArrayList<Materia> prerrequisitos;
     private ArrayList<Grupo> grupos;
-    // Es publico para que coordinador tenda acceso 
     public static ArrayList<Materia> materiasTotales = new ArrayList<Materia>();
     private String abreviatura;
 
@@ -43,66 +39,6 @@ public class Materia implements Serializable{
         this.grupos = grupos;
     }
     
-    public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public String getNombre() {
-        return this.nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    
-    public int getCodigo() {
-        return this.codigo;
-    }
-    
-    public int getCreditos() {
-        return this.creditos;
-    }
-
-    public void setCreditos(int creditos) {
-        this.creditos = creditos;
-    }
-
-    public String getFacultad() {
-        return this.facultad;
-    }
-
-    public void setFacultad(String facultad) {
-        this.facultad = facultad;
-    }
-
-    public int getCupos() {
-        return this.cupos;
-    }
-
-    public void setCupos(int cupos) {
-        this.cupos = cupos;
-    }
-
-    public ArrayList<Materia> getPrerrequisitos() {
-        return this.prerrequisitos;
-    }
-
-    public void setPrerrequisitos(ArrayList<Materia> prerrequisitos) {
-        this.prerrequisitos = prerrequisitos;
-    }
-
-    public ArrayList<Grupo> getGrupos() {
-        return this.grupos;
-    }
-
-    public void setGrupos(ArrayList<Grupo> grupos) {
-        this.grupos = grupos;
-    }
-    
     public int cantidadCupos(){
         int cantidad = 0;
         for (Grupo pGrupo:getGrupos()){
@@ -111,31 +47,16 @@ public class Materia implements Serializable{
         return cantidad;
     }
 
-    public String getAbreviatura() {
-        return abreviatura;
-    }
-
-    public void setAbreviatura(String abreviatura) {
-        this.abreviatura = abreviatura;
-    }
-
-    //Esta un poco ambigua la definicion de este metodo
     public Grupo crearGrupo(int numero, Profesor profesor, ArrayList<String> horario, int cupos, Salon salon){
-        
-    	//Faltaría que implementen los respectivos metodos y atributos en la clase profesor
-    	//para comprobar que si se pueda asignar al grupo.
+
     	Grupo grupo = new Grupo(this, numero, profesor, horario, cupos, salon);
     	
-    	//No se si sería mejor crear otro metodo para añadir un grupo o añadirlo aquí mismo. Hay que hablarlo.
-        cantidadCupos();
+    	cantidadCupos();
     	this.grupos.add(grupo);
     	
     	return grupo;
     }
-    //Cambié el metodo de un void a uno que retorne un Grupo por requerimiento de mi funcionalidad Att: Sebastian
     
-    
-    //Este metodo tambien tenemos que hablarlo
     public String mostrarContenidos(){
         String contenido =  "Materia: " + this.nombre +
         					"\nCodigo: " + this.codigo +
@@ -214,10 +135,6 @@ public class Materia implements Serializable{
             }
         }
         return null;
-    }
-
-    public static ArrayList<Materia> getMateriasTotales(){
-        return materiasTotales;
     }
 
     public static int buscarMateria(String nombre, int codigo){
@@ -323,5 +240,77 @@ public class Materia implements Serializable{
     		retorno += (i++)+". "+materia.nombre+".\n";
     	}
     	return retorno;
+    }
+
+    public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public String getNombre() {
+        return this.nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    public int getCodigo() {
+        return this.codigo;
+    }
+    
+    public int getCreditos() {
+        return this.creditos;
+    }
+
+    public void setCreditos(int creditos) {
+        this.creditos = creditos;
+    }
+
+    public String getFacultad() {
+        return this.facultad;
+    }
+
+    public void setFacultad(String facultad) {
+        this.facultad = facultad;
+    }
+
+    public int getCupos() {
+        return this.cupos;
+    }
+
+    public void setCupos(int cupos) {
+        this.cupos = cupos;
+    }
+
+    public ArrayList<Materia> getPrerrequisitos() {
+        return this.prerrequisitos;
+    }
+
+    public void setPrerrequisitos(ArrayList<Materia> prerrequisitos) {
+        this.prerrequisitos = prerrequisitos;
+    }
+
+    public ArrayList<Grupo> getGrupos() {
+        return this.grupos;
+    }
+
+    public void setGrupos(ArrayList<Grupo> grupos) {
+        this.grupos = grupos;
+    }
+
+    public static ArrayList<Materia> getMateriasTotales(){
+        return materiasTotales;
+    }
+
+    public String getAbreviatura() {
+        return abreviatura;
+    }
+
+    public void setAbreviatura(String abreviatura) {
+        this.abreviatura = abreviatura;
     }
 }

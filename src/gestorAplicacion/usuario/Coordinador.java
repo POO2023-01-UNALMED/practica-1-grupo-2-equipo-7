@@ -7,7 +7,6 @@ import java.io.Serializable;
 
 public class Coordinador extends Usuario implements Serializable{
     private final static int limitesCreditos=20;
-    // private static ArrayList<Materia> materiasTotales;
     private static final long serialVersionUID = 1L;
     private static ArrayList<Coordinador> coordinadoresTotales = new ArrayList<Coordinador>();
     private static String[] facultades = {"Facultad de arquitectura", "Facultad de ciencias", "Facultad de ciencias agrarias" , "Facultad de ciencias humanas y economicas", "Facultad de minas", "Sede"};
@@ -16,15 +15,6 @@ public class Coordinador extends Usuario implements Serializable{
         super(id, nombre,pw, facultad);
         super.setTipo("Coordinador");
         Coordinador.coordinadoresTotales.add(this);
-    }
-
-
-    //Metodos
-
-    //Abstract
-
-    public String toString(){
-        return "Nombre: "+ getNombre()+ "\nDocumento: "+ getId();
     }
 
     // Ya se encuentra hecha mas abajo :P
@@ -222,6 +212,10 @@ public class Coordinador extends Usuario implements Serializable{
     		retorno += (i++)+". "+facultad+"\n";
     	}
     	return retorno;
+    }
+
+    public String toString(){
+        return "Nombre: "+ getNombre()+ "\nDocumento: "+ getId();
     }
         
 
