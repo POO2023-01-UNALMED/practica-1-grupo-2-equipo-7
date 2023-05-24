@@ -206,6 +206,10 @@ public interface Interfaz {
             String a = beca.getConvenio();
             System.out.println(i +". "+ a + ".");
             i += 1;
+            System.out.println("    Cupos disponibles: " + beca.getCupos()+".");
+            System.out.println("    Estrato maximo para acceder: " + beca.getEstratoMinimo()+".");
+            System.out.println("    Creditos inscritos requeridos: " + beca.getCreditosInscritosRequeridos()+".");
+
         }
     } 
 
@@ -457,7 +461,6 @@ public interface Interfaz {
                 gruposInscritos.add(grupoSeleccionado);
                 materiasInscritas.add(materia);
                 grupoSeleccionado.agregarEstudiante(estudiante);
-                grupoSeleccionado.setCupos(grupoSeleccionado.getCupos()-1);
                 grupoSeleccionado.getMateria().cantidadCupos();
                 estudiante.setCreditos(estudiante.getCreditos()+materia.getCreditos());
                 estudiante.setMaterias(materiasInscritas);

@@ -153,7 +153,8 @@ public class Estudiante extends Usuario implements Serializable{
          */
         ArrayList<Grupo> gruposEliminar = new ArrayList<>();
         this.setMaterias(new ArrayList<Materia>());
-        for (Grupo grupo: this.grupos){
+        for (Grupo grupoE: this.grupos){
+            Grupo grupo = Grupo.buscarGrupo(grupoE.getMateria(), grupoE);
             grupo.getMateria().setCupos(grupo.getMateria().getCupos()+1);
             this.setCreditos(this.getCreditos()-grupo.getMateria().getCreditos());
             gruposEliminar.add(grupo);
