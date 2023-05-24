@@ -287,13 +287,19 @@ public class Main implements Interfaz{
                             scanner3_1.nextLine();
                             if(decision == 1){                              
                                 System.out.println("Ha escogido crear la materia con prerrequisitos.");
-                                System.out.println("Ingrese los prerrequisitos que tiene la materia para poder ser inscritas por el estudiante (separadas por comas con su respectivo espacio).");
+                                System.out.println("Ingrese los prerrequisitos que tiene la materia para poder ser inscritas por el estudiante (separadas por comas con su respectivo espacio). Si desea salir, ingrese la palabra 'Salir'.");
                                 String[] pReq;
+                                ArrayList<String> ingresos = new ArrayList<String>();
                                 ArrayList<Materia> pRequisitos = new ArrayList<Materia>();
                                 boolean seguir = true;
+                                boolean saliendo = true;
                                 while(true){
                                     String prerreq = scanner3_1.nextLine();
                                     pReq = prerreq.split(", ");
+                            
+                                for(String i : pReq){
+                                    ingresos.add(i);
+                                }
                                 for(String r: pReq){
                                     for(Materia materia:Materia.getMateriasTotales()){
                                         if (r.equals(materia.getNombre()) == true){
@@ -304,7 +310,12 @@ public class Main implements Interfaz{
                                     }
                                 }
 
-                                if(pRequisitos.size() == 0){
+                                if(ingresos.contains("Salir") || ingresos.contains("salir")){
+                                    System.out.println("Ha decidido salir, sera redireccionado al menu principal.");
+                                    saliendo = false;
+                                    break;
+                                }
+                                else if(pRequisitos.size() == 0){
                                     System.out.println("Ha escogido crear la materia con prerrequisitos pero no ingreso ninguna materia valida, intentelo nuevamente.");
                                     continue;
                                 }
@@ -327,7 +338,7 @@ public class Main implements Interfaz{
                                     }
                                     else if(0 > pre || pre > 2){
                                         System.out.println("Opcion invalida. Sera redireccionado a crear la materia nuevamente");
-                                        seguir = false;
+                                        saliendo = false;
                                         break;
                                     }
                                 }
@@ -335,6 +346,11 @@ public class Main implements Interfaz{
                                 if(!seguir){
                                     continue;
                                 }
+
+                                if(!saliendo){
+                                    break;
+                                }
+
                                 if(seguir){
                                     usuario.agregarMateria(nombre, codigo, descrip, creditos, facu, pRequisitos);
                                     System.out.println("La materia "+ nombre + " ha sido creada con exito.");
