@@ -843,7 +843,8 @@ public class Main implements Interfaz{
                     else if(opcion_5 == 2){
                         Scanner scanner5_2 = new Scanner(System.in);
                         System.out.println("Has seleccionado la opcion 2 (Aplicar beca a estudiante.)");
-                        System.out.println("Ingrese el nombre del estudiante");
+                        System.out.println("Ingrese el nombre del estudiante tal como aparece en la lista que vera a continuacion:");
+                        System.out.println(Estudiante.mostrarEstudiantes());
                         String estNombre = scanner5_2.nextLine();
                         
                         ArrayList<String> nomEst = new ArrayList<String>();
