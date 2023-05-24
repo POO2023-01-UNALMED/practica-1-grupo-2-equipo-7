@@ -206,6 +206,10 @@ public interface Interfaz {
             String a = beca.getConvenio();
             System.out.println(i +". "+ a + ".");
             i += 1;
+            System.out.println("    Cupos disponibles: " + beca.getCupos()+".");
+            System.out.println("    Estrato maximo para acceder: " + beca.getEstratoMinimo()+".");
+            System.out.println("    Creditos inscritos requeridos: " + beca.getCreditosInscritosRequeridos()+".");
+
         }
     } 
 

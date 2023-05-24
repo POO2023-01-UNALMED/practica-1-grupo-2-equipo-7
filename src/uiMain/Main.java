@@ -29,7 +29,12 @@ public class Main implements Interfaz{
         // Zona de Pruebas -------------------------------------------------------------------
         // int z = 1;
         // for (Estudiante estudiante : Estudiante.getEstudiantes()){
-        //     System.out.println((z++) + " " + estudiante.getNombre() + " " + estudiante.getId());
+        //     System.out.println((z++) + " " + estudiante.getNombre() + " " + estudiante.getId() + " " + estudiante.getEstrato());
+        // }
+        // for(Beca beca : Beca.getBecas() ){
+        //     System.out.println(beca.getConvenio() + " " + beca.getAvanceRequerido() + " " + beca.getCreditosInscritosRequeridos() + " " + beca.getEstratoMinimo()
+        //     );
+
         // }
         // System.out.println(Estudiante.getEstudiantes().get(0).getHorario().mostrarHorario());
 
@@ -333,7 +338,7 @@ public class Main implements Interfaz{
                                         break; 
                                     }
                                     else if(pre == 2){
-                                        System.out.println("Ingrese los prerrequisitos que desea agregar.");
+                                        System.out.println("Ingrese los prerrequisitos que desea agregar. Si desea salir, ingrese 'Salir'");
                                         continue;                                        
                                     }
                                     else if(0 > pre || pre > 2){
