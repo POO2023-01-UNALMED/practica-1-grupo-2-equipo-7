@@ -861,7 +861,7 @@ public class Main implements Interfaz{
                         for(Estudiante becado : estudiantesBeneficiados){
                             if(becado.getNombre().equals(estNombre) == true){
                                 System.out.println("El estudiante ya ha aplicado exitosamente a una beca, no puede aplicar a otra durante el semestre academico actual.");
-                                end = true;;
+                                end = true;
                             }
                         }
 
@@ -879,7 +879,6 @@ public class Main implements Interfaz{
                                     break;
                                 }
                                 else if (e.candidatoABeca(est,tipoBeca)){
-                                    estudiantesBeneficiados.add(est);
                                     tipoBeca.setCupos(tipoBeca.getCupos()-1);
                                     System.out.println("El estudiante "+ est.getNombre() +" cumple con los requisitos para aplicar a la beca " +tipoBeca.getConvenio()+".");
                                     estudiantesBeneficiados.add(est);
