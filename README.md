@@ -9,7 +9,7 @@ Este proyecto es un gestor de materias y horarios para estudiantes universitario
 
 2. **Desmatricular alumno:** los coordinadores pueden desmatricular a los estudiantes de las materias en las que ya no desean participar.
 
-3. **Generar un horario aleatorio:** los estudiantes pueden generar un horario aleatorio, lo que les permite visualizar la distribución de sus clases durante la semana.
+3. **Generar un horario :** los estudiantes pueden generar un horario, lo que les permite visualizar la distribución de sus clases durante la semana.
 
 4. **Eliminar o agregar materia o grupo de una materia:** los coordinadores pueden agregar o eliminar una materia o un grupo de alguna materia.
 
