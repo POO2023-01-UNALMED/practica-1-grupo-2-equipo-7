@@ -1,3 +1,12 @@
+/*
+ * Autores:
+ *  ANA SOFÍA GÓMEZ ZAPATA
+ *  EFRAÍN GÓMEZ RAMÍREZ
+ *  LIBARDO JOSÉ NAVARRO PEDROZO
+ */
+
+
+
 package gestorAplicacion.administracion;
 import java.util.ArrayList;
 import java.io.Serializable;

@@ -1,3 +1,3 @@
-java -jar ejecutar1.jar
+java -jar ejecutar.jar
 @echo off
 pause

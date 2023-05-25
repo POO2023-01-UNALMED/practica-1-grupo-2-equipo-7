@@ -1,3 +1,11 @@
+/*
+ * Autores:
+ *  MATEO ÁLVAREZ MURILLO
+ *  EFRAÍN GÓMEZ RAMÍREZ
+ *  LIBARDO JOSÉ NAVARRO PEDROZO
+ *	SEBASTIÁN OCAMPO GALVIS
+ */
+
 package gestorAplicacion.administracion;
 import java.io.Serializable;
 import java.util.*;

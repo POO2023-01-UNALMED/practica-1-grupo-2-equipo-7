@@ -1,3 +1,12 @@
+/*
+ * Autores:
+ *  MATEO ÁLVAREZ MURILLO
+ *  EFRAÍN GÓMEZ RAMÍREZ
+ *  LIBARDO JOSÉ NAVARRO PEDROZO
+ *  ANA SOFÍA GÓMEZ ZAPATA
+ *  SEBASTIÁN OCAMPO GALVIS
+ */
+
 package gestorAplicacion.usuario;
 
 import java.util.ArrayList;

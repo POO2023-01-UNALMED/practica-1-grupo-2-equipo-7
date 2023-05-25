@@ -1,9 +1,17 @@
+/*
+ * Autores:
+ *  MATEO ÁLVAREZ MURILLO
+ *  EFRAÍN GÓMEZ RAMÍREZ
+ *  LIBARDO JOSÉ NAVARRO PEDROZO
+ *  ANA SOFÍA GÓMEZ ZAPATA
+ *  SEBASTIÁN OCAMPO GALVIS
+ */
+
 package gestorAplicacion.usuario;
 
 import java.util.ArrayList;
 import gestorAplicacion.administracion.*;
 import java.io.Serializable;
-// import gestorAplicacion.usuario.*;
 
 public class Coordinador extends Usuario implements Serializable{
     private final static int limitesCreditos=20;
@@ -16,13 +24,6 @@ public class Coordinador extends Usuario implements Serializable{
         super.setTipo("Coordinador");
         Coordinador.coordinadoresTotales.add(this);
     }
-
-    // Ya se encuentra hecha mas abajo :P
-    // public void crearMateria(String nombre, int codigo, int creditos){
-    //     // Generarlo aqui o en el main?
-    //     Materia materia = new Materia(nombre,codigo, "Sin descripcion", creditos, "Sin facultad", 0);
-    //     // materiasTotales.add(materia);
-    // }
 
     public String desmatricular(Estudiante estudiante, Grupo grupo){
         // Desmatricular no seria simplemente llamar un metodo de estudiante?
@@ -39,12 +40,8 @@ public class Coordinador extends Usuario implements Serializable{
         }
     }
 
-    // public void contratarProfesor(String nombre, String facultad){
-    //     Profesor profesor = new Profesor(nombre,facultad);
-    // }
 
 
-    // FUSIONE resturarEstudiantesInscritosEnMateria Y resturarProfesoresInvolucradosEnMateria EN resturarMateria.
     public void resturarMateria(Materia materia){
         for (int i=0;i<materia.getGrupos().size();i++){
             Grupo puntero_Grupo = materia.getGrupos().get(i);
@@ -81,7 +78,6 @@ public class Coordinador extends Usuario implements Serializable{
     }
 
 
-    // ligadura dinamica?
     public static Object[] crearHorario(ArrayList<Materia> materias){
         /**
          * Toma una lista de materias que se desean ver.
@@ -180,10 +176,9 @@ public class Coordinador extends Usuario implements Serializable{
             Materia nMateria = new Materia(nombre, codigo, descripcion, creditos, facultad, prerrequisitos);
         }
     }
+
     /*Metodo candidato a beca: el metodo recibe un objeto de tipo estudiante y uno de tipo beca, el cual verifica que el estudiante cumpla con los requisitos necesarios para
     aplicar a la beca que se ingresa en los parametros y devuelve un booleano que indica si este es candidato a beca o no*/
-
-
     public boolean candidatoABeca(Estudiante estudiante, Beca tipoDeBeca){
         if (tipoDeBeca.getCupos() > 0){
             if ((estudiante.getPromedio() >= tipoDeBeca.getPromedioRequerido()) && (estudiante.getAvance() >= tipoDeBeca.getAvanceRequerido()) &&

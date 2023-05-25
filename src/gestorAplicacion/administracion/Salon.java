@@ -1,3 +1,10 @@
+/*
+ * Autores:
+ *  EFRAÍN GÓMEZ RAMÍREZ
+ *  LIBARDO JOSÉ NAVARRO PEDROZO
+ *  SEBASTIÁN OCAMPO GALVIS
+ */
+
 package gestorAplicacion.administracion;
 import java.util.ArrayList;
 import java.io.Serializable;
