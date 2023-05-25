@@ -162,6 +162,19 @@ public interface Interfaz {
                     break;   
                 } 
             }
+
+            boolean mens=false;
+            String nMateria="";
+            for (Grupo pGrupo:seleccionEstudiante.getGruposVistos()){
+                for (Grupo pGrupo1:horario.getGrupoContenidos()){
+                    if (pGrupo.getMateria().getCodigo()==pGrupo1.getMateria().getCodigo()){
+                        flag = false;
+                        mens = true;
+                        nMateria = pGrupo.getMateria().getNombre();
+                        break;   
+                    } 
+                }
+            }
                 
 
             if (flag){
@@ -174,6 +187,9 @@ public interface Interfaz {
             }else{
                 seleccionEstudiante.setHorario(tempHorario);
                 System.out.println("No es posible asignar el horario, el estudiante "+seleccionEstudiante.getNombre()+" no cumple los Pre-requisitos");
+                if(mens){
+                    System.out.println("o ya vio y aprobo una materia, dicha materia puede ser: "+nMateria);
+                }
             }
 
 
