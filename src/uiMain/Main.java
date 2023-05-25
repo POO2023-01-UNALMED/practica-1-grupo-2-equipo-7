@@ -663,7 +663,7 @@ public class Main implements Interfaz{
                 Estudiante estudiante = null;
                 Scanner scanner2 = new Scanner(System.in);
                 while (true){
-                    System.out.println("Elija como quiere seleccionar el alumno: \n1.Ver la lista de estudiantes. \n2.Buscar estudiante por ID y nombre. \n3.Salir");
+                    System.out.println("Elija como quiere seleccionar el alumno: \n1.Ver la lista de estudiantes. \n2.Buscar estudiante por ID (Documento) y nombre. \n3.Salir");
                     int eleccion = scanner.nextInt();
                     scanner.nextLine();
                     if (eleccion == 1){
@@ -677,7 +677,7 @@ public class Main implements Interfaz{
                     else if(eleccion == 2){
                         System.out.print("Ingrese el nombre del estudiante: ");
                         String nombre = scanner2.nextLine();
-                        System.out.print("Ingrese el id del estudiante: ");
+                        System.out.print("Ingrese el ID (Documento) del estudiante: ");
                         long id = scanner2.nextLong();
                         scanner2.nextLine();
                         int numeroEstudiante = Estudiante.buscarEstudiante(nombre, id);
