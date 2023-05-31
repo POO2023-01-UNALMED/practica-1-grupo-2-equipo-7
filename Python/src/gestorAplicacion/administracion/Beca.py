@@ -13,7 +13,7 @@ class Beca:
         self._necesitaRecomendacion=necesitaRecomendacion
         Beca._becas.append(self)
 
-    # Metodos
+    # METODOS
 
     @classmethod
     def eliminarBeca(cls,beca):
