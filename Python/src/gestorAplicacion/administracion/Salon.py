@@ -1,5 +1,4 @@
-from typing import Any
-
+from gestorAplicacion.administracion import *
 
 class Salon:
 
@@ -17,7 +16,7 @@ class Salon:
     def mostrarSalones(cls):
         retorno = ""
         i = 1
-        for salon in _salones:
+        for salon in Salon._salones:
             i += 1
             retorno += str(i)+". "+ salon._lugar +".\n"
         return retorno
