@@ -1,50 +1,72 @@
+from Python.src.gestorAplicacion.administracion import Grupo
+from Python.src.gestorAplicacion.usuario import Usuario
 from gestorAplicacion.administracion import *
 
-class Estudiante(Usuario):
 
+class Estudiante(Usuario):
     _estudiantes = []
 
-    def __init__(self, id, nombre, programa, semestre, facultad, estrato, sueldo, materias = None, gruposVistos = None):
+    def __init__(
+        self,
+        id,
+        nombre,
+        programa,
+        semestre,
+        facultad,
+        estrato,
+        sueldo,
+        materias=None,
+        gruposVistos=None,
+    ):
         super().__init__(id, nombre, facultad)
         super().setTipo("Estudiante")
         self._programa = programa
         self._semestre = semestre
         self._creditos = 0
-        self._materias = materias or [] #no se que tan bien este esto 
+        self._materias = materias or []  # no se que tan bien este esto
         self._grupos = []
         self._estrato = estrato
         self._sueldo = sueldo
-        self._valorMatricula  = 1234567 * estrato
+        self._valorMatricula = 1234567 * estrato
         self._matriculaPagada = False
         self._promedio = 0
         self._avance = 0
-        self._CREDITOS_PARA_GRADURASE = 120 
+        self._CREDITOS_PARA_GRADURASE = 120
         self._beca = None
         self._notas = None
         self._gruposVistos = gruposVistos or []
-        self._horario = None #Revisar
+        self._horario = None  # Revisar
         Estudiante._estudiantes.append(self)
-    
-    #METODOS
-    
+
+    # METODOS
+
     def mostrarMaterias():
         retorno = ""
         i = 1
         for grupo in Estudiante._grupos:
-            retorno += str(i) + "- " + grupo._materia._nombre + " | Grupo " + str(grupo._numero) + "\n"
+            retorno += (
+                str(i)
+                + "- "
+                + grupo._materia._nombre
+                + " | Grupo "
+                + str(grupo._numero)
+                + "\n"
+            )
             i += 1
         return retorno
-    
+
     @staticmethod
     def buscarEstudiante(nombre, id):
-        #Si el estudiante existe, retorna su indice en la lista 'estudiantes'
-        #Si no existe, retorna -1.
+        # Si el estudiante existe, retorna su indice en la lista 'estudiantes'
+        # Si no existe, retorna -1.
         for i in range(len(Estudiante._estudiantes)):
-            if (Estudiante._estudiantes[i].nombre == nombre) and (Estudiante._estudiantes[i].id == id):
+            if (Estudiante._estudiantes[i].nombre == nombre) and (
+                Estudiante._estudiantes[i].id == id
+            ):
                 return i
             else:
                 return -1
-    
+
     def eliminarMateria(self, materia):
         self._materias.remove(materia)
         self._creditos -= materia.creditos
@@ -67,7 +89,7 @@ class Estudiante(Usuario):
         for nota in Estudiante._notas:
             promedio += nota
         promedio = promedio / len(Estudiante._notas)
-        Estudiante.setPromedio(promedio) 
+        Estudiante.setPromedio(promedio)
 
     def calcularAvance():
         creditosVistos = 0
@@ -75,7 +97,9 @@ class Estudiante(Usuario):
         for pGrupo in Estudiante._gruposVistos:
             creditosVistos += pGrupo.getMateria().getCreditos()
 
-        Estudiante.setAvance((creditosVistos * 100.0) / Estudiante.getCreditosParaGraduarse())
+        Estudiante.setAvance(
+            (creditosVistos * 100.0) / Estudiante.getCreditosParaGraduarse()
+        )
 
     def agregarNota(self, nota):
         self._notas.append(nota)
@@ -101,9 +125,9 @@ class Estudiante(Usuario):
             if materia.getNombre() == nombre and materia.getCodigo() == codigo:
                 return True
         return False
-    
+
     def desmatricularMaterias(self):
-    #Desmatricula todas las materias de un estudiante
+        # Desmatricula todas las materias de un estudiante
         gruposEliminar = []
         self.setMaterias([])
         for grupoE in self._grupos:
@@ -115,8 +139,7 @@ class Estudiante(Usuario):
         for i in range(num):
             gruposEliminar[i].eliminarEstudiante(self)
 
-
-    #Getters y setters
+    # Getters y setters
     def getPrograma(self):
         return self._programa
 
@@ -156,7 +179,7 @@ class Estudiante(Usuario):
     @classmethod
     def getEstudiantes(cls):
         return cls._estudiantes
-    
+
     @classmethod
     def setEstudiantes(cls, estudiantes):
         cls._estudiantes = estudiantes
@@ -206,8 +229,10 @@ class Estudiante(Usuario):
     def setNotas(self, notas):
         self._notas = notas
 
+
 def getGruposVistos(self):
-        return self._gruposVistos
+    return self._gruposVistos
+
 
 def setGruposVistos(self, gruposVistos):
     self._gruposVistos = gruposVistos

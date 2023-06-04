@@ -4,6 +4,7 @@
 # ANA SOFÍA GÓMEZ ZAPATA
 # SEBASTIÁN OCAMPO GALVIS
 
+from Python.src.gestorAplicacion.administracion import Horario
 from gestorAplicacion.administracion import *
 import random
 

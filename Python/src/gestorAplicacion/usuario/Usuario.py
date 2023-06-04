@@ -31,20 +31,11 @@ class Usuario(ABC):
     def __str__(self):
         pass
 
-    @staticmethod
-    # def mostrarUsuarios(cls) -> str:
-    #     retorno = ""
-    #     i = 1
-    #     for usuario in cls._usuariosTotales:
-    #         retorno += (
-    #             str(i) + ". " + usuario._nombre + ", id: " + str(usuario._id) + "\n"
-    #         )
-    #         i += 1
-    #     return retorno
-    def mostrarUsuarios() -> str:
+    @classmethod
+    def mostrarUsuarios(cls) -> str:
         retorno = ""
         i = 1
-        for usuario in Usuario._usuariosTotales:
+        for usuario in cls._usuariosTotales:
             retorno += (
                 str(i) + ". " + usuario._nombre + ", id: " + str(usuario._id) + "\n"
             )
@@ -109,12 +100,10 @@ class Usuario(ABC):
     def setFacultad(self, facultad):
         self._facultad = facultad
 
-    @staticmethod
-    def getUsuariosTotales():
-        return Usuario.usuariosTotales
+    @classmethod
+    def getUsuariosTotales(cls):
+        return cls.usuariosTotales
 
-    @staticmethod
-    # def setUsuariosTotales(cls, usuariosTotales):
-    #     cls._usuariosTotales = usuariosTotales
-    def setUsuariosTotales(usuariosTotales):
-        Usuario._usuariosTotales = usuariosTotales
+    @classmethod
+    def setUsuariosTotales(cls, usuariosTotales):
+        cls._usuariosTotales = usuariosTotales

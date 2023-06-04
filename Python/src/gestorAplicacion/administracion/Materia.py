@@ -3,11 +3,20 @@ from gestorAplicacion.administracion import Salon
 from gestorAplicacion.usuario import Profesor
 from gestorAplicacion.usuario import Coordinador
 
+
 class Materia:
-         
     materiasTotales = []
 
-    def __init__(self, nombre, codigo, descripcion, creditos, facultad, prerrequisitos=None, grupos=None):
+    def __init__(
+        self,
+        nombre,
+        codigo,
+        descripcion,
+        creditos,
+        facultad,
+        prerrequisitos=None,
+        grupos=None,
+    ):
         self.nombre = nombre
         self.codigo = codigo
         self.descripcion = descripcion
@@ -18,25 +27,29 @@ class Materia:
         self.hacerAbreviatura(nombre)
         Materia.materiasTotales.append(self)
 
-    #MÉTODOS ESTÁTICOS
+    # MÉTODOS ESTÁTICOS
 
     @staticmethod
     def buscarMateria(nombre, codigo):
-        
-        #Si existe la materia, retorna su índice en la lista materiasTotales.
-        #Si no existe, retorna -1.
-        
+        # Si existe la materia, retorna su índice en la lista materiasTotales.
+        # Si no existe, retorna -1.
+
         for i in range(len(Materia.materiasTotales)):
-            if Materia.materiasTotales[i].getNombre() == nombre and Materia.materiasTotales[i].getCodigo() == codigo:
+            if (
+                Materia.materiasTotales[i].getNombre() == nombre
+                and Materia.materiasTotales[i].getCodigo() == codigo
+            ):
                 return i
         return -1
 
     @staticmethod
     def puedeVerMateria(estudiante, grupo):
-        
-        #Comprueba si un estudiante puede estar en un grupo.
-        
-        if not (estudiante.getCreditos() + grupo.getMateria().getCreditos() <= Coordinador.getLimitesCreditos()):
+        # Comprueba si un estudiante puede estar en un grupo.
+
+        if not (
+            estudiante.getCreditos() + grupo.getMateria().getCreditos()
+            <= Coordinador.getLimitesCreditos()
+        ):
             return False
         if not estudiante.getHorario().comprobarDisponibilidad(grupo.getHorario()):
             return False
@@ -48,9 +61,8 @@ class Materia:
 
     @staticmethod
     def comprobarPrerrequisitos(estudiante, materia):
-        
-        #Comprueba si un estudiante cumple con los prerrequisitos de una materia.
-        
+        # Comprueba si un estudiante cumple con los prerrequisitos de una materia.
+
         materiasVistas = []
         for pGrupo in estudiante.getGruposVistos():
             materiasVistas.append(pGrupo.getMateria())
@@ -63,7 +75,7 @@ class Materia:
             if not flag:
                 return False
         return True
-    
+
     @staticmethod
     def encontrarMateria(nombre):
         mater = None
@@ -80,8 +92,8 @@ class Materia:
             retorno += f"{i}. {materia.nombre}.\n"
             i += 1
         return retorno
-    
-    #MÉTODOS DE INSTANCIA
+
+    # MÉTODOS DE INSTANCIA
 
     def cantidadCupos(self):
         cantidad = 0
@@ -96,13 +108,24 @@ class Materia:
         self.grupos.append(grupo)
 
         return grupo
-    
+
     def mostrarContenidos(self):
-        contenido = "Materia: " + self.nombre + "\n" + \
-                    "Codigo: " + str(self.codigo) + "\n" + \
-                    "Creditos: " + str(self.creditos) + "\n" + \
-                    "Facultad: " + self.facultad + "\n" + \
-                    "Descripcion:\n" + self.descripcion
+        contenido = (
+            "Materia: "
+            + self.nombre
+            + "\n"
+            + "Codigo: "
+            + str(self.codigo)
+            + "\n"
+            + "Creditos: "
+            + str(self.creditos)
+            + "\n"
+            + "Facultad: "
+            + self.facultad
+            + "\n"
+            + "Descripcion:\n"
+            + self.descripcion
+        )
         return contenido
 
     def existenciaGrupo(self, grupoBuscado):
@@ -160,7 +183,7 @@ class Materia:
                 if len(palabra) >= 3:
                     abreviatura += palabra[:3] + " "
                 else:
-                    abreviatura += palabra[:len(palabra)] + " "
+                    abreviatura += palabra[: len(palabra)] + " "
             if len(abreviatura) <= 13:
                 self.abreviatura = abreviatura
             else:
@@ -173,12 +196,16 @@ class Materia:
             retorno += f"{i}. {grupo.getNumero()}.\n"
             i += 1
         return retorno
-    
-    #GETTERS Y SETTERS
 
-    @staticmethod
-    def getMateriasTotales():
-        return Materia.materiasTotales
+    # GETTERS Y SETTERS
+
+    @classmethod
+    def getMateriasTotales(cls):
+        return cls.materiasTotales
+
+    @classmethod
+    def setMateriasTotales(cls, materias):
+        cls.materiasTotales = materias
 
     def getDescripcion(self):
         return self.descripcion

@@ -135,6 +135,10 @@ class Horario:
     def setGrupoContenidos(self, grupoContenidos):
         self._grupoContenidos = grupoContenidos
 
-    @staticmethod
+    @classmethod
     def getHorariosTotales(cls):
         return cls._horariosTotales
+
+    @classmethod
+    def setHorariosTotales(cls, horarios):
+        cls._horariosTotales = horarios

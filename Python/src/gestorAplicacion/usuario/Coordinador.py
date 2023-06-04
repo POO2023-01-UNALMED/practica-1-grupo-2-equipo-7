@@ -1,18 +1,27 @@
+from Python.src.gestorAplicacion.administracion import Horario, Materia
+from Python.src.gestorAplicacion.usuario import Estudiante, Profesor, Usuario
 from gestorAplicacion.administracion import *
 
+
 class Coordinador(Usuario):
-    
-    _LIMITES_CREDITOS=20
-    _coordinadoresTotales=[]
-    _facultades = ["Facultad de arquitectura", "Facultad de ciencias", "Facultad de ciencias agrarias" , "Facultad de ciencias humanas y economicas", "Facultad de minas", "Sede"];
-    
-    def __init__(self,facultad,id,nombre, pw):
-        super().__init__(id,nombre,pw,facultad)
+    _LIMITES_CREDITOS = 20
+    _coordinadoresTotales = []
+    _facultades = [
+        "Facultad de arquitectura",
+        "Facultad de ciencias",
+        "Facultad de ciencias agrarias",
+        "Facultad de ciencias humanas y economicas",
+        "Facultad de minas",
+        "Sede",
+    ]
+
+    def __init__(self, facultad, id, nombre, pw):
+        super().__init__(id, nombre, pw, facultad)
         super().setTipo("Coordinador")
         Coordinador._coordinadoresTotales.append(self)
-    
+
     # METODOS
-    
+
     def desmatricular(self, estudiante, grupo):
         estaMatriculado = grupo.existenciaEstudiante(estudiante)
 
@@ -36,27 +45,26 @@ class Coordinador(Usuario):
         for e in Estudiante.getEstudiantes():
             if e == estudiante:
                 e1 = e
-                
+
         if e1 is not None:
             Estudiante.getEstudiantes().remove(e1)
-            
+
         for usuario in Usuario.getUsuariosTotales():
             if isinstance(usuario, Estudiante):
                 if usuario == estudiante:
                     Usuario.getUsuariosTotales().remove(usuario)
                     break
 
-    
     def crearHorario(materias):
         """
         Toma una lista de materias que se desean ver.
-        
+
         Crea un horario aleatorio basado en los grupos disponibles.
-        
+
         Retorna una lista estática de dos elementos: Un booleano que nos dirá si fue posible o no
         crear el horario, el horario generado y la materia que no permitió crear el horario en caso de existir.
         """
-        
+
         resultado = [None, None, None]
         horario = Horario()
         ok = True
@@ -86,9 +94,11 @@ class Coordinador(Usuario):
                 if gPosible[i] == len(materias[i].getGrupos()):
                     # Tenemos que probar todas las posibilidades, por lo tanto probamos con el siguiente grupo de la materia i-1
                     i -= 1
-                    horario.liberarHorario(materias[i].getGrupos()[gPosible[i]].getHorario())
+                    horario.liberarHorario(
+                        materias[i].getGrupos()[gPosible[i]].getHorario()
+                    )
                     gPosible[i] += 1
-                    gPosible[i+1] = 0
+                    gPosible[i + 1] = 0
 
                     # Comprobamos si, aunque iteramos todas las posibilidades, no se puede poner la materia i
                     if gPosible[i] == len(materias[i].getGrupos()):
@@ -106,8 +116,7 @@ class Coordinador(Usuario):
         resultado[2] = materiaObstaculo
 
         return resultado
-    
-    
+
     def eliminarMateria(materia):
         if materia in Materia.getMateriasTotales():
             Materia.getMateriasTotales().remove(materia)
@@ -115,19 +124,24 @@ class Coordinador(Usuario):
 
     def agregarMateria(nombre, codigo, descripcion, creditos, facultad, prerrequisitos):
         nombreMaterias = []
-        
+
         for materia in Materia.getMateriasTotales():
             nombreMaterias.append(materia.getNombre())
-            
+
         if nombre not in nombreMaterias:
-            nMateria = Materia(nombre, codigo, descripcion, creditos, facultad, prerrequisitos)
+            nMateria = Materia(
+                nombre, codigo, descripcion, creditos, facultad, prerrequisitos
+            )
 
     def candidatoABeca(estudiante, tipoDeBeca):
         if tipoDeBeca.getCupos() > 0:
-            if estudiante.getPromedio() >= tipoDeBeca.getPromedioRequerido() and \
-            estudiante.getAvance() >= tipoDeBeca.getAvanceRequerido() and \
-            estudiante.getCreditos() >= tipoDeBeca.getCreditosInscritosRequeridos() and \
-            estudiante.getEstrato() <= tipoDeBeca.getEstratoMinimo():
+            if (
+                estudiante.getPromedio() >= tipoDeBeca.getPromedioRequerido()
+                and estudiante.getAvance() >= tipoDeBeca.getAvanceRequerido()
+                and estudiante.getCreditos()
+                >= tipoDeBeca.getCreditosInscritosRequeridos()
+                and estudiante.getEstrato() <= tipoDeBeca.getEstratoMinimo()
+            ):
                 if tipoDeBeca.getNecesitaRecomendacion():
                     if Profesor.recomendarEstudiante(estudiante):
                         return True
@@ -151,9 +165,8 @@ class Coordinador(Usuario):
     def __str__(self):
         return "Nombre: " + self.getNombre() + "\nDocumento: " + self.getId()
 
-
     # Setters y Getters
-    
+
     @classmethod
     def getLimitesCreditos(cls):
         return cls.limitesCreditos
@@ -161,6 +174,10 @@ class Coordinador(Usuario):
     @classmethod
     def getCoordinadoresTotales(cls):
         return cls.coordinadoresTotales
+
+    @classmethod
+    def setCoordinadoresTotales(cls, coordinadores):
+        cls._coordinadoresTotales = coordinadores
 
     @classmethod
     def getFacultades(cls):

@@ -7,6 +7,7 @@
 from gestorAplicacion.usuario import Estudiante
 from gestorAplicacion.administracion import Materia, Salon
 
+
 class Grupo:
     _gruposTotales = []
 
@@ -19,9 +20,11 @@ class Grupo:
         self._salon = salon
         self._estudiantes = []
         Grupo._gruposTotales.append(self)
-    
+
     def mostrarInformacionGrupo(self):
-        return "Número del grupo: {}, Profesor: {}, Horario: {}, Cupos: {}, Salón: {}".format(self.numero, self.profesor, self.horario, self.cupos, self.salon)
+        return "Número del grupo: {}, Profesor: {}, Horario: {}, Cupos: {}, Salón: {}".format(
+            self.numero, self.profesor, self.horario, self.cupos, self.salon
+        )
 
     def existenciaEstudiante(self, estudiante):
         for e in self._estudiantes:
@@ -54,8 +57,8 @@ class Grupo:
                         indicej = j
                         break
 
-        return Materia.getMateriasTotales()[indicei].getGrupos()[indicej
-                                                                 ]
+        return Materia.getMateriasTotales()[indicei].getGrupos()[indicej]
+
     def agregarEstudiante(self, estudiante):
         self._estudiantes.append(estudiante)
         self._cupos -= 1
@@ -105,3 +108,7 @@ class Grupo:
     @classmethod
     def getGruposTotales(cls):
         return cls._gruposTotales
+
+    @classmethod
+    def setGruposTotales(cls, grupos):
+        cls._gruposTotales = grupos
