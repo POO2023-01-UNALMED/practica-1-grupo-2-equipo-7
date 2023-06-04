@@ -7,10 +7,11 @@
 from gestorAplicacion.administracion import *
 import random
 
+
 class Profesor:
     _profesores = []
 
-    def __init__(self, nombre, facultad, materiasDadas, horario = Horario(),grupos=[]):
+    def __init__(self, nombre, facultad, materiasDadas, horario=Horario(), grupos=[]):
         self._nombre = nombre
         self._facultad = facultad
         self._materiasDadas = materiasDadas
@@ -57,7 +58,10 @@ class Profesor:
         for profesor in cls._profesores:
             r += f"{i}. {profesor.getNombre()}. Materias: "
             for materia in profesor.getMateriasDadas():
-                if profesor.getMateriasDadas().index(materia) == len(profesor.getMateriasDadas()) - 1:
+                if (
+                    profesor.getMateriasDadas().index(materia)
+                    == len(profesor.getMateriasDadas()) - 1
+                ):
                     r += f"{materia.getNombre()}.\n"
                 else:
                     r += f"{materia.getNombre()}, "
@@ -71,7 +75,7 @@ class Profesor:
             if profesor.daMateria(nombre) and profesor not in profes:
                 profes.append(profesor)
         return profes
-    
+
     @classmethod
     def mostrarProfesMateria(cls, nombre):
         r = ""
@@ -105,13 +109,13 @@ class Profesor:
 
     def setGrupos(self, grupos):
         self._grupos = grupos
-        
+
     def setHorario(self, horario):
         self._horario = horario
 
     def getHorario(self):
         return self._horario
-    
+
     @classmethod
     def getProfesores(cls):
         return cls._profesores
