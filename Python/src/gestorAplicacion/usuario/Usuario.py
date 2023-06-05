@@ -8,7 +8,8 @@
 import pickle
 from abc import ABC, abstractmethod
 
-from Python.src.gestorAplicacion.administracion import Materia
+from Materia import Materia
+from gestorAplicacion.administracion.Materia import Materia
 
 
 class Usuario(ABC):

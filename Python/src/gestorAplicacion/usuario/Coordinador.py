@@ -1,6 +1,8 @@
-from Python.src.gestorAplicacion.administracion import Horario, Materia
-from Python.src.gestorAplicacion.usuario import Estudiante, Profesor, Usuario
-from gestorAplicacion.administracion import *
+from gestorAplicacion.administracion.Horario import Horario
+from gestorAplicacion.administracion.Materia import Materia
+from Estudiante import Estudiante
+from Profesor import Profesor
+from Usuario import Usuario
 
 
 class Coordinador(Usuario):

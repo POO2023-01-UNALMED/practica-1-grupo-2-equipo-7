@@ -1,7 +1,6 @@
-from gestorAplicacion.administracion import Grupo
-from gestorAplicacion.administracion import Salon
-from gestorAplicacion.usuario import Profesor
-from gestorAplicacion.usuario import Coordinador
+from Grupo import Grupo
+from Salon import Salon
+from gestorAplicacion.usuario.Coordinador import Coordinador
 
 
 class Materia:

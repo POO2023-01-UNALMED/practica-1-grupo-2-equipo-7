@@ -1,6 +1,5 @@
-from Python.src.gestorAplicacion.administracion import Grupo
-from Python.src.gestorAplicacion.usuario import Usuario
-from gestorAplicacion.administracion import *
+from gestorAplicacion.administracion.Grupo import Grupo
+from Usuario import Usuario
 
 
 class Estudiante(Usuario):

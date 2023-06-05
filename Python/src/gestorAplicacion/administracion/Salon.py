@@ -1,5 +1,4 @@
-from Python.src.gestorAplicacion.administracion import Horario
-from gestorAplicacion.administracion import *
+from Horario import Horario
 
 
 class Salon:

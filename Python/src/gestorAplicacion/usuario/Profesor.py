@@ -3,9 +3,7 @@
 # LIBARDO JOSÉ NAVARRO PEDROZO
 # ANA SOFÍA GÓMEZ ZAPATA
 # SEBASTIÁN OCAMPO GALVIS
-
-from Python.src.gestorAplicacion.administracion import Horario
-from gestorAplicacion.administracion import *
+from gestorAplicacion.administracion.Horario import Horario
 import random
 
 

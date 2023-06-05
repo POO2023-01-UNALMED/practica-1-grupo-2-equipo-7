@@ -3,9 +3,9 @@
 #  EFRAÍN GÓMEZ RAMÍREZ
 #  LIBARDO JOSÉ NAVARRO PEDROZO
 #  SEBASTIÁN OCAMPO GALVIS
-
-from gestorAplicacion.usuario import Estudiante
-from gestorAplicacion.administracion import Materia, Salon
+from gestorAplicacion.usuario.Estudiante import Estudiante
+from Materia import Materia
+from Salon import Salon
 
 
 class Grupo:

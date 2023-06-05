@@ -4,7 +4,6 @@
 #   SEBASTIÁN OCAMPO GALVIS
 #   MATEO ÁLVAREZ MURILLO
 
-import pickle
 from enum import Enum
 
 
