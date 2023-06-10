@@ -3,3 +3,4 @@
 .project
 .vscode/settings.json
 .classpath
+__pycache__/

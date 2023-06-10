@@ -1,15 +1,24 @@
-# from gestorAplicacion.administracion.Beca import Beca
-# from gestorAplicacion.administracion.Grupo import Grupo
-# from gestorAplicacion.administracion.Horario import Horario
-# from gestorAplicacion.administracion.Horario import DiaSemana
-# from gestorAplicacion.administracion.Materia import Materia
-# from gestorAplicacion.administracion.Salon import Salon
-# from gestorAplicacion.usuario.Coordinador import Coordinador
-# from gestorAplicacion.usuario.Estudiante import Estudiante
-# from gestorAplicacion.usuario.Profesor import Profesor
-# from gestorAplicacion.usuario.Usuario import Usuario
-# from baseDatos.Desealizador import Deserializador
-# from baseDatos.Serializador import Serializador
+from tkinter import *
 
-if __name__ == "__main__":
-    print("Este es el main")
+from gestorGrafico.ventInicio import VentInicio
+from gestorGrafico.ventLog import VentLog
+
+# Configuracion de ventana
+
+class MainWin(Tk):
+    def __init__(self):
+        super().__init__()
+        self.title("Sistema Matricula de Materias")
+        self.resizable(1,1)
+        self.geometry("865x460")
+        
+        VentInicio(self)
+        self.mainloop()
+
+    def abrirLog(self):
+        self.destroy()         
+        VentLog()
+    def abrirInicio(self):          
+        VentInicio(self)
+
+MainWin()
