@@ -1,6 +1,5 @@
-from Grupo import Grupo
-from Salon import Salon
-from gestorAplicacion.usuario.Coordinador import Coordinador
+from gestorAplicacion.administracion.Grupo import Grupo
+# from Salon import Salon
 
 
 class Materia:
@@ -43,6 +42,8 @@ class Materia:
 
     @staticmethod
     def puedeVerMateria(estudiante, grupo):
+        from gestorAplicacion.usuario.Coordinador import Coordinador
+        
         # Comprueba si un estudiante puede estar en un grupo.
 
         if not (

@@ -3,9 +3,8 @@
 #  EFRAÍN GÓMEZ RAMÍREZ
 #  LIBARDO JOSÉ NAVARRO PEDROZO
 #  SEBASTIÁN OCAMPO GALVIS
-from gestorAplicacion.usuario.Estudiante import Estudiante
-from Materia import Materia
-from Salon import Salon
+# from gestorAplicacion.usuario.Estudiante import Estudiante
+# from Salon import Salon
 
 
 class Grupo:
@@ -45,6 +44,8 @@ class Grupo:
 
     @staticmethod
     def buscarGrupo(materiaE, grupoE):
+        from gestorAplicacion.administracion.Materia import Materia
+        
         indicei = -1
         indicej = -1
         for i in range(len(Materia.getMateriasTotales())):

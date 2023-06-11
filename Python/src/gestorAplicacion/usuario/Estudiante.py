@@ -1,5 +1,6 @@
 from gestorAplicacion.administracion.Grupo import Grupo
-from Usuario import Usuario
+from gestorAplicacion.usuario.Usuario import Usuario
+# import pickle;
 
 
 class Estudiante(Usuario):
@@ -38,6 +39,9 @@ class Estudiante(Usuario):
         Estudiante._estudiantes.append(self)
 
     # METODOS
+    
+    def __str__(self):
+        return ""
 
     def mostrarMaterias():
         retorno = ""

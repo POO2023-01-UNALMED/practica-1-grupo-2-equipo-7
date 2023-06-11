@@ -8,20 +8,20 @@
 import pickle
 from abc import ABC, abstractmethod
 
-from Materia import Materia
+# from Materia import Materia
 from gestorAplicacion.administracion.Materia import Materia
 
 
 class Usuario(ABC):
     _usuariosTotales = []
 
-    def __init__(self, id, nombre, facultad):
-        self._id = id
-        self._nombre = nombre
-        self._facultad = facultad
-        Usuario._usuariosTotales.append(self)
+    # def __init__(self, id, nombre, facultad):
+    #     self._id = id
+    #     self._nombre = nombre
+    #     self._facultad = facultad
+    #     Usuario._usuariosTotales.append(self)
 
-    def __init__(self, id, nombre, pw, facultad):
+    def __init__(self, id, nombre, facultad, pw=0000):
         self._id = id
         self._nombre = nombre
         self._pw = pw

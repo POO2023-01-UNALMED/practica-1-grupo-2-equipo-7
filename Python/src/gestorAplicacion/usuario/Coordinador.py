@@ -1,8 +1,8 @@
 from gestorAplicacion.administracion.Horario import Horario
 from gestorAplicacion.administracion.Materia import Materia
-from Estudiante import Estudiante
-from Profesor import Profesor
-from Usuario import Usuario
+from gestorAplicacion.usuario.Estudiante import Estudiante
+from gestorAplicacion.usuario.Profesor import Profesor
+from gestorAplicacion.usuario.Usuario import Usuario
 
 
 class Coordinador(Usuario):

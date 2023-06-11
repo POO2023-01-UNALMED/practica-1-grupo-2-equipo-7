@@ -1,4 +1,4 @@
-from Horario import Horario
+from gestorAplicacion.administracion.Horario import Horario
 
 
 class Salon:
