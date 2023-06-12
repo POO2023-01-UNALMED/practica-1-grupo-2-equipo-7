@@ -17,9 +17,9 @@ class DiaSemana(Enum):
     SABADO = (5, 6)
     DOMINGO = (6, 7)
 
-    @staticmethod
-    def getDiaPorIndice(indice) -> str:
-        for dia in DiaSemana:
+    @classmethod
+    def getDiaPorIndice(cls, indice) -> str:
+        for dia in cls:
             if dia.value[0] == indice:
                 return dia.name
         return None
@@ -28,11 +28,6 @@ class DiaSemana(Enum):
 class Horario:
     _horariosTotales = []
 
-    def __init__(self):
-        Horario._horariosTotales.append(self)
-        self._horario = [[None] * 24 for _ in range(7)]
-        self._grupoContenidos = []
-
     def __init__(self, diaSemana, horaInicio, horaFinal, grupo):
         self._horario = [[None] * 24 for _ in range(7)]
         self._grupoContenidos = []
@@ -40,34 +35,32 @@ class Horario:
         for hora in range(horaInicio, horaFinal):
             self._horario[diaSemana][hora] = grupo
 
-    def __init__(self, horario, grupo):
-        self._horario = [[None] * 24 for _ in range(7)]
-        self._grupoContenidos = []
+    # Por si alguien utiliza los demas constructores que estaban en Java
+
+    # def __init__(self):
+    #     Horario._horariosTotales.append(self)
+    #     self._horario = [[None] * 24 for _ in range(7)]
+    #     self._grupoContenidos = []
+
+    # def __init__(self, horario, grupo):
+    #     self._horario = [[None] * 24 for _ in range(7)]
+    #     self._grupoContenidos = []
+    #     self._grupoContenidos.append(grupo)
+    #     for clase in horario:
+    #         dia = int(clase[0]) - 1
+    #         horaInicio = int(clase[2:4])
+    #         horaFinal = int(clase[5:7])
+    #         for hora in range(horaInicio, horaFinal):
+    #             self._horario[dia][hora] = grupo
+
+    def ocuparHorario(self, grupo, horario=None) -> None:
+        if horario == None:
+            horario = grupo.getHorario()
         self._grupoContenidos.append(grupo)
         for clase in horario:
             dia = int(clase[0]) - 1
             horaInicio = int(clase[2:4])
             horaFinal = int(clase[5:7])
-            for hora in range(horaInicio, horaFinal):
-                self._horario[dia][hora] = grupo
-
-    def ocuparHorario(self, horario, grupo) -> None:
-        self._grupoContenidos.append(grupo)
-        for clase in horario:
-            dia = int(clase[0]) - 1
-            horaInicio = int(clase[2:4])
-            horaFinal = int(clase[5:7])
-            for hora in range(horaInicio, horaFinal):
-                self._horario[dia][hora] = grupo
-
-    def ocuparHorario(self, grupo) -> None:
-        self._grupoContenidos.append(grupo)
-        horario = grupo.getHorario()
-        for clase in horario:
-            dia = int(clase[0]) - 1
-            horaInicio = int(clase[2:4])
-            horaFinal = int(clase[5:7])
-
             for hora in range(horaInicio, horaFinal):
                 self._horario[dia][hora] = grupo
 
@@ -95,11 +88,10 @@ class Horario:
         return True
 
     def comprobarDisponibilidad(self, clases) -> bool:
-        ok = True
-        for i in clases:
-            if not self.comprobarDisponibilidad(i):
-                ok = False
-        return ok
+        for clase in clases:
+            if not self.comprobarDisponibilidad(clase):
+                return False
+        return True
 
     def mostrarHorario(self) -> str:
         horario = "HORA        LUNES        MARTES        MIERCOLES        JUEVES        VIERNES        SABADO        DOMINGO\n"
