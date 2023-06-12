@@ -3,10 +3,10 @@ from tkinter import *
 from gestorGrafico.ventInicio import VentInicio
 from gestorGrafico.ventLog import VentLog
 
-from gestorAplicacion.usuario.Estudiante import Estudiante
+# from gestorAplicacion.usuario.Estudiante import Estudiante
 
-from baseDatos.Serializador import Serializador
-from baseDatos.Desealizador import Deserializador 
+# from baseDatos.Serializador import Serializador
+# from baseDatos.Desealizador import Deserializador 
 # Configuracion de ventana
 
 class MainWin(Tk):
@@ -26,10 +26,10 @@ class MainWin(Tk):
         VentInicio(self)
 
 MainWin()
-Deserializador.deserializarDatos()
-# estudiante = Estudiante(121,"Sofia Jose Mira Ceja","Ingenieria de sistemas e informatica",2,"Facultad de Minas",3,15000)
-Serializador.serializarDatos()
+# Deserializador.deserializarDatos()
+# # estudiante = Estudiante(121,"Sofia Jose Mira Ceja","Ingenieria de sistemas e informatica",2,"Facultad de Minas",3,15000)
+# Serializador.serializarDatos()
 
-print(Estudiante.getEstudiantes()[0].getNombre())
-print(Estudiante.getEstudiantes()[1].getNombre())
+# print(Estudiante.getEstudiantes()[0].getNombre())
+# print(Estudiante.getEstudiantes()[1].getNombre())
 
