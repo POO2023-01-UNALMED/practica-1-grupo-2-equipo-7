@@ -31,12 +31,12 @@ class Deserializador:
 
     @classmethod
     def deserializarDatos(cls):
-        Beca.setBecas(cls.deserializar("Beca"))
-        Grupo.setGruposTotales(cls.deserializar("Grupo"))
-        Horario.setHorariosTotales(cls.deserializar("Horario"))
-        Materia.setMateriasTotales(cls.deserializar("Materia"))
-        Salon.setSalones(cls.deserializar("Salon"))
-        Coordinador.setCoordinadoresTotales(cls.deserializar("Coordinador"))
-        Estudiante.setEstudiantes(cls.deserializar("Estudiante"))
-        Profesor.setProfesores(cls.deserializar("Profesor"))
-        Usuario.setUsuariosTotales(cls.deserializar("Usuario"))
+        Beca.setBecas(cls.deserializar("Becas"))
+        Grupo.setGruposTotales(cls.deserializar("Grupos"))
+        Horario.setHorariosTotales(cls.deserializar("Horarios"))
+        Materia.setMateriasTotales(cls.deserializar("Materias"))
+        Salon.setSalones(cls.deserializar("Salones"))
+        Coordinador.setCoordinadoresTotales(cls.deserializar("Coordinadores"))
+        Estudiante.setEstudiantes(cls.deserializar("Estudiantes"))
+        Profesor.setProfesores(cls.deserializar("Profesores"))
+        Usuario.setUsuariosTotales(cls.deserializar("Usuarios"))

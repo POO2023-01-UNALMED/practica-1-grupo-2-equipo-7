@@ -5,21 +5,12 @@
 #   ANA SOFÍA GÓMEZ ZAPATA
 #   SEBASTIÁN OCAMPO GALVIS
 
-import pickle
 from abc import ABC, abstractmethod
-
-# from Materia import Materia
 from gestorAplicacion.administracion.Materia import Materia
 
 
 class Usuario(ABC):
     _usuariosTotales = []
-
-    # def __init__(self, id, nombre, facultad):
-    #     self._id = id
-    #     self._nombre = nombre
-    #     self._facultad = facultad
-    #     Usuario._usuariosTotales.append(self)
 
     def __init__(self, id, nombre, facultad, pw=0000):
         self._id = id
@@ -27,6 +18,14 @@ class Usuario(ABC):
         self._pw = pw
         self._facultad = facultad
         Usuario._usuariosTotales.append(self)
+
+    # Por si alguien utiliza el otro constructor que estaban en Java
+
+    # def __init__(self, id, nombre, facultad):
+    #     self._id = id
+    #     self._nombre = nombre
+    #     self._facultad = facultad
+    #     Usuario._usuariosTotales.append(self)
 
     @abstractmethod
     def __str__(self):
@@ -36,7 +35,7 @@ class Usuario(ABC):
     def mostrarUsuarios(cls) -> str:
         retorno = ""
         i = 1
-        for usuario in cls._usuariosTotales:
+        for usuario in cls.getUsuariosTotales():
             retorno += (
                 str(i) + ". " + usuario._nombre + ", id: " + str(usuario._id) + "\n"
             )
@@ -46,31 +45,26 @@ class Usuario(ABC):
     def comprobacionFacultad(self, usuario) -> bool:
         facultad1 = self.getFacultad().lower()
         facultad2 = usuario.getFacultad().lower()
-        if facultad1 == facultad2:
-            return True
-        return False
+        return facultad1 == facultad2
 
     def desmatricularDelSistema(usuario) -> None:
-        usuarios_totales = Usuario.getUsuariosTotales()
-        for u in usuarios_totales:
-            if usuario == u:
-                usuarios_totales.remove(usuario)
+        usuariosTotales = Usuario.getUsuariosTotales()
+        for user in usuariosTotales:
+            if usuario == user:
+                usuariosTotales.remove(usuario)
                 break
 
-    def eliminar_materia(materia):
+    def eliminar_materia(materia) -> None:
         Materia.getMateriasTotales().remove(materia)
 
     def agregar_materia(
         nombre, codigo, descripcion, creditos, facultad, prerrequisitos
-    ):
-        nMateria = Materia(
+    ) -> None:
+        nuevaMateria = Materia(
             nombre, codigo, descripcion, creditos, facultad, prerrequisitos
         )
-        Materia.getMateriasTotales().append(nMateria)
+        Materia.getMateriasTotales().append(nuevaMateria)
 
-    # @staticmethod
-    # def getTipo(cls):
-    #     return cls.tipo
     def getTipo(self):
         return self._tipo
 

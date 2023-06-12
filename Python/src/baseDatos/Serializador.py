@@ -27,12 +27,12 @@ class Serializador:
 
     @classmethod
     def serializarDatos(cls):
-        cls.serializar("Beca", Beca.getBecas())
-        cls.serializar("Grupo", Grupo.getGruposTotales())
-        cls.serializar("Horario", Horario.getHorariosTotales())
-        cls.serializar("Materia", Materia.getMateriasTotales())
-        cls.serializar("Salon", Salon.getSalones())
-        cls.serializar("Coordinador", Coordinador.getCoordinadoresTotales())
-        cls.serializar("Estudiante", Estudiante.getEstudiantes())
-        cls.serializar("Profesor", Profesor.getProfesores())
-        cls.serializar("Usuario", Usuario.getUsuariosTotales())
+        cls.serializar("Becas", Beca.getBecas())
+        cls.serializar("Grupos", Grupo.getGruposTotales())
+        cls.serializar("Horarios", Horario.getHorariosTotales())
+        cls.serializar("Materias", Materia.getMateriasTotales())
+        cls.serializar("Salones", Salon.getSalones())
+        cls.serializar("Coordinadores", Coordinador.getCoordinadoresTotales())
+        cls.serializar("Estudiantes", Estudiante.getEstudiantes())
+        cls.serializar("Profesores", Profesor.getProfesores())
+        cls.serializar("Usuarios", Usuario.getUsuariosTotales())
