@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
+from DesmatricularAlumno import DesmatricularAlumno
 
 class VentPrincipal(Tk):
     def __init__(self):
@@ -34,7 +35,7 @@ class VentPrincipal(Tk):
             pass
 
         def desmatricularAlumno():
-            pass
+            DesmatricularAlumno(self).pack()
 
         def becas():
             pass
