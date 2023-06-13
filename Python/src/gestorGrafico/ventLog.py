@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import Tk
+
 class VentLog(Tk):
     def __init__(self):
         super().__init__()
@@ -25,3 +26,8 @@ class VentLog(Tk):
         boton_limpiar.grid(row=2,column=1,padx=10,pady=10,sticky="w")
 
         self.mainloop()
+        
+    
+        
+       
+        
