@@ -97,7 +97,7 @@ class Usuario(ABC):
 
     @classmethod
     def getUsuariosTotales(cls):
-        return cls.usuariosTotales
+        return cls._usuariosTotales
 
     @classmethod
     def setUsuariosTotales(cls, usuariosTotales):

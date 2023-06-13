@@ -28,7 +28,7 @@ class DiaSemana(Enum):
 class Horario:
     _horariosTotales = []
 
-    def __init__(self, diaSemana, horaInicio, horaFinal, grupo):
+    def __init__(self, diaSemana=0, horaInicio=0, horaFinal=0, grupo=""):
         self._horario = [[None] * 24 for _ in range(7)]
         self._grupoContenidos = []
         self._grupoContenidos.append(grupo)

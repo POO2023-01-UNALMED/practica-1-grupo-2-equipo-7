@@ -175,7 +175,7 @@ class Coordinador(Usuario):
 
     @classmethod
     def getCoordinadoresTotales(cls):
-        return cls.coordinadoresTotales
+        return cls._coordinadoresTotales
 
     @classmethod
     def setCoordinadoresTotales(cls, coordinadores):

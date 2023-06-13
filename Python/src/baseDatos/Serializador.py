@@ -1,7 +1,6 @@
 from gestorAplicacion.administracion.Beca import Beca
 from gestorAplicacion.administracion.Grupo import Grupo
 from gestorAplicacion.administracion.Horario import Horario
-from gestorAplicacion.administracion.Horario import DiaSemana
 from gestorAplicacion.administracion.Materia import Materia
 from gestorAplicacion.administracion.Salon import Salon
 from gestorAplicacion.usuario.Coordinador import Coordinador
