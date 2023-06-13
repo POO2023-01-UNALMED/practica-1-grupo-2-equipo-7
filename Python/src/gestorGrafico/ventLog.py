@@ -29,7 +29,7 @@ class VentLog(Tk):
             VentPrincipal()
 
         def verificar():
-            exist = True
+            exist = False
             for usuario in Usuario.getUsuariosTotales():
                 if usuario.getId() == entrada1.cget():
                     exist = True
