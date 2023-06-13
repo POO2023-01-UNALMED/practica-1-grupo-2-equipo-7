@@ -1,5 +1,4 @@
 from tkinter import *
-
 from gestorGrafico.ventInicio import VentInicio
 from gestorGrafico.ventLog import VentLog
 
@@ -31,8 +30,7 @@ class MainWin(Tk):
     def abrirLog(self):
         self.destroy()         
         VentLog()
-    def abrirInicio(self):          
-        VentInicio(self)
+    
 
 MainWin()
 Deserializador.deserializarDatos()

@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
-from DesmatricularAlumno import DesmatricularAlumno
-from MatricularMateria import MatricularMateria
+# from DesmatricularAlumno import DesmatricularAlumno
+# from MatricularMateria import MatricularMateria
 
 
 class VentPrincipal(Tk):
