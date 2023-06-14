@@ -1,5 +1,9 @@
 from tkinter import *
 from FieldFrame import FieldFrame
+from agregarMateria import agregarMateria
+from eliminarMateria import eliminarMateria
+from agregarGrupo import agregarGrupo
+from eliminarGrupo import eliminarGrupo
 
 class eliminarAgregarMateria(Frame):
 
@@ -45,54 +49,6 @@ class eliminarAgregarMateria(Frame):
         agGrup.pack(padx=20, pady=10)
         elGrup = Button(opciones, text="Eliminar Grupo", command=elGrupo)
         elGrup.pack(padx=20, pady=10)
-
-class agregarMateria(Frame):
-    def __init__(self, ventana):
-        super().__init__(ventana)
-
-        titulo = Label(self, text="Agregar Materia", font=("Arial", 14))
-        titulo.pack(side="top", anchor="c")
-
-        texto = ("A continuación, deberá ingresar la información necesaria para crear\n una nueva materia que será registrada en el sistema.")
-        descripcion = Label(self, text=texto, font=("Arial", 10))
-        descripcion.pack(anchor="n", pady=20)
-
-        criterios = ["Nombre", "Código", "Descripción", "Créditos", "Facultad", "Prerrequisitos"]
-        formulario = FieldFrame(self, "Criterio", criterios, "Valor", None)
-        formulario.pack()
-
-class eliminarMateria(Frame):
-    def __init__(self, ventana):
-        super().__init__(ventana)
-
-        titulo = Label(self, text="Eliminar Materia", font=("Arial", 14))
-        titulo.pack(side="top", anchor="c")
-
-        texto = ("A continuación, deberá ingresar la información necesaria para eliminar\n una materia que esté registrada en el sistema.")
-        descripcion = Label(self, text=texto, font=("Arial", 10))
-        descripcion.pack(anchor="n", pady=20)
-
-class agregarGrupo(Frame):
-    def __init__(self, ventana):
-        super().__init__(ventana)
-
-        titulo = Label(self, text="Agregar Grupo", font=("Arial", 14))
-        titulo.pack(side="top", anchor="c")
-
-        texto = ("A continuación, deberá ingresar la información necesaria para agregar\n un grupo a una materia registrada en el sistema.")
-        descripcion = Label(self, text=texto, font=("Arial", 10))
-        descripcion.pack(anchor="n", pady=20)
-
-class eliminarGrupo(Frame):
-    def __init__(self, ventana):
-        super().__init__(ventana)
-
-        titulo = Label(self, text="Eliminar Grupo", font=("Arial", 14))
-        titulo.pack(side="top", anchor="c")
-
-        texto = ("A continuación, deberá ingresar la información necesaria para eliminar\n un grupo que pertenezca a una materia registrada.")
-        descripcion = Label(self, text=texto, font=("Arial", 10))
-        descripcion.pack(anchor="n", pady=20)
 
 vent = Tk()
 vent.title("Szs")
