@@ -1,4 +1,4 @@
-from Grupo import Grupo
+from gestorAplicacion.administracion.Grupo import Grupo
 # from Salon import Salon
 
 

@@ -1,9 +1,9 @@
 from tkinter import *
-from FieldFrame import FieldFrame
-from agregarMateria import agregarMateria
-from eliminarMateria import eliminarMateria
-from agregarGrupo import agregarGrupo
-from eliminarGrupo import eliminarGrupo
+from gestorGrafico.FieldFrame import FieldFrame
+from gestorGrafico.agregarMateria import agregarMateria
+from gestorGrafico.eliminarMateria import eliminarMateria
+from gestorGrafico.agregarGrupo import agregarGrupo
+from gestorGrafico.eliminarGrupo import eliminarGrupo
 
 class eliminarAgregarMateria(Frame):
 

@@ -1,5 +1,5 @@
 from tkinter import *
-from FieldFrame import FieldFrame
+from gestorGrafico.FieldFrame import FieldFrame
 
 class DesmatricularAlumno(Frame):
     def __init__(self,ventana):

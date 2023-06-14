@@ -1,6 +1,6 @@
-from Estudiante import Estudiante
-from Coordinador import Coordinador
-from Materia import Materia
+from gestorAplicacion.usuario.Estudiante import Estudiante
+from gestorAplicacion.usuario.Coordinador import Coordinador
+from gestorAplicacion.administracion.Materia import Materia
 from tkinter import *
 
 
