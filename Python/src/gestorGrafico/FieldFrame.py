@@ -4,6 +4,8 @@ class FieldFrame(Frame):
     def __init__(self, ventana, tituloCriterios, criterios, tituloValores, valores=None, habilitado=None):
         super().__init__(ventana)
 
+        self._datos = []
+
         tituloC = Label(self, text=tituloCriterios, font=("Arial", 10))
         tituloC.grid(row=0, column=0, padx=10, pady=10)
 
@@ -25,6 +27,9 @@ class FieldFrame(Frame):
 
             valor.grid(row=i, column=1)
 
+            self._datos.append(valor)
+
 
     def getValue(self, criterio):
-        pass
+        i = self._datos.index(criterio)
+        return self._datos[i].get()
