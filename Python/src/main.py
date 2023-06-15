@@ -1,6 +1,7 @@
 from tkinter import *
 from gestorGrafico.ventInicio import VentInicio
 from gestorGrafico.ventLog import VentLog
+from gestorGrafico.ventPrincipal import VentPrincipal
 
 from gestorAplicacion.administracion.Beca import Beca
 from gestorAplicacion.administracion.Grupo import Grupo
@@ -33,14 +34,16 @@ class MainWin(Tk):
     
 
 MainWin()
+
+
 Deserializador.deserializarDatos()
 
-# materia = Materia("Calculo diferencial",)
 
 
+# for i in range(0,len(Estudiante.getEstudiantes())):
+#     print(Estudiante.getEstudiantes()[i].getNombre())
 
 
-# print(Estudiante.getEstudiantes()[0].getNombre())
-# print(Estudiante.getEstudiantes()[1].getNombre())
-# Serializador.serializarDatos()
+Serializador.serializarDatos()
 
+print("salio todo bien bro")

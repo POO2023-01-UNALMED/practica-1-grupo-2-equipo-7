@@ -87,21 +87,21 @@ class Estudiante(Usuario):
             self._matriculaPagada = False
             return False
 
-    def calcularPromedio():
+    def calcularPromedio(self):
         promedio = 0
-        for nota in Estudiante._notas:
+        for nota in self._notas:
             promedio += nota
-        promedio = promedio / len(Estudiante._notas)
-        Estudiante.setPromedio(promedio)
+        promedio = promedio / len(self._notas)
+        self.setPromedio(promedio)
 
-    def calcularAvance():
+    def calcularAvance(self):
         creditosVistos = 0
 
-        for pGrupo in Estudiante._gruposVistos:
+        for pGrupo in self._gruposVistos:
             creditosVistos += pGrupo.getMateria().getCreditos()
 
-        Estudiante.setAvance(
-            (creditosVistos * 100.0) / Estudiante.getCreditosParaGraduarse()
+        self.setAvance(
+            (creditosVistos * 100.0) / self.getCreditosParaGraduarse()
         )
 
     def agregarNota(self, nota):
@@ -218,7 +218,7 @@ class Estudiante(Usuario):
         self._avance = avance
 
     def getCreditosParaGraduarse(self):
-        return self._creditosParaGraduarse
+        return self._CREDITOS_PARA_GRADURASE
 
     def getBeca(self):
         return self._beca
