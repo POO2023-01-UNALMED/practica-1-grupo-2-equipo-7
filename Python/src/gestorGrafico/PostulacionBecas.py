@@ -6,13 +6,21 @@ class PostulacionBecas(Frame):
     def __init__(self,ventana):
         super().__init__(ventana)
         
+        def mostrarBeca():
+            pass
+
+        def aplicarBeca():
+            pass
+
         def becaNueva():
             self.pack_forget()
             cBeca = CrearBeca(ventana)
             cBeca.pack()
-        
-            
 
+        def eliminarBeca():
+            pass
+      
+         
         tituloenventana = Label(self, text="Eliminar Materia", font=("Arial", 14))
         tituloenventana.pack(side="top", anchor="c")
         textodescriptivo = ("Esta funcionalidad permite:\n1.Ver listado de becas existentes actualmente. \n2.Aplicar beca a estudiante." +
@@ -23,6 +31,17 @@ class PostulacionBecas(Frame):
         seleccion = Frame(self)
         seleccion.pack()
 
-        crearB = Button(seleccion, text="Crear Beca", command= becaNueva)
+        mostrarB = Button(seleccion, text="Mostrar listado de becas", command= mostrarBeca)
+        mostrarB.pack(padx=20, pady=10)
+
+        aplicarB = Button(seleccion, text="Aplicar beca a estudiante", command= aplicarBeca)
+        aplicarB.pack(padx=20, pady=10)
+
+        crearB = Button(seleccion, text="Crear nueva beca", command= becaNueva)
         crearB.pack(padx=20, pady=10)
+
+        eliminarB = Button(seleccion, text="Eliminar beca", command= eliminarBeca)
+        eliminarB.pack(padx=20, pady=10)
+
+
         
