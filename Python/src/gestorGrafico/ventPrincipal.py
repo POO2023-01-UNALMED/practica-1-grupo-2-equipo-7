@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from gestorGrafico.DesmatricularAlumno import DesmatricularAlumno
 from gestorGrafico.MatricularMateria import MatricularMateria
+from gestorGrafico.PostulacionBecas import PostulacionBecas
 from gestorGrafico.GenerarHorario import GenerarHorario
 
 
@@ -51,12 +52,14 @@ class VentPrincipal(Tk):
 
         def becas():
             mataHijos(self)
+            PostulacionBecas(self).pack()
             pass
         
         def mataHijos(ventana):
             for widget in ventana.winfo_children():
                 if isinstance(widget, Frame):
                     widget.destroy()
+
         menuBar = Menu(self)
         self.option_add("*tearOff",  False)
         self.config(menu=menuBar)
