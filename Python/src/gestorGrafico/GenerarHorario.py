@@ -1,4 +1,6 @@
 from tkinter import *
+from tkinter import StringVar
+from tkinter import ttk
 
 class GenerarHorario(Frame):
     def __init__(self,ventana):
@@ -20,13 +22,31 @@ class GenerarHorario(Frame):
         
         MidIzq=Frame(FrameCont,height=340,width=418,bg="red")
         MidIzq.grid(row=0,column=0,padx=5,pady=5)
+        MidIzq.pack_propagate(False)
         
         MidDer=Frame(FrameCont,height=340,width=418,bg="blue")
         MidDer.grid(row=0,column=1,padx=5,pady=5)
         
+        def chanOpc(event):
+            if combo.get()!="Ninguno":
+                eleccionFil.config(state="normal")
+                valorElecc.set("")
+            else:
+                eleccionFil.config(state="disabled")
+                valorElecc.set("Filtro")
+                eleccionFil.insert(0,valorElecc)
+                
+        valorDefecto = StringVar(value='Filtro')
+        combo = ttk.Combobox(MidIzq,values=["Facultad","Codigo","Creditos","Ninguno"],textvariable=valorDefecto,state="readonly")
+        combo.bind("<<ComboboxSelected>>",chanOpc)
+        combo.pack(side="top",fill="x",pady="10",padx="20")
         
         
-        # framejem = Frame(self,)
+        valorElecc = StringVar(MidIzq,value="Filtro")
+        eleccionFil = Entry(MidIzq,textvariable=valorElecc,state="disabled")
+        eleccionFil.pack(side="top",fill="x",pady=10,padx="20")
+        
+        
 
 
 
