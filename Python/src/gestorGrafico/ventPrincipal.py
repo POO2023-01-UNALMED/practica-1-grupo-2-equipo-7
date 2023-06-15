@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from gestorGrafico.DesmatricularAlumno import DesmatricularAlumno
 from gestorGrafico.MatricularMateria import MatricularMateria
+from gestorGrafico.GenerarHorario import GenerarHorario
 
 
 class VentPrincipal(Tk):
@@ -32,21 +33,32 @@ class VentPrincipal(Tk):
             messagebox.showinfo("Autores", autores)
 
         def matricularMateria():
+            mataHijos(self)
             MatricularMateria(self).pack()
 
         def generarHorario():
+            mataHijos(self)
+            GenerarHorario(self).pack()
             pass
 
         def eliminarAgregarMateria():
+            mataHijos(self)
             pass
 
         def desmatricularAlumno():
+            mataHijos(self)
             DesmatricularAlumno(self).pack()
 
         def becas():
+            mataHijos(self)
             pass
-
+        
+        def mataHijos(ventana):
+            for widget in ventana.winfo_children():
+                if isinstance(widget, Frame):
+                    widget.destroy()
         menuBar = Menu(self)
+        self.option_add("*tearOff",  False)
         self.config(menu=menuBar)
 
         menu1 = Menu(menuBar)
