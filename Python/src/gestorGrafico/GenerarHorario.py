@@ -4,6 +4,7 @@ from tkinter import ttk
 from tkinter import scrolledtext
 from tkinter import messagebox
 from gestorAplicacion.administracion.Materia import Materia
+from gestorAplicacion.usuario.Coordinador import Coordinador
 
 class GenerarHorario(Frame):
     def __init__(self,ventana):
@@ -132,7 +133,7 @@ class GenerarHorario(Frame):
             
         def generar():
             FrameCont.destroy()
-            horarioGenerado(self)
+            horarioGenerado(self,self.listaAMostrar)
             pass
             
             
@@ -197,11 +198,16 @@ class GenerarHorario(Frame):
 
         
 class horarioGenerado(Frame):
-    def __init__(self,ventana):
+    def __init__(self,ventana,materiasAGenerar):
         super().__init__(ventana)
         self.pack()
 
         FrameCont = Frame(self,bg="green",width=855,height=380)
         FrameCont.pack(side="top",padx=5,pady=5)
         FrameCont.grid_propagate(False)
+        
+        print(materiasAGenerar[0].getGrupos())
+        generacion = Coordinador.crearHorario(materiasAGenerar)
+        print(generacion[1].mostrarHorario)
+        
                 

@@ -121,13 +121,14 @@ class Coordinador(Usuario):
 
         return resultado
 
-    @staticmethod
-    def eliminarMateria(materia):
+    @classmethod
+    def eliminarMateria(cls,materia):
         if materia in Materia.getMateriasTotales():
             Coordinador.restaurarMateria(materia)
             Materia.getMateriasTotales().remove(materia)
 
-    def agregarMateria(nombre, codigo, descripcion, creditos, facultad, prerrequisitos):
+    @classmethod
+    def agregarMateria(cls,nombre, codigo, descripcion, creditos, facultad, prerrequisitos):
         nombreMaterias = []
 
         for materia in Materia.getMateriasTotales():
@@ -138,7 +139,8 @@ class Coordinador(Usuario):
                 nombre, codigo, descripcion, creditos, facultad, prerrequisitos
             )
 
-    def candidatoABeca(estudiante, tipoDeBeca):
+    @classmethod
+    def candidatoABeca(cls,estudiante, tipoDeBeca):
         if tipoDeBeca.getCupos() > 0:
             if (
                 estudiante.getPromedio() >= tipoDeBeca.getPromedioRequerido()
@@ -158,8 +160,8 @@ class Coordinador(Usuario):
                 return False
         else:
             return False
-
-    def mostrarFacultades():
+    @classmethod
+    def mostrarFacultades(cls):
         retorno = ""
         i = 1
         for facultad in Coordinador._facultades:

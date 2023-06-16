@@ -38,7 +38,7 @@ class VentLog(Tk):
                     break
 
             if exist:
-                if usuario.getPw() == entrada2.get():
+                if str(usuario.getPw()) == entrada2.get():
                     pw = True
                 else:
                     return messagebox.showwarning("Error", "La contrasena es incorrecta. Intentelo nuevamente")
