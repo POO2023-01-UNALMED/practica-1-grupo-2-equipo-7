@@ -30,7 +30,7 @@ class eliminarGrupo(Frame):
         textoM = Label(subFrame, text="Materia", font=("Arial", 10))
         textoM.grid(row=1, column=0, padx=10, pady=10)
 
-        valores = Materia.mostrarMaterias()
+        valores = Materia.listaNombresMaterias()
         texto = StringVar(subFrame, value="Seleccione una materia")
         box = ttk.Combobox(subFrame, values=valores, textvariable=texto)
         box.grid(row=1, column=1, padx=10, pady=10)

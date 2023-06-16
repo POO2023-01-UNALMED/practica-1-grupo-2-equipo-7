@@ -33,7 +33,7 @@ class Coordinador(Usuario):
         else:
             return "El estudiante no estaba matriculado"
 
-    def resturarMateria(self, materia):
+    def restaurarMateria(self, materia):
         for i in range(len(materia.getGrupos())):
             puntero_Grupo = materia.getGrupos()[i]
             puntero_Grupo.getProfesor().desvincularGrupo(puntero_Grupo)
@@ -121,8 +121,8 @@ class Coordinador(Usuario):
 
     def eliminarMateria(materia):
         if materia in Materia.getMateriasTotales():
+            Coordinador.restaurarMateria(materia)
             Materia.getMateriasTotales().remove(materia)
-            resturarMateria(materia)
 
     def agregarMateria(nombre, codigo, descripcion, creditos, facultad, prerrequisitos):
         nombreMaterias = []
@@ -159,7 +159,7 @@ class Coordinador(Usuario):
     def mostrarFacultades():
         retorno = ""
         i = 1
-        for facultad in facultades:
+        for facultad in Coordinador._facultades:
             retorno += str(i) + ". " + facultad + "\n"
             i += 1
         return retorno
