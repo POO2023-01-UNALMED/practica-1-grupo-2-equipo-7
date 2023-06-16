@@ -4,7 +4,7 @@ from gestorGrafico.DesmatricularAlumno import DesmatricularAlumno
 from gestorGrafico.MatricularMateria import MatricularMateria
 from gestorGrafico.PostulacionBecas import PostulacionBecas
 from gestorGrafico.GenerarHorario import GenerarHorario
-from gestorGrafico.EliminarAgregarMateria import EliminarAgregarMateria
+from gestorGrafico.eliminarAgregarMateria import EliminarAgregarMateria
 
 
 class VentPrincipal(Tk):

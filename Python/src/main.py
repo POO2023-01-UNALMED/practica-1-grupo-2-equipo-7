@@ -2,6 +2,7 @@ from tkinter import *
 from gestorGrafico.ventInicio import VentInicio
 from gestorGrafico.ventLog import VentLog
 from gestorGrafico.ventPrincipal import VentPrincipal
+from gestorGrafico.GenerarHorario import GenerarHorario
 
 from gestorAplicacion.administracion.Beca import Beca
 from gestorAplicacion.administracion.Grupo import Grupo
@@ -25,7 +26,8 @@ class MainWin(Tk):
         self.resizable(1,1)
         self.geometry("865x460")
         
-        VentInicio(self)
+        # VentInicio(self)    
+        GenerarHorario(self)
         self.mainloop()
 
     def abrirLog(self):
@@ -33,15 +35,18 @@ class MainWin(Tk):
         VentLog()
     
 
-MainWin()
 
 
 Deserializador.deserializarDatos()
 
+MainWin()
 
 
-# for i in range(0,len(Estudiante.getEstudiantes())):
-#     print(Estudiante.getEstudiantes()[i].getNombre())
+# for i in range(0,len(Materia.getMateriasTotales())):
+#     print(Materia.getMateriasTotales()[i].getNombre())
+
+# for i in Materia.getMateriasTotales():
+#     print(i.getFacultad())
 
 
 Serializador.serializarDatos()

@@ -1,10 +1,12 @@
 from tkinter import *
 from tkinter import StringVar
 from tkinter import ttk
+from gestorAplicacion.administracion.Materia import Materia
 
 class GenerarHorario(Frame):
     def __init__(self,ventana):
         super().__init__(ventana)
+        self.pack()
         # self.pack_propagate(False)
         
 
@@ -32,21 +34,87 @@ class GenerarHorario(Frame):
                 eleccionFil.config(state="normal")
                 valorElecc.set("")
             else:
+                combo2.config(values=listaNombresMaterias)
+                bontonFiltro.config(state="disabled")
                 eleccionFil.config(state="disabled")
                 valorElecc.set("Filtro")
                 eleccionFil.insert(0,valorElecc)
                 
-        valorDefecto = StringVar(value="Filtro")
-        combo = ttk.Combobox(MidIzq,values=["Facultad","Codigo","Creditos","Ninguno"],textvariable=valorDefecto,state="readonly")
-        combo.bind("<<ComboboxSelected>>",chanOpc)
-        combo.pack(side="top",fill="x",pady="10",padx="20")
+        def habilitarBotonFiltro(event):
+            bontonFiltro.config(state="normal")
+            # print(event.keysym)
+            if (len(event.widget.get())==1 or event.widget.get()=="") and event.keysym=="BackSpace":
+                bontonFiltro.config(state="disable")
+            else:
+                bontonFiltro.config(state="normal")
+                
+            
+                
         
+        valorDefe = StringVar(value="Elegir Filtro")
+        combo = ttk.Combobox(MidIzq, textvariable=valorDefe, values=["Facultad", "Creditos", "Codigo", "Ninguno"], state="readonly")
+        combo.bind("<<ComboboxSelected>>", chanOpc)
+        combo.pack(side="top", fill="x", pady="10", padx="100")
         
         valorElecc = StringVar(MidIzq,value="Filtro")
         eleccionFil = Entry(MidIzq,textvariable=valorElecc,state="disabled")
-        eleccionFil.pack(side="top",fill="x",pady=10,padx="20")
+        eleccionFil.bind("<Key>",habilitarBotonFiltro)
+        eleccionFil.pack(side="top",fill="x",pady=10,padx="100")
         
         
+        def genFiltro():
+            opcionFiltro = combo.current()
+            filtro = eleccionFil.get()
+            listaFiltrada=GenerarHorario.generarFiltro(opcionFiltro+1,filtro)
+            
+            listaNombresMaterias = []
+            for pMateria in listaFiltrada:
+                listaNombresMaterias.append(pMateria.getNombre())
+            
+            combo2.config(values=listaNombresMaterias)
+            
+        
+    
+        bontonFiltro=Button(MidIzq,text="Filtrar",command=genFiltro,state="disabled")
+        bontonFiltro.pack(side="top",pady=20)
+        
+        listaNombresMaterias = []
+        for pMateria in Materia.getMateriasTotales():
+            listaNombresMaterias.append(pMateria.getNombre())
+            
+        def haceAlgo(event):
+            pass
+        
+        valorDefe2 = StringVar(value="Materias")
+        combo2 = ttk.Combobox(MidIzq, textvariable=valorDefe2, values=listaNombresMaterias, state="readonly")
+        combo2.bind("<<ComboboxSelected>>", haceAlgo)
+        combo2.pack(side="top", fill="x", pady="20", padx="100")
+        
+        
+        
+    
+    @classmethod
+    def generarFiltro(cls,opcionFiltro,filtro):
+        listaFiltrada = []
+        # filtro == 1 == facultad
+        if opcionFiltro == 1:
+            for pMateria in Materia.getMateriasTotales():
+                if pMateria.getFacultad().lower() == filtro.lower():
+                    listaFiltrada.append(pMateria)
+
+        # filtro == 2 == Creditos
+        elif opcionFiltro == 2:
+            for pMateria in Materia.getMateriasTotales():
+                if pMateria.getCreditos() == int(filtro):
+                    listaFiltrada.append(pMateria)
+
+        # filtro == 3 == Codigo
+        elif opcionFiltro == 3:
+            for pMateria in Materia.getMateriasTotales():
+                if filtro in str(pMateria.getCodigo()):
+                    listaFiltrada.append(pMateria)
+                    
+        return listaFiltrada
 
 
 
