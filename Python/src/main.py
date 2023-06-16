@@ -17,7 +17,6 @@ from gestorAplicacion.usuario.Usuario import Usuario
 from baseDatos.Serializador import Serializador
 from baseDatos.Desealizador import Deserializador 
 
-Deserializador.deserializarDatos()
 # Configuracion de ventana
 
 class MainWin(Tk):
@@ -27,8 +26,8 @@ class MainWin(Tk):
         self.resizable(1,1)
         self.geometry("865x460")
         
-        # VentInicio(self)    
-        GenerarHorario(self)
+        VentInicio(self)    
+        # GenerarHorario(self)
         self.mainloop()
 
     def abrirLog(self):
@@ -38,6 +37,7 @@ class MainWin(Tk):
 
 
 
+Deserializador.deserializarDatos()
 
 MainWin()
 
