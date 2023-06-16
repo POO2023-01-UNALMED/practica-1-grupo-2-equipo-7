@@ -18,7 +18,19 @@ class eliminarMateria(Frame):
         descripcion = Label(self, text=texto, font=("Arial", 10))
         descripcion.pack(anchor="n", pady=20)
 
+        subFrame = Frame(self)
+        subFrame.pack()
+
+        tituloC = Label(subFrame, text="Criterio", font=("Arial", 10))
+        tituloC.grid(row=0, column=0, padx=10, pady=10)
+
+        tituloV = Label(subFrame, text="Valor", font=("Arial", 10))
+        tituloV.grid(row=0, column=1, padx=10, pady=10)
+
+        textoM = Label(subFrame, text="Materia", font=("Arial", 10))
+        textoM.grid(row=1, column=0, padx=10, pady=10)
+
         valores = Materia.mostrarMaterias()
-        texto = StringVar(self, value="Seleccione una materia")
-        box = ttk.Combobox(self, values=valores, textvariable=texto)
-        box.pack()
+        texto = StringVar(subFrame, value="Seleccione una materia")
+        box = ttk.Combobox(subFrame, values=valores, textvariable=texto)
+        box.grid(row=1, column=1, padx=10, pady=10)

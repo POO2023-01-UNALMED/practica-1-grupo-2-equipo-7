@@ -4,6 +4,7 @@ from gestorGrafico.DesmatricularAlumno import DesmatricularAlumno
 from gestorGrafico.MatricularMateria import MatricularMateria
 from gestorGrafico.PostulacionBecas import PostulacionBecas
 from gestorGrafico.GenerarHorario import GenerarHorario
+from gestorGrafico.EliminarAgregarMateria import EliminarAgregarMateria
 
 
 class VentPrincipal(Tk):
@@ -44,7 +45,8 @@ class VentPrincipal(Tk):
 
         def eliminarAgregarMateria():
             mataHijos(self)
-            pass
+            EliminarAgregarMateria(self).pack()
+            
 
         def desmatricularAlumno():
             mataHijos(self)
