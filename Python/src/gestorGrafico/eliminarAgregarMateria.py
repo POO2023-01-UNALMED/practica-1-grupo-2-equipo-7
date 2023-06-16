@@ -5,7 +5,8 @@ from gestorGrafico.eliminarMateria import eliminarMateria
 from gestorGrafico.agregarGrupo import agregarGrupo
 from gestorGrafico.eliminarGrupo import eliminarGrupo
 
-class eliminarAgregarMateria(Frame):
+
+class EliminarAgregarMateria(Frame):
 
     def __init__(self, ventana):
         super().__init__(ventana)
@@ -50,10 +51,9 @@ class eliminarAgregarMateria(Frame):
         elGrup = Button(opciones, text="Eliminar Grupo", command=elGrupo)
         elGrup.pack(padx=20, pady=10)
 
-# vent = Tk()
-# vent.title("Szs")
-# vent.geometry("600x350")
+#vent = Tk()
+#vent.title("Szs")
+#vent.geometry("600x350")
 
-# freim = eliminarAgregarMateria(vent)
-# freim.pack()
-# vent.mainloop()
+#eliminarAgregarMateria(vent).pack()
+#vent.mainloop()
