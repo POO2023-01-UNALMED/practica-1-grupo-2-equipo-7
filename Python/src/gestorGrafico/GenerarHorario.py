@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import StringVar
 from tkinter import ttk
+from tkinter import scrolledtext
+from tkinter import messagebox
 from gestorAplicacion.administracion.Materia import Materia
 
 class GenerarHorario(Frame):
@@ -22,12 +24,13 @@ class GenerarHorario(Frame):
         FrameCont.pack(side="top",padx=5,pady=5)
         FrameCont.grid_propagate(False)
         
-        MidIzq=Frame(FrameCont,height=340,width=418,bg="red")
+        MidIzq=Frame(FrameCont,height=340,width=268,bg="red")
         MidIzq.grid(row=0,column=0,padx=5,pady=5)
         MidIzq.pack_propagate(False)
         
-        MidDer=Frame(FrameCont,height=340,width=418,bg="blue")
+        MidDer=Frame(FrameCont,height=340,width=568,bg="blue")
         MidDer.grid(row=0,column=1,padx=5,pady=5)
+        MidDer.pack_propagate(False)
         
         def chanOpc(event):
             if combo.get()!="Ninguno":
@@ -54,17 +57,18 @@ class GenerarHorario(Frame):
         valorDefe = StringVar(value="Elegir Filtro")
         combo = ttk.Combobox(MidIzq, textvariable=valorDefe, values=["Facultad", "Creditos", "Codigo", "Ninguno"], state="readonly")
         combo.bind("<<ComboboxSelected>>", chanOpc)
-        combo.pack(side="top", fill="x", pady="10", padx="100")
+        combo.pack(side="top", fill="x", pady="10", padx="25")
         
         valorElecc = StringVar(MidIzq,value="Filtro")
         eleccionFil = Entry(MidIzq,textvariable=valorElecc,state="disabled")
         eleccionFil.bind("<Key>",habilitarBotonFiltro)
-        eleccionFil.pack(side="top",fill="x",pady=10,padx="100")
+        eleccionFil.pack(side="top",fill="x",pady=10,padx="25")
         
         
         def genFiltro():
             opcionFiltro = combo.current()
             filtro = eleccionFil.get()
+            global listaFiltrada
             listaFiltrada=GenerarHorario.generarFiltro(opcionFiltro+1,filtro)
             
             listaNombresMaterias = []
@@ -81,14 +85,65 @@ class GenerarHorario(Frame):
         listaNombresMaterias = []
         for pMateria in Materia.getMateriasTotales():
             listaNombresMaterias.append(pMateria.getNombre())
+        
+        self.listaAMostrar =[]
+        def agregarMtaeria(event):
+            # global listaAMostrar
+            # listaAMostrar = []
+            materia = combo2.get()
+            for pMateria in Materia.getMateriasTotales():
+                if pMateria.getNombre() == materia:
+                    if pMateria not in self.listaAMostrar:
+                        self.listaAMostrar.append(pMateria)
+                        break
+                    else:
+                        messagebox.showinfo("!Ya esta¡","La materia que quieres agregar ya esta en la lista")
+                        break
             
-        def haceAlgo(event):
-            pass
+            
+            # print(self.listaAMostrar)
+            txt = self.mostrarLista(self.listaAMostrar)
+            materiasText.delete(1.0,"end")
+            materiasText.insert(1.0,txt)
         
         valorDefe2 = StringVar(value="Materias")
         combo2 = ttk.Combobox(MidIzq, textvariable=valorDefe2, values=listaNombresMaterias, state="readonly")
-        combo2.bind("<<ComboboxSelected>>", haceAlgo)
-        combo2.pack(side="top", fill="x", pady="20", padx="100")
+        combo2.bind("<<ComboboxSelected>>", agregarMtaeria)
+        combo2.pack(side="top", fill="x", pady="20", padx="25")
+        
+        
+        materiasText = scrolledtext.ScrolledText(MidDer,height=10,width=100)
+        materiasText.pack(side="top",pady=10,padx=10)
+        materiasText.insert(1.0,("%-3s %-40s %-10s %-10s" % ("Num", "Nombre", "Facultad", "Codigo"))+"\n")
+        
+        fraBotones=Frame(MidDer,bg="purple")
+        fraBotones.pack(side="top",padx=10,pady=10)
+        
+        def eliminarUltima():
+            if len(self.listaAMostrar)>=1:
+                self.listaAMostrar.pop()
+                txt = self.mostrarLista(self.listaAMostrar)
+                materiasText.delete(1.0,"end")
+                materiasText.insert("end",txt)
+                
+        def eliminarTodas():
+            self.listaAMostrar=[]
+            materiasText.delete(2.0,"end")
+            
+        def generar():
+            FrameCont.destroy()
+            horarioGenerado(self)
+            pass
+            
+            
+        bottEliminarUltima = Button(fraBotones,text="Eliminar Ultima",command=eliminarUltima)
+        bottEliminarUltima.pack(side="left",padx=10,pady=10)
+        
+        bottLimpiar = Button(fraBotones,text="Eliminar todas",command=eliminarTodas)
+        bottLimpiar.pack(side="left",padx=10,pady=10)
+       
+        bottGenerar = Button(fraBotones,text="Generar",command=generar)
+        bottGenerar.pack(side="left",padx=10,pady=10)
         
         
         
@@ -115,8 +170,38 @@ class GenerarHorario(Frame):
                     listaFiltrada.append(pMateria)
                     
         return listaFiltrada
+    
+    @classmethod
+    def mostrarLista(cls,ListaAMostrar):
+        txt = ""
+        con = 1
+        txt+=("%-3s %-40s %-10s %-10s" % ("Num", "Nombre", "Facultad", "Codigo"))+"\n"
+
+        
+        for pMateria in ListaAMostrar:
+            facultad = pMateria.getFacultad()
+            # print(facultad)
+            if facultad == "Facultad de ciencias humanas y economicas":
+                facultad = "FCHE"
+            elif facultad=="Sede":
+                pass
+            else:
+                facultad = (pMateria.getFacultad()[12:])
+                facultad = facultad.capitalize()
+            txt+=("%-3d %-40s %-10s %-10d" % (con, pMateria.getNombre(), facultad, pMateria.getCodigo()))+"\n"
+            con += 1
+        
+        return txt
 
 
 
         
+class horarioGenerado(Frame):
+    def __init__(self,ventana):
+        super().__init__(ventana)
+        self.pack()
 
+        FrameCont = Frame(self,bg="green",width=855,height=380)
+        FrameCont.pack(side="top",padx=5,pady=5)
+        FrameCont.grid_propagate(False)
+                
