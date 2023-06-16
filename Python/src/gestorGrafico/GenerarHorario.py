@@ -36,7 +36,7 @@ class GenerarHorario(Frame):
                 valorElecc.set("Filtro")
                 eleccionFil.insert(0,valorElecc)
                 
-        valorDefecto = StringVar(value='Filtro')
+        valorDefecto = StringVar(value="Filtro")
         combo = ttk.Combobox(MidIzq,values=["Facultad","Codigo","Creditos","Ninguno"],textvariable=valorDefecto,state="readonly")
         combo.bind("<<ComboboxSelected>>",chanOpc)
         combo.pack(side="top",fill="x",pady="10",padx="20")

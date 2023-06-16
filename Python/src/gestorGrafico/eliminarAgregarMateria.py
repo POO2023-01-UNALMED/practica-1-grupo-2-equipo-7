@@ -50,10 +50,10 @@ class eliminarAgregarMateria(Frame):
         elGrup = Button(opciones, text="Eliminar Grupo", command=elGrupo)
         elGrup.pack(padx=20, pady=10)
 
-vent = Tk()
-vent.title("Szs")
-vent.geometry("600x350")
+# vent = Tk()
+# vent.title("Szs")
+# vent.geometry("600x350")
 
-freim = eliminarAgregarMateria(vent)
-freim.pack()
-vent.mainloop()
+# freim = eliminarAgregarMateria(vent)
+# freim.pack()
+# vent.mainloop()

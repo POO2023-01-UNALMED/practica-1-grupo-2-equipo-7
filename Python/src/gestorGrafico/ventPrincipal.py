@@ -4,6 +4,8 @@ from gestorGrafico.DesmatricularAlumno import DesmatricularAlumno
 from gestorGrafico.MatricularMateria import MatricularMateria
 from gestorGrafico.PostulacionBecas import PostulacionBecas
 from gestorGrafico.GenerarHorario import GenerarHorario
+from gestorGrafico.eliminarAgregarMateria import eliminarAgregarMateria
+
 
 
 class VentPrincipal(Tk):
@@ -40,11 +42,10 @@ class VentPrincipal(Tk):
         def generarHorario():
             mataHijos(self)
             GenerarHorario(self).pack()
-            pass
 
         def eliminarAgregarMateria():
             mataHijos(self)
-            pass
+            eliminarAgregarMateria(self).pack()
 
         def desmatricularAlumno():
             mataHijos(self)
@@ -53,7 +54,6 @@ class VentPrincipal(Tk):
         def becas():
             mataHijos(self)
             PostulacionBecas(self).pack()
-            pass
         
         def mataHijos(ventana):
             for widget in ventana.winfo_children():
@@ -75,9 +75,7 @@ class VentPrincipal(Tk):
 
         menu2.add_cascade(label="Matricular materia", command=matricularMateria)
         menu2.add_cascade(label="Generar Horario", command=generarHorario)
-        menu2.add_cascade(
-            label="Eliminar o agregar Materia / Grupo", command=eliminarAgregarMateria
-        )
+        menu2.add_cascade(label="Eliminar o agregar Materia / Grupo", command=eliminarAgregarMateria)
         menu2.add_cascade(label="Desmatricular Alumno", command=desmatricularAlumno)
         menu2.add_cascade(label="Busqueda y Postulacion de Becas", command=becas)
 
@@ -87,7 +85,3 @@ class VentPrincipal(Tk):
         menu3.add_cascade(label="Acerca de", command=mostrarAutores)
 
         self.mainloop()
-
-
-if __name__ == "__main__":
-    VentPrincipal()
