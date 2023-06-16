@@ -18,13 +18,14 @@ class Coordinador(Usuario):
     ]
 
     def __init__(self, facultad, id, nombre, pw):
-        super().__init__(id, nombre, pw, facultad)
+        super().__init__(id, nombre, facultad, pw)
         super().setTipo("Coordinador")
         Coordinador._coordinadoresTotales.append(self)
 
     # METODOS
 
-    def desmatricular(self, estudiante, grupo):
+    @staticmethod
+    def desmatricular(estudiante, grupo):
         estaMatriculado = grupo.existenciaEstudiante(estudiante)
 
         if estaMatriculado:
@@ -33,14 +34,15 @@ class Coordinador(Usuario):
         else:
             return "El estudiante no estaba matriculado"
 
-    def resturarMateria(self, materia):
+    @staticmethod
+    def restaurarMateria(materia):
         for i in range(len(materia.getGrupos())):
             puntero_Grupo = materia.getGrupos()[i]
             puntero_Grupo.getProfesor().desvincularGrupo(puntero_Grupo)
 
             for j in range(len(puntero_Grupo.getEstudiantes())):
                 puntero_Estudiante = puntero_Grupo.getEstudiantes()[j]
-                self.desmatricular(puntero_Estudiante, puntero_Grupo)
+                Coordinador.desmatricular(puntero_Estudiante, puntero_Grupo)
 
     def desmatricularDelSistema(self, estudiante):
         e1 = None
@@ -119,10 +121,11 @@ class Coordinador(Usuario):
 
         return resultado
 
+    @staticmethod
     def eliminarMateria(materia):
         if materia in Materia.getMateriasTotales():
+            Coordinador.restaurarMateria(materia)
             Materia.getMateriasTotales().remove(materia)
-            resturarMateria(materia)
 
     def agregarMateria(nombre, codigo, descripcion, creditos, facultad, prerrequisitos):
         nombreMaterias = []
@@ -159,7 +162,7 @@ class Coordinador(Usuario):
     def mostrarFacultades():
         retorno = ""
         i = 1
-        for facultad in facultades:
+        for facultad in Coordinador._facultades:
             retorno += str(i) + ". " + facultad + "\n"
             i += 1
         return retorno

@@ -17,6 +17,7 @@ from gestorAplicacion.usuario.Usuario import Usuario
 from baseDatos.Serializador import Serializador
 from baseDatos.Desealizador import Deserializador 
 
+Deserializador.deserializarDatos()
 # Configuracion de ventana
 
 class MainWin(Tk):
@@ -37,7 +38,6 @@ class MainWin(Tk):
 
 
 
-Deserializador.deserializarDatos()
 
 MainWin()
 

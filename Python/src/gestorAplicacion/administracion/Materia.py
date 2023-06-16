@@ -92,6 +92,14 @@ class Materia:
             retorno += f"{i}. {materia.nombre}.\n"
             i += 1
         return retorno
+    
+    @staticmethod
+    def listaNombresMaterias():
+        retorno = []
+        for materia in Materia.materiasTotales:
+            retorno.append(materia.getNombre())
+        return retorno
+
 
     # MÉTODOS DE INSTANCIA
 

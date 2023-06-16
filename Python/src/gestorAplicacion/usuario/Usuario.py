@@ -12,10 +12,10 @@ from gestorAplicacion.administracion.Materia import Materia
 class Usuario(ABC):
     _usuariosTotales = []
 
-    def __init__(self, id, nombre, facultad, pw=0000):
+    def __init__(self, id, nombre, facultad, pw="0000"):
         self._id = id
         self._nombre = nombre
-        self._pw = pw
+        self._pw = str(pw)
         self._facultad = facultad
         Usuario._usuariosTotales.append(self)
 

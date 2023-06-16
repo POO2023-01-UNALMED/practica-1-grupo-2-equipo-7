@@ -10,7 +10,7 @@ class VentLog(Tk):
         self.title("Sistema Matricula de Materias")
         self.resizable(1,1)
         self.geometry("865x460")
-        
+
         frame = Frame(self, width=400, height=200)
         frame.pack(expand=True)
 
@@ -29,18 +29,22 @@ class VentLog(Tk):
             VentPrincipal()
 
         def verificar():
-            exist = True
+            exist = False
+            pw = False
+            
             for usuario in Usuario.getUsuariosTotales():
-                if usuario.getId() == entrada1.cget():
+                if usuario.getId() == int(entrada1.get()):
                     exist = True
-                else:
-                    return messagebox.showwarning("El id ingresado no corresponde a ningun usuario registrado en el sistema.")
-                if exist:
-                    if usuario.getPw() == entrada2.cget():
-                        exist = True
-                    else:
-                        return messagebox.showwarning("La contrasena es incorrecta. Intentelo nuevamente")
+                    break
+
             if exist:
+                if usuario.getPw() == entrada2.get():
+                    pw = True
+                else:
+                    return messagebox.showwarning("Error", "La contrasena es incorrecta. Intentelo nuevamente")
+            else:
+                return messagebox.showwarning("Error", "El id ingresado no corresponde a ningún usuario")
+            if pw:
                 cambiarVentana()
              
         usuar = Label(frame,text="Usuario")
