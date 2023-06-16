@@ -191,3 +191,5 @@ class Coordinador(Usuario):
     @classmethod
     def setFacultades(cls, facultades):
         cls.facultades = facultades
+    
+    

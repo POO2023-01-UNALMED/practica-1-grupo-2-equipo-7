@@ -45,10 +45,9 @@ MainWin()
 # for i in range(0,len(Materia.getMateriasTotales())):
 #     print(Materia.getMateriasTotales()[i].getNombre())
 
-# for i in Materia.getMateriasTotales():
-#     print(i.getFacultad())
+    
 
 
 Serializador.serializarDatos()
 
-print("salio todo bien bro/sis ;D")
+print("salio todo bien bro/sis/helicoptero apache? ;D")
