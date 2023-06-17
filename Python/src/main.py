@@ -39,11 +39,14 @@ class MainWin(Tk):
 
 Deserializador.deserializarDatos()
 
+    
 MainWin()
 
 
-# for i in range(0,len(Materia.getMateriasTotales())):
-#     print(Materia.getMateriasTotales()[i].getNombre())
+
+
+
+
 
 # Serializador.serializarDatos()
 

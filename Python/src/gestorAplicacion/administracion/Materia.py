@@ -21,7 +21,7 @@ class Materia:
         self.creditos = creditos
         self.facultad = facultad
         self.prerrequisitos = prerrequisitos or []
-        self.grupos = grupos or []
+        self.grupos =[]
         self.hacerAbreviatura(nombre)
         Materia.materiasTotales.append(self)
 
@@ -174,6 +174,9 @@ class Materia:
             salon.getHorario().ocuparHorario(horario, nGrupo)
             profesor.vincularGrupo(nGrupo)
 
+    def agregarGrupoHecho(self, grupoHecho):
+        self.grupos.append(grupoHecho)
+
     def buscarGrupoDeEstudiante(self, estudiante):
         for grupo in self.grupos:
             for e in grupo.getEstudiantes():
@@ -253,6 +256,8 @@ class Materia:
 
     def setPrerrequisitos(self, prerrequisitos):
         self.prerrequisitos = prerrequisitos
+        
+        
 
     def getGrupos(self):
         return self.grupos
