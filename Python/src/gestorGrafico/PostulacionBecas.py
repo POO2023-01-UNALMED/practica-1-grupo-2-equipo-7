@@ -7,9 +7,11 @@ class PostulacionBecas(Frame):
         super().__init__(ventana)
         
         def mostrarBeca():
+            self.pack_forget()
             pass
 
         def aplicarBeca():
+            self.pack_forget()
             pass
 
         def becaNueva():
@@ -18,6 +20,7 @@ class PostulacionBecas(Frame):
             cBeca.pack()
 
         def eliminarBeca():
+            self.pack_forget()
             pass
       
          

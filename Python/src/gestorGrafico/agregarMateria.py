@@ -6,6 +6,9 @@ class agregarMateria(Frame):
     def __init__(self, ventana):
         super().__init__(ventana)
 
+        def siguiente():
+            pass
+
         titulo = Label(self, text="Agregar Materia", font=("Arial", 14))
         titulo.pack(side="top", anchor="c")
 
@@ -13,15 +16,8 @@ class agregarMateria(Frame):
         descripcion = Label(self, text=texto, font=("Arial", 10))
         descripcion.pack(anchor="n", pady=20)
 
-        criterios = ["Nombre", "Código", "Descripción", "Créditos", "Facultad"]
+        criterios = ["Nombre", "Código", "Descripción", "Créditos", "Facultad", "Prerrequisitos"]
         formulario = FieldFrame(self, "Criterio", criterios, "Valor", None)
         formulario.pack()
 
-        subFrame = Frame(self)
-        subFrame.pack()
-
-        textoP = Label(subFrame, text="Prerrquisitos", font=("Arial", 10))
-        textoP.grid(row=0, column=0, padx=10, pady=10)
-
-        boxP = ttk.Combobox(subFrame, values=["Si","No"])
-        boxP.grid(row=0, column=1, padx=10, pady=10)
+        botonSiguiente = Button(self, text="Siguiente", command=siguiente)

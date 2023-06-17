@@ -18,9 +18,11 @@ class eliminarMateria(Frame):
             confirmacion = messagebox.askokcancel("Confirmación de eliminación", "¿Está seguro que desea eliminar la materia {} del sistema?".format(box.get()))
             if confirmacion:
                 mate = Materia.encontrarMateria(str(box.get()))
-
-                Coordinador.eliminarMateria(mate)
-                messagebox.showinfo("Materia eliminada", "La materia ha sido eliminada con éxito del sistema")
+                try:
+                    Coordinador.eliminarMateria(mate)
+                    messagebox.showinfo("Materia eliminada", "La materia ha sido eliminada con éxito del sistema")
+                except:
+                    messagebox.showerror("Error", "Seleccione una materia de la lista")
 
         titulo = Label(self, text="Eliminar Materia", font=("Arial", 14))
         titulo.pack(side="top", anchor="c")
@@ -46,5 +48,5 @@ class eliminarMateria(Frame):
         box = ttk.Combobox(subFrame, values=valores, textvariable=texto)
         box.grid(row=1, column=1, padx=10, pady=10)
 
-        botonElimiar = Button(self, text="Eliminar", command=botEliminar)
-        botonElimiar.pack()
+        botonEliminar = Button(self, text="Eliminar", command=botEliminar)
+        botonEliminar.pack()

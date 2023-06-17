@@ -146,15 +146,18 @@ class Materia:
             return False
 
     def eliminarGrupo(self, numero):
-        grupo = self.grupos[numero - 1]
-        grupo.getProfesor().desvincularGrupo(grupo)
-        grupo.getSalon().getHorario().liberarHorario(grupo.getHorario())
-        self.grupos.remove(grupo)
-        self.cupos -= grupo.getCupos()
-        for i in range(numero - 1, len(self.grupos)):
-            grupoCamb = self.grupos[i]
-            nGrupoAnt = grupoCamb.getNumero()
-            grupoCamb.setNumero(nGrupoAnt - 1)
+        if numero>0 and numero<=len(self.grupos):
+            grupo = self.grupos[numero - 1]
+            grupo.getProfesor().desvincularGrupo(grupo)
+            grupo.getSalon().getHorario().liberarHorario(grupo.getHorario())
+            self.grupos.remove(grupo)
+            self.cupos -= grupo.getCupos()
+            for i in range(numero - 1, len(self.grupos)):
+                grupoCamb = self.grupos[i]
+                nGrupoAnt = grupoCamb.getNumero()
+                grupoCamb.setNumero(nGrupoAnt - 1)
+        else:
+            raise IndexError("El número no corresponde a ningún grupo")
 
     def agregarGrupo(self, numero, profesor, horario, cupos, salon):
         dispSalon = True

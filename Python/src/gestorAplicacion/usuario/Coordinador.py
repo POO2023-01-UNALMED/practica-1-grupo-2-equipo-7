@@ -126,6 +126,8 @@ class Coordinador(Usuario):
         if materia in Materia.getMateriasTotales():
             Coordinador.restaurarMateria(materia)
             Materia.getMateriasTotales().remove(materia)
+        else:
+            raise TypeError("Se ha ingresado un valor inválido")
 
     @classmethod
     def agregarMateria(cls,nombre, codigo, descripcion, creditos, facultad, prerrequisitos):
