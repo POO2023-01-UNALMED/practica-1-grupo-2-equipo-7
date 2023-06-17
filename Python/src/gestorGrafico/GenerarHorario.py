@@ -206,8 +206,8 @@ class horarioGenerado(Frame):
         FrameCont.pack(side="top",padx=5,pady=5)
         FrameCont.grid_propagate(False)
         
-        print(materiasAGenerar[0].getGrupos())
+        # print(materiasAGenerar[0].getGrupos())
         generacion = Coordinador.crearHorario(materiasAGenerar)
-        print(generacion[1].mostrarHorario)
+        print(generacion[1].mostrarHorario())
         
                 

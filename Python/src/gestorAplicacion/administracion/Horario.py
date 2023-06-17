@@ -79,7 +79,9 @@ class Horario:
             self.liberarHorario(grupo.getHorario())
 
     def comprobarDisponibilidad(self, clase) -> bool:
-        dia = int(clase[0]) - 1
+        # print("esto es: "+str(clase)[0])
+        clase = clase[0]
+        dia = int(clase[0])-1
         horaInicio = int(clase[2:4])
         horaFinal = int(clase[5:7])
         for hora in range(horaInicio, horaFinal):
@@ -87,7 +89,7 @@ class Horario:
                 return False
         return True
 
-    def comprobarDisponibilidad(self, clases) -> bool:
+    def comprobarDisponibilidadClases(self, clases) -> bool:
         for clase in clases:
             if not self.comprobarDisponibilidad(clase):
                 return False
@@ -112,7 +114,7 @@ class Horario:
                 materia = ""
                 if self._horario[j][i] is not None:
                     materia = self._horario[j][i].getMateria().getAbreviatura()
-                cantidad_espacios = (DiaSemana.getDiaPorIndice(j).length + 8) - len(
+                cantidad_espacios = (len(DiaSemana.getDiaPorIndice(j)) + 8) - len(
                     materia
                 )
                 espacios = " " * cantidad_espacios
