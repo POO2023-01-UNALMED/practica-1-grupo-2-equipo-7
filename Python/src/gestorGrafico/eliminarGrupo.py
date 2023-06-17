@@ -1,15 +1,27 @@
 from tkinter import *
 #from gestorGrafico.FieldFrame import FieldFrame
 from tkinter import ttk
+from tkinter import messagebox
 import sys
 import os
 
-sys.path.append(os.path.join(os.path.dirname(__file__), "../gestorAplicacion/administracion/"))
-from Materia import Materia
+from gestorAplicacion.administracion.Materia import Materia
 
 class eliminarGrupo(Frame):
     def __init__(self, ventana):
         super().__init__(ventana)
+
+        def botEliminar():
+            confirmacion = messagebox.askokcancel("Confirmación de eliminación", "¿Está seguro que desea eliminar el grupo {} de la materia {}?".format(entGrupo.get(), box.get()))
+            if confirmacion:
+                mate = Materia.encontrarMateria(str(box.get()))
+                try:
+                    mate.eliminarGrupo(int(entGrupo.get()))
+                    messagebox.showinfo("Grupo eliminado", "El grupo ha sido eliminado con éxito de la materia")
+                except IndexError:
+                    messagebox.showerror("Error", "El número ingresado no corresponde a ningún grupo registrado en la materia")
+
+                    
 
         titulo = Label(self, text="Eliminar Grupo", font=("Arial", 14))
         titulo.pack(side="top", anchor="c")
@@ -37,3 +49,9 @@ class eliminarGrupo(Frame):
 
         textoM = Label(subFrame, text="Grupo", font=("Arial", 10))
         textoM.grid(row=2, column=0, padx=10, pady=10)
+
+        entGrupo = Entry(subFrame, font=("Arial", 10))
+        entGrupo.grid(row=2, column=1, padx=10, pady=10)
+
+        botonEliminar = Button(self, text="Eliminar", command=botEliminar)
+        botonEliminar.pack()
