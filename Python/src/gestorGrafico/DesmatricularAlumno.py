@@ -10,6 +10,10 @@ class DesmatricularAlumno(Frame):
         def listaEstudiantes():
             self.pack_forget()
             AlumnoPorLista(ventana)
+
+        def buscarEstudiante():
+            self.pack_forget()
+            AlumnoPorBusqueda(ventana)
         
         titulo = Label(self, text="Desmatricular Alumno", font=("Arial", 14), fg="#42f2f5", bg="#241d1d",)
         titulo.pack(side="top", anchor="c")
@@ -26,7 +30,7 @@ class DesmatricularAlumno(Frame):
         opcion1 = Button(self, text="Ver la lista de estudiantes", font=("Arial", 10), fg="#110433", command=listaEstudiantes)
         opcion1.pack(anchor="n", pady=20)
 
-        opcion2 = Button(self, text="Buscar estudiante por ID (Documento) y nombre", font=("Arial", 10), fg="#110433")
+        opcion2 = Button(self, text="Buscar estudiante por ID (Documento) y nombre", font=("Arial", 10), fg="#110433", command=buscarEstudiante)
         opcion2.pack(anchor="n", pady=20)
 
 
@@ -131,3 +135,21 @@ class AlumnoPorLista(Frame):
 
         desmatricular2 = Button(der, text="Desmatricular de una materia", font=("Arial", 10), fg="#110433", command=desmatricularMateria)
         desmatricular2.pack(pady=20)
+
+class AlumnoPorBusqueda(Frame):
+
+    def __init__(self,ventana):
+        super().__init__(ventana)
+        self._seleccionado = None
+
+        izq=Frame(ventana, height=460,width=250, bg="#42f2f5")
+        izq.pack(side="left", anchor="e")
+        izq.pack_propagate(False)
+
+        der=Frame(ventana, height=460,width=615, bg="#3f0b54")
+        der.pack(side="right", fill="both")
+        der.pack_propagate(False)
+
+        criterios = ["Nombre", "Documento"]
+        fildEstudiante = FieldFrame(izq, "Criterio", criterios, "Valor")
+        fildEstudiante.pack()

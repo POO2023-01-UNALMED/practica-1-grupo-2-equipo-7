@@ -3,7 +3,7 @@ from tkinter import *
 class FieldFrame(Frame):
     def __init__(self, ventana, tituloCriterios, criterios, tituloValores, valores=None, habilitado=None):
         super().__init__(ventana)
-
+        self._criterios = criterios
         self._datos = []
 
         tituloC = Label(self, text=tituloCriterios, font=("Arial", 10))
@@ -31,5 +31,5 @@ class FieldFrame(Frame):
 
 
     def getValue(self, criterio):
-        i = self._datos.index(criterio)
+        i = self._criterios.index(criterio)
         return self._datos[i].get()
