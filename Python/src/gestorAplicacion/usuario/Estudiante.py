@@ -63,12 +63,11 @@ class Estudiante(Usuario):
         # Si el estudiante existe, retorna su indice en la lista 'estudiantes'
         # Si no existe, retorna -1.
         for i in range(len(Estudiante._estudiantes)):
-            if (Estudiante._estudiantes[i].nombre == nombre) and (
-                Estudiante._estudiantes[i].id == id
+            if (Estudiante._estudiantes[i].getNombre() == nombre) and (
+                Estudiante._estudiantes[i].getId() == id
             ):
                 return i
-            else:
-                return -1
+        return -1
 
     def eliminarMateria(self, materia):
         self._materias.remove(materia)

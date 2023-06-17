@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 from gestorGrafico.FieldFrame import FieldFrame
 from gestorAplicacion.usuario.Estudiante import Estudiante
 
@@ -142,6 +143,59 @@ class AlumnoPorBusqueda(Frame):
         super().__init__(ventana)
         self._seleccionado = None
 
+        def buscarEstudiante():
+            estudiante = fildEstudiante.getValue("Nombre")
+            documento = int(fildEstudiante.getValue("Documento"))
+            indice = Estudiante.buscarEstudiante(estudiante, documento)
+
+            if self._seleccionado is not None:
+                    self._seleccionado.destroy()
+            
+            if indice != -1:
+                alumno = Estudiante.getEstudiantes()[indice]
+                self._seleccionado = Label(izq, text="Estudiante encontrado:\n" + estudiante, font=("Arial", 12), bg="red")
+                self._seleccionado.pack(expand=True,padx=10, pady=10)
+            else:
+
+                messagebox.showwarning("Busqueda fallida", "Estudiante no encontrado, intente nuevamente")
+
+        def limpiar():
+            fildEstudiante.limpiarValues()
+
+        def desmatricularDelSistema(self):
+            if self._seleccionado != None:
+                titulo.destroy()
+                descripcion.destroy()
+                desmatricular1.destroy()
+                desmatricular2.destroy()           
+
+        def desmatricularMateria(self):
+            if self._seleccionado != None:
+                titulo.destroy()
+                descripcion.destroy()
+                desmatricular1.destroy()
+                desmatricular2.destroy()
+            
+            else:
+                return
+
+            titulo2 = Label(der, text="Desmatricular de Materia", font=("Arial", 14), fg="#42f2f5", bg="#241d1d")
+            titulo2.pack(side="top", anchor="center", padx=10, pady=10)
+
+            izq1 = Frame(der)
+            izq1.pack(side="left")
+
+            descripcion1 = Label(izq1, text="Rellena los campos necesarios")
+            descripcion1.pack(side="top", anchor="n", pady=10, padx=10)
+
+            criterios = ["Materia", "Grupo"]
+            datos = FieldFrame(izq1, "Criterio", criterios, "Valor")
+            datos.pack(anchor="e")
+
+            descripcion2 = Label(der, text="Elige la materia")
+            descripcion2.pack(side="right", anchor="nw", pady=10, padx=10)
+
+
         izq=Frame(ventana, height=460,width=250, bg="#42f2f5")
         izq.pack(side="left", anchor="e")
         izq.pack_propagate(False)
@@ -153,3 +207,26 @@ class AlumnoPorBusqueda(Frame):
         criterios = ["Nombre", "Documento"]
         fildEstudiante = FieldFrame(izq, "Criterio", criterios, "Valor")
         fildEstudiante.pack()
+
+        frame = Frame(izq)
+        frame.pack(fill="x", padx=7)
+
+        acept = Button(frame, text="Buscar", font=("Arial", 10), fg="#1c0226", command=buscarEstudiante)
+        acept.pack(side="left", anchor="ne", padx=10, pady=10)
+
+        borrar = Button(frame, text="Borrar", font=("Arial", 10), fg="#1c0226", command=limpiar)
+        borrar.pack(side="right", anchor="nw", padx=10, pady=10)
+
+        titulo = Label(der, text="Desmatricular Alumno", font=("Arial", 14), fg="#42f2f5", bg="#241d1d",)
+        titulo.pack(side="top", anchor="center", pady=10)
+
+        text = "Seleccione de que quiere desmatricular al estudiante"
+
+        descripcion = Label(der, text=text, font=("Arial", 10), fg="white", bg="#3f0b54")
+        descripcion.pack(pady=10)
+
+        desmatricular1 = Button(der, text="Desmatricular del sistema", font=("Arial", 10), fg="#110433", command=desmatricularDelSistema)
+        desmatricular1.pack(pady=20)
+
+        desmatricular2 = Button(der, text="Desmatricular de una materia", font=("Arial", 10), fg="#110433", command=desmatricularMateria)
+        desmatricular2.pack(pady=20)
