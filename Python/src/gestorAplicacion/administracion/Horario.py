@@ -31,9 +31,10 @@ class Horario:
     def __init__(self, diaSemana=0, horaInicio=0, horaFinal=0, grupo=""):
         self._horario = [[None] * 24 for _ in range(7)]
         self._grupoContenidos = []
-        self._grupoContenidos.append(grupo)
-        for hora in range(horaInicio, horaFinal):
-            self._horario[diaSemana][hora] = grupo
+        if grupo != "":
+            self._grupoContenidos.append(grupo)
+            for hora in range(horaInicio, horaFinal):
+                self._horario[diaSemana][hora] = grupo
 
     # Por si alguien utiliza los demas constructores que estaban en Java
 
@@ -72,8 +73,12 @@ class Horario:
             for hora in range(horaInicio, horaFinal):
                 grupoEliminado = self._horario[dia][hora]
                 self._horario[dia][hora] = None
-            print("este es el supuesto grupo eliminado: "+grupoEliminado)
-            self._grupoContenidos.remove(grupoEliminado)
+      
+            for pGrupo in self._grupoContenidos:
+                if pGrupo.getProfesor() == grupoEliminado.getProfesor():
+                    if pGrupo.getNumero() == grupoEliminado.getNumero():
+                        if pGrupo.getMateria().getNombre()==grupoEliminado.getMateria().getNombre():
+                            self._grupoContenidos.remove(pGrupo)    
 
     def vaciarHorario(self, grupos) -> None:
         for grupo in grupos:

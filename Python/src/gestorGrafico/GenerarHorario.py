@@ -232,7 +232,7 @@ class horarioGenerado(Frame):
             RecoleccionDat(ventana)
         
         def conservarAsignar():
-            pass
+            eleccionEstudiante(ventana,horarioAMostrar)
         
         bottConservar = Button(fraBotones,text="Conservar y Asignar",command=conservarAsignar)
         bottConservar.pack(side="left",padx=10,pady=1)
@@ -241,7 +241,11 @@ class horarioGenerado(Frame):
         bottDescartar.pack(side="left",padx=10,pady=1)        
 
 
-class eleccionEstudiante(Frame):
-    def __init__(self,ventana):
+class eleccionEstudiante(Frame,):
+    def __init__(self,ventana,horarioAMostrar):
         super().__init__(ventana)
         self.pack()
+        
+        
+        
+        

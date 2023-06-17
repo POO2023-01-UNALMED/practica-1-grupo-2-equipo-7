@@ -41,9 +41,9 @@ Deserializador.deserializarDatos()
 
     
 MainWin()
-
-
-
+# for pHorario in Horario.getHorariosTotales():
+#     print(pHorario.getGrupoContenidos())
+#     print("\n")
 
 
 
