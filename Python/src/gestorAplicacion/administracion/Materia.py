@@ -22,6 +22,7 @@ class Materia:
         self.facultad = facultad
         self.prerrequisitos = prerrequisitos or []
         self.grupos =[]
+        # self.cupos =0
         self.hacerAbreviatura(nombre)
         Materia.materiasTotales.append(self)
 
@@ -210,6 +211,13 @@ class Materia:
             retorno += f"{i}. {grupo.getNumero()}.\n"
             i += 1
         return retorno
+    
+    def calcularCupos(self):
+        cupos =0
+        for i in self.grupos:
+            cupos+=i.getCupos()
+            
+        return cupos
 
     # GETTERS Y SETTERS
 
@@ -249,7 +257,7 @@ class Materia:
         self.facultad = facultad
 
     def getCupos(self):
-        return self.cupos
+        return self.calcularCupos()
 
     def setCupos(self, cupos):
         self.cupos = cupos
@@ -259,8 +267,6 @@ class Materia:
 
     def setPrerrequisitos(self, prerrequisitos):
         self.prerrequisitos = prerrequisitos
-        
-        
 
     def getGrupos(self):
         return self.grupos

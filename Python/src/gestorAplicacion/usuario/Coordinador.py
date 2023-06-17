@@ -80,7 +80,7 @@ class Coordinador(Usuario):
 
         while True:
             pClases = materias[i].getGrupos()[gPosible[i]].getHorario()
-            if horario.comprobarDisponibilidadClases(pClases):
+            if horario.comprobarDisponibilidad(pClases):
                 # Asignamos la materia al horario
                 horario.ocuparHorario(materias[i].getGrupos()[gPosible[i]])
                 # Al ponerse 1 significa que sí es posible poner dicha materia
@@ -178,7 +178,7 @@ class Coordinador(Usuario):
 
     @classmethod
     def getLimitesCreditos(cls):
-        return cls.limitesCreditos
+        return cls._LIMITES_CREDITOS
 
     @classmethod
     def getCoordinadoresTotales(cls):

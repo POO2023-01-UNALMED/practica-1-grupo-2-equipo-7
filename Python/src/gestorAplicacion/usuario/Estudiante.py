@@ -79,8 +79,8 @@ class Estudiante(Usuario):
         self.eliminarMateria(grupo.materia)
 
     def pagarMatricula(self):
-        if self._sueldo >= self.valorMatricula:
-            self._sueldo -= self.valorMatricula
+        if self._sueldo >= self._valorMatricula:
+            self._sueldo -= self._valorMatricula
             self._matriculaPagada = True
             return True
         else:
@@ -233,9 +233,9 @@ class Estudiante(Usuario):
         self._notas = notas
 
 
-def getGruposVistos(self):
-    return self._gruposVistos
+    def getGruposVistos(self):
+        return self._gruposVistos
 
 
-def setGruposVistos(self, gruposVistos):
-    self._gruposVistos = gruposVistos
+    def setGruposVistos(self, gruposVistos):
+        self._gruposVistos = gruposVistos

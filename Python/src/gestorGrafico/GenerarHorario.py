@@ -3,6 +3,8 @@ from tkinter import StringVar
 from tkinter import ttk
 from tkinter import scrolledtext
 from tkinter import messagebox
+from gestorAplicacion.administracion.Horario import Horario
+from gestorAplicacion.usuario.Estudiante import Estudiante
 from gestorAplicacion.administracion.Materia import Materia
 from gestorAplicacion.usuario.Coordinador import Coordinador
 
@@ -224,28 +226,88 @@ class horarioGenerado(Frame):
         horarioText.insert(1.0,horario)
         
         
-        fraBotones=Frame(self,bg="purple")
-        fraBotones.pack(side="top",padx=1,pady=1)
+        fraBotones=Frame(self,bg="purple",height=60)
+        fraBotones.pack(side="top",fill="both",padx=5,pady=(0,5))
+        fraBotones.pack_propagate(False)
         
         def descartar():
             self.destroy()
             RecoleccionDat(ventana)
         
-        def conservarAsignar():
-            eleccionEstudiante(ventana,horarioAMostrar)
-        
-        bottConservar = Button(fraBotones,text="Conservar y Asignar",command=conservarAsignar)
-        bottConservar.pack(side="left",padx=10,pady=1)
+        # def conservarAsignar():
+        self.listaEstudiantes=[]
+        listaNombresEstu=[]
+        for pEstudiante in Estudiante.getEstudiantes():
+            if (pEstudiante.isMatriculaPagada()):
+                listaNombresEstu.append(pEstudiante.getNombre())
+                self.listaEstudiantes.append(pEstudiante) 
+            
+        def asignar():
+            estudianteElegido = self.listaEstudiantes[combo3.current()]
+            tempHorario = estudianteElegido.getHorario()
+            estudianteElegido.setHorario(Horario())
+            
+            flag = True
+            for pGrupo in horarioAMostrar.getGrupoContenidos():
+                if not Materia.puedeVerMateria(estudianteElegido, pGrupo):
+                    flag = False
+                    break
+                
+            mens = False
+            nMateria = ""
+            for pGrupo in estudianteElegido.getGruposVistos():
+                for pGrupo1 in horarioAMostrar.getGrupoContenidos():
+                    if pGrupo.getMateria().getCodigo() == pGrupo1.getMateria().getCodigo():
+                        flag = False
+                        mens = True
+                        nMateria = pGrupo.getMateria().getNombre()
+                        break
+            
+            if flag:
+                estudianteElegido.setHorario(horarioAMostrar)
+                estudianteElegido.desmatricularMaterias()
+                for pGrupo in horarioAMostrar.getGrupoContenidos():
+                    horarioGenerado.matricularMateriaParte4(estudianteElegido, pGrupo)
+                mesExito="Horario asignado con éxito al estudiante " + estudianteElegido.getNombre()
+                messagebox.showinfo("",mesExito)
+                # self.destroy()
+            else:
+                estudianteElegido.setHorario(tempHorario)
+                mesFrac="No es posible asignar el horario, el estudiante " + estudianteElegido.getNombre() + " no cumple los Pre-requisitos"
+                if mens:
+                    mesFrac+=" o ya vio y aprobó una materia, dicha materia puede ser: " + nMateria
+                
+                messagebox.showinfo("",mesFrac)
+
+                
+
+
+            
         
         bottDescartar = Button(fraBotones,text="Descartar",command=descartar)
         bottDescartar.pack(side="left",padx=10,pady=1)        
 
+        bottConservar = Button(fraBotones,text="Agignar",command=asignar)
+        bottConservar.pack(side="right",padx=10,pady=1)
 
-class eleccionEstudiante(Frame,):
-    def __init__(self,ventana,horarioAMostrar):
-        super().__init__(ventana)
-        self.pack()
+        combo3 = ttk.Combobox(fraBotones, textvariable=StringVar(value="Estudiantes habilitados"), values=listaNombresEstu, state="readonly")
+        combo3.pack(side="right", fill="x", pady="1", padx="1")
         
-        
+        textAsig = Label(fraBotones,text="Conservar y asignar a: ")
+        textAsig.pack(side="right",padx=10,pady=1)
+
+    @classmethod
+    def matricularMateriaParte4(cls,estudiante,grupo):
+        materiasInscritas = estudiante.getMaterias().copy()
+        materiasInscritas.append(grupo.getMateria())
+        grupo.agregarEstudiante(estudiante)
+        grupo.getMateria().setCupos(grupo.getMateria().getCupos() - 1)
+        grupo.setCupos(grupo.getCupos() - 1)
+        gruposInscritos = estudiante.getGrupos().copy()
+        gruposInscritos.append(grupo)
+        estudiante.setGrupos(gruposInscritos)
+        estudiante.setCreditos(estudiante.getCreditos() + grupo.getMateria().getCreditos())
+        estudiante.setMaterias(materiasInscritas)
+
         
         

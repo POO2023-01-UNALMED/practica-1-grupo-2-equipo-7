@@ -84,7 +84,7 @@ class Horario:
         for grupo in grupos:
             self.liberarHorario(grupo.getHorario())
 
-    def comprobarDisponibilidad(self, clase) -> bool:
+    def comprobarDisponibilidadUna(self, clase) -> bool:
         # print("esto es: "+str(clase))
         # clase = clase[0]
         dia = int(clase[0])-1
@@ -95,9 +95,9 @@ class Horario:
                 return False
         return True
 
-    def comprobarDisponibilidadClases(self, clases) -> bool:
+    def comprobarDisponibilidad(self, clases) -> bool:
         for clase in clases:
-            if not self.comprobarDisponibilidad(clase):
+            if not self.comprobarDisponibilidadUna(clase):
                 return False
         return True
 
