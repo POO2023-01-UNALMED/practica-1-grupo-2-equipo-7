@@ -72,6 +72,7 @@ class Horario:
             for hora in range(horaInicio, horaFinal):
                 grupoEliminado = self._horario[dia][hora]
                 self._horario[dia][hora] = None
+            print("este es el supuesto grupo eliminado: "+grupoEliminado)
             self._grupoContenidos.remove(grupoEliminado)
 
     def vaciarHorario(self, grupos) -> None:
@@ -79,8 +80,8 @@ class Horario:
             self.liberarHorario(grupo.getHorario())
 
     def comprobarDisponibilidad(self, clase) -> bool:
-        # print("esto es: "+str(clase)[0])
-        clase = clase[0]
+        # print("esto es: "+str(clase))
+        # clase = clase[0]
         dia = int(clase[0])-1
         horaInicio = int(clase[2:4])
         horaFinal = int(clase[5:7])
@@ -117,6 +118,35 @@ class Horario:
                 cantidad_espacios = (len(DiaSemana.getDiaPorIndice(j)) + 8) - len(
                     materia
                 )
+                espacios = " " * cantidad_espacios
+                horario += materia + espacios
+            horario += "\n"
+        return horario
+    
+    def mostrarHorario2(self) -> str:
+        # Si el dos, y este si es bueno, porque tiene mano de efrain >:O 
+        horario = "HORA        LUNES        MARTES        MIERCOLES        JUEVES        VIERNES        SABADO        DOMINGO\n"
+
+        for i in range(6,24):
+            if i < 9:
+                horaConCeroDelante = "0" + str(i)
+                horaSiguienteConCeroDelante = "0" + str(i + 1)
+                horario += (
+                    horaConCeroDelante + "-" + horaSiguienteConCeroDelante + "       "
+                )
+            elif i == 9:
+                horario += "09-10" + "       "
+            else:
+                horario += str(i) + "-" + str(i + 1) + "       "
+
+            for j in range(7):
+                materia = ""
+                if self._horario[j][i] is not None:
+                    materia = self._horario[j][i].getMateria().getAbreviatura()
+                if j != 6:
+                    cantidad_espacios = (len(DiaSemana.getDiaPorIndice(j)) + 8) - len(materia)
+                else:
+                    cantidad_espacios = len(materia)
                 espacios = " " * cantidad_espacios
                 horario += materia + espacios
             horario += "\n"

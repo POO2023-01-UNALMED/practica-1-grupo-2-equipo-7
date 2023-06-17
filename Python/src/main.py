@@ -26,8 +26,8 @@ class MainWin(Tk):
         self.resizable(0,0)
         self.geometry("865x460")
         
-        VentInicio(self)    
-        # GenerarHorario(self)
+        # VentInicio(self)    
+        GenerarHorario(self)
         self.mainloop()
 
     def abrirLog(self):
