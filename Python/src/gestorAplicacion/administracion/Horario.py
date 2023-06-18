@@ -75,7 +75,7 @@ class Horario:
                 self._horario[dia][hora] = None
       
             for pGrupo in self._grupoContenidos:
-                if pGrupo.getProfesor() == grupoEliminado.getProfesor():
+                if not isinstance(pGrupo,str):
                     if pGrupo.getNumero() == grupoEliminado.getNumero():
                         if pGrupo.getMateria().getNombre()==grupoEliminado.getMateria().getNombre():
                             self._grupoContenidos.remove(pGrupo)    

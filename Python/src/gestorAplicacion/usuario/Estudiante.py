@@ -1,5 +1,6 @@
 from gestorAplicacion.administracion.Grupo import Grupo
 from gestorAplicacion.usuario.Usuario import Usuario
+from gestorAplicacion.administracion.Horario import Horario
 # import pickle;
 
 
@@ -35,7 +36,7 @@ class Estudiante(Usuario):
         self._beca = None
         self._notas = None
         self._gruposVistos = gruposVistos or []
-        self._horario = None  # Revisar
+        self._horario = Horario()  # Revisar
         Estudiante._estudiantes.append(self)
 
     # METODOS
@@ -75,7 +76,7 @@ class Estudiante(Usuario):
 
     def eliminarGrupo(self, grupo):
         self._grupos.remove(grupo)
-        self.eliminarMateria(grupo.materia)
+        self.eliminarMateria(grupo.getMateria())
 
     def pagarMatricula(self):
         if self._sueldo >= self._valorMatricula:

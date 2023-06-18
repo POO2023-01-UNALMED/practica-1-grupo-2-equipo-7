@@ -20,6 +20,19 @@ class Salon:
             i += 1
             retorno += str(i) + ". " + salon._lugar + ".\n"
         return retorno
+    
+    @classmethod
+    def nombresSalones(cls):
+        nombres = []
+        for salon in Salon._salones:
+            nombres.append(salon.getLugar())
+        return nombres
+    
+    @classmethod
+    def encontrarSalon(cls, salon):
+        for s in Salon._salones:
+            if s.getLugar()==salon:
+                return s
 
     # Setters y Getters
 

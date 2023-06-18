@@ -152,7 +152,7 @@ class Materia:
             grupo.getProfesor().desvincularGrupo(grupo)
             grupo.getSalon().getHorario().liberarHorario(grupo.getHorario())
             self.grupos.remove(grupo)
-            self.cupos -= grupo.getCupos()
+            
             for i in range(numero - 1, len(self.grupos)):
                 grupoCamb = self.grupos[i]
                 nGrupoAnt = grupoCamb.getNumero()

@@ -74,6 +74,20 @@ class Profesor:
             if profesor.daMateria(nombre) and profesor not in profes:
                 profes.append(profesor)
         return profes
+    
+    @classmethod
+    def nombresProfesDeMateria(cls, materia):
+        profes = []
+        for profesor in cls._profesores:
+            if profesor.daMateria(materia) and profesor not in profes:
+                profes.append(profesor.getNombre())
+        return profes
+
+    @classmethod
+    def encontrarProfe(cls, profesor):
+        for profe in Profesor._profesores:
+            if profe.getNombre()== profesor:
+                return profe
 
     @classmethod
     def mostrarProfesMateria(cls, nombre):
