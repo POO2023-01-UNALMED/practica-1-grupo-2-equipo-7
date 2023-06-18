@@ -6,7 +6,7 @@ class CrearBeca(Frame):
     def __init__(self, ventana):
         super().__init__(ventana)
 
-        titulo = Label(self, text="Aplicar Beca a Estudiante", font=("Arial", 14))
+        titulo = Label(self, text="Crear Beca", font=("Arial", 14))
         titulo.pack(side="top", anchor="c")
 
         texto = ("A continuación, deberá ingresar la información necesaria para crear\n una nueva beca que será registrada en el sistema.")

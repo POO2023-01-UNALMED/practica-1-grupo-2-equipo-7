@@ -3,6 +3,7 @@ from gestorAplicacion.administracion.Materia import Materia
 from gestorAplicacion.usuario.Estudiante import Estudiante
 from gestorAplicacion.usuario.Profesor import Profesor
 from gestorAplicacion.usuario.Usuario import Usuario
+from gestorAplicacion.administracion.Beca import Beca
 
 
 class Coordinador(Usuario):
@@ -196,4 +197,9 @@ class Coordinador(Usuario):
     def setFacultades(cls, facultades):
         cls.facultades = facultades
     
+    @classmethod
+    def mostrarBecas(cls):
+        i = 1
+        for beca in Beca.getBecas():
+            a = beca.getConvenio()
     

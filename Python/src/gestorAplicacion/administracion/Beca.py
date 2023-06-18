@@ -27,6 +27,13 @@ class Beca:
     @classmethod
     def eliminarBeca(cls, beca):
         cls._becas.remove(beca)
+    
+    @staticmethod
+    def listaBecas():
+        lista = []
+        for beca in Beca._becas:
+            lista.append(beca.getConvenio())
+        return lista
 
     # Setters y Getters
 

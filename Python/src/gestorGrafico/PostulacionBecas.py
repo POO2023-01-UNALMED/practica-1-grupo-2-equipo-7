@@ -1,6 +1,7 @@
 from tkinter import *
-from gestorGrafico.FieldFrame import FieldFrame
 from gestorGrafico.CrearBeca import CrearBeca
+from gestorGrafico.EliminarBeca import EliminarBeca
+from gestorGrafico.FieldFrame import FieldFrame
 
 class PostulacionBecas(Frame):
     def __init__(self,ventana):
@@ -8,11 +9,9 @@ class PostulacionBecas(Frame):
         
         def mostrarBeca():
             self.pack_forget()
-            pass
 
         def aplicarBeca():
             self.pack_forget()
-            pass
 
         def becaNueva():
             self.pack_forget()
@@ -21,7 +20,8 @@ class PostulacionBecas(Frame):
 
         def eliminarBeca():
             self.pack_forget()
-            pass
+            eBeca = EliminarBeca(ventana)
+            eBeca.pack()
       
          
         tituloenventana = Label(self, text="Eliminar Materia", font=("Arial", 14))
