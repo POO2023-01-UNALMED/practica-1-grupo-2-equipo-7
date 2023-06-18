@@ -287,7 +287,7 @@ class horarioGenerado(Frame):
         bottDescartar = Button(fraBotones,text="Descartar",command=descartar)
         bottDescartar.pack(side="left",padx=10,pady=1)        
 
-        bottConservar = Button(fraBotones,text="Agignar",command=asignar)
+        bottConservar = Button(fraBotones,text="Asignar",command=asignar)
         bottConservar.pack(side="right",padx=10,pady=1)
 
         combo3 = ttk.Combobox(fraBotones, textvariable=StringVar(value="Estudiantes habilitados"), values=listaNombresEstu, state="readonly")
