@@ -50,13 +50,13 @@ Deserializador.deserializarDatos()
 MainWin()
 
 
-Serializador.serializarDatos()
+# Serializador.serializarDatos()
 
-# Pruebas desmatricularAlumno
-for grupo in Estudiante.getEstudiantes()[0].getGrupos():
-    print(grupo.getMateria().getNombre())
-print("Estudiantes")
-for estudiante in Materia.getMateriasTotales()[0].getGrupos()[0].getEstudiantes():
-    print(estudiante.getNombre())
+# # Pruebas desmatricularAlumno
+# for grupo in Estudiante.getEstudiantes()[0].getGrupos():
+#     print(grupo.getMateria().getNombre())
+# print("Estudiantes")
+# for estudiante in Materia.getMateriasTotales()[0].getGrupos()[0].getEstudiantes():
+#     print(estudiante.getNombre())
 
-print("salio todo bien bro/sis/helicoptero apache? ;D")
+# print("salio todo bien bro/sis/helicoptero apache? ;D")
