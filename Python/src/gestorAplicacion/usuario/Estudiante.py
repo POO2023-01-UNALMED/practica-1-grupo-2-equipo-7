@@ -75,7 +75,7 @@ class Estudiante(Usuario):
 
     def eliminarGrupo(self, grupo):
         self._grupos.remove(grupo)
-        self.eliminarMateria(grupo.materia)
+        self.eliminarMateria(grupo.getMateria())
 
     def pagarMatricula(self):
         if self._sueldo >= self._valorMatricula:

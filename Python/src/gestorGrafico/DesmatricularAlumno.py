@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter import messagebox
 from gestorGrafico.FieldFrame import FieldFrame
 from gestorAplicacion.usuario.Estudiante import Estudiante
+from gestorAplicacion.administracion.Grupo import Grupo
 
 class DesmatricularAlumno(Frame):
     def __init__(self,ventana):
@@ -44,15 +45,57 @@ class DesmatricularAlumno(Frame):
 class AlumnoPorLista(Frame):
     def __init__(self,ventana):
         super().__init__(ventana)
-        self._seleccionado = None
+        self._estudianteSeleccionado = None
+        self._materiaSeleccionada = None
+
+        def desmatricularGrupo():
+            if self._materiaSeleccionada == None:
+                return
+            
+            if (grupo.existenciaEstudiante(estudiante)):
+                grupo.eliminarEstudiante(estudiante)
+                estudiante.getHorario().liberarHorario(grupo.getHorario())
+                messagebox.showinfo("Estudiante desmatriculado", "El estudiante ha sido desmatriculado de la materia.")
+            else:
+                messagebox.showwarning("Estudiante no encontrado", "El estudiante no se encuentra en la materia o ya ha sido desmatriculado")
+
+        def seleccionMateria(event):
+                global grupo
+                nombreMateria = comboMaterias.get()
+                if self._materiaSeleccionada is not None:
+                    self._materiaSeleccionada.destroy()
+                
+                materia = None
+                grupo = None
+
+                for i in range(len(estudiante.getMaterias())):
+                    if estudiante.getMaterias()[i].getNombre() == nombreMateria:
+                        materia = i
+
+                for i in range(len(estudiante.getGrupos())):
+                    if estudiante.getGrupos()[i].getMateria().getNombre() == nombreMateria:
+                        grupo = i
+
+                grupo = estudiante.getGrupos()[grupo]
+                materia = estudiante.getMaterias()[materia]
+
+                grupo = Grupo.buscarGrupo(materia, grupo)
+
+                infoMateria = "Materia seleccionada: " + nombreMateria + "\n"
+                infoMateria += "Informacion del grupo:\n"
+                infoMateria += "Numero: " + str(grupo.getNumero()) + "\n"
+                infoMateria += "Profesor: " + grupo.getProfesor().getNombre()
+                
+                self._materiaSeleccionada = Label(der, text=infoMateria, font=("Arial", 10))
+                self._materiaSeleccionada.pack(anchor="c", padx=10, pady=10)
 
         def eleccionEstudiante(event):
             
-            estudiante = combo.get()
-            if self._seleccionado is not None:
-                self._seleccionado.destroy()
-            self._seleccionado = Label(izq, text="Estudiante seleccionado:\n" + estudiante, font=("Arial", 12), bg="red")
-            self._seleccionado.pack(anchor="c", padx=10, pady=10)
+            est = combo.get()
+            if self._estudianteSeleccionado is not None:
+                self._estudianteSeleccionado.destroy()
+            self._estudianteSeleccionado = Label(izq, text="Estudiante seleccionado:\n" + est, font=("Arial", 12), bg="red")
+            self._estudianteSeleccionado.pack(anchor="c", padx=10, pady=10)
 
         def nombresAlumnos(estudiantes):
             listaNombres = []
@@ -70,6 +113,9 @@ class AlumnoPorLista(Frame):
                 desmatricular2.destroy()           
 
         def desmatricularMateria():
+            global estudiante, comboMaterias
+            nombreMateria = ""
+
             if combo.get() != "":
                 titulo.destroy()
                 descripcion.destroy()
@@ -82,18 +128,8 @@ class AlumnoPorLista(Frame):
             titulo2 = Label(der, text="Desmatricular de Materia", font=("Arial", 14), fg="#42f2f5", bg="#241d1d")
             titulo2.pack(side="top", anchor="center", padx=10, pady=10)
 
-            izq1 = Frame(der)
-            izq1.pack(side="left")
-
-            descripcion1 = Label(izq1, text="Rellena los campos necesarios")
-            descripcion1.pack(side="top", anchor="n", pady=10, padx=10)
-
-            criterios = ["Materia", "Grupo"]
-            datos = FieldFrame(izq1, "Criterio", criterios, "Valor")
-            datos.pack(anchor="e")
-
-            descripcion2 = Label(der, text="Elige la materia")
-            descripcion2.pack(side="right", anchor="nw", pady=10, padx=10)
+            descripcionMayor = Label(der, text="Selecciona la materia de la que quiere desmatricular al alumno", font=("Arial", 12))
+            descripcionMayor.pack(side="top", pady=10)
 
             estudiante = None
 
@@ -103,7 +139,15 @@ class AlumnoPorLista(Frame):
 
             nombresMateriasE = []
 
-            # for grupo in estudiante.getGrupos():
+            for grupo in estudiante.getGrupos():
+                nombresMateriasE.append(grupo.getMateria().getNombre())
+            
+            comboMaterias = ttk.Combobox(der, values=nombresMateriasE, state="readonly")
+            comboMaterias.bind("<<ComboboxSelected>>", seleccionMateria)
+            comboMaterias.pack(side="top", fill="x", pady="20", padx="25", anchor="c")
+
+            botonDesmatricular = Button(der, text="Desmatricular", font=("Arial", 10), command=desmatricularGrupo)
+            botonDesmatricular.pack(side="bottom", anchor="center", pady=10)
 
 
         izq=Frame(ventana, height=460,width=250, bg="#42f2f5")
@@ -141,20 +185,62 @@ class AlumnoPorBusqueda(Frame):
 
     def __init__(self,ventana):
         super().__init__(ventana)
-        self._seleccionado = None
+        self._estudianteSeleccionado = None
+        self._materiaSeleccionada = None
+
+        def desmatricularGrupo():
+            if self._materiaSeleccionada == None:
+                return
+            
+            if (grupo.existenciaEstudiante(estudiante)):
+                grupo.eliminarEstudiante(estudiante)
+                estudiante.getHorario().liberarHorario(grupo.getHorario())
+                messagebox.showinfo("Estudiante desmatriculado", "El estudiante ha sido desmatriculado de la materia.")
+            else:
+                messagebox.showwarning("Estudiante no encontrado", "El estudiante no se encuentra en la materia o ya ha sido desmatriculado")
+
+        def seleccionMateria(event):
+                global grupo
+                nombreMateria = comboMaterias.get()
+                if self._materiaSeleccionada is not None:
+                    self._materiaSeleccionada.destroy()
+                
+                materia = None
+                grupo = None
+
+                for i in range(len(estudiante.getMaterias())):
+                    if estudiante.getMaterias()[i].getNombre() == nombreMateria:
+                        materia = i
+
+                for i in range(len(estudiante.getGrupos())):
+                    if estudiante.getGrupos()[i].getMateria().getNombre() == nombreMateria:
+                        grupo = i
+
+                grupo = estudiante.getGrupos()[grupo]
+                materia = estudiante.getMaterias()[materia]
+
+                grupo = Grupo.buscarGrupo(materia, grupo)
+
+                infoMateria = "Materia seleccionada: " + nombreMateria + "\n"
+                infoMateria += "Informacion del grupo:\n"
+                infoMateria += "Numero: " + str(grupo.getNumero()) + "\n"
+                infoMateria += "Profesor: " + grupo.getProfesor().getNombre()
+                
+                self._materiaSeleccionada = Label(der, text=infoMateria, font=("Arial", 10))
+                self._materiaSeleccionada.pack(anchor="c", padx=10, pady=10)
 
         def buscarEstudiante():
             estudiante = fildEstudiante.getValue("Nombre")
             documento = int(fildEstudiante.getValue("Documento"))
             indice = Estudiante.buscarEstudiante(estudiante, documento)
 
-            if self._seleccionado is not None:
-                    self._seleccionado.destroy()
+            if self._estudianteSeleccionado is not None:
+                    self._estudianteSeleccionado.destroy()
             
             if indice != -1:
                 alumno = Estudiante.getEstudiantes()[indice]
-                self._seleccionado = Label(izq, text="Estudiante encontrado:\n" + estudiante, font=("Arial", 12), bg="red")
-                self._seleccionado.pack(expand=True,padx=10, pady=10)
+                self._estudianteSeleccionado = Label(izq, text="Estudiante encontrado:\n" + estudiante, font=("Arial", 12), bg="red")
+                self._estudianteSeleccionado.pack(expand=True,padx=10, pady=10)
             else:
 
                 messagebox.showwarning("Busqueda fallida", "Estudiante no encontrado, intente nuevamente")
@@ -162,15 +248,18 @@ class AlumnoPorBusqueda(Frame):
         def limpiar():
             fildEstudiante.limpiarValues()
 
-        def desmatricularDelSistema(self):
-            if self._seleccionado != None:
+        def desmatricularDelSistema():
+            if self._estudianteSeleccionado != None:
                 titulo.destroy()
                 descripcion.destroy()
                 desmatricular1.destroy()
                 desmatricular2.destroy()           
 
-        def desmatricularMateria(self):
-            if self._seleccionado != None:
+        def desmatricularMateria():
+            global estudiante, comboMaterias
+            nombreMateria = ""
+
+            if self._estudianteSeleccionado != None:
                 titulo.destroy()
                 descripcion.destroy()
                 desmatricular1.destroy()
@@ -182,18 +271,26 @@ class AlumnoPorBusqueda(Frame):
             titulo2 = Label(der, text="Desmatricular de Materia", font=("Arial", 14), fg="#42f2f5", bg="#241d1d")
             titulo2.pack(side="top", anchor="center", padx=10, pady=10)
 
-            izq1 = Frame(der)
-            izq1.pack(side="left")
+            descripcionMayor = Label(der, text="Selecciona la materia de la que quiere desmatricular al alumno", font=("Arial", 12))
+            descripcionMayor.pack(side="top", pady=10)
 
-            descripcion1 = Label(izq1, text="Rellena los campos necesarios")
-            descripcion1.pack(side="top", anchor="n", pady=10, padx=10)
+            estudiante = None
 
-            criterios = ["Materia", "Grupo"]
-            datos = FieldFrame(izq1, "Criterio", criterios, "Valor")
-            datos.pack(anchor="e")
+            for e in Estudiante.getEstudiantes():
+                if e.getNombre() == fildEstudiante.getValue("Nombre"):
+                    estudiante = e
 
-            descripcion2 = Label(der, text="Elige la materia")
-            descripcion2.pack(side="right", anchor="nw", pady=10, padx=10)
+            nombresMateriasE = []
+
+            for grupo in estudiante.getGrupos():
+                nombresMateriasE.append(grupo.getMateria().getNombre())
+            
+            comboMaterias = ttk.Combobox(der, values=nombresMateriasE, state="readonly")
+            comboMaterias.bind("<<ComboboxSelected>>", seleccionMateria)
+            comboMaterias.pack(side="top", fill="x", pady="20", padx="25", anchor="c")
+
+            botonDesmatricular = Button(der, text="Desmatricular", font=("Arial", 10), command=desmatricularGrupo)
+            botonDesmatricular.pack(side="bottom", anchor="center", pady=10)
 
 
         izq=Frame(ventana, height=460,width=250, bg="#42f2f5")
