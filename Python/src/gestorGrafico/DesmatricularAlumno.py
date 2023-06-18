@@ -3,7 +3,9 @@ from tkinter import ttk
 from tkinter import messagebox
 from gestorGrafico.FieldFrame import FieldFrame
 from gestorAplicacion.usuario.Estudiante import Estudiante
+from gestorAplicacion.usuario.Coordinador import Coordinador
 from gestorAplicacion.administracion.Grupo import Grupo
+from gestorAplicacion.administracion.Horario import Horario
 
 class DesmatricularAlumno(Frame):
     def __init__(self,ventana):
@@ -53,9 +55,20 @@ class AlumnoPorLista(Frame):
                 return
             
             if (grupo.existenciaEstudiante(estudiante)):
+
+                nombresMaterias1 = []
+
+                for g in estudiante.getGrupos():
+                    if g.getMateria().getNombre() == grupo.getMateria().getNombre():
+                        continue
+                    nombresMaterias1.append(g.getMateria().getNombre())
+
+                comboMaterias.config(values=nombresMaterias1)
+
                 grupo.eliminarEstudiante(estudiante)
                 estudiante.getHorario().liberarHorario(grupo.getHorario())
                 messagebox.showinfo("Estudiante desmatriculado", "El estudiante ha sido desmatriculado de la materia.")
+
             else:
                 messagebox.showwarning("Estudiante no encontrado", "El estudiante no se encuentra en la materia o ya ha sido desmatriculado")
 
@@ -86,7 +99,7 @@ class AlumnoPorLista(Frame):
                 infoMateria += "Numero: " + str(grupo.getNumero()) + "\n"
                 infoMateria += "Profesor: " + grupo.getProfesor().getNombre()
                 
-                self._materiaSeleccionada = Label(der, text=infoMateria, font=("Arial", 10))
+                self._materiaSeleccionada = Label(der, text=infoMateria, font=("Arial", 10),bg="#085870")
                 self._materiaSeleccionada.pack(anchor="c", padx=10, pady=10)
 
         def eleccionEstudiante(event):
@@ -110,7 +123,23 @@ class AlumnoPorLista(Frame):
                 titulo.destroy()
                 descripcion.destroy()
                 desmatricular1.destroy()
-                desmatricular2.destroy()           
+                desmatricular2.destroy()
+            else:
+                return
+            
+            estudiante = None
+
+            for e in Estudiante.getEstudiantes():
+                if e.getNombre() == combo.get():
+                    estudiante = e
+            estudiante.setHorario(Horario())
+            estudiante.getHorario().vaciarHorario(estudiante.getGrupos())
+            estudiante.desmatricularMaterias()
+            Coordinador.desmatricularDelSistema(estudiante)
+
+            nombresEstudiantes1 = nombresAlumnos(Estudiante.getEstudiantes())
+            combo.config(values=nombresEstudiantes1)
+            messagebox.showinfo("Estudiante desmatriculado", "El estudiante ha sido desmatriculado del sistema con exito")
 
         def desmatricularMateria():
             global estudiante, comboMaterias
@@ -125,7 +154,7 @@ class AlumnoPorLista(Frame):
             else:
                 return
 
-            titulo2 = Label(der, text="Desmatricular de Materia", font=("Arial", 14), fg="#42f2f5", bg="#241d1d")
+            titulo2 = Label(der, text="Desmatricular de Materia", font=("Arial", 14), bg="#241d1d")
             titulo2.pack(side="top", anchor="center", padx=10, pady=10)
 
             descripcionMayor = Label(der, text="Selecciona la materia de la que quiere desmatricular al alumno", font=("Arial", 12))
@@ -161,9 +190,9 @@ class AlumnoPorLista(Frame):
         valorPredeterminado = StringVar(value="Elige el estudiante")
         combo = ttk.Combobox(izq, textvariable=valorPredeterminado, values=nombresEstudiantes, state="readonly")
         combo.bind("<<ComboboxSelected>>", eleccionEstudiante)
-        combo.pack(fill="x", pady="20", padx="25")
-
-        der=Frame(ventana, height=460,width=615, bg="#3f0b54")
+        combo.pack(fill="x", pady="20", padx="25") 
+        
+        der=Frame(ventana, height=460,width=615, bg="#cedae0")
         der.pack(side="right", fill="both")
         der.pack_propagate(False)
 
@@ -193,6 +222,15 @@ class AlumnoPorBusqueda(Frame):
                 return
             
             if (grupo.existenciaEstudiante(estudiante)):
+                
+                nombresMaterias1 = []
+
+                for g in estudiante.getGrupos():
+                    if g.getMateria().getNombre() == grupo.getMateria().getNombre():
+                        continue
+                    nombresMaterias1.append(g.getMateria().getNombre())
+
+                comboMaterias.config(values=nombresMaterias1)
                 grupo.eliminarEstudiante(estudiante)
                 estudiante.getHorario().liberarHorario(grupo.getHorario())
                 messagebox.showinfo("Estudiante desmatriculado", "El estudiante ha sido desmatriculado de la materia.")
@@ -253,7 +291,22 @@ class AlumnoPorBusqueda(Frame):
                 titulo.destroy()
                 descripcion.destroy()
                 desmatricular1.destroy()
-                desmatricular2.destroy()           
+                desmatricular2.destroy()
+            else:
+                return
+            
+            estudiante = None
+
+            for e in Estudiante.getEstudiantes():
+                if e.getNombre() == fildEstudiante.getValue("Nombre"):
+                    estudiante = e
+
+            estudiante.setHorario(Horario())
+            estudiante.getHorario().vaciarHorario(estudiante.getGrupos())
+            estudiante.desmatricularMaterias()
+            Coordinador.desmatricularDelSistema(estudiante)
+
+            messagebox.showinfo("Estudiante desmatriculado", "El estudiante ha sido desmatriculado del sistema con exito")
 
         def desmatricularMateria():
             global estudiante, comboMaterias
@@ -267,8 +320,9 @@ class AlumnoPorBusqueda(Frame):
             
             else:
                 return
+            
 
-            titulo2 = Label(der, text="Desmatricular de Materia", font=("Arial", 14), fg="#42f2f5", bg="#241d1d")
+            titulo2 = Label(der, text="Desmatricular de Materia", font=("Arial", 14), fg="#085870", bg="#241d1d")
             titulo2.pack(side="top", anchor="center", padx=10, pady=10)
 
             descripcionMayor = Label(der, text="Selecciona la materia de la que quiere desmatricular al alumno", font=("Arial", 12))
