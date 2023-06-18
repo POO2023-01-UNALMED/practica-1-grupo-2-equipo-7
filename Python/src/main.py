@@ -26,7 +26,7 @@ class MainWin(Tk):
         self.resizable(0,0)
         self.geometry("865x460")
         
-        VentInicio(self)    
+        VentInicio(self)   
         #GenerarHorario(self)
         self.mainloop()
 
@@ -59,4 +59,4 @@ print("Estudiantes")
 for estudiante in Materia.getMateriasTotales()[0].getGrupos()[0].getEstudiantes():
     print(estudiante.getNombre())   
 
-print("salio todo bien bro/sis/helicoptero apache? ;D")
+# print("salio todo bien bro/sis/helicoptero apache? ;D")

@@ -11,8 +11,9 @@ class VentPrincipal(Tk):
     def __init__(self):
         super().__init__()
         self.title("Sistema Matricula de Materias")
-        self.resizable(1, 1)
+        self.resizable(0, 0)
         self.geometry("865x460")
+        self.configure(bg="#cedae0")
 
         def infoBasica():
             messagebox.showinfo(
@@ -83,5 +84,39 @@ class VentPrincipal(Tk):
         menuBar.add_cascade(label="Ayuda", menu=menu3)
 
         menu3.add_cascade(label="Acerca de", command=mostrarAutores)
+
+        frame = Frame(self)
+        frame.pack(anchor="center")
+
+        bienvenida_label = Label(frame, text="¡Bienvenido a la ventana principal de S.M.M!", font=("Arial", 14), fg="white", bg="#085870")
+        bienvenida_label.pack(padx=10, pady=10)
+
+        simbolo = ("  ____        __  __       __  __ \n"
+        + " / ___|      |  \\/  |     |  \\/  |\n"
+        + " \\___ \\      | |\\/| |     | |\\/| |\n"
+        + "  ___) |  _  | |  | |  _  | |  | |\n"
+        + " |____/  (_) |_|  |_| (_) |_|  |_|\n"
+        + "                                 ")
+
+        figura = Label(frame, bg="#085870", text=simbolo)
+        figura.pack(anchor="center")
+
+        informacion = """
+        Esta aplicación te permite gestionar la matrícula de los estudiantes de forma eficiente. Aquí puedes realizar las siguientes acciones:
+
+        1. Matricular Materia: Selecciona y matricula las materias para los estudiantes en el período académico actual.
+        2. Generar Horario: Crea automáticamente horarios para los estudiantes, evitando conflictos de horarios entre las materias matriculadas.
+        3. Agregar o Eliminar Materia/Grupo: Crea nuevas materias y grupos en la base de datos, para ofrecer más opciones a los estudiantes.
+        4. Desmatricular Alumno: Cancela la matrícula de un estudiante y retira todas las materias inscritas o una sola materia de tu eleccion.
+        5. Búsqueda y Postulación de Becas: Explora las becas disponibles y ayuda a los estudiantes en el proceso de postulación.
+
+        Para comenzar, selecciona la opción deseada en el menú principal en Procesos y Consultas y sigue las instrucciones que se te presenten.
+
+        ¡Disfruta de la experiencia de matricularte de forma rápida y eficaz!
+
+        """
+        
+        info_text = Label(frame, text=informacion, font=("Arial", 10), fg="white",bg="#085870")
+        info_text.pack(padx=10, pady=10)
 
         self.mainloop()
