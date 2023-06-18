@@ -16,28 +16,18 @@ class MateriaMatriculada(ErrorManejo):
     def __init__(self, nombre):
         super().__init__("El estudiante ya tiene la materia "+nombre+" matriculada")
 
-class MateriaCursada(ErrorManejo):
-    def __init__(self, nombre=""):
-        super().__init__("El estudiante ya curso la materia "+nombre)
-
 class EstudianteSinCreditos(ErrorManejo):
     def __init__(self, nombre=""):
         super().__init__("El estudiante "+nombre+" no tiene creditos suficientes")
-
 
 class EstudianteSinMatriculaPagada(ErrorManejo):
     def __init__(self, nombre=""):
         super().__init__("El estudiante "+nombre+" no tiene la matricula pagada")
 
-
 class PrerrequisitosMateria(ErrorManejo):
     def __init__(self, nombre=""):
         super().__init__("El estudiante "+nombre+" no cumple con los prerrequisitos")
 
-
 class MateriaSinCupo(ErrorManejo):
     def __init__(self, nombre=""):
         super().__init__("La materia "+nombre+" no cuenta con cupos suficientes")
-
-
-
