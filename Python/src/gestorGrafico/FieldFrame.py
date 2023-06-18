@@ -37,6 +37,8 @@ class FieldFrame(Frame):
         return self._datos[i].get()
     
     def limpiarValues(self):
-
         for entry in self._entrysCriterios:
             entry.delete(0, last= END)
+           
+    def crearBotones(self, comando1, texto = "Aceptar", Pady = 50, Column= 0, Padx = 0):
+        return Button(self, text=texto, font=("Arial", 10), command=comando1).grid(padx = Padx, pady = Pady, column = Column, row = len(self._datos)+1)
