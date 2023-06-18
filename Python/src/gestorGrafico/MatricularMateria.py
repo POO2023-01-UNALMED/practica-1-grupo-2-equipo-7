@@ -1,5 +1,6 @@
 from gestorAplicacion.usuario.Estudiante import Estudiante
 from gestorAplicacion.usuario.Coordinador import Coordinador
+from gestorAplicacion.administracion.Horario import Horario
 from gestorAplicacion.administracion.Materia import Materia
 from gestorGrafico.FieldFrame import FieldFrame
 from tkinter import messagebox
@@ -203,7 +204,7 @@ class MatricularMateria2(Frame):
             else:
                 messagebox.showerror("Error","Error al seleccionar la materia")
         except:
-            messagebox.showerror("Error2","Error al rellenar el campo")
+            messagebox.showerror("Error","Error al rellenar el campo")
 
     def comprobar2(self):
         try:
@@ -249,17 +250,21 @@ class MatricularMateria3(Frame):
         caja.pack()
         self.grupos_disponibles = []
         self.grupos_materia = self.materia.getGrupos()
-        self.horario_estudiante = self.estudiante.getHorario()
+        horarioPrueba=self.estudiante.getHorario()
+        self.horario_estudiante = horarioPrueba if not horarioPrueba is None else Horario()
         self.materias_estudiante = self.estudiante.getMaterias()
-        self.grupos_estudiante = self.estudiante.getGrupos()
+
+        self.grupos_estudiante = self.estudiante.getGrupos() 
         grupos_texto = ""
         for grupo in self.grupos_materia:
-            # if grupo is None:
-            #     continue
-            # horario_grupo = grupo.getHorario()
-            # if not self.horario_estudiante.comprobarDisponibilidad(horario_grupo):
-            #     continue
+            horario_grupo = grupo.getHorario()
+            if horario_grupo is None:
+                horario_grupo==Horario()
+            if not self.horario_estudiante.comprobarDisponibilidad(horario_grupo):
+                continue
             if grupo.getCupos() <= 0:
+                continue
+            if grupo.getHorario()==[]:
                 continue
             self.grupos_disponibles.append(grupo)
             grupos_texto+=str(len(self.grupos_disponibles))+ " - Grupo #"+ str(grupo.getNumero())+ " cupos: "+ str(grupo.getCupos())+ " Profesor: "+ grupo.getProfesor().getNombre()+"\n"
@@ -292,12 +297,48 @@ class MatricularMateria3(Frame):
                 self.estudiante.setCreditos(self.estudiante.getCreditos() + self.materia.getCreditos())
                 self.estudiante.setMaterias(self.materias_estudiante)
                 self.estudiante.setGrupos(self.grupos_estudiante)
+                self.horario_estudiante.ocuparHorario(grupo_seleccionado, grupo_seleccionado.getHorario())
+                self.estudiante.setHorario(self.horario_estudiante)
                 imprimir = "Materia "+ self.materia.getNombre()+ " - grupo #"+ str(grupo_seleccionado.getNumero())
                 imprimir+=". Ha sido matriculado al estudiante: "+ self.estudiante.getNombre()
-                messagebox.showinfo("Matriculación exitosa",imprimir)
-                self.destroy()
-                MatricularMateria(self.ventana).pack()
+                opcion3 = messagebox.askokcancel("Confirmación","Matriculación exitosa "+imprimir+"\n\nDesea ver el horario del estudiante?")
+                if opcion3:
+                    self.destroy()
+                    MatricularMateria4(self.ventana, self.estudiante).pack()
+                else:
+                    self.destroy()
+                    MatricularMateria(self.ventana).pack()
             else:
                 messagebox.showerror("Error","Error al seleccionar el grupo")
         except:
             messagebox.showerror("Error","Error al rellenar el campo")
+
+
+class MatricularMateria4(Frame):
+    def __init__(self, ventana, estudiante):
+        super().__init__(ventana)
+        self.ventana=ventana
+        self.estudiante=estudiante
+        titulo = Label(self, text="Mostrar horario estudiante", font=("Arial", 14))
+        titulo.pack(side="top", anchor="c")
+        seleccionado="Estudiante seleccionado: "+self.estudiante.getNombre()
+        seleccion=Label(self, text=seleccionado, font=("Arial", 11))
+        seleccion.pack(anchor="n", pady=10)
+        caja = Frame(self)
+        caja.pack()
+
+        horarioFrame = Frame(caja,width=855,height=310)
+        horarioFrame.pack(side="top",padx=5,pady=5)
+        horarioFrame.pack_propagate(False)
+        horario=self.estudiante.getHorario().mostrarHorario2()
+        horarioText = Text(horarioFrame,width=855,height=100)
+        horarioText.pack(side="top",fill="x")
+        horarioText.insert(1.0,horario)
+
+        boton = Button(caja, text="Regresar", command=self.regresar)
+        boton.pack(pady=10)
+
+
+    def regresar(self):
+        self.destroy()
+        MatricularMateria(self.ventana).pack()    
