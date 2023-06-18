@@ -85,7 +85,10 @@ class VentPrincipal(Tk):
 
         menu3.add_cascade(label="Acerca de", command=mostrarAutores)
 
-        bienvenida_label = Label(self, text="¡Bienvenido a la ventana principal de S.M.M!", font=("Arial", 14), fg="white", bg="#085870")
+        frame = Frame(self)
+        frame.pack(anchor="center")
+
+        bienvenida_label = Label(frame, text="¡Bienvenido a la ventana principal de S.M.M!", font=("Arial", 14), fg="white", bg="#085870")
         bienvenida_label.pack(padx=10, pady=10)
 
         simbolo = ("  ____        __  __       __  __ \n"
@@ -95,8 +98,6 @@ class VentPrincipal(Tk):
         + " |____/  (_) |_|  |_| (_) |_|  |_|\n"
         + "                                 ")
 
-        frame = Frame(self)
-        frame.pack(anchor="center")
         figura = Label(frame, bg="#085870", text=simbolo)
         figura.pack(anchor="center")
 
@@ -115,7 +116,7 @@ class VentPrincipal(Tk):
 
         """
         
-        info_text = Label(self, text=informacion, font=("Arial", 10), fg="white",bg="#085870")
+        info_text = Label(frame, text=informacion, font=("Arial", 10), fg="white",bg="#085870")
         info_text.pack(padx=10, pady=10)
 
         self.mainloop()
