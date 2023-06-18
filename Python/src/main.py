@@ -27,7 +27,7 @@ class MainWin(Tk):
         self.geometry("865x460")
         
         VentInicio(self)    
-        GenerarHorario(self)
+        #GenerarHorario(self)
         self.mainloop()
 
     def abrirLog(self):
@@ -50,7 +50,7 @@ Deserializador.deserializarDatos()
 MainWin()
 
 
-# Serializador.serializarDatos()
+Serializador.serializarDatos()
 
 # Pruebas desmatricularAlumno
 for grupo in Estudiante.getEstudiantes()[0].getGrupos():

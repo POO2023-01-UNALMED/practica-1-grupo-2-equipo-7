@@ -191,11 +191,11 @@ class Coordinador(Usuario):
 
     @classmethod
     def getFacultades(cls):
-        return cls.facultades
+        return cls._facultades
 
     @classmethod
     def setFacultades(cls, facultades):
-        cls.facultades = facultades
+        cls._facultades = facultades
     
     @classmethod
     def mostrarBecas(cls):
