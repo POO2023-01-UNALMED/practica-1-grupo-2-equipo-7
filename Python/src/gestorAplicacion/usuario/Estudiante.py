@@ -1,5 +1,6 @@
 from gestorAplicacion.administracion.Grupo import Grupo
 from gestorAplicacion.usuario.Usuario import Usuario
+from gestorAplicacion.administracion.Horario import Horario
 # import pickle;
 
 
@@ -35,7 +36,7 @@ class Estudiante(Usuario):
         self._beca = None
         self._notas = None
         self._gruposVistos = gruposVistos or []
-        self._horario = None  # Revisar
+        self._horario = Horario()  # Revisar
         Estudiante._estudiantes.append(self)
 
     # METODOS
