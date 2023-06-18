@@ -4,17 +4,13 @@ class ErrorManejo(ErrorAplicacion):
     def __init__(self, error):
         super().__init__(error)
 
-class CamposVacios(ErrorManejo):
+class CampoVacio(ErrorManejo):
     def __init__(self):
         super().__init__("Los campos del formulario no fueron llenados")
 
-class CamposInvalidos(ErrorManejo):
+class CampoInvalido(ErrorManejo):
     def __init__(self):
         super().__init__("Los campos del formulario fueron llenados incorrectamente")
-
-class CampoNumero(ErrorManejo):
-    def __init__(self):
-        super().__init__("Se debe ingresar un número")
 
 class MateriaMatriculada(ErrorManejo):
     def __init__(self, nombre):
@@ -39,7 +35,7 @@ class PrerrequisitosMateria(ErrorManejo):
         super().__init__("El estudiante "+nombre+" no cumple con los prerrequisitos")
 
 
-class MateriaSinCupos(ErrorManejo):
+class MateriaSinCupo(ErrorManejo):
     def __init__(self, nombre=""):
         super().__init__("La materia "+nombre+" no cuenta con cupos suficientes")
 

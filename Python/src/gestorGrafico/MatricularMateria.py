@@ -2,6 +2,8 @@ from gestorAplicacion.usuario.Estudiante import Estudiante
 from gestorAplicacion.usuario.Coordinador import Coordinador
 from gestorAplicacion.administracion.Horario import Horario
 from gestorAplicacion.administracion.Materia import Materia
+from excepciones.ErrorManejo import *
+from excepciones.ObjetoInexistente import *
 from gestorGrafico.FieldFrame import FieldFrame
 from tkinter import messagebox
 from tkinter import *
@@ -11,7 +13,7 @@ class MatricularMateria(Frame):
     def __init__(self, ventana):
         super().__init__(ventana)
         self._ventana=ventana
-        titulo = Label(self, text="Matricular Materia", foreground="#007bff",font=("Helvetica", 14, "bold"))
+        titulo = Label(self, text="Matricular Materia", foreground="#085870",font=("Helvetica", 14, "bold"))
         titulo.pack(side="top", anchor="c")
         texto = """En esta parte, debes seleccionar al estudiante deseado de dos formas:
 1. Búsqueda manual: Ingresa el ID y nombre del estudiante.
@@ -20,8 +22,8 @@ class MatricularMateria(Frame):
         descripcion.pack(anchor="n", pady=10)
         opciones = Frame(self)
         opciones.pack()
-        manual = Button(opciones,text="Seleccionar al estudiante\n de forma manual",foreground="black",background="#007bff",font=("Helvetica", 12),command=lambda: self.seleccionar_estudiante(caja, label_vacio, False))
-        lista = Button(opciones,text="Seleccionar al estudiante\n mediante una lista",foreground="black",background="#007bff",font=("Helvetica", 12),command=lambda: self.seleccionar_estudiante(caja, label_vacio, True))
+        manual = Button(opciones,text="Seleccionar al estudiante\n de forma manual",foreground="black",background="#085870",font=("Helvetica", 12),command=lambda: self.seleccionar_estudiante(caja, label_vacio, False))
+        lista = Button(opciones,text="Seleccionar al estudiante\n mediante una lista",foreground="black",background="#085870",font=("Helvetica", 12),command=lambda: self.seleccionar_estudiante(caja, label_vacio, True))
         manual.pack(side=LEFT, padx=(0, 10))
         lista.pack(side=LEFT, padx=(10, 10))
         busqueda = Frame(self)
@@ -36,6 +38,14 @@ class MatricularMateria(Frame):
         texto.delete("1.0", "end")
         texto.insert(INSERT, string)
         texto.pack(fill=X, expand=True, padx=(10, 10))
+
+    @classmethod
+    def es_numero(cls, numero):
+        try:
+            numero=int(numero)
+            return True
+        except:
+            return False
 
     @classmethod
     def limpiar_frame(cls, frame):
@@ -78,42 +88,48 @@ class MatricularMateria(Frame):
 
 
     def comprobacion1(self):
-        if len(self.estudiantes_mostrados) == 0:
-                messagebox.showinfo("Sin estudiantes","No hay estudiantes disponibles")
+        opcion=self.campo.getValue("Numero")
         try:
-            opcion=int(self.campo.getValue("Numero"))
-            if opcion <= len(self.estudiantes_mostrados) and opcion >= 1:
-                estudiante_seleccionado = self.estudiantes_mostrados[opcion - 1]
-                opcion = messagebox.askokcancel("Confirmación","Estudiante seleccionado: "+ estudiante_seleccionado.getNombre())
-                if opcion:
-                    self.destroy()
-                    MatricularMateria2(self._ventana, estudiante_seleccionado).pack()
-            else:
-                messagebox.showerror("Error","Error al seleccionar estudiante")
+            if opcion=="":
+                    raise Exception
+            try:
+                opcion=int(opcion)
+                if opcion <= len(self.estudiantes_mostrados) and opcion >= 1:
+                    estudiante_seleccionado = self.estudiantes_mostrados[opcion - 1]
+                    opcion = messagebox.askokcancel("Confirmación","Estudiante seleccionado: "+ estudiante_seleccionado.getNombre())
+                    if opcion:
+                        self.destroy()
+                        MatricularMateria2(self._ventana, estudiante_seleccionado).pack()
+                else:
+                    raise Exception
+            except:
+                messagebox.showerror("Error",CampoInvalido().mostrarMensaje())
         except:
-            messagebox.showerror("Error","Error al rellenar el campo")
+            messagebox.showerror("Error",CampoVacio().mostrarMensaje())
             
 
     def comprobacion2(self):
+        id_estudiante=self.campo2.getValue("ID")
+        nombre_estudiante=self.campo2.getValue("Nombre")
         try:
-            id_estudiante=int(self.campo2.getValue("ID"))
-            nombre_estudiante=self.campo2.getValue("Nombre")
-            index = Estudiante.buscarEstudiante(nombre_estudiante, id_estudiante)
+            if id_estudiante=="" or nombre_estudiante=="":
+                raise Exception
+            index = Estudiante.buscarEstudiante(nombre_estudiante, int(id_estudiante))
             if index == -1:
-                messagebox.showinfo("Estudiante nulo","El estudiante no ha sido encontrado")
+                messagebox.showerror("Error",EstudianteInexistente(nombre_estudiante).mostrarMensaje())
             else:
                 estudiante_seleccionado = self.estudiantes_totales[index]
                 if not estudiante_seleccionado.isMatriculaPagada():
-                    messagebox.showinfo("Matricula sin pagar","El estudiante tiene la matricula sin pagar")
+                    messagebox.showerror("Error",EstudianteSinMatriculaPagada(nombre_estudiante).mostrarMensaje())
                 elif estudiante_seleccionado.getCreditos() >= self.limite_creditos:
-                    messagebox.showinfo("Creditos insuficientes","El estudiante no tiene suficientes creditos para inscribir")
+                    messagebox.showerror("Error",EstudianteSinCreditos(nombre_estudiante).mostrarMensaje())
                 else:
                     opcion = messagebox.askokcancel("Confirmación","Estudiante seleccionado: "+ estudiante_seleccionado.getNombre())
                     if opcion:
                         self.destroy()
                         MatricularMateria2(self._ventana, estudiante_seleccionado).pack()
         except:
-            messagebox.showerror("Error","Error al rellenar los campos")
+            messagebox.showerror("Error",CampoVacio().mostrarMensaje())
 
 
 class MatricularMateria2(Frame):
@@ -121,7 +137,7 @@ class MatricularMateria2(Frame):
         super().__init__(ventana)
         self.ventana=ventana
         self.estudiante=estudiante
-        titulo = Label(self, text="Matricular Materia 2", foreground="#007bff",font=("Helvetica", 14, "bold"))
+        titulo = Label(self, text="Matricular Materia 2", foreground="#085870",font=("Helvetica", 14, "bold"))
         titulo.pack(side="top", anchor="c")
         texto = """En esta parte, debes seleccionar la materia deseada de dos formas:
 1. Búsqueda manual: Ingresa el código y nombre de la materia.
@@ -133,8 +149,8 @@ class MatricularMateria2(Frame):
         descripcion.pack(anchor="n", pady=5)
         opciones = Frame(self)
         opciones.pack()
-        manual = Button(opciones,text="Seleccionar la materia\n de forma manual",foreground="black",background="#007bff",font=("Helvetica", 12),command=lambda: self.seleccionar_materia(caja, label_vacio, False))
-        lista = Button(opciones,text="Seleccionar la materia\n mediante una lista",foreground="black",background="#007bff",font=("Helvetica", 12),command=lambda: self.seleccionar_materia(caja, label_vacio, True))
+        manual = Button(opciones,text="Seleccionar la materia\n de forma manual",foreground="black",background="#085870",font=("Helvetica", 12),command=lambda: self.seleccionar_materia(caja, label_vacio, False))
+        lista = Button(opciones,text="Seleccionar la materia\n mediante una lista",foreground="black",background="#085870",font=("Helvetica", 12),command=lambda: self.seleccionar_materia(caja, label_vacio, True))
         manual.pack(side=LEFT, padx=(0, 10))
         lista.pack(side=LEFT, padx=(10, 10))
         busqueda = Frame(self)
@@ -193,43 +209,50 @@ class MatricularMateria2(Frame):
         
 
     def comprobar1(self):
-        try:
-            opcion = int(self.campo.getValue("Numero"))   
-            if opcion <= len(self.materias_disponibles) and opcion >= 1:
-                materia_seleccionada = self.materias_disponibles[opcion-1]
-                opcion2 = messagebox.askokcancel("Confirmación","Materia seleccionada: "+ materia_seleccionada.getNombre())
-                if opcion2:
-                    self.destroy()
-                    MatricularMateria3(self.ventana, self.estudiante, materia_seleccionada).pack()
-            else:
-                messagebox.showerror("Error","Error al seleccionar la materia")
-        except:
-            messagebox.showerror("Error","Error al rellenar el campo")
-
-    def comprobar2(self):
-        try:
-            nombre_materia = self.campo2.getValue("Nombre")
-            codigo_materia = int(self.campo2.getValue("Codigo"))
-            index = Materia.buscarMateria(nombre_materia, codigo_materia)
-            if index == -1:
-                messagebox.showinfo("Materia nula","La materia no ha sido encontrado")
-            else:
-                materia_seleccionada = self.materias_totales[index]
-                if materia_seleccionada.getCupos() <= 0:
-                    messagebox.showinfo("Materia sin cupos","La materia seleccionada no cuenta con cupos disponibles")
-                elif not Materia.comprobarPrerrequisitos(self.estudiante, materia_seleccionada):
-                    messagebox.showinfo("Materia con prerrequisitos","El estudiante no cumple los prerrequisitos para ver la materia")
-                elif (self.creditos_estudiante + materia_seleccionada.getCreditos()> self.limite_creditos):
-                    messagebox.showinfo("Sin creditos suficientes","El estudiante no cuenta con creditos suficientes")
-                elif materia_seleccionada in self.materias_estudiante:
-                    messagebox.showinfo("Materia matriculada","El estudiante ya la tiene matriculada")
-                else:
-                    opcion = messagebox.askokcancel("Confirmación","Materia seleccionada: "+ materia_seleccionada.getNombre())
-                    if opcion:
+        opcion = self.campo.getValue("Numero")
+        if opcion=="":
+            messagebox.showerror("Error",CampoVacio().mostrarMensaje())
+        else:
+            try:
+                opcion=int(opcion)
+                if opcion <= len(self.materias_disponibles) and opcion >= 1:
+                    materia_seleccionada = self.materias_disponibles[opcion-1]
+                    opcion2 = messagebox.askokcancel("Confirmación","Materia seleccionada: "+ materia_seleccionada.getNombre())
+                    if opcion2:
                         self.destroy()
                         MatricularMateria3(self.ventana, self.estudiante, materia_seleccionada).pack()
-        except:
-            messagebox.showerror("Error1","Error al rellenar los campos")
+                else:
+                    messagebox.showerror("Error",CampoInvalido().mostrarMensaje())
+            except:
+                messagebox.showerror("Error",CampoVacio().mostrarMensaje())
+
+    def comprobar2(self):
+        nombre_materia = self.campo2.getValue("Nombre")
+        codigo_materia = self.campo2.getValue("Codigo")
+        if codigo_materia=="" or nombre_materia=="":
+            messagebox.showerror("Error",CampoVacio().mostrarMensaje())
+        else:
+            try:
+                index = Materia.buscarMateria(nombre_materia, int(codigo_materia))
+                if index == -1:
+                    messagebox.showerror("Error",MateriaInexistente(nombre_materia).mostrarMensaje())
+                else:
+                    materia_seleccionada = self.materias_totales[index]
+                    if materia_seleccionada.getCupos() <= 0:
+                        messagebox.showerror("Error",MateriaSinCupo(nombre_materia).mostrarMensaje())
+                    elif not Materia.comprobarPrerrequisitos(self.estudiante, materia_seleccionada):
+                        messagebox.showerror("Error",PrerrequisitosMateria(nombre_materia).mostrarMensaje())
+                    elif (self.creditos_estudiante + materia_seleccionada.getCreditos()> self.limite_creditos):
+                        messagebox.showerror("Error",EstudianteSinCreditos(self.estudiante.getNombre()).mostrarMensaje())
+                    elif materia_seleccionada in self.materias_estudiante:
+                        messagebox.showerror("Error",MateriaMatriculada(self.estudiante.getNombre()).mostrarMensaje())
+                    else:
+                        opcion = messagebox.askokcancel("Confirmación","Materia seleccionada: "+ materia_seleccionada.getNombre())
+                        if opcion:
+                            self.destroy()
+                            MatricularMateria3(self.ventana, self.estudiante, materia_seleccionada).pack()
+            except:
+                messagebox.showerror("Error",CampoInvalido().mostrarMensaje())
 
 
 class MatricularMateria3(Frame):
@@ -238,7 +261,7 @@ class MatricularMateria3(Frame):
         self.ventana=ventana
         self.estudiante=estudiante
         self.materia=materia
-        titulo = Label(self, text="Matricular Materia 3", foreground="#007bff",font=("Helvetica", 14, "bold"))
+        titulo = Label(self, text="Matricular Materia 3", foreground="#085870",font=("Helvetica", 14, "bold"))
         titulo.pack(side="top", anchor="c")
         texto = """En esta parte, debes seleccionar el grupo deseado mediante una lista de los disponibles:"""
         seleccionados="Estudiante: "+self.estudiante.getNombre()+"\nMateria: "+self.materia.getNombre()
@@ -286,32 +309,36 @@ class MatricularMateria3(Frame):
         MatricularMateria2(self.ventana, self.estudiante).pack()
 
     def comprobar(self):
-        try:
-            opcion = int(self.campo.getValue("Numero"))
-            if opcion <= len(self.grupos_disponibles) and opcion >= 1:
-                grupo_seleccionado = self.grupos_disponibles[opcion - 1]
-                self.grupos_estudiante.append(grupo_seleccionado)
-                self.materias_estudiante.append(self.materia)
-                grupo_seleccionado.agregarEstudiante(self.estudiante)
-                self.materia.cantidadCupos()
-                self.estudiante.setCreditos(self.estudiante.getCreditos() + self.materia.getCreditos())
-                self.estudiante.setMaterias(self.materias_estudiante)
-                self.estudiante.setGrupos(self.grupos_estudiante)
-                self.horario_estudiante.ocuparHorario(grupo_seleccionado, grupo_seleccionado.getHorario())
-                self.estudiante.setHorario(self.horario_estudiante)
-                imprimir = "Materia "+ self.materia.getNombre()+ " - grupo #"+ str(grupo_seleccionado.getNumero())
-                imprimir+=". Ha sido matriculado al estudiante: "+ self.estudiante.getNombre()
-                opcion3 = messagebox.askokcancel("Confirmación","Matriculación exitosa "+imprimir+"\n\nDesea ver el horario del estudiante?")
-                if opcion3:
-                    self.destroy()
-                    MatricularMateria4(self.ventana, self.estudiante).pack()
+        opcion = self.campo.getValue("Numero")
+        if opcion=="":
+            messagebox.showerror("Error",CampoVacio().mostrarMensaje())
+        else:
+            try:
+                opcion=int(opcion)
+                if opcion <= len(self.grupos_disponibles) and opcion >= 1:
+                    grupo_seleccionado = self.grupos_disponibles[opcion - 1]
+                    self.grupos_estudiante.append(grupo_seleccionado)
+                    self.materias_estudiante.append(self.materia)
+                    grupo_seleccionado.agregarEstudiante(self.estudiante)
+                    self.materia.cantidadCupos()
+                    self.estudiante.setCreditos(self.estudiante.getCreditos() + self.materia.getCreditos())
+                    self.estudiante.setMaterias(self.materias_estudiante)
+                    self.estudiante.setGrupos(self.grupos_estudiante)
+                    self.horario_estudiante.ocuparHorario(grupo_seleccionado, grupo_seleccionado.getHorario())
+                    self.estudiante.setHorario(self.horario_estudiante)
+                    imprimir = "Materia "+ self.materia.getNombre()+ " - grupo #"+ str(grupo_seleccionado.getNumero())
+                    imprimir+=". Ha sido matriculado al estudiante: "+ self.estudiante.getNombre()
+                    opcion3 = messagebox.askokcancel("Confirmación","Matriculación exitosa "+imprimir+"\n\nDesea ver el horario del estudiante?")
+                    if opcion3:
+                        self.destroy()
+                        MatricularMateria4(self.ventana, self.estudiante).pack()
+                    else:
+                        self.destroy()
+                        MatricularMateria(self.ventana).pack()
                 else:
-                    self.destroy()
-                    MatricularMateria(self.ventana).pack()
-            else:
-                messagebox.showerror("Error","Error al seleccionar el grupo")
-        except:
-            messagebox.showerror("Error","Error al rellenar el campo")
+                    raise Exception
+            except:
+                messagebox.showerror("Error",CampoInvalido().mostrarMensaje())
 
 
 class MatricularMateria4(Frame):
@@ -319,7 +346,7 @@ class MatricularMateria4(Frame):
         super().__init__(ventana)
         self.ventana=ventana
         self.estudiante=estudiante
-        titulo = Label(self, text="Mostrar horario estudiante", foreground="#007bff",font=("Helvetica", 14, "bold"))
+        titulo = Label(self, text="Mostrar horario estudiante", foreground="#085870",font=("Helvetica", 14, "bold"))
         titulo.pack(side="top", anchor="c")
         seleccionado="Estudiante seleccionado: "+self.estudiante.getNombre()
         seleccion=Label(self, text=seleccionado, font=("Arial", 11,"bold"))
@@ -335,7 +362,7 @@ class MatricularMateria4(Frame):
         horarioText.pack(side="top",fill="x")
         horarioText.insert(1.0,horario)
 
-        boton = Button(caja, text="Regresar",foreground="black",background="#007bff",font=("Helvetica", 12), command=self.regresar)
+        boton = Button(caja, text="Regresar",foreground="black",background="#085870",font=("Helvetica", 12), command=self.regresar)
         boton.pack(pady=10)
 
 
