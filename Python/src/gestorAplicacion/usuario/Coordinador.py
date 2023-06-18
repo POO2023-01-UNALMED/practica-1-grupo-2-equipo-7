@@ -45,7 +45,8 @@ class Coordinador(Usuario):
                 puntero_Estudiante = puntero_Grupo.getEstudiantes()[j]
                 Coordinador.desmatricular(puntero_Estudiante, puntero_Grupo)
 
-    def desmatricularDelSistema(self, estudiante):
+    @classmethod
+    def desmatricularDelSistema(cls, estudiante):
         e1 = None
         for e in Estudiante.getEstudiantes():
             if e == estudiante:
