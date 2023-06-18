@@ -270,7 +270,8 @@ class horarioGenerado(Frame):
                     horarioGenerado.matricularMateriaParte4(estudianteElegido, pGrupo)
                 mesExito="Horario asignado con éxito al estudiante " + estudianteElegido.getNombre()
                 messagebox.showinfo("",mesExito)
-                # self.destroy()
+                self.destroy()
+                RecoleccionDat(ventana)
             else:
                 estudianteElegido.setHorario(tempHorario)
                 mesFrac="No es posible asignar el horario, el estudiante " + estudianteElegido.getNombre() + " no cumple los Pre-requisitos"
@@ -279,7 +280,7 @@ class horarioGenerado(Frame):
                 
                 messagebox.showinfo("",mesFrac)
 
-                
+            
 
 
             

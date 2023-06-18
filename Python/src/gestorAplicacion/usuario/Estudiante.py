@@ -71,11 +71,20 @@ class Estudiante(Usuario):
         return -1
 
     def eliminarMateria(self, materia):
-        self._materias.remove(materia)
+        for pMateria in self._materias:
+            if pMateria.getNombre() == materia.getNombre():
+                self._materias.remove(pMateria)
+        
+        # self._materias.remove(materia)
         self._creditos -= materia.creditos
 
     def eliminarGrupo(self, grupo):
-        self._grupos.remove(grupo)
+        for pGrupo in self._grupos:
+            if pGrupo.getNumero() == grupo.getNumero():
+                if pGrupo.getProfesor() == grupo.getProfesor():
+                    if pGrupo.getMateria == grupo.getMateria():
+                        self._grupos.remove(pGrupo)
+        # self._grupos.remove(grupo)
         self.eliminarMateria(grupo.getMateria())
 
     def pagarMatricula(self):
