@@ -18,8 +18,26 @@ class VentPrincipal(Tk):
         self.iconbitmap("Python\src\gestorGrafico\Imagenes\icono.ico")
 
         def infoBasica():
+            texto = """Bienvenido a nuestra aplicación de Matrícula de Materias.
+
+Nuestra aplicación te permite gestionar de manera eficiente y sencilla el proceso de matrícula de materias en tu institución educativa. Con nuestra aplicación, podrás realizar las siguientes acciones:
+
+1. Matricular materia: Selecciona al estudiante la materias que desea cursar en el próximo período académico y confirma su inscripción.
+
+2. Generar horario: Crea automáticamente un horario de clases basado en las materias que selecciones al estudiante, teniendo en cuenta los horarios disponibles y las restricciones establecidas.
+
+3. Agregar o eliminar materia/grupo: Realiza cambios en la base de datos de materias, ya sea para agregar nuevas materias o eliminar aquellas que ya no deseas que esten en el sistema.
+
+4. Desmatricular alumno: En caso de que necesites cancelar una matrícula en su totalidad, puedes utilizar esta opción para desmatricular de todas las materias inscritas.
+
+5. Búsqueda y postulación de becas: Explora las becas disponibles y postula estudiantes que cumplan con sus requisitos y objetivos académicos.
+
+Estamos comprometidos con brindarte una experiencia fácil de usar y confiable. Si tienes alguna pregunta o necesitas ayuda, no dudes en contactar a nuestro equipo de soporte técnico.
+
+¡Esperamos que disfrutes de nuestra aplicación y tengas un exitoso período académico!
+            """
             messagebox.showinfo(
-                "Informacion de la aplicacion", "Sistema de matricula de materias"
+                "Informacion de la aplicacion", texto
             )
 
         def salir():

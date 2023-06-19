@@ -4,6 +4,8 @@ from tkinter import messagebox
 from gestorAplicacion.usuario.Usuario import Usuario
 from gestorAplicacion.usuario.Coordinador import Coordinador
 from gestorGrafico.ventPrincipal import VentPrincipal
+from excepciones.ObjetoInexistente import *
+from excepciones.ErrorManejo import *
 
 class VentLog(Tk):
     def __init__(self):
@@ -32,33 +34,41 @@ class VentLog(Tk):
             VentPrincipal()
 
         def verificar():
-            exist = False
-            esCoo = False
-            pw = False
-            coordi = None
-            
-            for usuario in Usuario.getUsuariosTotales():
-                if usuario.getId() == int(entrada1.get()):
-                    coordi = usuario
-                    exist = True
-                    break
+            try:
+                exist = False
+                esCoo = False
+                pw = False
+                coordi = None
+                
+                if entrada1.get() == "" and entrada2.get() == "":
+                    raise CampoVacio
+                
+                for usuario in Usuario.getUsuariosTotales():
+                    if usuario.getId() == int(entrada1.get()):
+                        coordi = usuario
+                        exist = True
+                        break
 
-            if exist:
-                if not isinstance(usuario, Coordinador):
-                    return messagebox.showwarning("Error", "El usuario ingresado no corresponde a un coordinador")
-                else:
-                    esCoo = True
+                if exist:
+                    if not isinstance(usuario, Coordinador):
+                        return messagebox.showwarning("Error", "El usuario ingresado no corresponde a un coordinador")
+                    else:
+                        esCoo = True
 
-            if esCoo:
-                if str(usuario.getPw()) == entrada2.get():
-                    pw = True
+                if esCoo:
+                    if str(usuario.getPw()) == entrada2.get():
+                        pw = True
+                    else:
+                        return messagebox.showwarning("Error", "La contrasena es incorrecta. Intentelo nuevamente")
                 else:
-                    return messagebox.showwarning("Error", "La contrasena es incorrecta. Intentelo nuevamente")
-            else:
-                return messagebox.showwarning("Error", "El id ingresado no corresponde a ningún usuario")
-            if pw:
-                Coordinador.setCoordinadorIngresado(coordi)
-                cambiarVentana()
+                    return messagebox.showwarning("Error", "El id ingresado no corresponde a ningún usuario")
+                if pw:
+                    Coordinador.setCoordinadorIngresado(coordi)
+                    cambiarVentana()
+            except CampoVacio:
+                messagebox.showerror("Error",CampoVacio().mostrarMensaje())
+            except ValueError:
+                messagebox.showerror("Error",CampoInvalido().mostrarMensaje())
              
         usuar = Label(frame,text="Usuario",bg="#cedae0",font=("arial", 11, "bold"))
         entrada1 = Entry(frame)

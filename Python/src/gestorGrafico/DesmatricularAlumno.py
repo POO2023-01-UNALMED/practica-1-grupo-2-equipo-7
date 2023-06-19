@@ -132,6 +132,8 @@ class AlumnoPorLista(Frame):
             
             estudiante = None
 
+            combo.config(state="disabled")
+
             for e in Estudiante.getEstudiantes():
                 if e.getNombre() == combo.get():
                     estudiante = e
@@ -159,6 +161,8 @@ class AlumnoPorLista(Frame):
             else:
                 messagebox.showerror("Error",CampoVacio().mostrarMensaje())
                 return
+
+            combo.config(state="disabled")
 
             titulo2 = Label(der, text="Desmatricular de Materia", font=("Arial", 14), bg="#085870")
             titulo2.pack(side="top", anchor="center", padx=10, pady=10)
