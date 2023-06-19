@@ -12,7 +12,7 @@ class MostrarBeca(Frame):
         def mosBeca():
             infoBecas = ""
             i = 1
-            for beca in Beca._becas():
+            for beca in Beca.getBecas():
                 a = beca.getConvenio() 
                 infoBecas += f"{str(i)}. {str(a)}.\n    Cupos disponibles: {beca.getCupos()}\n     Estrato maximo para acceder: {beca.getEstratoMinimo()}.\n    Creditos inscritos requeridos: {beca.getCreditosInscritosRequeridos()}."
             return infoBecas
@@ -30,6 +30,7 @@ class MostrarBeca(Frame):
         lista = Text(contenedor, border=False, font=("Arial", 11))
         lista.pack()
         lista.configure(height=35)
-        MatricularMateria.mostrar_texto(mosBeca, lista)
+        text = mosBeca()
+        MatricularMateria.mostrar_texto(text, lista)
 
 
