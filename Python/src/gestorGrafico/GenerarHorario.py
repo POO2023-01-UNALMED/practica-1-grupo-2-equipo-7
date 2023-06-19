@@ -21,7 +21,7 @@ class GenerarHorario(Frame):
         titulo.pack(side="top",padx=5,pady=10)
 
         texto = "Esta opcion le permitira generar un horario en base a unas materias seleccionadas, para luego poder asignarselo a algun estudiante o descartarlo"
-        descripcion = Label(self, text=texto, font=("Arial", 11),wraplength=400)
+        descripcion = Label(self, text=texto, font=("Arial", 11),wraplength=600)
         descripcion.pack(side="top",padx=5)
         
         RecoleccionDat(self)
@@ -219,8 +219,8 @@ class horarioGenerado(Frame):
         super().__init__(ventana)
         self.pack()
 
-        FrameCont2 = Frame(self,bg="green",width=855,height=310)
-        FrameCont2.pack(side="top",padx=5,pady=5)
+        FrameCont2 = Frame(self,bg="#085870",width=855,height=310)
+        FrameCont2.pack(side="top",padx=5,pady=(5,0))
         FrameCont2.pack_propagate(False)
         
         horario=horarioAMostrar.mostrarHorario2()
@@ -231,7 +231,7 @@ class horarioGenerado(Frame):
         
         
         fraBotones=Frame(self,bg="#085870",height=60)
-        fraBotones.pack(side="top",fill="both",padx=5,pady=(0,5))
+        fraBotones.pack(side="top",fill="both",padx=0,pady=(5,0))
         fraBotones.pack_propagate(False)
         
         def descartar():
@@ -289,16 +289,16 @@ class horarioGenerado(Frame):
 
             
         
-        bottDescartar = Button(fraBotones,text="Descartar",command=descartar)
-        bottDescartar.pack(side="left",padx=10,pady=1)        
+        bottDescartar = Button(fraBotones,text="Descartar",command=descartar,bg="#cedae0",font=("arial",11),fg="#085870")
+        bottDescartar.pack(side="left",padx=10,pady=(3,1))        
 
-        bottConservar = Button(fraBotones,text="Asignar",command=asignar)
-        bottConservar.pack(side="right",padx=10,pady=1)
+        bottConservar = Button(fraBotones,text="Asignar",command=asignar,bg="#cedae0",font=("arial",11),fg="#085870")
+        bottConservar.pack(side="right",padx=10,pady=(3,1))
 
         combo3 = ttk.Combobox(fraBotones, textvariable=StringVar(value="Estudiantes habilitados"), values=listaNombresEstu, state="readonly")
-        combo3.pack(side="right", fill="x", pady="1", padx="1")
+        combo3.pack(side="right", fill="x", pady="1", padx=(3,1))
         
-        textAsig = Label(fraBotones,text="Conservar y asignar a: ")
+        textAsig = Label(fraBotones,text="Conservar y asignar a: ",bg="#cedae0",font=("arial",11),fg="#085870")
         textAsig.pack(side="right",padx=10,pady=1)
 
     @classmethod
