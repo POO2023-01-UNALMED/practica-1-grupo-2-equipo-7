@@ -111,9 +111,9 @@ class MatricularMateria(Frame):
     def comprobacion2(self):
         id_estudiante=self.campo2.getValue("ID")
         nombre_estudiante=self.campo2.getValue("Nombre")
+        if id_estudiante=="" or nombre_estudiante=="":
+            messagebox.showerror("Error",CampoVacio().mostrarMensaje())
         try:
-            if id_estudiante=="" or nombre_estudiante=="":
-                raise Exception
             index = Estudiante.buscarEstudiante(nombre_estudiante, int(id_estudiante))
             if index == -1:
                 messagebox.showerror("Error",EstudianteInexistente(nombre_estudiante).mostrarMensaje())
@@ -129,7 +129,7 @@ class MatricularMateria(Frame):
                         self.destroy()
                         MatricularMateria2(self._ventana, estudiante_seleccionado).pack()
         except:
-            messagebox.showerror("Error",CampoVacio().mostrarMensaje())
+            messagebox.showerror("Error",CampoInvalido().mostrarMensaje())
 
 
 class MatricularMateria2(Frame):
