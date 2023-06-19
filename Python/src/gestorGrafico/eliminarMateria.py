@@ -22,7 +22,7 @@ class eliminarMateria(Frame):
             if confirmacion:
                 mate = Materia.encontrarMateria(str(box.get()))
                 try:
-                    Coordinador.getCoordinadorIngresado().eliminarMateria(mate)
+                    Coordinador.getUsuarioIngresado().eliminarMateria(mate)
                     messagebox.showinfo("Materia eliminada", "La materia ha sido eliminada con éxito del sistema")
                 except:
                     messagebox.showerror("Error", CampoVacio().mostrarMensaje())

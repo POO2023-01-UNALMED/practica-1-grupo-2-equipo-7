@@ -61,7 +61,7 @@ class agregarMateria(Frame):
                                 for box in boxes:
                                     if not isinstance(Materia.encontrarMateria(box.get()), Materia):
                                         raise CampoVacio()
-                                Coordinador.getCoordinadorIngresado().agregarMateria(nombre, codigo, descripcion, creditos, facultad, prerrequisitos)
+                                Coordinador.getUsuarioIngresado().agregarMateria(nombre, codigo, descripcion, creditos, facultad, prerrequisitos)
                                 messagebox.showinfo("Materia agregada", "La materia ha sido agregada con éxito al sistema")
                             except:
                                 messagebox.showerror("Error", CampoInvalido().mostrarMensaje())
