@@ -38,11 +38,11 @@ class VentInicio(Frame):
 
 
         # Frame 5 Bibliografia de cada desarrollador
-        bibi1="Mi nombre es Mateo Álvarez Murillo, nací en Medellín el 15 de agosto del 2004. Actualmente, curso el tercer semestre de ingeniería de sistemas e informática. Comencé a programar en el equipo de robótica de mi institución, me apasiona el desarrollo de software y todo el mundo de la informática."
-        bibi2="Soy Sebastián Ocampo Galvis, nacido en Medellín un 24 de Septiembre de 2003. Estoy cursando tercer semestre en ingeniería de sistemas en la Universidad Nacional de Colombia. Soy un gran aficionado al deporte y a la informática desde hace muchos años."
+        bibi1="Soy Sebastián Ocampo Galvis, nacido en Medellín un 24 de Septiembre de 2003. Estoy cursando tercer semestre en ingeniería de sistemas en la Universidad Nacional de Colombia. Soy un gran aficionado al deporte y a la informática desde hace muchos años."
+        bibi2="Mi nombre es Mateo Álvarez Murillo, nací en Medellín el 15 de agosto del 2004. Actualmente, curso el tercer semestre de ingeniería de sistemas e informática. Comencé a programar en el equipo de robótica de mi institución, me apasiona el desarrollo de software y todo el mundo de la informática."
         bibi3="Mi nombre es Ana Sofía Gómez, nací el 4 de Marzo del 2005 en Medellín. Actualmente me encuentro cursando mi segundo semestre de Ingeniería de Sistemas e Informática en la Universidad Nacional. Aparte de lo que involucra la carrera, disfruto mucho de la repostería."
-        bibi4="Mi nombre es Efrain Gomez Ramirez, nací el 14 de Mayo del 2004 en Mompos. Actualmente me encuentro cursando mi tercer semestre de Ingeniería de Sistemas e Informática en la Universidad Nacional. Disfruto participar en eventos de programacion competitiva y aprender sobre algoritmia."
-        bibi5="In4 congue, metus eget venenatis condimentum, tellus dolor facilisis risus, non blandit risus dolor sed quam. Nunc eu iaculis magna. Vivamus ac vestibulum ipsum4"
+        bibi4="Mi nombre es Efrain Gomez Ramirez, nací el 14 de Mayo del 2004 en Mompós. Actualmente me encuentro cursando mi tercer semestre de Ingeniería de Sistemas e Informática en la Universidad Nacional. Disfruto participar en eventos de programación competitiva y aprender sobre algoritmia."
+        bibi5="Mi nombre es Libardo Jose Navarro Pedrozo, nací el 26 de Marzo del 2005 en Mompós. Me encuentro cursando mi tercer semestre de Ingeniería de Sistemas e Informática en la Universidad Nacional. Soy un apasionado de las matemáticas, la algoritmia y la informática."
 
         self.biblios = [bibi1,bibi2,bibi3,bibi4,bibi5]
           
@@ -67,7 +67,7 @@ class VentInicio(Frame):
             
             # Cambio de puntero  
             i+=1
-            n =4 # numero de grupo de fotos en la carpeta imagenes, cuando se tengan todas debe ser 5
+            n =5 # numero de grupo de fotos en la carpeta imagenes, cuando se tengan todas debe ser 5
             if i ==n:
                 self.punteroIntergrante= 0
             else:
@@ -136,7 +136,7 @@ class VentInicio(Frame):
         
         # Texto descripcion
         
-        descripTexto = Label(p4Frame,text="",font=("arial", 12, "bold"),bg="#cedae0",wraplength=400)
+        descripTexto = Label(p4Frame,text="",font=("arial", 10, "bold"),bg="#cedae0",wraplength=400)
         descripTexto.pack(side="top",fill="x",pady=10)
         
         # Boton para pasar
@@ -147,7 +147,7 @@ class VentInicio(Frame):
             
         
         botonIngreso=Button(p4Frame,text="Ingresar",command=cambioVentana,bg="#085870",font=("arial", 12, "bold"),fg="#cedae0")
-        botonIngreso.pack(side="top",pady=20)
+        botonIngreso.pack(side="top",pady=(10,20))
            
         
         # Creacion del menu :U
@@ -158,6 +158,6 @@ class VentInicio(Frame):
         ventana.menuBar.add_cascade(label="Archivo",menu=menu1)
         menu1.add_command(label="Salir",command=lambda:ventana.destroy())
         
-        textDescrip="Hola esto es un texto de prueba Hola esto es un texto de prueba Hola esto es un texto de prueba Hola esto es un texto de prueba Hola esto es un texto de prueba Hola esto es un texto de prueba Hola esto es un texto de prueba"
+        textDescrip="SMM es un sistema de gestión académica diseñado para mejorar la administración de asignaturas en instituciones educativas. Está dirigido exclusivamente a coordinadores académicos y tiene como objetivo optimizar los procesos relacionados con la gestión académica."
         menu1.add_command(label="Descripcion",command=lambda: descripTexto.config(text=textDescrip))
         
