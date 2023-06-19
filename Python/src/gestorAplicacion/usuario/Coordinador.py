@@ -8,7 +8,7 @@ from excepciones.ErrorManejo import *
 from excepciones.ObjetoInexistente import *
 
 class Coordinador(Usuario):
-    _coordinadorIngresado = None
+    _usuarioIngresado = None
     _LIMITES_CREDITOS = 20
     _coordinadoresTotales = []
     _facultades = [
@@ -207,9 +207,9 @@ class Coordinador(Usuario):
             a = beca.getConvenio()
     
     @classmethod
-    def getCoordinadorIngresado(cls):
-        return cls._coordinadorIngresado
+    def getUsuarioIngresado(cls):
+        return cls._usuarioIngresado
     
     @classmethod
-    def setCoordinadorIngresado(cls, coordinador):
-        cls._coordinadorIngresado = coordinador
+    def setUsuarioIngresado(cls, usuario):
+        cls._usuarioIngresado = usuario

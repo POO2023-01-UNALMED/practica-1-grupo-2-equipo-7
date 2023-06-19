@@ -28,7 +28,7 @@ class MainWin(Tk):
         self.iconbitmap("Python\src\gestorGrafico\Imagenes\icono.ico")
         
         
-        Coordinador.setCoordinadorIngresado(None)
+        Coordinador.setUsuarioIngresado(None)
         VentInicio(self)
         # GenerarHorario(self)
         self.mainloop()

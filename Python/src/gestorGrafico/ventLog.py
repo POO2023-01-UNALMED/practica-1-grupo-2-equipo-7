@@ -63,7 +63,7 @@ class VentLog(Tk):
                 else:
                     return messagebox.showwarning("Error", "El id ingresado no corresponde a ningún usuario")
                 if pw:
-                    Coordinador.setCoordinadorIngresado(coordi)
+                    Coordinador.setUsuarioIngresado(coordi)
                     cambiarVentana()
             except CampoVacio:
                 messagebox.showerror("Error",CampoVacio().mostrarMensaje())
