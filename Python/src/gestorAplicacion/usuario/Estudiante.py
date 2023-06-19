@@ -6,7 +6,6 @@ from gestorAplicacion.administracion.Horario import Horario
 
 class Estudiante(Usuario):
     _estudiantes = []
-
     def __init__(
         self,
         id,
@@ -19,6 +18,8 @@ class Estudiante(Usuario):
         materias=None,
         gruposVistos=None,
     ):
+        
+
         super().__init__(id, nombre, facultad)
         super().setTipo("Estudiante")
         self._programa = programa
@@ -88,12 +89,13 @@ class Estudiante(Usuario):
     #     self.eliminarMateria(grupo.getMateria())
     
     def eliminarMateria(self, materia):
-        print(self.getNombre())
-        print(Estudiante.getEstudiantes()[0].getNombre())
-        print(len(Estudiante.getEstudiantes()[0].getMaterias()))
+        # print(self.getNombre())
+        # print(Estudiante.getEstudiantes()[0].getNombre())
+        # print(len(Estudiante.getEstudiantes()[0].getMaterias()))
         indice = None
+        print(self.getMaterias())
         for i in range(len(self.getMaterias())):
-            if self._materias[i].getNombre() == materia.getNombre():
+            if (self._materias[i]).getNombre() == materia.getNombre():
                 indice = i
 
         self._materias.pop(indice)
