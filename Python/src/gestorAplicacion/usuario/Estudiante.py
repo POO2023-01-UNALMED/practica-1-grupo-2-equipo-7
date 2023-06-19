@@ -88,7 +88,15 @@ class Estudiante(Usuario):
     #     self.eliminarMateria(grupo.getMateria())
     
     def eliminarMateria(self, materia):
-        self._materias.remove(materia)
+        print(self.getNombre())
+        print(Estudiante.getEstudiantes()[0].getNombre())
+        print(len(Estudiante.getEstudiantes()[0].getMaterias()))
+        indice = None
+        for i in range(len(self.getMaterias())):
+            if self._materias[i].getNombre() == materia.getNombre():
+                indice = i
+
+        self._materias.pop(indice)
         self._creditos -= materia.creditos
 
     def eliminarGrupo(self, grupo):
