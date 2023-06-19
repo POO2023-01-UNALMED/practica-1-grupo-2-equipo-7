@@ -38,11 +38,11 @@ class VentInicio(Frame):
 
 
         # Frame 5 Bibliografia de cada desarrollador
-        bibi1="In1 congue, metus eget venenatis condimentum, tellus dolor facilisis risus, non blandit risus dolor sed quam. Nunc eu iaculis magna. Vivamus ac vestibulum ipsum1"
-        bibi2="In2 congue, metus eget venenatis condimentum, tellus dolor facilisis risus, non blandit risus dolor sed quam. Nunc eu iaculis magna. Vivamus ac vestibulum ipsum2"
-        bibi3="In3 congue, metus eget venenatis condimentum, tellus dolor facilisis risus, non blandit risus dolor sed quam. Nunc eu iaculis magna. Vivamus ac vestibulum ipsum3"
-        bibi4="In4 congue, metus eget venenatis condimentum, tellus dolor facilisis risus, non blandit risus dolor sed quam. Nunc eu iaculis magna. Vivamus ac vestibulum ipsum4"
-        bibi5="In5 congue, metus eget venenatis condimentum, tellus dolor facilisis risus, non blandit risus dolor sed quam. Nunc eu iaculis magna. Vivamus ac vestibulum ipsum5"
+        bibi1="Mi nombre es Mateo Álvarez Murillo, nací en Medellín el 15 de agosto del 2004. Actualmente, curso el tercer semestre de ingeniería de sistemas e informática. Comencé a programar en el equipo de robótica de mi institución, me apasiona el desarrollo de software y todo el mundo de la informática."
+        bibi2="Soy Sebastián Ocampo Galvis, nacido en Medellín un 24 de Septiembre de 2003. Estoy cursando tercer semestre en ingeniería de sistemas en la Universidad Nacional de Colombia. Soy un gran aficionado al deporte y a la informática desde hace muchos años."
+        bibi3="Mi nombre es Ana Sofía Gómez, nací el 4 de Marzo del 2005 en Medellín. Actualmente me encuentro cursando mi segundo semestre de Ingeniería de Sistemas e Informática en la Universidad Nacional. Aparte de lo que involucra la carrera, disfruto mucho de la repostería."
+        bibi4="Mi nombre es Efrain Gomez Ramirez, nací el 14 de Mayo del 2004 en Mompos. Actualmente me encuentro cursando mi tercer semestre de Ingeniería de Sistemas e Informática en la Universidad Nacional. Disfruto participar en eventos de programacion competitiva y aprender sobre algoritmia."
+        bibi5="In4 congue, metus eget venenatis condimentum, tellus dolor facilisis risus, non blandit risus dolor sed quam. Nunc eu iaculis magna. Vivamus ac vestibulum ipsum4"
 
         self.biblios = [bibi1,bibi2,bibi3,bibi4,bibi5]
           
@@ -67,14 +67,14 @@ class VentInicio(Frame):
             
             # Cambio de puntero  
             i+=1
-            n =2 # numero de grupo de fotos en la carpeta imagenes, cuando se tengan todas debe ser 4
+            n =4 # numero de grupo de fotos en la carpeta imagenes, cuando se tengan todas debe ser 5
             if i ==n:
                 self.punteroIntergrante= 0
             else:
                 self.punteroIntergrante=i
             
 
-        biblioTexto = Label(p5Frame,text=bibi1,font=("arial", 12, "bold"),bg="#cedae0",wraplength=410,highlightbackground="#085870",highlightthickness=2)
+        biblioTexto = Label(p5Frame,text=bibi1,font=("arial", 10),bg="#cedae0",wraplength=405,highlightbackground="#085870",highlightthickness=2)
         biblioTexto.pack(expand=True,fill="both")
         biblioTexto.bind("<Button-1>",cambiarTextoEImagenF6)
 

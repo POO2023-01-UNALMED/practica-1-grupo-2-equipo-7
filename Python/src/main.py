@@ -30,7 +30,7 @@ class MainWin(Tk):
         
         Coordinador.setCoordinadorIngresado(None)
         VentInicio(self)
-        #GenerarHorario(self)
+        # GenerarHorario(self)
         self.mainloop()
 
     def abrirLog(self):
