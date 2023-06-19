@@ -98,7 +98,7 @@ class Estudiante(Usuario):
             if (self._materias[i]).getNombre() == materia.getNombre():
                 indice = i
 
-        # self._materias.pop(indice)
+        self._materias.pop(indice)
         self._creditos -= materia.creditos
 
     def eliminarGrupo(self, grupo):
@@ -160,7 +160,7 @@ class Estudiante(Usuario):
     def desmatricularMaterias(self):
         # Desmatricula todas las materias de un estudiante
         gruposEliminar = []
-        self.setMaterias([])
+        # self.setMaterias([])
         for grupoE in self._grupos:
             grupo = Grupo.buscarGrupo(grupoE.getMateria(), grupoE)
             grupo.getMateria().setCupos(grupo.getMateria().getCupos() + 1)

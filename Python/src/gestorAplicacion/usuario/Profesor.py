@@ -20,7 +20,7 @@ class Profesor:
 
     def vincularGrupo(self, g):
         self._grupos.append(g)
-        self._horario.ocuparHorario(g.getHorario(), g)
+        self._horario.ocuparHorario(g, g.getHorario())
 
     def desvincularGrupo(self, g):
         if g in self._grupos:
