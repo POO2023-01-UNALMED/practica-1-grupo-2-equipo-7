@@ -7,19 +7,19 @@ class VentInicio(Frame):
         
         # Creacion de Frames
 
-        p1Frame=Frame(self,height=450,width=425,bg="red")
-        p1Frame.grid(row=0,column=0,columnspan=1,rowspan=1,padx=(5,3),pady=5)
+        p1Frame=Frame(self,height=450,width=425,bg="#cedae0")
+        p1Frame.grid(row=0,column=0,columnspan=1,rowspan=1,padx=(5,0),pady=5)
         p1Frame.grid_propagate(False)
 
-        p2Frame=Frame(self,height=450,width=425,bg="blue")
-        p2Frame.grid(row=0,column=1,columnspan=1,rowspan=1,padx=(3,5),pady=5)
+        p2Frame=Frame(self,height=450,width=425,bg="#cedae0")
+        p2Frame.grid(row=0,column=1,columnspan=1,rowspan=1,padx=(0,5),pady=5)
         p2Frame.grid_propagate(False)
 
-        p3Frame=Frame(p1Frame,height=70,width=415,bg="green")
+        p3Frame=Frame(p1Frame,height=70,width=415,bg="#085870")
         p3Frame.grid(row=0,column=0,columnspan=1,rowspan=1,padx=5,pady=(5,3))
         p3Frame.pack_propagate(False)
 
-        p4Frame=Frame(p1Frame,height=365,width=415,bg="green")
+        p4Frame=Frame(p1Frame,height=365,width=415,bg="#cedae0")
         p4Frame.grid(row=1,column=0,columnspan=2,rowspan=1,padx=5,pady=(3,5))
         p4Frame.pack_propagate(False)
 
@@ -27,13 +27,13 @@ class VentInicio(Frame):
         p5Frame.grid(row=0,column=0,columnspan=1,rowspan=1,padx=5,pady=(5,3))
         p5Frame.pack_propagate(False)
 
-        p6Frame=Frame(p2Frame,height=335,width=335,bg="yellow")
+        p6Frame=Frame(p2Frame,height=335,width=335,bg="#085870")
         p6Frame.grid(row=1,column=0,columnspan=2,rowspan=1,padx=5,pady=(3,5))
         p6Frame.grid_propagate(False)
 
         # Frame 3 Saludo bienvenida
         mensaje="Hola, bienvenido al sistemas de matricula de materias S.M.M"
-        mensajeBienv = Label(p3Frame,text=mensaje,font=("arial", 18, "bold"),bg="green",wraplength=415)
+        mensajeBienv = Label(p3Frame,text=mensaje,font=("arial", 18, "bold"),bg="#085870",wraplength=415,fg="#cedae0")
         mensajeBienv.pack(expand=True)
 
 
@@ -74,7 +74,7 @@ class VentInicio(Frame):
                 self.punteroIntergrante=i
             
 
-        biblioTexto = Label(p5Frame,text=bibi1,font=("arial", 12, "bold"),bg="yellow",wraplength=410,highlightbackground="black",highlightthickness=2)
+        biblioTexto = Label(p5Frame,text=bibi1,font=("arial", 12, "bold"),bg="#cedae0",wraplength=410,highlightbackground="#085870",highlightthickness=2)
         biblioTexto.pack(expand=True,fill="both")
         biblioTexto.bind("<Button-1>",cambiarTextoEImagenF6)
 
@@ -130,13 +130,13 @@ class VentInicio(Frame):
         
         self.imagenF41 =PhotoImage(file="Python\src\gestorGrafico\Imagenes\imgInF4.1.png")
         
-        ImagenF4 = Label(p4Frame,image=self.imagenF41,width=300,wraplength=160,highlightbackground="black",highlightthickness=2)
+        ImagenF4 = Label(p4Frame,image=self.imagenF41,width=300,wraplength=160,highlightbackground="#085870",highlightthickness=4)
         ImagenF4.pack(side="top",pady=3)
         ImagenF4.bind("<Enter>",cambiarTextoEImagenF4)
         
         # Texto descripcion
         
-        descripTexto = Label(p4Frame,text="",font=("arial", 12, "bold"),bg="green",wraplength=400)
+        descripTexto = Label(p4Frame,text="",font=("arial", 12, "bold"),bg="#cedae0",wraplength=400)
         descripTexto.pack(side="top",fill="x",pady=10)
         
         # Boton para pasar
@@ -146,7 +146,7 @@ class VentInicio(Frame):
             ventana.abrirLog()
             
         
-        botonIngreso=Button(p4Frame,text="Ingresar",command=cambioVentana)
+        botonIngreso=Button(p4Frame,text="Ingresar",command=cambioVentana,bg="#085870",font=("arial", 12, "bold"),fg="#cedae0")
         botonIngreso.pack(side="top",pady=20)
            
         

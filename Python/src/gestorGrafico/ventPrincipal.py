@@ -12,8 +12,10 @@ class VentPrincipal(Tk):
         super().__init__()
         self.title("Sistema Matricula de Materias")
         self.resizable(0, 0)
-        self.geometry("865x460")
+        self.geometry("865x480")
         self.configure(bg="#cedae0")
+        self.pack_propagate(False)
+        self.iconbitmap("Python\src\gestorGrafico\Imagenes\icono.ico")
 
         def infoBasica():
             messagebox.showinfo(
@@ -86,7 +88,8 @@ class VentPrincipal(Tk):
         menu3.add_cascade(label="Acerca de", command=mostrarAutores)
 
         frame = Frame(self)
-        frame.pack(anchor="center")
+        frame.pack(anchor="center",expand=True)
+        # frame.pack_propagate(False)
 
         bienvenida_label = Label(frame, text="¡Bienvenido a la ventana principal de S.M.M!", font=("Arial", 14), fg="white", bg="#085870")
         bienvenida_label.pack(padx=10, pady=10)
@@ -98,7 +101,8 @@ class VentPrincipal(Tk):
         + " |____/  (_) |_|  |_| (_) |_|  |_|\n"
         + "                                 ")
 
-        figura = Label(frame, bg="#085870", text=simbolo)
+        self.imagen = PhotoImage(file="Python\src\gestorGrafico\Imagenes\imgVentPrincipal.png")
+        figura = Label(frame,height=108,width=192,image=self.imagen)
         figura.pack(anchor="center")
 
         informacion = """

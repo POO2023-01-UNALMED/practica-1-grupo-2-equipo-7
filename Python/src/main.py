@@ -24,7 +24,9 @@ class MainWin(Tk):
         super().__init__()
         self.title("Sistema Matricula de Materias")
         self.resizable(0,0)
-        self.geometry("865x460")
+        self.geometry("865x480")
+        self.iconbitmap("Python\src\gestorGrafico\Imagenes\icono.ico")
+        
         
         Coordinador.setCoordinadorIngresado(None)
         VentInicio(self)

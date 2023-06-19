@@ -11,8 +11,10 @@ class VentLog(Tk):
         self.title("Sistema Matricula de Materias")
         self.resizable(0,0)
         self.geometry("865x460")
+        self.config(bg="#cedae0",highlightbackground="#085870",highlightthickness=5)
+        self.iconbitmap("Python\src\gestorGrafico\Imagenes\icono.ico")
 
-        frame = Frame(self, width=400, height=200)
+        frame = Frame(self, width=400, height=200,bg="#cedae0",highlightbackground="#085870",highlightthickness=5)
         frame.pack(expand=True)
 
         def mostrarContraseña():
@@ -58,13 +60,13 @@ class VentLog(Tk):
                 Coordinador.setCoordinadorIngresado(coordi)
                 cambiarVentana()
              
-        usuar = Label(frame,text="Usuario")
+        usuar = Label(frame,text="Usuario",bg="#cedae0",font=("arial", 11, "bold"))
         entrada1 = Entry(frame)
-        cont = Label(frame,text="Contraseña")
+        cont = Label(frame,text="Contraseña",bg="#cedae0",font=("arial", 11, "bold"))
         entrada2 = Entry(frame, show="*")
-        boton_ingresar = Button(frame, text="Iniciar Sesion", command= verificar)
-        boton_limpiar = Button(frame, text="Limpiar", command= limpiar)
-        revisar = Checkbutton(frame, text="Mostrar contraseña", command= mostrarContraseña)        
+        boton_ingresar = Button(frame, text="Iniciar Sesion", command= verificar,bg="#085870",font=("arial", 11, "bold"),fg="#cedae0")
+        boton_limpiar = Button(frame, text="Limpiar", command= limpiar,bg="#085870",font=("arial", 11, "bold"),fg="#cedae0")
+        revisar = Checkbutton(frame, text="Mostrar contraseña", command= mostrarContraseña,bg="#cedae0",font=("arial", 11, "bold"))        
         
         usuar.grid(row=0,column=0,padx=10,pady=10,sticky="w")
         entrada1.grid(row=0,column=1,columnspan=2,padx=10,pady=10)
