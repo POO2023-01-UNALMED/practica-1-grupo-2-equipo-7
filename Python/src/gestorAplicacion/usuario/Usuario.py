@@ -19,6 +19,11 @@ class Usuario(ABC):
         self._facultad = facultad
         Usuario._usuariosTotales.append(self)
 
+
+    @abstractmethod
+    def __str__(self):
+        pass
+
     # Por si alguien utiliza el otro constructor que estaban en Java
 
     # def __init__(self, id, nombre, facultad):
@@ -26,11 +31,6 @@ class Usuario(ABC):
     #     self._nombre = nombre
     #     self._facultad = facultad
     #     Usuario._usuariosTotales.append(self)
-
-    @abstractmethod
-    def __str__(self):
-        pass
-
     @classmethod
     def mostrarUsuarios(cls) -> str:
         retorno = ""

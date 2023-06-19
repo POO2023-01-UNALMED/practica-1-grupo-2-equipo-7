@@ -42,7 +42,7 @@ class Estudiante(Usuario):
     # METODOS
     
     def __str__(self):
-        return ""
+        return "Nombre Estudiante: "+self.getNombre()+" Documento: "+ self.getId()
 
     def mostrarMaterias():
         retorno = ""
@@ -70,23 +70,31 @@ class Estudiante(Usuario):
                 return i
         return -1
 
-    def eliminarMateria(self, materia):
-        for pMateria in self._materias:
-            if pMateria.getNombre() == materia.getNombre():
-                self._materias.remove(pMateria)
+    # def eliminarMateria(self, materia):
+    #     for pMateria in self._materias:
+    #         if pMateria.getNombre() == materia.getNombre():
+    #             self._materias.remove(pMateria)
         
-        # self._materias.remove(materia)
+    #     # self._materias.remove(materia)
+    #     self._creditos -= materia.creditos
+
+    # def eliminarGrupo(self, grupo):
+    #     for pGrupo in self._grupos:
+    #         if pGrupo.getNumero() == grupo.getNumero():
+    #             if pGrupo.getProfesor() == grupo.getProfesor():
+    #                 if pGrupo.getMateria == grupo.getMateria():
+    #                     self._grupos.remove(pGrupo)
+    #     # self._grupos.remove(grupo)
+    #     self.eliminarMateria(grupo.getMateria())
+    
+    def eliminarMateria(self, materia):
+        self._materias.remove(materia)
         self._creditos -= materia.creditos
 
     def eliminarGrupo(self, grupo):
-        for pGrupo in self._grupos:
-            if pGrupo.getNumero() == grupo.getNumero():
-                if pGrupo.getProfesor() == grupo.getProfesor():
-                    if pGrupo.getMateria == grupo.getMateria():
-                        self._grupos.remove(pGrupo)
-        # self._grupos.remove(grupo)
+        self._grupos.remove(grupo)
         self.eliminarMateria(grupo.getMateria())
-
+    
     def pagarMatricula(self):
         if self._sueldo >= self._valorMatricula:
             self._sueldo -= self._valorMatricula
@@ -101,7 +109,8 @@ class Estudiante(Usuario):
         for nota in self._notas:
             promedio += nota
         promedio = promedio / len(self._notas)
-        self.setPromedio(promedio)
+        self._promedio = promedio
+        # self.setPromedio(promedio)
 
     def calcularAvance(self):
         creditosVistos = 0

@@ -174,7 +174,7 @@ class Coordinador(Usuario):
         return retorno
 
     def __str__(self):
-        return "Nombre: " + self.getNombre() + "\nDocumento: " + self.getId()
+        return "Nombre Coordinador: " + self.getNombre() + "\nDocumento: " + self.getId()
 
     # Setters y Getters
 
