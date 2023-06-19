@@ -93,12 +93,12 @@ class Estudiante(Usuario):
         # print(Estudiante.getEstudiantes()[0].getNombre())
         # print(len(Estudiante.getEstudiantes()[0].getMaterias()))
         indice = None
-        print(self.getMaterias())
+        # print(self.getMaterias())
         for i in range(len(self.getMaterias())):
             if (self._materias[i]).getNombre() == materia.getNombre():
                 indice = i
 
-        self._materias.pop(indice)
+        # self._materias.pop(indice)
         self._creditos -= materia.creditos
 
     def eliminarGrupo(self, grupo):

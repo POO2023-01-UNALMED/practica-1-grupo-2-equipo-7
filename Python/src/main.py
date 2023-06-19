@@ -47,7 +47,7 @@ Deserializador.deserializarDatos()
 # for pMateria in Materia.getMateriasTotales():
 #     print(pMateria.getGrupos())
 
-# MainWin()
+MainWin()
 
 
 
