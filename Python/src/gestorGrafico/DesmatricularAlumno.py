@@ -6,6 +6,8 @@ from gestorAplicacion.usuario.Estudiante import Estudiante
 from gestorAplicacion.usuario.Coordinador import Coordinador
 from gestorAplicacion.administracion.Grupo import Grupo
 from gestorAplicacion.administracion.Horario import Horario
+from excepciones.ObjetoInexistente import *
+from excepciones.ErrorManejo import *
 
 class DesmatricularAlumno(Frame):
     def __init__(self,ventana):
@@ -125,6 +127,7 @@ class AlumnoPorLista(Frame):
         
         def desmatricularDelSistema():
             if combo.get() == "":
+                messagebox.showerror("Error",CampoVacio().mostrarMensaje())
                 return
             
             estudiante = None
@@ -140,6 +143,7 @@ class AlumnoPorLista(Frame):
 
             nombresEstudiantes1 = nombresAlumnos(Estudiante.getEstudiantes())
             combo.config(values=nombresEstudiantes1)
+            self._estudianteSeleccionado = None
             messagebox.showinfo("Estudiante desmatriculado", "El estudiante ha sido desmatriculado del sistema con exito")
 
         def desmatricularMateria():
@@ -153,6 +157,7 @@ class AlumnoPorLista(Frame):
                 desmatricular2.destroy()
             
             else:
+                messagebox.showerror("Error",CampoVacio().mostrarMensaje())
                 return
 
             titulo2 = Label(der, text="Desmatricular de Materia", font=("Arial", 14), bg="#085870")
@@ -271,26 +276,36 @@ class AlumnoPorBusqueda(Frame):
                 self._materiaSeleccionada.pack(anchor="c", padx=10, pady=10)
 
         def buscarEstudiante():
-            estudiante = fildEstudiante.getValue("Nombre")
-            documento = int(fildEstudiante.getValue("Documento"))
-            indice = Estudiante.buscarEstudiante(estudiante, documento)
+            try:
+                estudiante = fildEstudiante.getValue("Nombre")
+                documento = int(fildEstudiante.getValue("Documento"))
+                indice = Estudiante.buscarEstudiante(estudiante, documento)
+
+            except:
+                messagebox.showerror("Error",CampoInvalido().mostrarMensaje())
+                return
 
             if self._estudianteSeleccionado is not None:
                     self._estudianteSeleccionado.destroy()
-            
-            if indice != -1:
-                alumno = Estudiante.getEstudiantes()[indice]
-                self._estudianteSeleccionado = Label(izq, text="Estudiante encontrado:\n" + estudiante, font=("Arial", 12), bg="#cedae0")
-                self._estudianteSeleccionado.pack(expand=True,padx=10, pady=10)
-            else:
-
-                messagebox.showwarning("Busqueda fallida", "Estudiante no encontrado, intente nuevamente")
+            try:
+                if indice != -1:
+                    alumno = Estudiante.getEstudiantes()[indice]
+                    self._estudianteSeleccionado = Label(izq, text="Estudiante encontrado:\n" + estudiante, font=("Arial", 12), bg="#cedae0")
+                    self._estudianteSeleccionado.pack(expand=True,padx=10, pady=10)
+                else:
+                    raise EstudianteInexistente(estudiante)
+            except EstudianteInexistente:
+                messagebox.showerror("Error",EstudianteInexistente(estudiante).mostrarMensaje())
 
         def limpiar():
             fildEstudiante.limpiarValues()
 
         def desmatricularDelSistema():
-            if self._estudianteSeleccionado == None:
+            try:
+                if self._estudianteSeleccionado == None:
+                    raise CampoVacio
+            except CampoVacio:
+                messagebox.showerror("Error",CampoVacio().mostrarMensaje())
                 return
             
             estudiante = None
@@ -304,6 +319,7 @@ class AlumnoPorBusqueda(Frame):
             estudiante.getHorario().vaciarHorario(estudiante.getGrupos())
             estudiante.desmatricularMaterias()
             Coordinador.desmatricularDelSistema(estudiante)
+            self._estudianteSeleccionado = None
 
             messagebox.showinfo("Estudiante desmatriculado", "El estudiante ha sido desmatriculado del sistema con exito")
 
@@ -311,15 +327,19 @@ class AlumnoPorBusqueda(Frame):
             global estudiante, comboMaterias
             nombreMateria = ""
 
-            if self._estudianteSeleccionado != None:
-                titulo.destroy()
-                descripcion.destroy()
-                desmatricular1.destroy()
-                desmatricular2.destroy()
+            try:
+                if self._estudianteSeleccionado != None:
+                    titulo.destroy()
+                    descripcion.destroy()
+                    desmatricular1.destroy()
+                    desmatricular2.destroy()
+                
+                else:
+                    raise CampoVacio
             
-            else:
+            except:
+                messagebox.showerror("Error",CampoVacio().mostrarMensaje())
                 return
-            
 
             titulo2 = Label(der, text="Desmatricular de Materia", font=("Arial", 14), fg="white", bg="#085870")
             titulo2.pack(side="top", anchor="center", padx=10, pady=10)

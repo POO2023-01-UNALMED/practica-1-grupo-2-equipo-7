@@ -13,13 +13,15 @@ class GenerarHorario(Frame):
         super().__init__(ventana)
         self.pack()
         # self.pack_propagate(False)
+        self.config(bg="#cedae0")
+        
 
-        titulo = Label(self, text="Generar Horario", font=("Arial", 14))
-        titulo.pack(side="top", fill="x",padx=5,pady=10)
+        titulo = Label(self, text="Generar Horario", font=("Arial", 14,"bold"),fg="#cedae0",bg="#085870",wraplength=410,highlightbackground="#085870",highlightthickness=2)
+        titulo.pack(side="top",padx=5,pady=10)
 
         texto = """Esta opcion le permitira generar un horario en base a unas materias seleccionadas, para luego poder asignarselo a algun estudiante o descartarlo"""
         descripcion = Label(self, text=texto, font=("Arial", 10),wraplength=400)
-        descripcion.pack(side="top", fill="x",padx=5)
+        descripcion.pack(side="top",padx=5)
         
         RecoleccionDat(self)
 
@@ -27,6 +29,7 @@ class RecoleccionDat(Frame):
     def __init__(self,ventana):
             super().__init__(ventana)
             self.pack()
+            self.config(bg="#cedae0")
        
             FrameCont = Frame(self,bg="green",width=855,height=380)
             FrameCont.pack(side="top",padx=5,pady=5)
