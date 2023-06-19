@@ -116,7 +116,7 @@ class MatricularMateria(Frame):
         try:
             index = Estudiante.buscarEstudiante(nombre_estudiante, int(id_estudiante))
             if index == -1:
-                messagebox.showerror("Error",EstudianteInexistente(nombre_estudiante).mostrarMensaje())
+                messagebox.showerror("Error",EstudianteInexistente("").mostrarMensaje())
             else:
                 estudiante_seleccionado = self.estudiantes_totales[index]
                 if not estudiante_seleccionado.isMatriculaPagada():
@@ -235,7 +235,7 @@ class MatricularMateria2(Frame):
             try:
                 index = Materia.buscarMateria(nombre_materia, int(codigo_materia))
                 if index == -1:
-                    messagebox.showerror("Error",MateriaInexistente(nombre_materia).mostrarMensaje())
+                    messagebox.showerror("Error",MateriaInexistente("").mostrarMensaje())
                 else:
                     materia_seleccionada = self.materias_totales[index]
                     if materia_seleccionada.getCupos() <= 0:
