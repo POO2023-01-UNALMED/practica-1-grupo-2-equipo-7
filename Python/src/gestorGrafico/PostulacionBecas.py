@@ -40,16 +40,16 @@ class PostulacionBecas(Frame):
         seleccion = Frame(self)
         seleccion.pack()
 
-        mostrarB = Button(seleccion, text="Mostrar listado de becas", foreground="black",background="#085870",font=("Helvetica", 12), command= mostrarBeca)
+        mostrarB = Button(seleccion, text="Mostrar listado de becas", foreground="white",background="#085870",font=("Helvetica", 11), command= mostrarBeca)
         mostrarB.grid(row=0,column=0,padx=20,pady=10,sticky="w")
 
-        aplicarB = Button(seleccion, text="Aplicar beca a estudiante", foreground="black",background="#085870",font=("Helvetica", 12), command= aplicarBeca)
+        aplicarB = Button(seleccion, text="Aplicar beca a estudiante", foreground="white",background="#085870",font=("Helvetica", 11), command= aplicarBeca)
         aplicarB.grid(row=0,column=1,padx=10,pady=10,sticky="w")
 
-        crearB = Button(seleccion, text="Crear nueva beca", foreground="black",background="#085870",font=("Helvetica", 12), command= becaNueva)
+        crearB = Button(seleccion, text="Crear nueva beca", foreground="white",background="#085870",font=("Helvetica", 11), command= becaNueva)
         crearB.grid(row=1,column=0,padx=45,pady=10,sticky="w")
 
-        eliminarB = Button(seleccion, text="Eliminar beca", foreground="black",background="#085870",font=("Helvetica", 12), command= eliminarBeca)
+        eliminarB = Button(seleccion, text="Eliminar beca", foreground="white",background="#085870",font=("Helvetica", 11), command= eliminarBeca)
         eliminarB.grid(row=1,column=1,padx=50,pady=10,sticky="w")
 
 
