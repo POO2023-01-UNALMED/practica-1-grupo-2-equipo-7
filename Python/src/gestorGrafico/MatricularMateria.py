@@ -22,8 +22,8 @@ class MatricularMateria(Frame):
         descripcion.pack(anchor="n", pady=10)
         opciones = Frame(self)
         opciones.pack()
-        manual = Button(opciones,text="Seleccionar al estudiante\n de forma manual",foreground="black",background="#085870",font=("Helvetica", 12),command=lambda: self.seleccionar_estudiante(caja, label_vacio, False))
-        lista = Button(opciones,text="Seleccionar al estudiante\n mediante una lista",foreground="black",background="#085870",font=("Helvetica", 12),command=lambda: self.seleccionar_estudiante(caja, label_vacio, True))
+        manual = Button(opciones,text="Seleccionar al estudiante\n de forma manual",foreground="white",background="#085870",font=("Helvetica", 12),command=lambda: self.seleccionar_estudiante(caja, label_vacio, False))
+        lista = Button(opciones,text="Seleccionar al estudiante\n mediante una lista",foreground="white",background="#085870",font=("Helvetica", 12),command=lambda: self.seleccionar_estudiante(caja, label_vacio, True))
         manual.pack(side=LEFT, padx=(0, 10))
         lista.pack(side=LEFT, padx=(10, 10))
         busqueda = Frame(self)
@@ -149,8 +149,8 @@ class MatricularMateria2(Frame):
         descripcion.pack(anchor="n", pady=5)
         opciones = Frame(self)
         opciones.pack()
-        manual = Button(opciones,text="Seleccionar la materia\n de forma manual",foreground="black",background="#085870",font=("Helvetica", 12),command=lambda: self.seleccionar_materia(caja, label_vacio, False))
-        lista = Button(opciones,text="Seleccionar la materia\n mediante una lista",foreground="black",background="#085870",font=("Helvetica", 12),command=lambda: self.seleccionar_materia(caja, label_vacio, True))
+        manual = Button(opciones,text="Seleccionar la materia\n de forma manual",foreground="white",background="#085870",font=("Helvetica", 12),command=lambda: self.seleccionar_materia(caja, label_vacio, False))
+        lista = Button(opciones,text="Seleccionar la materia\n mediante una lista",foreground="white",background="#085870",font=("Helvetica", 12),command=lambda: self.seleccionar_materia(caja, label_vacio, True))
         manual.pack(side=LEFT, padx=(0, 10))
         lista.pack(side=LEFT, padx=(10, 10))
         busqueda = Frame(self)
@@ -362,7 +362,7 @@ class MatricularMateria4(Frame):
         horarioText.pack(side="top",fill="x")
         horarioText.insert(1.0,horario)
 
-        boton = Button(caja, text="Regresar",foreground="black",background="#085870",font=("Helvetica", 12), command=self.regresar)
+        boton = Button(caja, text="Regresar",foreground="white",background="#085870",font=("Helvetica", 12), command=self.regresar)
         boton.pack(pady=10)
 
 
