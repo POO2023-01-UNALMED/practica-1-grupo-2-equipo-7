@@ -4,9 +4,11 @@ from gestorAplicacion.usuario.Estudiante import Estudiante
 from gestorAplicacion.usuario.Profesor import Profesor
 from gestorAplicacion.usuario.Usuario import Usuario
 from gestorAplicacion.administracion.Beca import Beca
-
+from excepciones.ErrorManejo import *
+from excepciones.ObjetoInexistente import *
 
 class Coordinador(Usuario):
+    _coordinadorIngresado = None
     _LIMITES_CREDITOS = 20
     _coordinadoresTotales = []
     _facultades = [
@@ -123,16 +125,16 @@ class Coordinador(Usuario):
 
         return resultado
 
-    @classmethod
-    def eliminarMateria(cls,materia):
+    
+    def eliminarMateria(self, materia):
         if materia in Materia.getMateriasTotales():
             Coordinador.restaurarMateria(materia)
             Materia.getMateriasTotales().remove(materia)
         else:
-            raise TypeError("Se ha ingresado un valor inválido")
+            raise CampoVacio("Se ha ingresado un valor inválido")
 
-    @classmethod
-    def agregarMateria(cls,nombre, codigo, descripcion, creditos, facultad, prerrequisitos):
+    
+    def agregarMateria(self, nombre, codigo, descripcion, creditos, facultad, prerrequisitos):
         nombreMaterias = []
 
         for materia in Materia.getMateriasTotales():
@@ -204,3 +206,10 @@ class Coordinador(Usuario):
         for beca in Beca.getBecas():
             a = beca.getConvenio()
     
+    @classmethod
+    def getCoordinadorIngresado(cls):
+        return cls._coordinadorIngresado
+    
+    @classmethod
+    def setCoordinadorIngresado(cls, coordinador):
+        cls._coordinadorIngresado = coordinador

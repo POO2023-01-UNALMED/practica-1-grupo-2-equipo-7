@@ -31,3 +31,7 @@ class PrerrequisitosMateria(ErrorManejo):
 class MateriaSinCupo(ErrorManejo):
     def __init__(self, nombre=""):
         super().__init__("La materia "+nombre+" no cuenta con cupos suficientes")
+
+class GrupoNoAgregado(ErrorManejo):
+    def __init__(self):
+        super().__init__("El grupo no ha sido agregado a la materia. El profesor y/o el salón no contaba(n) con disponibilidad")

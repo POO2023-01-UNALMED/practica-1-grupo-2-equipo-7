@@ -1,4 +1,5 @@
 from gestorAplicacion.administracion.Grupo import Grupo
+from excepciones.ErrorManejo import *
 # from Salon import Salon
 
 
@@ -158,25 +159,23 @@ class Materia:
                 nGrupoAnt = grupoCamb.getNumero()
                 grupoCamb.setNumero(nGrupoAnt - 1)
         else:
-            raise IndexError("El número no corresponde a ningún grupo")
+            raise CampoInvalido()
 
     def agregarGrupo(self, numero, profesor, horario, cupos, salon):
         dispSalon = True
         dispProfesor = True
         daMateria = profesor.daMateria(self.nombre)
 
-        for hor in horario:
-            dispProfesor = profesor.getHorario().comprobarDisponibilidad(hor)
-            dispSalon = salon.getHorario().comprobarDisponibilidad(hor)
-
-            if not dispProfesor or not dispSalon:
-                break
+        
+        dispProfesor = profesor.getHorario().comprobarDisponibilidad(horario)
+        dispSalon = salon.getHorario().comprobarDisponibilidad(horario)
 
         if dispProfesor and dispSalon and daMateria:
             nGrupo = self.crearGrupo(numero, profesor, horario, cupos, salon)
-            self.cupos += cupos
-            salon.getHorario().ocuparHorario(horario, nGrupo)
+            salon.getHorario().ocuparHorario(nGrupo, horario)
             profesor.vincularGrupo(nGrupo)
+        else:
+            raise GrupoNoAgregado()
 
     def agregarGrupoHecho(self, grupoHecho):
         self.grupos.append(grupoHecho)

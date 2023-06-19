@@ -26,7 +26,8 @@ class MainWin(Tk):
         self.resizable(0,0)
         self.geometry("865x460")
         
-        VentInicio(self)   
+        Coordinador.setCoordinadorIngresado(None)
+        VentInicio(self)
         #GenerarHorario(self)
         self.mainloop()
 
@@ -39,7 +40,7 @@ class MainWin(Tk):
 
 Deserializador.deserializarDatos()
 
-    
+
 # for pHorario in Horario.getHorariosTotales():
 #     print(pHorario.getGrupoContenidos())
 # #     print("\n")
@@ -48,8 +49,26 @@ Deserializador.deserializarDatos()
 #     print(pMateria.getGrupos())
 
 MainWin()
+MainWin()
 
 
+
+# c1234 = Estudiante(1234,"Libardo Jose Navarro Pedrozo","Ingenieria de Sistemas e Informatica",3,"Facultad de minas",2,97530865,[c02022_3010438,c102022_3010435,c12022_1000004,c12022_1000005,c22022_1000008,c32022_1000003,c122022_3010334,c182022_1000089,])
+#for pEsutiante in Estudiante.getEstudiantes():
+    # grupos = pEsutiante.getMaterias()
+    # materias = pEsutiante.getGruposVistos()
+    
+    # pEsutiante.setGruposVistos(grupos)
+    # pEsutiante.setMaterias(materias)
+    # if len(grupos)>=1:
+    #     pEsutiante.calcularAvance()
+    #     pEsutiante.calcularPromedio()
+    
+#    print(pEsutiante.getNombre())
+#    print("tiene un promedio de: "+str(pEsutiante.getPromedio())+" y un avance de: "+str(pEsutiante.getAvance()))
+#    print(pEsutiante.getMaterias())
+#    print(pEsutiante.getGruposVistos())
+#    print("\n")
 
 # Serializador.serializarDatos()
 

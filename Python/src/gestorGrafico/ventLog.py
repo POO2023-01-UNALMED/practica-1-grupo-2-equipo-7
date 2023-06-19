@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import Tk
 from tkinter import messagebox
 from gestorAplicacion.usuario.Usuario import Usuario
+from gestorAplicacion.usuario.Coordinador import Coordinador
 from gestorGrafico.ventPrincipal import VentPrincipal
 
 class VentLog(Tk):
@@ -30,14 +31,23 @@ class VentLog(Tk):
 
         def verificar():
             exist = False
+            esCoo = False
             pw = False
+            coordi = None
             
             for usuario in Usuario.getUsuariosTotales():
                 if usuario.getId() == int(entrada1.get()):
+                    coordi = usuario
                     exist = True
                     break
 
             if exist:
+                if not isinstance(usuario, Coordinador):
+                    return messagebox.showwarning("Error", "El usuario ingresado no corresponde a un coordinador")
+                else:
+                    esCoo = True
+
+            if esCoo:
                 if str(usuario.getPw()) == entrada2.get():
                     pw = True
                 else:
@@ -45,6 +55,7 @@ class VentLog(Tk):
             else:
                 return messagebox.showwarning("Error", "El id ingresado no corresponde a ningún usuario")
             if pw:
+                Coordinador.setCoordinadorIngresado(coordi)
                 cambiarVentana()
              
         usuar = Label(frame,text="Usuario")
@@ -65,7 +76,12 @@ class VentLog(Tk):
         
         self.mainloop()
         
+    @classmethod
+    def getCoordinadorIngresado(cls):
+        return cls.coordinadorIngresado
     
-        
+    @classmethod
+    def setCoordinadorIngresado(cls, coordinador):
+        cls.coordinadorIngresado = coordinador
        
         
