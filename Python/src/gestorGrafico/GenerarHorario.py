@@ -13,14 +13,15 @@ class GenerarHorario(Frame):
         super().__init__(ventana)
         self.pack()
         # self.pack_propagate(False)
-        self.config(bg="#cedae0")
+        self.config(bg="#cedae0",highlightbackground="#085870",highlightthickness=5)
+        
         
 
         titulo = Label(self, text="Generar Horario", font=("Arial", 14,"bold"),fg="#cedae0",bg="#085870",wraplength=410,highlightbackground="#085870",highlightthickness=2)
         titulo.pack(side="top",padx=5,pady=10)
 
-        texto = """Esta opcion le permitira generar un horario en base a unas materias seleccionadas, para luego poder asignarselo a algun estudiante o descartarlo"""
-        descripcion = Label(self, text=texto, font=("Arial", 10),wraplength=400)
+        texto = "Esta opcion le permitira generar un horario en base a unas materias seleccionadas, para luego poder asignarselo a algun estudiante o descartarlo"
+        descripcion = Label(self, text=texto, font=("Arial", 11),wraplength=400)
         descripcion.pack(side="top",padx=5)
         
         RecoleccionDat(self)
@@ -31,15 +32,15 @@ class RecoleccionDat(Frame):
             self.pack()
             self.config(bg="#cedae0")
        
-            FrameCont = Frame(self,bg="green",width=855,height=380)
+            FrameCont = Frame(self,bg="#cedae0",width=855,height=380)
             FrameCont.pack(side="top",padx=5,pady=5)
             FrameCont.grid_propagate(False)
             
-            MidIzq=Frame(FrameCont,height=340,width=268,bg="red")
+            MidIzq=Frame(FrameCont,height=340,width=268,bg="#085870")
             MidIzq.grid(row=0,column=0,padx=5,pady=5)
             MidIzq.pack_propagate(False)
             
-            MidDer=Frame(FrameCont,height=340,width=568,bg="blue")
+            MidDer=Frame(FrameCont,height=340,width=568,bg="#cedae0")
             MidDer.grid(row=0,column=1,padx=5,pady=5)
             MidDer.pack_propagate(False)
             
@@ -90,7 +91,7 @@ class RecoleccionDat(Frame):
                 
             
         
-            bontonFiltro=Button(MidIzq,text="Filtrar",command=genFiltro,state="disabled")
+            bontonFiltro=Button(MidIzq,text="Filtrar",command=genFiltro,state="disabled",bg="#cedae0",font=("arial",11),fg="#085870")
             bontonFiltro.pack(side="top",pady=20)
             
             listaNombresMaterias = []
@@ -127,7 +128,7 @@ class RecoleccionDat(Frame):
             materiasText.pack(side="top",pady=10,padx=10)
             materiasText.insert(1.0,("%-3s %-40s %-10s %-10s" % ("Num", "Nombre", "Facultad", "Codigo"))+"\n")
             
-            fraBotones=Frame(MidDer,bg="purple")
+            fraBotones=Frame(MidDer,bg="#085870")
             fraBotones.pack(side="top",padx=10,pady=10)
             
             def eliminarUltima():
@@ -153,13 +154,13 @@ class RecoleccionDat(Frame):
                 else:
                     messagebox.showinfo("Vacio","No hay nada que generar :/")
                 
-            bottEliminarUltima = Button(fraBotones,text="Eliminar Ultima",command=eliminarUltima)
+            bottEliminarUltima = Button(fraBotones,text="Eliminar Ultima",command=eliminarUltima,bg="#cedae0",font=("arial",11),fg="#085870")
             bottEliminarUltima.pack(side="left",padx=10,pady=10)
             
-            bottLimpiar = Button(fraBotones,text="Eliminar todas",command=eliminarTodas)
+            bottLimpiar = Button(fraBotones,text="Eliminar todas",command=eliminarTodas,bg="#cedae0",font=("arial",11),fg="#085870")
             bottLimpiar.pack(side="left",padx=10,pady=10)
         
-            bottGenerar = Button(fraBotones,text="Generar",command=generar)
+            bottGenerar = Button(fraBotones,text="Generar",command=generar,bg="#cedae0",font=("arial",11),fg="#085870")
             bottGenerar.pack(side="left",padx=10,pady=10)
             
             
@@ -229,7 +230,7 @@ class horarioGenerado(Frame):
         horarioText.insert(1.0,horario)
         
         
-        fraBotones=Frame(self,bg="purple",height=60)
+        fraBotones=Frame(self,bg="#085870",height=60)
         fraBotones.pack(side="top",fill="both",padx=5,pady=(0,5))
         fraBotones.pack_propagate(False)
         
