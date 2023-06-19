@@ -34,6 +34,14 @@ class Beca:
         for beca in Beca._becas:
             lista.append(beca.getConvenio())
         return lista
+    
+    @staticmethod
+    def buscandoBeca(becaSel):
+        beca = None
+        for becas in Beca._becas:
+            if becas.getConvenio() == becaSel:
+                beca = becas
+        return beca
 
     # Setters y Getters
 
