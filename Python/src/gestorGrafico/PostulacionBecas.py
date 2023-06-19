@@ -8,6 +8,7 @@ from gestorGrafico.FieldFrame import FieldFrame
 class PostulacionBecas(Frame):
     def __init__(self,ventana):
         super().__init__(ventana)
+        self.config(bg="#cedae0")
         
         def mostrarBeca():
             self.pack_forget()
@@ -30,26 +31,26 @@ class PostulacionBecas(Frame):
             eBeca.pack()
       
          
-        tituloenventana = Label(self, text="Búsqueda y Postulación de Becas", foreground="#085870", font=("Helvetica", 14, "bold"))
+        tituloenventana = Label(self, text="Búsqueda y Postulación de Becas", bg="#cedae0", foreground="#085870", font=("Helvetica", 14, "bold"))
         tituloenventana.pack(side="top", anchor="c")
         textodescriptivo = ("Esta funcionalidad permite:\n1.Ver listado de becas existentes actualmente. \n2.Aplicar beca a estudiante." +
                            "\n3.Crear nueva beca. \n4.Eliminar beca.")
-        descripcion = Label(self, text=textodescriptivo, font=("Arial", 11), fg="#110433")
+        descripcion = Label(self, text=textodescriptivo, font=("Arial", 11), bg="#cedae0", fg="#110433")
         descripcion.pack(anchor="n", pady=20)
 
-        seleccion = Frame(self)
+        seleccion = Frame(self,bg="#cedae0")
         seleccion.pack()
 
-        mostrarB = Button(seleccion, text="Mostrar listado de becas", foreground="white",background="#085870",font=("Helvetica", 11), command= mostrarBeca)
+        mostrarB = Button(seleccion, text="Mostrar listado de becas", foreground="white",background="#085870",font=("Helvetica", 12), command= mostrarBeca)
         mostrarB.grid(row=0,column=0,padx=20,pady=10,sticky="w")
 
-        aplicarB = Button(seleccion, text="Aplicar beca a estudiante", foreground="white",background="#085870",font=("Helvetica", 11), command= aplicarBeca)
+        aplicarB = Button(seleccion, text="Aplicar beca a estudiante", foreground="white",background="#085870",font=("Helvetica", 12), command= aplicarBeca)
         aplicarB.grid(row=0,column=1,padx=10,pady=10,sticky="w")
 
-        crearB = Button(seleccion, text="Crear nueva beca", foreground="white",background="#085870",font=("Helvetica", 11), command= becaNueva)
+        crearB = Button(seleccion, text="Crear nueva beca", foreground="white",background="#085870",font=("Helvetica", 12), command= becaNueva)
         crearB.grid(row=1,column=0,padx=45,pady=10,sticky="w")
 
-        eliminarB = Button(seleccion, text="Eliminar beca", foreground="white",background="#085870",font=("Helvetica", 11), command= eliminarBeca)
+        eliminarB = Button(seleccion, text="Eliminar beca", foreground="white",background="#085870",font=("Helvetica", 12), command= eliminarBeca)
         eliminarB.grid(row=1,column=1,padx=50,pady=10,sticky="w")
 
 
