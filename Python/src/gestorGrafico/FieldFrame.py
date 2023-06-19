@@ -41,4 +41,4 @@ class FieldFrame(Frame):
             entry.delete(0, last= END)
            
     def crearBotones(self, comando1, texto = "Aceptar", Pady = 50, Column= 0, Padx = 0):
-        return Button(self, text=texto, foreground="black",background="#085870",font=("Helvetica", 11), command=comando1).grid(padx = Padx, pady = Pady, column = Column, row = len(self._datos)+1)
+        return Button(self, text=texto, foreground="white",background="#085870",font=("Helvetica", 11), command=comando1).grid(padx = Padx, pady = Pady, column = Column, row = len(self._datos)+1)
