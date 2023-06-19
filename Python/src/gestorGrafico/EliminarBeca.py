@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 from tkinter import ttk
 from gestorAplicacion.administracion.Beca import Beca
 from gestorGrafico.FieldFrame import FieldFrame
@@ -8,7 +9,16 @@ class EliminarBeca(Frame):
         super().__init__(ventana)
 
         def confEliminar():
-            pass
+            quest = messagebox.askokcancel("Confirmar acción", f"¿Está seguro que desea eliminar la beca {comboBecas.get()} del sistema?\n Esta acción será permanente.")
+            if quest:
+                bec = Beca.buscandoBeca(str(comboBecas.get()))
+                try:
+                    Beca.eliminarBeca(bec)
+                    messagebox.showinfo("Beca eliminada", f"La beca {comboBecas.get()} ha sido eliminada con éxito del sistema")
+                except:
+                    messagebox.showerror("Error", "Debe seleccionar una beca del listado para poder continuar.")
+
+                
 
         titulo = Label(self, text="Eliminar Beca", font=("Arial", 14))
         titulo.pack(side="top", anchor="c")
