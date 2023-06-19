@@ -66,7 +66,7 @@ class VentLog(Tk):
         entrada2 = Entry(frame, show="*")
         boton_ingresar = Button(frame, text="Iniciar Sesion", command= verificar,bg="#085870",font=("arial", 11, "bold"),fg="#cedae0")
         boton_limpiar = Button(frame, text="Limpiar", command= limpiar,bg="#085870",font=("arial", 11, "bold"),fg="#cedae0")
-        revisar = Checkbutton(frame, text="Mostrar contraseña", command= mostrarContraseña,bg="#cedae0",font=("arial", 11, "bold"))        
+        revisar = Checkbutton(frame, text="Mostrar contraseña", command= mostrarContraseña,bg="#cedae0",font=("arial", 11))        
         
         usuar.grid(row=0,column=0,padx=10,pady=10,sticky="w")
         entrada1.grid(row=0,column=1,columnspan=2,padx=10,pady=10)
