@@ -169,8 +169,11 @@ class AlumnoPorLista(Frame):
 
             nombresMateriasE = []
 
-            for grupo in estudiante.getGrupos():
-                nombresMateriasE.append(grupo.getMateria().getNombre())
+            print(estudiante == Estudiante.getEstudiantes()[0])
+            print(estudiante.getMaterias())
+
+            for materia in estudiante.getMaterias():
+                nombresMateriasE.append(materia.getNombre())
             
             comboMaterias = ttk.Combobox(der, values=nombresMateriasE, state="readonly")
             comboMaterias.bind("<<ComboboxSelected>>", seleccionMateria)
