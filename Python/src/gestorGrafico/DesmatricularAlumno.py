@@ -141,7 +141,7 @@ class AlumnoPorLista(Frame):
             estudiante.setHorario(Horario())
             estudiante.getHorario().vaciarHorario(estudiante.getGrupos())
             estudiante.desmatricularMaterias()
-            Coordinador.desmatricularDelSistema(estudiante)
+            Coordinador._usuarioIngresado.desmatricularDelSistema(estudiante)
 
             nombresEstudiantes1 = nombresAlumnos(Estudiante.getEstudiantes())
             combo.config(values=nombresEstudiantes1)
@@ -322,7 +322,7 @@ class AlumnoPorBusqueda(Frame):
             estudiante.setHorario(Horario())
             estudiante.getHorario().vaciarHorario(estudiante.getGrupos())
             estudiante.desmatricularMaterias()
-            Coordinador.desmatricularDelSistema(estudiante)
+            Coordinador._usuarioIngresado.desmatricularDelSistema(estudiante)
             self._estudianteSeleccionado = None
 
             messagebox.showinfo("Estudiante desmatriculado", "El estudiante ha sido desmatriculado del sistema con exito")
