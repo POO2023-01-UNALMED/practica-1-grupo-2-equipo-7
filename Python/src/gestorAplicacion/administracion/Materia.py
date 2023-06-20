@@ -66,6 +66,9 @@ class Materia:
         # Comprueba si un estudiante cumple con los prerrequisitos de una materia.
 
         materiasVistas = []
+        materias_estudiante=[]
+        for materia in estudiante.getMaterias():
+            materias_estudiante.append(materia.getCodigo())
         for grupo in estudiante.getGruposVistos():
             materiasVistas.append(grupo.getMateria().getCodigo())
         for materia in materiap.getPrerrequisitos():
@@ -77,6 +80,8 @@ class Materia:
             if not flag:
                 return False
         if materiap.getCodigo() in materiasVistas:
+            return False
+        if materiap.getCodigo() in materias_estudiante:
             return False
         return True
 
