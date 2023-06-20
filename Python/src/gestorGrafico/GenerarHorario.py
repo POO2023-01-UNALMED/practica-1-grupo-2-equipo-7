@@ -257,6 +257,7 @@ class horarioGenerado(Frame):
                 if not Materia.puedeVerMateria(estudianteElegido, pGrupo):
                     flag = False
                     break
+            print(flag)
                 
             mens = False
             nMateria = ""
@@ -267,6 +268,7 @@ class horarioGenerado(Frame):
                         mens = True
                         nMateria = pGrupo.getMateria().getNombre()
                         break
+            print(flag)
             
             if flag:
                 estudianteElegido.setHorario(horarioAMostrar)

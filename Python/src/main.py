@@ -17,7 +17,6 @@ from gestorAplicacion.usuario.Usuario import Usuario
 from baseDatos.Serializador import Serializador
 from baseDatos.Desealizador import Deserializador 
 
-# Configuracion de ventana
 
 class MainWin(Tk):
     def __init__(self):
@@ -30,7 +29,6 @@ class MainWin(Tk):
         
         Coordinador.setUsuarioIngresado(None)
         VentInicio(self)
-        # GenerarHorario(self)
         self.mainloop()
 
     def abrirLog(self):
@@ -38,17 +36,12 @@ class MainWin(Tk):
         VentLog()
     
 
+if __name__=="__main__":
+
+    Deserializador.deserializarDatos()
 
 
-Deserializador.deserializarDatos()
-
-# for i in Estudiante.getEstudiantes():
-#     print(i.getNombre())
-#     for j in i.getGruposVistos():
-#         print(j.getMateria().getNombre())
-
-
-MainWin()
+    MainWin()
 
 
 # Serializador.serializarDatos()
