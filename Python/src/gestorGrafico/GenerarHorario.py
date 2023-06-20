@@ -303,16 +303,16 @@ class horarioGenerado(Frame):
 
     @classmethod
     def matricularMateriaParte4(cls,estudiante,grupo):
-        materiasInscritas = estudiante.getMaterias().copy()
-        materiasInscritas.append(grupo.getMateria())
+        grupos_estudiante=estudiante.getGrupos()
+        materias_estudiante=estudiante.getMaterias()
+        materia=grupo.getMateria()
+        grupos_estudiante.append(grupo)
+        materias_estudiante.append(materia)
         grupo.agregarEstudiante(estudiante)
-        grupo.getMateria().setCupos(grupo.getMateria().getCupos() - 1)
-        grupo.setCupos(grupo.getCupos() - 1)
-        gruposInscritos = estudiante.getGrupos().copy()
-        gruposInscritos.append(grupo)
-        estudiante.setGrupos(gruposInscritos)
-        estudiante.setCreditos(estudiante.getCreditos() + grupo.getMateria().getCreditos())
-        estudiante.setMaterias(materiasInscritas)
+        materia.cantidadCupos()
+        estudiante.setCreditos(estudiante.getCreditos() + materia.getCreditos())
+        estudiante.setMaterias(materias_estudiante)
+        estudiante.setGrupos(grupos_estudiante)
 
         
         
