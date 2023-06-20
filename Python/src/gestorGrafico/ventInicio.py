@@ -122,7 +122,7 @@ class VentInicio(Frame):
             
             # Cambio de puntero  
             i+= 1
-            n = 2 # numero de grupo de fotos en la carpeta imagenes, cuando se tengan todas debe ser 5
+            n = 5 # numero de grupo de fotos en la carpeta imagenes, cuando se tengan todas debe ser 5
             if i ==(n+1):
                 self.punteroImagen= 1
             else:
