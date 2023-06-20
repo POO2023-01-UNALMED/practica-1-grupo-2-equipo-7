@@ -192,10 +192,17 @@ class AlumnoPorLista(Frame):
             botonDesmatricular = Button(der, text="Desmatricular", font=("Arial", 10), command=desmatricularGrupo, bg="#085870", fg="white")
             botonDesmatricular.pack(side="bottom", anchor="center", pady=10)
 
+        def retroceder():
+            izq.destroy()
+            der.destroy()
+            DesmatricularAlumno(ventana)
 
         izq=Frame(ventana, height=460,width=250, bg="#085870")
         izq.pack(side="left", anchor="e")
         izq.pack_propagate(False)
+
+        atras = Button(izq, text="Atras", font=("Arial", 10), bg="#cedae0", fg="#085870", command=retroceder)
+        atras.pack(side="bottom", anchor="center", padx=10, pady=10)
 
         desc = Label(izq, text="Elija al estudiante", font=("Arial", 14), bg="#cedae0")
         desc.pack(side="top", anchor="c", padx=10, pady=10)
@@ -375,11 +382,19 @@ class AlumnoPorBusqueda(Frame):
 
             botonDesmatricular = Button(der, text="Desmatricular", font=("Arial", 10), fg="white", bg="#085870", command=desmatricularGrupo)
             botonDesmatricular.pack(side="bottom", anchor="center", pady=10)
+        
+        def retroceder():
+            izq.destroy()
+            der.destroy()
+            DesmatricularAlumno(ventana)
 
 
         izq=Frame(ventana, height=460,width=250, bg="#085870")
         izq.pack(side="left", anchor="e")
         izq.pack_propagate(False)
+
+        atras = Button(izq, text="Atras", font=("Arial", 10), bg="#cedae0", fg="#085870", command=retroceder)
+        atras.pack(side="bottom", anchor="center", padx=10, pady=10)
 
         der=Frame(ventana, height=460,width=615, bg="#cedae0")
         der.pack(side="right", fill="both")
@@ -414,3 +429,4 @@ class AlumnoPorBusqueda(Frame):
 
         desmatricular2 = Button(subFrame, text="Desmatricular de una materia", font=("Arial", 10), fg="white", bg="#085870", command=desmatricularMateria)
         desmatricular2.pack(pady=20, padx=5)
+        
