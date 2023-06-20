@@ -1,5 +1,8 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
+from gestorAplicacion.administracion.Beca import Beca
+from excepciones.ErrorManejo import *
 from gestorGrafico.FieldFrame import FieldFrame
 
 class CrearBeca(Frame):
@@ -7,11 +10,43 @@ class CrearBeca(Frame):
         super().__init__(ventana)
         self.config(bg="#cedae0")
 
+        nombres = []
+        for beca in Beca._becas:
+            nom = beca.getConvenio()
+            nombres.append(nom)
+
         def crear():
             cupos = int(cuposE.get())
             convenio = nombreE.get()
             promedio = float(promedioE.get())
-            pass
+            avance = int(avanceE.get())
+            estrato = int(estratoE.get())
+            creditos = int(creditosE.get())
+            ayudaEco = int(ayudaE.get())
+            necesitaR = combo.get()
+
+            confirmar = messagebox.askokcancel("Confirmación", f"¿Está seguro de que desea agregar la beca: {convenio} al sistema?")
+            if confirmar:
+                if cupos<0 or avance<0 or estrato<0 or creditos<0 or ayudaEco<0 or promedio<0:
+                    return messagebox.showerror("Error",CampoInvalido().mostrarMensaje())
+                
+                for n in nombres:
+                    if n == convenio:
+                        return messagebox.showerror("Error",BecaExistente().mostrarMensaje())
+                    
+                if necesitaR == "":
+                    return messagebox.showerror("Error",CampoVacio().mostrarMensaje())
+                
+                if necesitaR == "Si":
+                    necesitaR = True
+                else:
+                    if necesitaR == "No":
+                        necesitaR = False
+
+                if cupos>0 and avance>0 and estrato>0 and creditos>0 and ayudaEco>0 and promedio>0:
+                    nuevaBeca = (cupos, convenio, promedio, avance, estrato, creditos, ayudaEco, necesitaR)
+                    return messagebox.showinfo("Beca agregada", "La beca ha sido agregada con éxito al sistema.")
+                
 
         titulo = Label(self, text="Crear Beca", bg="#cedae0", foreground="#085870", font=("Helvetica", 14, "bold"))
         titulo.pack(side="top", anchor="c")
@@ -66,7 +101,7 @@ class CrearBeca(Frame):
 
         recomendacionB = Label(creandoBeca, text="¿La beca necesita\nrecomendación?", font=("Arial", 11), fg="#085870", bg="#cedae0")
         recomendacionB.grid(row=8, column=0, padx=10)
-        combo = ttk.Combobox(creandoBeca, values=["Sí.","No."])
+        combo = ttk.Combobox(creandoBeca, values=["Si.","No."])
         combo.grid(row=8, column=1, padx=10)
 
         boton =  boton = Button(self, text="Crear Beca", command=crear, font=("Arial", 11, "bold"), fg="white", bg="#085870")

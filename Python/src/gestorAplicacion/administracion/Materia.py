@@ -62,21 +62,23 @@ class Materia:
         return True
 
     @staticmethod
-    def comprobarPrerrequisitos(estudiante, materia):
+    def comprobarPrerrequisitos(estudiante, materiap):
         # Comprueba si un estudiante cumple con los prerrequisitos de una materia.
 
         materiasVistas = []
-        for pGrupo in estudiante.getGruposVistos():
-            materiasVistas.append(pGrupo.getMateria())
-        for pMateria in materia.getPrerrequisitos():
+        for grupo in estudiante.getGruposVistos():
+            materiasVistas.append(grupo.getMateria().getCodigo())
+        for materia in materiap.getPrerrequisitos():
             flag = False
-            for pVistas in materiasVistas:
-                if pMateria.getCodigo() == pVistas.getCodigo():
+            for vista in materiasVistas:
+                if materia.getCodigo() == vista:
                     flag = True
                     break
             if not flag:
-                return False
-        return True
+                return True
+        if materiap.getCodigo() in materiasVistas:
+            return True
+        return False
 
     @staticmethod
     def encontrarMateria(nombre):

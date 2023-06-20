@@ -111,12 +111,12 @@ class MatricularMateria(Frame):
     def comprobacion2(self):
         id_estudiante=self.campo2.getValue("ID")
         nombre_estudiante=self.campo2.getValue("Nombre")
+        if id_estudiante=="" or nombre_estudiante=="":
+            messagebox.showerror("Error",CampoVacio().mostrarMensaje())
         try:
-            if id_estudiante=="" or nombre_estudiante=="":
-                raise Exception
             index = Estudiante.buscarEstudiante(nombre_estudiante, int(id_estudiante))
             if index == -1:
-                messagebox.showerror("Error",EstudianteInexistente(nombre_estudiante).mostrarMensaje())
+                messagebox.showerror("Error",EstudianteInexistente("").mostrarMensaje())
             else:
                 estudiante_seleccionado = self.estudiantes_totales[index]
                 if not estudiante_seleccionado.isMatriculaPagada():
@@ -129,7 +129,7 @@ class MatricularMateria(Frame):
                         self.destroy()
                         MatricularMateria2(self._ventana, estudiante_seleccionado).pack()
         except:
-            messagebox.showerror("Error",CampoVacio().mostrarMensaje())
+            messagebox.showerror("Error",CampoInvalido().mostrarMensaje())
 
 
 class MatricularMateria2(Frame):
@@ -172,7 +172,7 @@ class MatricularMateria2(Frame):
             materias_texto=""
             self.materias_disponibles = []
             for materia in self.materias_totales:
-                if not Materia.comprobarPrerrequisitos(self.estudiante, materia):
+                if Materia.comprobarPrerrequisitos(self.estudiante, materia):
                     continue
                 elif materia.getCupos() <= 0:
                     continue
@@ -235,12 +235,12 @@ class MatricularMateria2(Frame):
             try:
                 index = Materia.buscarMateria(nombre_materia, int(codigo_materia))
                 if index == -1:
-                    messagebox.showerror("Error",MateriaInexistente(nombre_materia).mostrarMensaje())
+                    messagebox.showerror("Error",MateriaInexistente("").mostrarMensaje())
                 else:
                     materia_seleccionada = self.materias_totales[index]
                     if materia_seleccionada.getCupos() <= 0:
                         messagebox.showerror("Error",MateriaSinCupo(nombre_materia).mostrarMensaje())
-                    elif not Materia.comprobarPrerrequisitos(self.estudiante, materia_seleccionada):
+                    elif Materia.comprobarPrerrequisitos(self.estudiante, materia_seleccionada):
                         messagebox.showerror("Error",PrerrequisitosMateria(nombre_materia).mostrarMensaje())
                     elif (self.creditos_estudiante + materia_seleccionada.getCreditos()> self.limite_creditos):
                         messagebox.showerror("Error",EstudianteSinCreditos(self.estudiante.getNombre()).mostrarMensaje())

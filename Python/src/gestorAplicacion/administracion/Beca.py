@@ -43,6 +43,7 @@ class Beca:
                 beca = becas
         return beca
 
+
     # Setters y Getters
 
     def getCupos(self):

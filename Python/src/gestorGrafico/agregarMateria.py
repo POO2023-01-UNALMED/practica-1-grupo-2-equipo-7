@@ -61,7 +61,7 @@ class agregarMateria(Frame):
                                 for box in boxes:
                                     if not isinstance(Materia.encontrarMateria(box.get()), Materia):
                                         raise CampoVacio()
-                                Coordinador.getCoordinadorIngresado().agregarMateria(nombre, codigo, descripcion, creditos, facultad, prerrequisitos)
+                                Coordinador.getUsuarioIngresado().agregarMateria(nombre, codigo, descripcion, creditos, facultad, prerrequisitos)
                                 messagebox.showinfo("Materia agregada", "La materia ha sido agregada con éxito al sistema")
                             except:
                                 messagebox.showerror("Error", CampoInvalido().mostrarMensaje())
@@ -123,7 +123,7 @@ class agregarMateria(Frame):
         creditosE = Entry(sFrame, font=("Arial", 11))
         creditosE.grid(row=4, column=1, padx=10, pady=8)
 
-        prerrequisitosL = Label(sFrame, text="Prerrequisitos", font=("Arial", 11), fg="white", bg="#085870")
+        prerrequisitosL = Label(sFrame, text="# Prerrequisitos", font=("Arial", 11), fg="white", bg="#085870")
         prerrequisitosL.grid(row=5, column=0, padx=10, pady=8)
         prerrequisitosE = Entry(sFrame, font=("Arial", 11))
         prerrequisitosE.grid(row=5, column=1, padx=10, pady=8)

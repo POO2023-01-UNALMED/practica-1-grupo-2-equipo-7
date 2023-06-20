@@ -35,3 +35,7 @@ class MateriaSinCupo(ErrorManejo):
 class GrupoNoAgregado(ErrorManejo):
     def __init__(self):
         super().__init__("El grupo no ha sido agregado a la materia. El profesor y/o el salón no contaba(n) con disponibilidad")
+
+class BecaExistente(ErrorManejo):
+    def __init__(self):
+        super().__init__("El nombre que intenta asignar a la nueva beca, ya existe. Intentelo nuevamente.")
