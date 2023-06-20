@@ -123,7 +123,7 @@ class agregarMateria(Frame):
         creditosE = Entry(sFrame, font=("Arial", 11))
         creditosE.grid(row=4, column=1, padx=10, pady=8)
 
-        prerrequisitosL = Label(sFrame, text="Prerrequisitos", font=("Arial", 11), fg="white", bg="#085870")
+        prerrequisitosL = Label(sFrame, text="# Prerrequisitos", font=("Arial", 11), fg="white", bg="#085870")
         prerrequisitosL.grid(row=5, column=0, padx=10, pady=8)
         prerrequisitosE = Entry(sFrame, font=("Arial", 11))
         prerrequisitosE.grid(row=5, column=1, padx=10, pady=8)
