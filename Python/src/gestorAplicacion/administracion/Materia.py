@@ -75,10 +75,10 @@ class Materia:
                     flag = True
                     break
             if not flag:
-                return True
+                return False
         if materiap.getCodigo() in materiasVistas:
-            return True
-        return False
+            return False
+        return True
 
     @staticmethod
     def encontrarMateria(nombre):
