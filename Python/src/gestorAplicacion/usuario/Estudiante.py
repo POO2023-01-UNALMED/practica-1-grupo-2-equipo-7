@@ -102,7 +102,11 @@ class Estudiante(Usuario):
         self._creditos -= materia.creditos
 
     def eliminarGrupo(self, grupo):
-        self._grupos.remove(grupo)
+        indice = None
+        for i in range(len(self._grupos)):
+            if self._grupos[i].getMateria().getCodigo() == grupo.getMateria().getCodigo():
+                indice = i
+        self._grupos.pop(indice)
         self.eliminarMateria(grupo.getMateria())
     
     def pagarMatricula(self):
