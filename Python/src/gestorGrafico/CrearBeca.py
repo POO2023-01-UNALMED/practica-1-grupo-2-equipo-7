@@ -45,7 +45,7 @@ class CrearBeca(Frame):
                         necesitaR = False
 
                 if cupos>0 and avance>0 and estrato>0 and creditos>0 and ayudaEco>0 and promedio>0:
-                    nuevaBeca = (cupos, convenio, promedio, avance, estrato, creditos, ayudaEco, necesitaR)
+                    nuevaBeca = Beca(cupos, convenio, promedio, avance, estrato, creditos, ayudaEco, necesitaR)
                     return messagebox.showinfo("Beca agregada", "La beca ha sido agregada con éxito al sistema.")
                 
 
