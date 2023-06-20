@@ -80,5 +80,5 @@ class AplicarBeca(Frame):
         comboEst = ttk.Combobox(aplicandoFrame, values=estE, textvariable= textoPre)
         comboEst.grid(row=1, column=1, padx=10, pady=10)
 
-        boton = Button(self, text="Aplicar", command=asigBeca, font=("Arial", 11), fg="white", bg="#085870")
+        boton = Button(self, text="Aplicar Beca", command=asigBeca, font=("Arial", 11, "bold"), fg="white", bg="#085870")
         boton.pack()

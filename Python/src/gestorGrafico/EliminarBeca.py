@@ -40,5 +40,5 @@ class EliminarBeca(Frame):
         comboBecas = ttk.Combobox(becaFrame, values=becasE, textvariable= textoDefault)
         comboBecas.grid(row=0, column=1, padx=10, pady=10)
         
-        boton = Button(self, text="Eliminar", command=confEliminar, font=("Arial", 11), fg="white", bg="#085870")
+        boton = Button(self, text="Eliminar Beca", command=confEliminar, font=("Arial", 11, "bold"), fg="white", bg="#085870")
         boton.pack()
