@@ -13,24 +13,32 @@ class MatricularMateria(Frame):
     def __init__(self, ventana):
         super().__init__(ventana)
         self._ventana=ventana
+<<<<<<< HEAD
+        self.pack(expand=True)
+        self.config(highlightbackground="#085870",highlightthickness=3)
+
         titulo = Label(self, text="Matricular Materia", foreground="#085870",font=("Helvetica", 14, "bold"))
+=======
+        self.config(bg="#cedae0")
+        titulo = Label(self, text="Matricular Materia", foreground="#085870",font=("Helvetica", 14, "bold"),bg="#cedae0")
+>>>>>>> f72b6429c432761448e122826344025ebba7de5c
         titulo.pack(side="top", anchor="c")
         texto = """En esta parte, debes seleccionar al estudiante deseado de dos formas:
 1. Búsqueda manual: Ingresa el ID y nombre del estudiante.
 2. Búsqueda por lista: Selecciona un estudiante de una lista disponible."""
-        descripcion = Label(self, text=texto, font=("Arial", 11))
+        descripcion = Label(self, text=texto, font=("Arial", 11),bg="#cedae0")
         descripcion.pack(anchor="n", pady=10)
-        opciones = Frame(self)
+        opciones = Frame(self, bg="#cedae0")
         opciones.pack()
         manual = Button(opciones,text="Seleccionar al estudiante\n de forma manual",foreground="white",background="#085870",font=("Helvetica", 12),command=lambda: self.seleccionar_estudiante(caja, label_vacio, False))
         lista = Button(opciones,text="Seleccionar al estudiante\n mediante una lista",foreground="white",background="#085870",font=("Helvetica", 12),command=lambda: self.seleccionar_estudiante(caja, label_vacio, True))
         manual.pack(side=LEFT, padx=(0, 10))
         lista.pack(side=LEFT, padx=(10, 10))
-        busqueda = Frame(self)
+        busqueda = Frame(self,bg="#cedae0")
         busqueda.pack()
-        label_vacio = Label(busqueda, text="",font=("Arial", 11))
+        label_vacio = Label(busqueda, text="",font=("Arial", 11),bg="#cedae0")
         label_vacio.pack(pady=(10, 10))
-        caja = Frame(self)
+        caja = Frame(self,bg="#cedae0")
         caja.pack()
 
     @classmethod
@@ -58,7 +66,7 @@ class MatricularMateria(Frame):
         self.estudiantes_totales = Estudiante.getEstudiantes()
         self.limite_creditos = Coordinador.getLimitesCreditos()
         if busqueda_lista:
-            label.config(text="Entro a busqueda por lista")
+            label.config(text="Entro a busqueda por lista",bg="#cedae0")
             nombres_texto = ""
             self.estudiantes_mostrados = []
             for estudiante in self.estudiantes_totales:
@@ -70,20 +78,22 @@ class MatricularMateria(Frame):
                 nombres_texto+=str(len(self.estudiantes_mostrados))+ "- Nombre: "+ estudiante.getNombre()+ " ID: "+ str(estudiante.getId())+"\n"
             if nombres_texto=="":
                 nombres_texto="No hay estudiantes disponibles para matricular"
-            lista = Text(frame, border=False, font=("Arial", 11))
+            lista = Text(frame, border=True, font=("Arial", 11))
             lista.pack()
-            lista.configure(height=5)
+            lista.configure(height=5, bg="#cedae0")
             self.mostrar_texto(nombres_texto, lista)
             self.campo = FieldFrame(frame, "Criterio", ["Numero"], "Valor")
             self.campo.crearBotones(self.comprobacion1, "Aceptar", 10, 0, 0)
             self.campo.crearBotones(self.campo.limpiarValues, "Limpiar", 10, 1, 0)
+            self.campo.config(bg="#cedae0")
             self.campo.pack()
         else:
             MatricularMateria.limpiar_frame(frame)
-            label.config(text="Entro a busqueda manual")
+            label.config(text="Entro a busqueda manual", bg="#cedae0")
             self.campo2 = FieldFrame(frame, "Criterio", ["Nombre", "ID"], "Valor")
             self.campo2.crearBotones(self.comprobacion2, "Aceptar", 10, 0, 0)
             self.campo2.crearBotones(self.campo2.limpiarValues, "Limpiar", 10, 1, 0)
+            self.campo2.config(bg="#cedae0")
             self.campo2.pack()
 
 
@@ -137,27 +147,35 @@ class MatricularMateria2(Frame):
         super().__init__(ventana)
         self.ventana=ventana
         self.estudiante=estudiante
+<<<<<<< HEAD
+        self.pack(expand=True)
+        self.config(highlightbackground="#085870",highlightthickness=3)
+
         titulo = Label(self, text="Matricular Materia 2", foreground="#085870",font=("Helvetica", 14, "bold"))
+=======
+        self.config(bg="#cedae0")
+        titulo = Label(self, text="Matricular Materia 2", foreground="#085870",font=("Helvetica", 14, "bold"),bg="#cedae0")
+>>>>>>> f72b6429c432761448e122826344025ebba7de5c
         titulo.pack(side="top", anchor="c")
         texto = """En esta parte, debes seleccionar la materia deseada de dos formas:
 1. Búsqueda manual: Ingresa el código y nombre de la materia.
 2. Búsqueda por lista: Selecciona una materia de una lista disponible."""
         seleccionados="Estudiante: "+self.estudiante.getNombre()
-        seleccion=Label(self, text=seleccionados, font=("Arial", 11,"bold"))
+        seleccion=Label(self, text=seleccionados, font=("Arial", 11,"bold"),bg="#cedae0")
         seleccion.pack(anchor="n", pady=5)
-        descripcion = Label(self, text=texto, font=("Arial", 11))
+        descripcion = Label(self, text=texto, font=("Arial", 11),bg="#cedae0")
         descripcion.pack(anchor="n", pady=5)
-        opciones = Frame(self)
+        opciones = Frame(self, bg="#cedae0")
         opciones.pack()
         manual = Button(opciones,text="Seleccionar la materia\n de forma manual",foreground="white",background="#085870",font=("Helvetica", 12),command=lambda: self.seleccionar_materia(caja, label_vacio, False))
         lista = Button(opciones,text="Seleccionar la materia\n mediante una lista",foreground="white",background="#085870",font=("Helvetica", 12),command=lambda: self.seleccionar_materia(caja, label_vacio, True))
         manual.pack(side=LEFT, padx=(0, 10))
         lista.pack(side=LEFT, padx=(10, 10))
-        busqueda = Frame(self)
+        busqueda = Frame(self, bg="#cedae0")
         busqueda.pack()
-        label_vacio = Label(busqueda, text="",font=("Arial", 11))
+        label_vacio = Label(busqueda, text="",font=("Arial", 11),bg="#cedae0")
         label_vacio.pack(pady=(10, 10))
-        caja = Frame(self)
+        caja = Frame(self, bg="#cedae0")
         caja.pack()
 
 
@@ -182,7 +200,7 @@ class MatricularMateria2(Frame):
                     continue
                 self.materias_disponibles.append(materia)
                 materias_texto+=str(len(self.materias_disponibles))+ " - Nombre: "+ materia.getNombre()+ " Cupos: "+ str(materia.getCupos())+"\n"
-            lista = Text(ventana, border=False, font=("Arial", 11))
+            lista = Text(ventana, border=True, font=("Arial", 11),bg="#cedae0")
             lista.pack()
             lista.configure(height=5)
             if (materias_texto==""):
@@ -192,14 +210,16 @@ class MatricularMateria2(Frame):
             self.campo.crearBotones(self.comprobar1, "Aceptar", 10, 0, 0)
             self.campo.crearBotones(self.campo.limpiarValues, "Limpiar", 10, 1, 0)
             self.campo.crearBotones(self.regreso, "Regresar", 10, 2, 0)
+            self.campo.config(bg="#cedae0")
             self.campo.pack()
         else:
             MatricularMateria.limpiar_frame(ventana)
-            label.config(text="Entro a busqueda manual")
+            label.config(text="Entro a busqueda manual",bg="#cedae0")
             self.campo2 = FieldFrame(ventana, "Criterio", ["Nombre", "Codigo"], "Valor")
             self.campo2.crearBotones(self.comprobar2, "Aceptar", 10, 0, 0)
             self.campo2.crearBotones(self.campo2.limpiarValues, "Limpiar", 10, 1, 0)
             self.campo2.crearBotones(self.regreso, "Regresar", 10, 2, 0) 
+            self.campo2.config(bg="#cedae0")
             self.campo2.pack()
 
 
@@ -261,15 +281,23 @@ class MatricularMateria3(Frame):
         self.ventana=ventana
         self.estudiante=estudiante
         self.materia=materia
+<<<<<<< HEAD
+        self.pack(expand=True)
+        self.config(highlightbackground="#085870",highlightthickness=3)
+
         titulo = Label(self, text="Matricular Materia 3", foreground="#085870",font=("Helvetica", 14, "bold"))
+=======
+        self.config(bg="#cedae0")
+        titulo = Label(self, text="Matricular Materia 3", foreground="#085870",font=("Helvetica", 14, "bold"),bg="#cedae0")
+>>>>>>> f72b6429c432761448e122826344025ebba7de5c
         titulo.pack(side="top", anchor="c")
         texto = """En esta parte, debes seleccionar el grupo deseado mediante una lista de los disponibles:"""
         seleccionados="Estudiante: "+self.estudiante.getNombre()+"\nMateria: "+self.materia.getNombre()
-        seleccion=Label(self, text=seleccionados, font=("Arial", 11,"bold"))
+        seleccion=Label(self, text=seleccionados, font=("Arial", 11,"bold"),bg="#cedae0")
         seleccion.pack(anchor="n", pady=5)
-        descripcion = Label(self, text=texto, font=("Arial", 11))
+        descripcion = Label(self, text=texto, font=("Arial", 11),bg="#cedae0")
         descripcion.pack(anchor="n", pady=5)
-        caja = Frame(self)
+        caja = Frame(self,bg="#cedae0")
         caja.pack()
         self.grupos_disponibles = []
         self.grupos_materia = self.materia.getGrupos()
@@ -293,7 +321,7 @@ class MatricularMateria3(Frame):
             grupos_texto+=str(len(self.grupos_disponibles))+ " - Grupo #"+ str(grupo.getNumero())+ " cupos: "+ str(grupo.getCupos())+ " Profesor: "+ grupo.getProfesor().getNombre()+"\n"
         if grupos_texto=="":
             grupos_texto="No hay grupos disponibles para el estudiante"
-        lista = Text(caja, border=False, font=("Arial", 11))
+        lista = Text(caja, border=True, font=("Arial", 11),bg="#cedae0")
         lista.pack()
         lista.configure(height=7)
         MatricularMateria.mostrar_texto(grupos_texto, lista)
@@ -301,6 +329,7 @@ class MatricularMateria3(Frame):
         self.campo.crearBotones(self.comprobar, "Aceptar", 10, 0, 0)
         self.campo.crearBotones(self.campo.limpiarValues, "Limpiar", 10, 1, 0)
         self.campo.crearBotones(self.regreso, "Regresar", 10, 2, 0) 
+        self.campo.config(bg="#cedae0")
         self.campo.pack()
 
     
@@ -346,12 +375,20 @@ class MatricularMateria4(Frame):
         super().__init__(ventana)
         self.ventana=ventana
         self.estudiante=estudiante
+<<<<<<< HEAD
+        self.pack(expand=True)
+        self.config(highlightbackground="#085870",highlightthickness=3)
+
         titulo = Label(self, text="Mostrar horario estudiante", foreground="#085870",font=("Helvetica", 14, "bold"))
+=======
+        self.config(bg="#cedae0")
+        titulo = Label(self, text="Mostrar horario estudiante", foreground="#085870",font=("Helvetica", 14, "bold"),bg="#cedae0")
+>>>>>>> f72b6429c432761448e122826344025ebba7de5c
         titulo.pack(side="top", anchor="c")
         seleccionado="Estudiante seleccionado: "+self.estudiante.getNombre()
-        seleccion=Label(self, text=seleccionado, font=("Arial", 11,"bold"))
+        seleccion=Label(self, text=seleccionado, font=("Arial", 11,"bold"),bg="#cedae0")
         seleccion.pack(anchor="n", pady=10)
-        caja = Frame(self)
+        caja = Frame(self,bg="#cedae0")
         caja.pack()
 
         horarioFrame = Frame(caja,width=855,height=310)

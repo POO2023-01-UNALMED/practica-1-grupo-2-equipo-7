@@ -7,14 +7,14 @@ class FieldFrame(Frame):
         self._datos = []
         self._entrysCriterios = []
 
-        tituloC = Label(self, text=tituloCriterios, font=("Arial", 11))
+        tituloC = Label(self, text=tituloCriterios, font=("Arial", 11),bg="#cedae0")
         tituloC.grid(row=0, column=0, padx=10, pady=8)
 
-        tituloV = Label(self, text=tituloValores, font=("Arial", 11))
+        tituloV = Label(self, text=tituloValores, font=("Arial", 11),bg="#cedae0")
         tituloV.grid(row=0, column=1, padx=10, pady=8)
 
         for i in range(1, len(criterios)+1):
-            lCriterio = Label(self, text=criterios[i-1], font=("Arial", 11))
+            lCriterio = Label(self, text=criterios[i-1], font=("Arial", 11),bg="#cedae0")
             lCriterio.grid(row=i, column=0, padx=10, pady=8)
 
             valor = Entry(self, font=("Arial", 11))
