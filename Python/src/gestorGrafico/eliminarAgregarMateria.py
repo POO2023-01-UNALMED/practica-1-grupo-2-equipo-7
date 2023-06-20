@@ -10,7 +10,8 @@ class EliminarAgregarMateria(Frame):
 
     def __init__(self, ventana):
         super().__init__(ventana)
-        self.config(bg="#cedae0")
+        self.config(highlightbackground="#085870",highlightthickness=3)
+        self.pack(expand=True)
 
         def agMateria():
             self.pack_forget()
@@ -33,15 +34,15 @@ class EliminarAgregarMateria(Frame):
             elM.pack()
 
         titulo = Label(self, text="Agregar/Eliminar Materia/Grupo", font=("Arial", 14), fg="white", bg="#085870")
-        titulo.pack(side="top", anchor="c")
+        titulo.pack(side="top", anchor="c", padx=5, pady=5)
 
         texto = ("Esta funcionalidad permite:\n1. Agregar una nueva materia al sistema. 3. Agregar un grupo a una materia existente."+
                  "\n2. Eliminar una materia existente del sistema. 4. Eliminar un grupo existente en alguna materia.")
         descripcion = Label(self, text=texto, font=("Arial", 11), fg="white", bg="#085870")
-        descripcion.pack(anchor="n", pady=20)
+        descripcion.pack(anchor="n", pady=20, padx=5)
 
         opciones = Frame(self, bg="#cedae0")
-        opciones.pack()
+        opciones.pack(padx=5, pady=5)
 
         agMat = Button(opciones, text="Agregar Materia", font=("Arial", 11), command=agMateria, fg="white", bg="#085870")
         agMat.pack(padx=20, pady=10)

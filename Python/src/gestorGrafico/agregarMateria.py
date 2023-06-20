@@ -11,7 +11,8 @@ from excepciones.ObjetoInexistente import *
 class agregarMateria(Frame):
     def __init__(self, ventana):
         super().__init__(ventana)
-        self.config(bg="#cedae0")
+        self.config(highlightbackground="#085870",highlightthickness=3)
+        self.pack(expand=True)
 
         def limpiar1():
             nombreE.delete(0, last= END)
@@ -39,7 +40,7 @@ class agregarMateria(Frame):
 
                     subFrame = Frame(self, bg="#cedae0")
                     subFrame.pack()
-                    tituloC = Label(subFrame, text="Criterio", font=("Arial", 11), fg="white", bg="#085870")
+                    tituloC = Label(subFrame, text="Criterio", font=("Arial", 11), fg="white", bg="#085870", padx=5, pady=5)
                     tituloC.grid(row=0, column=0, padx=10, pady=8)
 
                     tituloV = Label(subFrame, text="Materia", font=("Arial", 11), fg="white", bg="#085870")

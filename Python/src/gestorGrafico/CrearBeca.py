@@ -8,7 +8,8 @@ from gestorGrafico.FieldFrame import FieldFrame
 class CrearBeca(Frame):
     def __init__(self, ventana):
         super().__init__(ventana)
-        self.config(bg="#cedae0")
+        self.config(highlightbackground="#085870",highlightthickness=3)
+        self.pack(expand=True)
 
         nombres = []
         for beca in Beca._becas:

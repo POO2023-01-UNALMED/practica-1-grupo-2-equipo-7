@@ -7,7 +7,8 @@ from gestorGrafico.FieldFrame import FieldFrame
 class EliminarBeca(Frame):
     def __init__(self, ventana):
         super().__init__(ventana)
-        self.config(bg="#cedae0")
+        self.config(highlightbackground="#085870",highlightthickness=3)
+        self.pack(expand=True)
 
         def confEliminar():
             quest = messagebox.askokcancel("Confirmar acción", f"¿Está seguro que desea eliminar la beca {comboBecas.get()} del sistema?\n Esta acción será permanente.")
