@@ -42,7 +42,10 @@ class MainWin(Tk):
 
 Deserializador.deserializarDatos()
 
-
+# for i in Estudiante.getEstudiantes():
+#     print(i.getNombre())
+#     for j in i.getGruposVistos():
+#         print(j.getMateria().getNombre())
 
 
 MainWin()
