@@ -79,7 +79,7 @@ class agregarMateria(Frame):
                     confirmacion = messagebox.askokcancel("Confirmación", "¿Está seguro de que desea agregar la materia {} al sistema?".format(nombre))
                     if confirmacion:
                         try:
-                            Coordinador.getCoordinadorIngresado().agregarMateria(nombre, codigo, descripcion, creditos, facultad, prerrequisitos)
+                            Coordinador.getUsuarioIngresado().agregarMateria(nombre, codigo, descripcion, creditos, facultad, prerrequisitos)
                             messagebox.showinfo("Materia agregada", "La materia ha sido agregada con éxito al sistema")
                         except:
                             messagebox.showerror("Error", CampoInvalido().mostrarMensaje())
