@@ -96,7 +96,8 @@ class RecoleccionDat(Frame):
             
             listaNombresMaterias = []
             for pMateria in Materia.getMateriasTotales():
-                listaNombresMaterias.append(pMateria.getNombre())
+                if len(pMateria.getGrupos())>=1 and pMateria.getCupos()>=1:
+                    listaNombresMaterias.append(pMateria.getNombre())
             
             self.listaAMostrar =[]
             def agregarMtaeria(event):
@@ -171,20 +172,20 @@ class RecoleccionDat(Frame):
         listaFiltrada = []
         # filtro == 1 == facultad
         if opcionFiltro == 1:
-            for pMateria in Materia.getMateriasTotales():
-                if pMateria.getFacultad().lower() == filtro.lower() and pMateria.getGrupos()>=1:
+            for pMateria in Materia.getMateriasTotales() :
+                if pMateria.getFacultad().lower() == filtro.lower() and len(pMateria.getGrupos())>=1 and pMateria.getCupos()>=1:
                     listaFiltrada.append(pMateria)
 
         # filtro == 2 == Creditos
-        elif opcionFiltro == 2 and pMateria.getGrupos()>=1:
+        elif opcionFiltro == 2:
             for pMateria in Materia.getMateriasTotales():
-                if pMateria.getCreditos() == int(filtro):
+                if pMateria.getCreditos() == int(filtro) and len(pMateria.getGrupos())>=1 and pMateria.getCupos()>=1:
                     listaFiltrada.append(pMateria)
 
         # filtro == 3 == Codigo
         elif opcionFiltro == 3 and pMateria.getGrupos()>=1:
             for pMateria in Materia.getMateriasTotales():
-                if filtro in str(pMateria.getCodigo()):
+                if filtro in str(pMateria.getCodigo() and len(pMateria.getGrupos())>=1) and pMateria.getCupos()>=1:
                     listaFiltrada.append(pMateria)
                     
         return listaFiltrada
