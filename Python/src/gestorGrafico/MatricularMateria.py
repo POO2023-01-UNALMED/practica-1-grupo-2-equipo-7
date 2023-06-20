@@ -13,15 +13,10 @@ class MatricularMateria(Frame):
     def __init__(self, ventana):
         super().__init__(ventana)
         self._ventana=ventana
-<<<<<<< HEAD
         self.pack(expand=True)
         self.config(highlightbackground="#085870",highlightthickness=3)
 
         titulo = Label(self, text="Matricular Materia", foreground="#085870",font=("Helvetica", 14, "bold"))
-=======
-        self.config(bg="#cedae0")
-        titulo = Label(self, text="Matricular Materia", foreground="#085870",font=("Helvetica", 14, "bold"),bg="#cedae0")
->>>>>>> f72b6429c432761448e122826344025ebba7de5c
         titulo.pack(side="top", anchor="c")
         texto = """En esta parte, debes seleccionar al estudiante deseado de dos formas:
 1. Búsqueda manual: Ingresa el ID y nombre del estudiante.
@@ -147,15 +142,10 @@ class MatricularMateria2(Frame):
         super().__init__(ventana)
         self.ventana=ventana
         self.estudiante=estudiante
-<<<<<<< HEAD
         self.pack(expand=True)
         self.config(highlightbackground="#085870",highlightthickness=3)
 
         titulo = Label(self, text="Matricular Materia 2", foreground="#085870",font=("Helvetica", 14, "bold"))
-=======
-        self.config(bg="#cedae0")
-        titulo = Label(self, text="Matricular Materia 2", foreground="#085870",font=("Helvetica", 14, "bold"),bg="#cedae0")
->>>>>>> f72b6429c432761448e122826344025ebba7de5c
         titulo.pack(side="top", anchor="c")
         texto = """En esta parte, debes seleccionar la materia deseada de dos formas:
 1. Búsqueda manual: Ingresa el código y nombre de la materia.
@@ -281,15 +271,10 @@ class MatricularMateria3(Frame):
         self.ventana=ventana
         self.estudiante=estudiante
         self.materia=materia
-<<<<<<< HEAD
         self.pack(expand=True)
         self.config(highlightbackground="#085870",highlightthickness=3)
 
         titulo = Label(self, text="Matricular Materia 3", foreground="#085870",font=("Helvetica", 14, "bold"))
-=======
-        self.config(bg="#cedae0")
-        titulo = Label(self, text="Matricular Materia 3", foreground="#085870",font=("Helvetica", 14, "bold"),bg="#cedae0")
->>>>>>> f72b6429c432761448e122826344025ebba7de5c
         titulo.pack(side="top", anchor="c")
         texto = """En esta parte, debes seleccionar el grupo deseado mediante una lista de los disponibles:"""
         seleccionados="Estudiante: "+self.estudiante.getNombre()+"\nMateria: "+self.materia.getNombre()
@@ -375,15 +360,10 @@ class MatricularMateria4(Frame):
         super().__init__(ventana)
         self.ventana=ventana
         self.estudiante=estudiante
-<<<<<<< HEAD
         self.pack(expand=True)
         self.config(highlightbackground="#085870",highlightthickness=3)
 
         titulo = Label(self, text="Mostrar horario estudiante", foreground="#085870",font=("Helvetica", 14, "bold"))
-=======
-        self.config(bg="#cedae0")
-        titulo = Label(self, text="Mostrar horario estudiante", foreground="#085870",font=("Helvetica", 14, "bold"),bg="#cedae0")
->>>>>>> f72b6429c432761448e122826344025ebba7de5c
         titulo.pack(side="top", anchor="c")
         seleccionado="Estudiante seleccionado: "+self.estudiante.getNombre()
         seleccion=Label(self, text=seleccionado, font=("Arial", 11,"bold"),bg="#cedae0")
