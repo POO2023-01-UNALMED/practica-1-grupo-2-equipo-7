@@ -172,17 +172,17 @@ class RecoleccionDat(Frame):
         # filtro == 1 == facultad
         if opcionFiltro == 1:
             for pMateria in Materia.getMateriasTotales():
-                if pMateria.getFacultad().lower() == filtro.lower():
+                if pMateria.getFacultad().lower() == filtro.lower() and pMateria.getGrupos()>=1:
                     listaFiltrada.append(pMateria)
 
         # filtro == 2 == Creditos
-        elif opcionFiltro == 2:
+        elif opcionFiltro == 2 and pMateria.getGrupos()>=1:
             for pMateria in Materia.getMateriasTotales():
                 if pMateria.getCreditos() == int(filtro):
                     listaFiltrada.append(pMateria)
 
         # filtro == 3 == Codigo
-        elif opcionFiltro == 3:
+        elif opcionFiltro == 3 and pMateria.getGrupos()>=1:
             for pMateria in Materia.getMateriasTotales():
                 if filtro in str(pMateria.getCodigo()):
                     listaFiltrada.append(pMateria)
