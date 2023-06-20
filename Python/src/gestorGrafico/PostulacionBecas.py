@@ -8,7 +8,8 @@ from gestorGrafico.FieldFrame import FieldFrame
 class PostulacionBecas(Frame):
     def __init__(self,ventana):
         super().__init__(ventana)
-        self.config(bg="#cedae0")
+        self.config(highlightbackground="#085870",highlightthickness=3)
+        self.pack(expand=True)
         
         def mostrarBeca():
             self.pack_forget()
@@ -32,14 +33,14 @@ class PostulacionBecas(Frame):
       
          
         tituloenventana = Label(self, text="Búsqueda y Postulación de Becas", bg="#cedae0", foreground="#085870", font=("Helvetica", 14, "bold"))
-        tituloenventana.pack(side="top", anchor="c")
+        tituloenventana.pack(side="top", anchor="c", padx=5, pady=5)
         textodescriptivo = ("Esta funcionalidad permite:\n1.Ver listado de becas existentes actualmente. \n2.Aplicar beca a estudiante." +
                            "\n3.Crear nueva beca. \n4.Eliminar beca.")
         descripcion = Label(self, text=textodescriptivo, font=("Arial", 11), bg="#cedae0", fg="#110433")
-        descripcion.pack(anchor="n", pady=20)
+        descripcion.pack(anchor="n", pady=20, padx=5)
 
         seleccion = Frame(self,bg="#cedae0")
-        seleccion.pack()
+        seleccion.pack(padx=5, pady=5)
 
         mostrarB = Button(seleccion, text="Mostrar listado de becas", foreground="white",background="#085870",font=("Helvetica", 12), command= mostrarBeca)
         mostrarB.grid(row=0,column=0,padx=20,pady=10,sticky="w")

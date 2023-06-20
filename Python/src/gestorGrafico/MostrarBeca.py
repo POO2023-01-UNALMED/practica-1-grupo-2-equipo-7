@@ -20,8 +20,8 @@ class MostrarBeca(Frame):
             return infoBecas
 
 
-        tituloenventana = Label(self, text="Mostrar Becas Existentes", bg="#cedae0", foreground="#085870", font=("Helvetica", 14, "bold"))
-        tituloenventana.pack(side="top", anchor="c")
+        tituloenventana = Label(self, text="Mostrar Becas Existentes", bg="#085870", foreground="white", font=("Helvetica", 14, "bold"))
+        tituloenventana.pack(side="top", anchor="c", padx=5, pady=5)
         textodescriptivo = ("A continuación puede conocer información básica sobre las becas activas actualmente.  ")
         descripcion = Label(self, text=textodescriptivo, font=("Arial", 11), bg="#cedae0", fg="#110433")
         descripcion.pack(anchor="n", pady=20)

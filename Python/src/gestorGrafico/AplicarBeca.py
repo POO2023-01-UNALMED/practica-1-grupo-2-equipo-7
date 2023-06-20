@@ -10,7 +10,8 @@ from gestorGrafico.FieldFrame import FieldFrame
 class AplicarBeca(Frame):
     def __init__(self, ventana):
         super().__init__(ventana)
-        self.config(bg="#cedae0")
+        self.config(highlightbackground="#085870",highlightthickness=3)
+        self.pack(expand=True)
     
         estudiantesBeneficiados = []
 
