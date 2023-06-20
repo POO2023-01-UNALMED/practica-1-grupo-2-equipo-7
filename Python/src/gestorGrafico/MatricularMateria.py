@@ -177,7 +177,7 @@ class MatricularMateria2(Frame):
             materias_texto=""
             self.materias_disponibles = []
             for materia in self.materias_totales:
-                if Materia.comprobarPrerrequisitos(self.estudiante, materia):
+                if not Materia.comprobarPrerrequisitos(self.estudiante, materia):
                     continue
                 elif materia.getCupos() <= 0:
                     continue
@@ -245,7 +245,7 @@ class MatricularMateria2(Frame):
                     materia_seleccionada = self.materias_totales[index]
                     if materia_seleccionada.getCupos() <= 0:
                         messagebox.showerror("Error",MateriaSinCupo(nombre_materia).mostrarMensaje())
-                    elif Materia.comprobarPrerrequisitos(self.estudiante, materia_seleccionada):
+                    elif not Materia.comprobarPrerrequisitos(self.estudiante, materia_seleccionada):
                         messagebox.showerror("Error",PrerrequisitosMateria(nombre_materia).mostrarMensaje())
                     elif (self.creditos_estudiante + materia_seleccionada.getCreditos()> self.limite_creditos):
                         messagebox.showerror("Error",EstudianteSinCreditos(self.estudiante.getNombre()).mostrarMensaje())
