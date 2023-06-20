@@ -31,7 +31,7 @@ class MatricularMateria(Frame):
         busqueda.pack()
         label_vacio = Label(busqueda, text="",font=("Arial", 11),bg="#cedae0")
         label_vacio.pack(pady=(10, 10))
-        caja = Frame(self)
+        caja = Frame(self,bg="#cedae0")
         caja.pack()
 
     @classmethod
