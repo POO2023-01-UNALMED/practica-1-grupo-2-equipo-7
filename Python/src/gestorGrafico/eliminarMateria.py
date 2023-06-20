@@ -15,7 +15,8 @@ import os
 class eliminarMateria(Frame):
     def __init__(self, ventana):
         super().__init__(ventana)
-        self.config(bg="#cedae0")
+        self.config(highlightbackground="#085870",highlightthickness=3)
+        self.pack(expand=True)
 
         def botEliminar():
             confirmacion = messagebox.askokcancel("Confirmación de eliminación", "¿Está seguro que desea eliminar la materia {} del sistema?".format(box.get()))
@@ -31,14 +32,14 @@ class eliminarMateria(Frame):
             box.delete(0, last= END)
 
         titulo = Label(self, text="Eliminar Materia", font=("Arial", 14),  fg="white", bg="#085870")
-        titulo.pack(side="top", anchor="c")
+        titulo.pack(side="top", anchor="c", padx=5, pady=5)
 
         texto = ("A continuación, deberá ingresar la información necesaria para eliminar\n una materia que esté registrada en el sistema.")
         descripcion = Label(self, text=texto, font=("Arial", 11), fg="white", bg="#085870")
-        descripcion.pack(anchor="n", pady=20)
+        descripcion.pack(anchor="n", pady=20, padx=5)
 
         subFrame = Frame(self, bg="#cedae0")
-        subFrame.pack()
+        subFrame.pack(padx=5, pady=5)
 
         tituloC = Label(subFrame, text="Criterio", font=("Arial", 11), fg="white", bg="#085870")
         tituloC.grid(row=0, column=0, padx=10, pady=10)
