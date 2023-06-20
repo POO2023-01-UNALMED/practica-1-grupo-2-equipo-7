@@ -78,10 +78,14 @@ class agregarGrupo(Frame):
 
                                 if d not in dias or hi not in horas or hf not in horas or int(hi[:2:])>=int(hf[:2:]):
                                     raise CampoInvalido()
-                                print("No es lo del formato")
                                 
                                 formato = str(vDias[d])+"-"+hi[:2:]+"-"+hf[:2:]
                                 horario.append(formato)
+                            copia = horario
+                            for i in range (len(horario)-1):
+                                for hor in horario:
+                                    if copia[i]==hor and horario.index(hor)!=i:
+                                        raise CampoInvalido()
                             numero = len(Materia.getMateriasTotales())+1
                             materia.agregarGrupo(numero, profesor, horario, cupos, salon)
                             messagebox.showinfo("Grupo agregado", "El grupo ha sido agregado con éxito a la materia")
